@@ -15,7 +15,11 @@ class CreateMeetingAttachmentsTable extends Migration
     {
         Schema::create('meeting_attachments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('meeting_point');
+            $table->text('link_url');
             $table->timestamps();
+            
+            $table->foreign('meeting_point')->references('id')->on('meeting_points')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

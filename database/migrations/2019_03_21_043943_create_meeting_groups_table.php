@@ -15,7 +15,16 @@ class CreateMeetingGroupsTable extends Migration
     {
         Schema::create('meeting_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('meeting_type')->nullable();
+            $table->bigInteger('company')->nullable();
+            $table->bigInteger('department')->nullable();
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+            
+            $table->foreign('meeting_type')->references('id')->on('meeting_types')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('company')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('department')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

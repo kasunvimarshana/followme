@@ -15,6 +15,7 @@ class CreateUserPositionsTable extends Migration
     {
         Schema::create('user_positions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->timestamps();
         });
     }

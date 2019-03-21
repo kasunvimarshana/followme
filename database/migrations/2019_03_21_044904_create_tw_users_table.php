@@ -15,7 +15,12 @@ class CreateTwUsersTable extends Migration
     {
         Schema::create('tw_users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('meeting_tw');
+            $table->bigInteger('user');
             $table->timestamps();
+            
+            $table->foreign('meeting_tw')->references('id')->on('meeting_tws')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -15,6 +15,7 @@ class CreateMeetingTypesTable extends Migration
     {
         Schema::create('meeting_types', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
