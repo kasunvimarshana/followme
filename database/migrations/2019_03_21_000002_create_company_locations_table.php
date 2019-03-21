@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMeetingAttachmentsTable extends Migration
+class CreateCompanyLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateMeetingAttachmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('meeting_attachments', function (Blueprint $table) {
+        Schema::create('company_locations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('meeting_point');
-            $table->text('link_url');
+            $table->unsignedBigInteger('company')->nullable();
+            $table->string('name')->unique();
             $table->timestamps();
             
-            $table->foreign('meeting_point')->references('id')->on('meeting_points')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('company')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateMeetingAttachmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meeting_attachments');
+        Schema::dropIfExists('company_locations');
     }
 }

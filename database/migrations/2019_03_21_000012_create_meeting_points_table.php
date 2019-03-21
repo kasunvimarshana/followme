@@ -15,8 +15,8 @@ class CreateMeetingPointsTable extends Migration
     {
         Schema::create('meeting_points', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user');
-            $table->bigInteger('meeting');
+            $table->unsignedBigInteger('user');
+            $table->unsignedBigInteger('meeting');
             $table->text('description');
             $table->timestamps();
             

@@ -15,19 +15,19 @@ class CreateMeetingsTable extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('meeting_type');
+            $table->unsignedBigInteger('meeting_type');
             $table->text('description')->nullable();
-            $table->bigInteger('created_by');
+            $table->unsignedBigInteger('created_by');
             $table->dateTime('start_date');
             $table->dateTime('start_time');
             $table->dateTime('end_date');
             $table->dateTime('end_time');
-            $table->bigInteger('company')->nullable();
-            $table->bigInteger('department')->nullable();
+            $table->unsignedBigInteger('company')->nullable();
+            $table->unsignedBigInteger('department')->nullable();
             $table->string('status')->default('0');
             $table->timestamps();
             
-            $table->foreign('meeting_type')->references('id')->on('meeting_types')->onDelete('cascade')->onUpdate->cascade();
+            $table->foreign('meeting_type')->references('id')->on('meeting_types')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('company')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('department')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');

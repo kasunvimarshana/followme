@@ -15,9 +15,9 @@ class CreateMeetingGroupsTable extends Migration
     {
         Schema::create('meeting_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('meeting_type')->nullable();
-            $table->bigInteger('company')->nullable();
-            $table->bigInteger('department')->nullable();
+            $table->unsignedBigInteger('meeting_type')->nullable();
+            $table->unsignedBigInteger('company')->nullable();
+            $table->unsignedBigInteger('department')->nullable();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

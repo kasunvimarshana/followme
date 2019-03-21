@@ -24,22 +24,22 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             //custom fields
             //$table->bigInteger('id')->unsigned()->unique();
-            $table->bigInteger('id')->unique();
-            $table->bigInteger('epf_no')->unique();
-            $table->bigInteger('company');
-            $table->bigInteger('department');
-            $table->bigInteger('user_position')->nullable();
-            $table->bigInteger('created_by');
+            $table->unsignedBigInteger('id')->unique();
+            $table->unsignedBigInteger('epf_no')->unique();
+            $table->unsignedBigInteger('company');
+            $table->unsignedBigInteger('department');
+            $table->unsignedBigInteger('user_position')->nullable();
+            $table->unsignedBigInteger('created_by');
             $table->string('phone');
             //$table->boolean('active')->default(0);
             //$table->enum('status', ['a', 'd']);
             $table->string('status')->default('1');
             
-            $table->primary('id');
+            //$table->primary('id');
             $table->foreign('company')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
-            $tale->foreign('department')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('department')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_position')->references('id')->on('user_positions')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreign('created_by')->references('id')->on('users');
             //$table->index('epf_no');
         });
     }

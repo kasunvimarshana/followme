@@ -15,12 +15,12 @@ class CreateMeetingTwsTable extends Migration
     {
         Schema::create('meeting_tws', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('meeting');
+            $table->unsignedBigInteger('meeting');
             $table->text('description');
             $table->boolean('is_done')->default(0);
             $table->string('status')->default('0');
             $table->dateTime('due_date')->useCurrent();
-            $table->bigInteger('done_by')->nullable();
+            $table->unsignedBigInteger('done_by')->nullable();
             $table->timestamps();
             
             $table->foreign('meeting')->references('id')->on('meetings')->onDelete('cascade')->onUpdate('cascade');
