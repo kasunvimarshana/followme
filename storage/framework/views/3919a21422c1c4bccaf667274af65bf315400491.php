@@ -85,13 +85,15 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="<?php echo e(url('/')); ?>" method="post">
+    <form action="<?php echo e(url('login')); ?>" method="POST">
+      <!-- <?php echo e(csrf_field()); ?> || <?php echo e(Session::token()); ?> -->
+      <?php echo csrf_field(); ?>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo e(old('email')); ?>"/>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password" value="<?php echo e(old('password')); ?>"/>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

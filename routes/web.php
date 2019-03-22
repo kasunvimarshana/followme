@@ -18,7 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-*/
-Route::get('/', function () {
-    return view('login');
+
+Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
+    Route::get('/admin', 'UserController@home_1');
+    Route::get('/user', 'UserController@home_2');
 });
+*/
+
+Route::get('/', array('uses' => 'LoginController@showLogin'));
+// route to show the login form
+Route::get('login', array('uses' => 'LoginController@showLogin'));
+// route to process the form
+Route::post('login', array('uses' => 'LoginController@doLogin'));
