@@ -31,40 +31,6 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
-    
-    <style>
-    canvas {
-        display: fixed;
-        vertical-align: bottom;
-    }
-    #particles-js {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: #00356B;
-    }
-    .login-box {
-        /*
-        max-width: 90%;
-        text-shadow: 0px 0px 2px #131415;
-        font-family: 'Open Sans', sans-serif;
-        */
-        background: rgba(0, 0, 0, 0.4);
-        border-radius: 1em;
-        width: 45%;
-        position: absolute;
-        top: 25%;
-        right: 50%;
-        transform: translate(50%,-50%);
-    }
-    .login-box-body{
-        background-color: transparent;
-    }
-    .login-logo a, .register-logo a, .login-box-msg{
-        color: #F0F0F0;
-    }
-    </style>
-    
     <!-- Scripts -->
     <!-- script src="{{ asset('js/app.js') }}" defer></script -->
     <!-- REQUIRED JS SCRIPTS -->
@@ -76,7 +42,6 @@
     <script src="{{ asset('node_modules/admin-lte/dist/js/adminlte.min.js') }}"></script>
 </head>
 <body class="hold-transition login-page">
-    <div id="particles-js"></div>
 <div class="login-box">
   <div class="login-logo">
     <a href="{{ url('/') }}"><b>Follow </b>Me</a>
@@ -136,115 +101,5 @@
     });
   });
 </script -->
-<!-- Particle-js -->
-<script src="{{ asset('node_modules/particles.js/particles.js') }}"></script>
-<script>
-// ParticlesJS Config.
-particlesJS("particles-js", {
-  "particles": {
-    "number": {
-      "value": 80,
-      "density": {
-        "enable": true,
-        "value_area": 700
-      }
-    },
-    "color": {
-      "value": "#ffffff"
-    },
-    "shape": {
-      "type": "circle",
-      "stroke": {
-        "width": 0,
-        "color": "#000000"
-      },
-      "polygon": {
-        "nb_sides": 5
-      },
-    },
-    "opacity": {
-      "value": 0.5,
-      "random": false,
-      "anim": {
-        "enable": false,
-        "speed": 1,
-        "opacity_min": 0.1,
-        "sync": false
-      }
-    },
-    "size": {
-      "value": 3,
-      "random": true,
-      "anim": {
-        "enable": false,
-        "speed": 40,
-        "size_min": 0.1,
-        "sync": false
-      }
-    },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#ffffff",
-      "opacity": 0.4,
-      "width": 1
-    },
-    "move": {
-      "enable": true,
-      "speed": 6,
-      "direction": "none",
-      "random": false,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false,
-      "attract": {
-        "enable": false,
-        "rotateX": 600,
-        "rotateY": 1200
-      }
-    }
-  },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": {
-        "enable": true,
-        "mode": "grab"
-      },
-      "onclick": {
-        "enable": true,
-        "mode": "push"
-      },
-      "resize": true
-    },
-    "modes": {
-      "grab": {
-        "distance": 140,
-        "line_linked": {
-          "opacity": 1
-        }
-      },
-      "bubble": {
-        "distance": 400,
-        "size": 40,
-        "duration": 2,
-        "opacity": 8,
-        "speed": 3
-      },
-      "repulse": {
-        "distance": 200,
-        "duration": 0.4
-      },
-      "push": {
-        "particles_nb": 4
-      },
-      "remove": {
-        "particles_nb": 2
-      }
-    }
-  },
-  "retina_detect": true
-}); 
-</script>
 </body>
 </html>
