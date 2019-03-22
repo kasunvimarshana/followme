@@ -47,7 +47,7 @@ class LoginController extends Controller
                 return Redirect::to('main');
             } else {        
                 // validation not successful, send back to form 
-                return Redirect::to('login');
+                return Redirect::to('login')->withInput(Input::except('password'));
             }
         }
         

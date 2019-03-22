@@ -22,6 +22,7 @@ class CreateMeetingTwsTable extends Migration
             $table->dateTime('due_date')->useCurrent();
             $table->unsignedBigInteger('done_by')->nullable();
             $table->dateTime('done_date')->useCurrent();
+            $table->integer('piority')->default(0);
             $table->timestamps();
             
             $table->foreign('meeting')->references('id')->on('meetings')->onDelete('cascade')->onUpdate('cascade');

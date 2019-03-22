@@ -25,6 +25,7 @@ class CreateMeetingsTable extends Migration
             $table->unsignedBigInteger('company')->nullable();
             $table->unsignedBigInteger('department')->nullable();
             $table->string('status')->default('0');
+            $table->integer('piority')->default(0);
             $table->timestamps();
             
             $table->foreign('meeting_type')->references('id')->on('meeting_types')->onDelete('cascade')->onUpdate('cascade');
