@@ -77,7 +77,7 @@ desired effect
     <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{ url('/') }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>F</b>ME</span>
       <!-- logo for regular state and mobile devices -->
@@ -185,8 +185,8 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">ACTIVITIES</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>MEETING</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>3W</span></a></li>
+        <li class="active"><a href="#"><i class="fa fa-edit"></i> <span>MEETING</span></a></li>
+        <li><a href="#"><i class="fa fa-edit"></i> <span>3W</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -195,21 +195,13 @@ desired effect
     @show
   <!-- ./left-side-column. contains the logo and sidebar -->
 
-  @section("content_wrapper")
+  @section('content_wrapper')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Page Header
-        <small>Optional description</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
-    </section>
-
+    @section('content_header')
+    @show
+    <!-- ./Content Header (Page header) -->
     <!-- Main content -->
     <section class="content container-fluid">
 
@@ -228,7 +220,7 @@ desired effect
   @show
 
   <!-- Main Footer -->
-  @section("main_footer")
+  @section('main_footer')
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
@@ -253,7 +245,7 @@ desired effect
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-@section("section_script")
+@section('section_script')
 @show
 <!-- REQUIRED JS SCRIPTS -->
 

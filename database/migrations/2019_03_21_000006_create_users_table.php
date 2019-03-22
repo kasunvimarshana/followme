@@ -26,10 +26,10 @@ class CreateUsersTable extends Migration
             //$table->bigInteger('id')->unsigned()->unique();
             $table->unsignedBigInteger('id')->unique();
             $table->unsignedBigInteger('epf_no')->unique();
-            $table->unsignedBigInteger('company');
-            $table->unsignedBigInteger('department');
+            $table->unsignedBigInteger('company')->nullable();
+            $table->unsignedBigInteger('department')->nullable();
             $table->unsignedBigInteger('user_position')->nullable();
-            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->string('phone');
             //$table->boolean('active')->default(0);
             //$table->enum('status', ['a', 'd']);
@@ -39,7 +39,7 @@ class CreateUsersTable extends Migration
             $table->foreign('company')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('department')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_position')->references('id')->on('user_positions')->onDelete('cascade')->onUpdate('cascade');
-            //$table->foreign('created_by')->references('id')->on('users');
+            //$table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             //$table->index('epf_no');
         });
     }
