@@ -30,3 +30,5 @@ Route::get('/', array('uses' => 'LoginController@showLogin'));
 Route::get('login', array('uses' => 'LoginController@showLogin'));
 // route to process the form
 Route::post('login', array('uses' => 'LoginController@doLogin'));
+
+Route::get('main', array('uses' => 'MainController@index'));
