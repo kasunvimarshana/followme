@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -42,7 +43,8 @@ class LoginController extends Controller
                 // redirect them to the secure section or whatever
                 // return Redirect::to('secure');
                 // for now we'll just echo success (even though echoing in a controller is bad)
-                echo 'SUCCESS!';
+                //echo 'SUCCESS!';
+                return Redirect::to('main');
             } else {        
                 // validation not successful, send back to form 
                 return Redirect::to('login');

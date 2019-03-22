@@ -30,5 +30,7 @@ Route::get('/', array('uses' => 'LoginController@showLogin'));
 Route::get('login', array('uses' => 'LoginController@showLogin'));
 // route to process the form
 Route::post('login', array('uses' => 'LoginController@doLogin'));
-
+// route to procss logout
+Route::get('logout', array('uses' => 'LoginController@doLogout'));
+// rout to main page
 Route::get('main', array('uses' => 'MainController@index'));
