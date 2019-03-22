@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\company_location;
+
 class CompanyLocationSeeder extends Seeder
 {
     /**
@@ -12,5 +14,10 @@ class CompanyLocationSeeder extends Seeder
     public function run()
     {
         //
+        company_location::create([
+            'id' => 1,
+            'name' => 'default',
+            'company' => 1
+        ]);
     }
 }

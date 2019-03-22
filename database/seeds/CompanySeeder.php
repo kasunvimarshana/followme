@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\company;
+
 class CompanySeeder extends Seeder
 {
     /**
@@ -12,5 +14,9 @@ class CompanySeeder extends Seeder
     public function run()
     {
         //
+        company::create([
+            'id' => 1,
+            'name' => 'brandix'
+        ]);
     }
 }

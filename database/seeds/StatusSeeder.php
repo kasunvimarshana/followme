@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\status;
+
 class StatusSeeder extends Seeder
 {
     /**
@@ -12,5 +14,9 @@ class StatusSeeder extends Seeder
     public function run()
     {
         //
+        status::create([
+            'id' => 1,
+            'name' => 'default'
+        ]);
     }
 }

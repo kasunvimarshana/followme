@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         */
         
         User::create([
-            'id' => 0,
+            'id' => 1,
             'name' => 'admin',
             'email' => 'admin@brandix.com',
             'email_verified_at' => now(),
@@ -37,7 +37,11 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'epf_no' => 0,
             'phone' => '0000000000',
-            'status' => '1'
+            'status' => '0',
+            'company' => 1,
+            'department' => 1,
+            'user_position' => 1,
+            'created_by' => 1
         ]);
     }
 }

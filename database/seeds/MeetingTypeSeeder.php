@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\meeting_type;
+
 class MeetingTypeSeeder extends Seeder
 {
     /**
@@ -12,5 +14,9 @@ class MeetingTypeSeeder extends Seeder
     public function run()
     {
         //
+        meeting_type::create([
+            'id' => 1,
+            'name' => 'default'
+        ]);
     }
 }

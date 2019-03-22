@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\department;
+
 class DepartmentSeeder extends Seeder
 {
     /**
@@ -12,5 +14,9 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         //
+        department::create([
+            'id' => 1,
+            'name' => 'default'
+        ]);
     }
 }
