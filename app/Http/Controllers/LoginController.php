@@ -15,6 +15,9 @@ class LoginController extends Controller
 {
     public function showLogin(){
         //return view('login');
+        if(Auth::check()){
+            return Redirect::to('config');
+        }
         return View::make('login');
     }
     
@@ -44,7 +47,7 @@ class LoginController extends Controller
                 // return Redirect::to('secure');
                 // for now we'll just echo success (even though echoing in a controller is bad)
                 //echo 'SUCCESS!';
-                return Redirect::to('main');
+                return Redirect::to('config');
             } else {        
                 // validation not successful, send back to form 
                 return Redirect::to('login')->withInput(Input::except('password'));

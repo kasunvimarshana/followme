@@ -33,4 +33,6 @@ Route::post('login', array('uses' => 'LoginController@doLogin'));
 // route to procss logout
 Route::get('logout', array('uses' => 'LoginController@doLogout'));
 // rout to main page
-Route::get('main', array('uses' => 'MainController@index'));
+Route::get('config', array('uses' => 'ConfigController@index'));
+// route to user page
+Route::get('config/user', array('uses' => 'ConfigController@index'));

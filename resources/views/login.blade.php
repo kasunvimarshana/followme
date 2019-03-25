@@ -8,72 +8,47 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css') }}"/>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/font-awesome/css/font-awesome.min.css') }}"/>
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/Ionicons/css/ionicons.min.css') }}"/>
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/plugins/iCheck/square/blue.css') }}"/>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/dist/css/AdminLTE.min.css') }}"/>
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-    page. However, you can choose any other skin. Make sure you
-    apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/dist/css/skins/_all-skins.min.css') }}"/>
-    <!-- link href="{{ asset('css/app.css') }}" rel="stylesheet"/ -->
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
-    
+    @include('partials.main_stylesheet')
     <style>
-    canvas {
-        display: fixed;
-        vertical-align: bottom;
-    }
-    #particles-js {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: #00356B;
-    }
-    .login-box {
-        /*
-        max-width: 90%;
-        text-shadow: 0px 0px 2px #131415;
-        font-family: 'Open Sans', sans-serif;
-        */
-        background: rgba(0, 0, 0, 0.4);
-        border-radius: 1em;
-        width: 45%;
-        position: absolute;
-        top: 25%;
-        right: 50%;
-        transform: translate(50%,-50%);
-    }
-    .login-box-body{
-        background-color: transparent;
-    }
-    .login-logo a, .register-logo a, .login-box-msg{
-        color: #F0F0F0;
-    }
+        canvas {
+            display: fixed;
+            vertical-align: bottom;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #00356B;
+        }
+        .login-box {
+            /*
+            max-width: 90%;
+            text-shadow: 0px 0px 2px #131415;
+            font-family: 'Open Sans', sans-serif;
+            */
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 1em;
+            width: 45%;
+            position: absolute;
+            top: 25%;
+            right: 50%;
+            transform: translate(50%,-50%);
+        }
+        .login-box-body{
+            background-color: transparent;
+        }
+        .login-logo a, .register-logo a, .login-box-msg{
+            color: #F0F0F0;
+        }
     </style>
     
     <!-- Scripts -->
     <!-- script src="{{ asset('js/app.js') }}" defer></script -->
     <!-- REQUIRED JS SCRIPTS -->
-    <!-- jQuery 3 -->
-    <script src="{{ asset('node_modules/admin-lte/bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="{{ asset('node_modules/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('node_modules/admin-lte/dist/js/adminlte.min.js') }}"></script>
+    @include('partials.main_script')
+    <!-- REQUIRED JS SCRIPTS -->
 </head>
 <body class="hold-transition login-page">
     <div id="particles-js"></div>

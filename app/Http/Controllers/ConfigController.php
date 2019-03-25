@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
-class MainController extends Controller
+class ConfigController extends Controller
 {
     public function __construct(){
         
     }
     
     public function index(){
-        return View::make('main');
+        return View::make('config');
     }
 }
