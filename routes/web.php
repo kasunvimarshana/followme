@@ -32,7 +32,21 @@ Route::get('login', array('uses' => 'LoginController@showLogin'));
 Route::post('login', array('uses' => 'LoginController@doLogin'));
 // route to procss logout
 Route::get('logout', array('uses' => 'LoginController@doLogout'));
-// rout to main page
-Route::get('config', array('uses' => 'ConfigController@index'));
-// route to user page
-Route::get('config/user', array('uses' => 'ConfigController@index'));
+
+// route group for auth users
+Route::group(['middleware' => 'memberMiddleWare'], function(){
+    //Route::match(['get', 'post'], '/memberOnlyPage/', 'HomeController@index');
+    
+    // rout to main page
+    Route::get('config', array('uses' => 'ConfigController@index'));
+    // route to user page
+    Route::get('config/user', array('uses' => 'UserController@index'));
+    // route to department page
+    Route::get('config/department', array('uses' => 'DepartmentController@index'));
+    // route to location page
+    Route::get('config/location', array('uses' => 'CompanyLocationController@index'));
+    // route to meeting type page
+    Route::get('config/meeting_type', array('uses' => 'MeetingTypeController@index'));
+    // route to meeting group page
+    Route::get('config/meeting_group', array('uses' => 'MeetingGroupController@index'));
+});
