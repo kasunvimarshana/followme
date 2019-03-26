@@ -18,7 +18,9 @@ class LoginController extends Controller
         if(Auth::check()){
             return Redirect::to('config');
         }
-        return View::make('login');
+        if(view()->exists('login')){
+            return View::make('login');
+        }
     }
     
     public function doLogin(){

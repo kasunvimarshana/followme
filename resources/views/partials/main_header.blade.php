@@ -33,7 +33,11 @@
                         <!-- The user image in the navbar-->
                         <img src="{{ URL::asset('node_modules/admin-lte/dist/img/avatar5.png') }}" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs">
+                            @isset($auth_user)
+                                {{ $auth_user->email }}
+                            @endisset
+                        </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
@@ -41,8 +45,10 @@
                             <img src="{{ URL::asset('node_modules/admin-lte/dist/img/avatar5.png') }}" class="img-circle" alt="User Image">
 
                             <p>
-                            Alexander Pierce - Web Developer
-                            <small>Member since Nov. 2012</small>
+                            @isset($auth_user)
+                                {{ $auth_user->name }} <!-- - {{ App\User::find(1)->department->id }} -->
+                                <small>{{ $auth_user->email }}</small>
+                            @endisset
                             </p>
                         </li>
                         @section('menu_body')

@@ -36,10 +36,10 @@ class AuthUserProvider extends ServiceProvider
     public function boot()
     {
         //
-        if(Auth::check()){
+        //if(Auth::check()){
             view()->composer('*', function($view){
                 $view->with('auth_user', auth()->user());
             });
-        }
+        //}
     }
 }

@@ -23,6 +23,7 @@ class CreateMeetingsTable extends Migration
             $table->dateTime('end_date');
             $table->dateTime('end_time');
             $table->unsignedBigInteger('company')->nullable();
+            $table->unsignedBigInteger('company_location')->nullable();
             $table->unsignedBigInteger('department')->nullable();
             $table->string('status')->default('0');
             $table->integer('piority')->default(0);
@@ -31,6 +32,7 @@ class CreateMeetingsTable extends Migration
             $table->foreign('meeting_type')->references('id')->on('meeting_types')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('company')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('company_location')->references('id')->on('company_locations')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('department')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
         });
     }

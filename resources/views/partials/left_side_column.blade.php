@@ -9,7 +9,10 @@
                 <img src="{{ URL::asset('node_modules/admin-lte/dist/img/avatar5.png') }}" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                @isset($auth_user)
+                    <p> {{ $auth_user->email }} </p>
+                @endisset
+                <!-- p>user</p -->
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
