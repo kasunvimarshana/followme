@@ -47,7 +47,7 @@ class User extends Authenticatable
     
     //one to many (inverse)
     public function department(){
-        return $this->belongsTo(App\department::class, 'department', 'id');
+        return $this->belongsTo('App\department', 'department', 'id');
     }
     
     //one to many
@@ -87,6 +87,6 @@ class User extends Authenticatable
     
     //one to many
     public function meeting_points(){
-        return $this->hasMany('App\meeting_point', 'foreign_key', 'local_key');
+        return $this->hasMany('App\meeting_point', 'user', 'id');
     }
 }

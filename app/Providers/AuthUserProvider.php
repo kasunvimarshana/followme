@@ -28,18 +28,18 @@ class AuthUserProvider extends ServiceProvider
     }*/
     /*public function boot()
     {
-        view()->composer('*', function($view){
-            $view->with('user', auth()->user())
-        });
+        if(Auth::check()){
+            view()->composer('*', function($view){
+                $view->with('user', auth()->user());
+            });
+        }
     }*/
     
     public function boot()
     {
         //
-        //if(Auth::check()){
-            view()->composer('*', function($view){
-                $view->with('auth_user', auth()->user());
-            });
-        //}
+        view()->composer('*', function($view){
+            $view->with('auth_user', auth()->user());
+        });
     }
 }

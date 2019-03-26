@@ -26,8 +26,8 @@
             
             <li class="header">ACTIVITIES</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="{{ set_active(['meeting']) }}"><a href="#"><i class="fa fa-edit"></i> <span>MEETING</span></a></li>
-            <li class="{{ set_active(['tw']) }}"><a href="#"><i class="fa fa-edit"></i> <span>3W</span></a></li>
+            <li class="{{ set_active(['meeting']) }}"><a href="{{ url('/meeting') }}"><i class="fa fa-edit"></i> <span>MEETING</span></a></li>
+            <li class="{{ set_active(['meeting/tw']) }}"><a href="{{ url('/meeting/tw') }}"><i class="fa fa-edit"></i> <span>3W</span></a></li>
             <li class="header">ACTIVITIES</li>
             <li class="treeview {{ set_active(['config', 'config/*']) }}">
                 <a href="#">

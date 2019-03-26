@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'epf_no' => 1,
             'phone' => '0000000000',
-            'status' => '0',
+            'status' => '1',
             'company' => 1,
             'department' => 1,
             'user_position' => 1,

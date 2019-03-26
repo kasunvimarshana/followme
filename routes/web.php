@@ -49,4 +49,14 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('config/meeting_type', array('uses' => 'MeetingTypeController@index'));
     // route to meeting group page
     Route::get('config/meeting_group', array('uses' => 'MeetingGroupController@index'));
+    // route to meeting group page
+    Route::get('meeting', array('uses' => 'MeetingController@index'));
+    // route to meeting group page
+    Route::get('meeting/tw', array('uses' => 'MeetingTWController@index'));
+    // user create page
+    Route::get('config/user/create', array('uses' => 'UserController@showCreate'));
+    // route to process create user
+    Route::post('config/user/create', array('uses' => 'UserController@doCreate'));
+    // route to process edit user
+    Route::post('config/user/edit', array('uses' => 'UserController@doEdit'));
 });

@@ -46,7 +46,7 @@
 
                             <p>
                             @isset($auth_user)
-                                {{ $auth_user->name }} <!-- - {{ App\User::find(1)->department->id }} -->
+                                {{ $auth_user->name }} <!-- - -->
                                 <small>{{ $auth_user->email }}</small>
                             @endisset
                             </p>

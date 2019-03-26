@@ -34,7 +34,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('/config/meeting') }}">
+            <a href="{{ url('meeting') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-calendar"></i></span>
             </a>
             <!-- info-box-content -->

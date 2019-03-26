@@ -1,3 +1,11 @@
 .info-box-number{
     word-wrap: break-word;
 }
+
+/* backround color sidebar menu selected list item */
+.sidebar-menu li.active{
+    background-color: rgba(60,141,188, 0.3) !important;
+}
+.sidebar-menu>li.active>a {
+    background-color: transparent !important;
+}
