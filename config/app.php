@@ -175,7 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         // custom service providers
-        App\Providers\AuthUserProvider::class
+        App\Providers\AuthUserProvider::class,
+        // provider for flash message
+        Codecourse\Notify\NotifyServiceProvider::class,
 
     ],
 
@@ -227,6 +229,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        //alias for flash message
+        'Notify' => Codecourse\Notify\Facades\Notify::class
 
     ],
 

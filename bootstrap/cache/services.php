@@ -36,6 +36,7 @@
     32 => 'App\\Providers\\EventServiceProvider',
     33 => 'App\\Providers\\RouteServiceProvider',
     34 => 'App\\Providers\\AuthUserProvider',
+    35 => 'Codecourse\\Notify\\NotifyServiceProvider',
   ),
   'eager' => 
   array (
@@ -60,6 +61,7 @@
     18 => 'App\\Providers\\EventServiceProvider',
     19 => 'App\\Providers\\RouteServiceProvider',
     20 => 'App\\Providers\\AuthUserProvider',
+    21 => 'Codecourse\\Notify\\NotifyServiceProvider',
   ),
   'deferred' => 
   array (

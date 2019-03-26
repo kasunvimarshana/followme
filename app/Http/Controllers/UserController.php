@@ -88,7 +88,12 @@ class UserController extends Controller
             // data is valid and working.
             // Commit the queries!
             DB::commit();
-            notify()->flash('user register', 'success', ['timer' => 2000]);
+            
+            notify()->flash('User Created', 'success', [
+                'timer' => 3000,
+                'text' => 'success'
+            ]);
+            
             return Redirect::to('config/user/create');
         }
         
