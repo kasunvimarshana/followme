@@ -30,10 +30,10 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('department')->nullable();
             $table->unsignedBigInteger('user_position')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->string('phone');
+            $table->string('phone')->nullable();
             //$table->boolean('active')->default(0);
             //$table->enum('status', ['a', 'd']);
-            $table->string('status')->default('1');
+            $table->string('status')->default('1')->nullable();
             
             //$table->primary('id');
             $table->foreign('company')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');

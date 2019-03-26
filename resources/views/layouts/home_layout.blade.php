@@ -98,7 +98,12 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 @section('section_script')
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
 @show
+    
+<script>
+    
+</script>
 <!-- REQUIRED JS SCRIPTS -->
 
 
