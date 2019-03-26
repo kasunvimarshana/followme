@@ -7,3 +7,4 @@
 <script src="{{ asset('node_modules/admin-lte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('node_modules/admin-lte/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('js/custom_script.js') }}"></script>

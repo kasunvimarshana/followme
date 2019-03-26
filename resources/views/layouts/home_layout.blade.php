@@ -13,7 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
     @section('section_stylesheet')
-        @includeIf('partials.main_stylesheet');
+        @includeIf('partials.main_stylesheet')
     @show
     @section('section_script_main')
         @includeIf('partials.main_script')
