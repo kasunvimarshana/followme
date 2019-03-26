@@ -60,11 +60,11 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="{{ url('login') }}" method="POST">
+    <form action="{{ url('login') }}" method="POST" autocomplete="off">
       <!-- {{ csrf_field() }} || {{ Session::token() }} -->
       @csrf
       <div class="form-group has-feedback">
-        <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}"/>
+        <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required/>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

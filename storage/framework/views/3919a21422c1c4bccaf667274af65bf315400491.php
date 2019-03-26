@@ -60,11 +60,11 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="<?php echo e(url('login')); ?>" method="POST">
+    <form action="<?php echo e(url('login')); ?>" method="POST" autocomplete="off">
       <!-- <?php echo e(csrf_field()); ?> || <?php echo e(Session::token()); ?> -->
       <?php echo csrf_field(); ?>
       <div class="form-group has-feedback">
-        <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo e(old('email')); ?>"/>
+        <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo e(old('email')); ?>" required/>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
