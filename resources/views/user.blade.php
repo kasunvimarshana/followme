@@ -35,14 +35,14 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('meeting') }}">
+            <a href="{{ url('/config/user/list') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
             </a>
             <!-- info-box-content -->
             <div class="info-box-content">
                 <span class="info-box-text">List Users</span>
                 <span class="info-box-number">
-                    @isset($auth_user)
+                    @isset($count)
                         {{ number_format($count) }}
                     @endisset
                 </span>

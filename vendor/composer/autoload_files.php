@@ -77,6 +77,9 @@ return array(
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
     '0d8253363903f0ac7b0978dcde4e28a0' => $vendorDir . '/beyondcode/laravel-dump-server/helpers.php',
+    'd92e6dafb93e67e5b59c39d9b9d00659' => $vendorDir . '/codecourse/notify/src/Codecourse/Notify/functions.php',
+    'f472b1734887fbff321b8210de15ae2a' => $vendorDir . '/ken/sweetanimation/src/Ken/Sweetanimation/functions/register.php',
     '377b22b161c09ed6e5152de788ca020a' => $vendorDir . '/spatie/laravel-permission/src/helpers.php',
+    'a806c12c6e24e7e4e900847766218dba' => $vendorDir . '/uxweb/sweet-alert/src/SweetAlert/functions.php',
     'fdb3b5f01b3ed818a713c5450349237f' => $baseDir . '/app/Helpers/functions.php',
 );

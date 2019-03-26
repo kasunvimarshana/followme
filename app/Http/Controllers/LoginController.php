@@ -16,9 +16,11 @@ class LoginController extends Controller
     public function showLogin(){
         //return view('login');
         if(Auth::check()){
+            //Session::flash('message', 'Login !');
             return Redirect::to('config');
         }
         if(view()->exists('login')){
+            //Session::flash('message', 'Login !');
             return View::make('login');
         }
     }
@@ -32,7 +34,8 @@ class LoginController extends Controller
         // run the validation rules on the inputs from the form
         $validator = Validator::make(Input::all(), $rules);
         // if the validator fails, redirect back to the form
-        if ($validator->fails()) {
+        if ($validator->fails()) 
+            //Session::flash('message', 'Login !');
             return Redirect::to('login')
             ->withErrors($validator) // send back all errors to the login form
             ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
@@ -52,6 +55,7 @@ class LoginController extends Controller
                 return Redirect::to('config');
             } else {        
                 // validation not successful, send back to form 
+                //Session::flash('message', 'Login !');
                 return Redirect::to('login')->withInput(Input::except('password'));
             }
         }

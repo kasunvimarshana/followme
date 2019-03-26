@@ -52,4 +52,15 @@
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
     ),
   ),
+  'uxweb/sweet-alert' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'UxWeb\\SweetAlert\\SweetAlertServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Alert' => 'UxWeb\\SweetAlert\\SweetAlert',
+    ),
+  ),
 );

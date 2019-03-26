@@ -78,7 +78,10 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '0d8253363903f0ac7b0978dcde4e28a0' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/helpers.php',
+        'd92e6dafb93e67e5b59c39d9b9d00659' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/functions.php',
+        'f472b1734887fbff321b8210de15ae2a' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/functions/register.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
+        'a806c12c6e24e7e4e900847766218dba' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/functions.php',
         'fdb3b5f01b3ed818a713c5450349237f' => __DIR__ . '/../..' . '/app/Helpers/functions.php',
     );
 
@@ -95,6 +98,10 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         array (
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
+        ),
+        'U' => 
+        array (
+            'UxWeb\\SweetAlert\\' => 17,
         ),
         'T' => 
         array (
@@ -213,6 +220,10 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'UxWeb\\SweetAlert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -435,11 +446,25 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
         ),
+        'K' => 
+        array (
+            'Ken\\Sweetanimation\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/ken/sweetanimation/src',
+            ),
+        ),
         'D' => 
         array (
             'Doctrine\\Common\\Lexer\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
+            ),
+        ),
+        'C' => 
+        array (
+            'Codecourse\\Notify\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/codecourse/notify/src',
             ),
         ),
     );
@@ -452,20 +477,33 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\CompanyLocationController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompanyLocationController.php',
+        'App\\Http\\Controllers\\ConfigController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConfigController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DepartmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/DepartmentController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
-        'App\\Http\\Controllers\\MainController' => __DIR__ . '/../..' . '/app/Http/Controllers/MainController.php',
+        'App\\Http\\Controllers\\MeetingAttachmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingAttachmentController.php',
+        'App\\Http\\Controllers\\MeetingController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingController.php',
+        'App\\Http\\Controllers\\MeetingGroupController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingGroupController.php',
+        'App\\Http\\Controllers\\MeetingGroupUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingGroupUserController.php',
+        'App\\Http\\Controllers\\MeetingTWController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingTWController.php',
+        'App\\Http\\Controllers\\MeetingTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingTypeController.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\MemberMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/MemberMiddleware.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
+        'App\\Http\\Middleware\\SuperAdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/SuperAdminMiddleware.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
+        'App\\Providers\\AuthUserProvider' => __DIR__ . '/../..' . '/app/Providers/AuthUserProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
@@ -518,6 +556,10 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Codecourse\\Notify\\Facades\\Notify' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/Facades/Notify.php',
+        'Codecourse\\Notify\\Notifier' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/Notifier.php',
+        'Codecourse\\Notify\\NotifyServiceProvider' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/NotifyServiceProvider.php',
+        'Codecourse\\Notify\\Storage\\Session' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/Storage/Session.php',
         'CompanyLocationSeeder' => __DIR__ . '/../..' . '/database/seeds/CompanyLocationSeeder.php',
         'CompanySeeder' => __DIR__ . '/../..' . '/database/seeds/CompanySeeder.php',
         'Complex\\Complex' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Complex.php',
@@ -1979,6 +2021,10 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
+        'Ken\\Sweetanimation\\Facades\\Sweetanimation' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/Facades/Sweetanimation.php',
+        'Ken\\Sweetanimation\\Provider\\SpiderServiceProvider' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/Provider/SpiderServiceProvider.php',
+        'Ken\\Sweetanimation\\Spider\\Slice' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/Spider/Slice.php',
+        'Ken\\Sweetanimation\\Storage\\Session' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/Storage/Session.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
@@ -4256,6 +4302,12 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'UserPositionSeeder' => __DIR__ . '/../..' . '/database/seeds/UserPositionSeeder.php',
         'UserSeeder' => __DIR__ . '/../..' . '/database/seeds/UserSeeder.php',
+        'UxWeb\\SweetAlert\\ConvertMessagesIntoSweetAlert' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/ConvertMessagesIntoSweetAlert.php',
+        'UxWeb\\SweetAlert\\LaravelSessionStore' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/LaravelSessionStore.php',
+        'UxWeb\\SweetAlert\\SessionStore' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/SessionStore.php',
+        'UxWeb\\SweetAlert\\SweetAlert' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/SweetAlert.php',
+        'UxWeb\\SweetAlert\\SweetAlertNotifier' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/SweetAlertNotifier.php',
+        'UxWeb\\SweetAlert\\SweetAlertServiceProvider' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/SweetAlertServiceProvider.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',
