@@ -2,7 +2,9 @@
 
 @section('section_stylesheet')
     @parent
+    <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/select2/dist/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" />
 @endsection
 
 @section('section_script_main')
@@ -64,10 +66,21 @@
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <!-- p class="form-control-static"></p -->
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ old('password') }}"/>
+                </div>
+                <!-- span id="form-control" class="help-block"></span -->
+            </div>
+            <!-- .form-group -->
+            
+            <!-- form-group -->
+            <div class="form-group col-sm-12">
                 <label for="user_position" class="col-sm-2 control-label">Position</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <input type="text" class="form-control" id="user_position" name="user_position" placeholder="Position" value="{{ old('user_position') }}"/>
+                    <select class="form-control select2" id="user_position" name="user_position" value="{{ old('user_position') }}" data-placeholder="Position" style="width: 100%;"></select>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
@@ -78,18 +91,7 @@
                 <label for="department" class="col-sm-2 control-label">Department</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <input type="text" class="form-control" id="department" name="department" placeholder="Department" value="{{ old('department') }}"/>
-                </div>
-                <!-- span id="form-control" class="help-block"></span -->
-            </div>
-            <!-- .form-group -->
-            
-            <!-- form-group -->
-            <div class="form-group col-sm-12">
-                <label for="password" class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-10">
-                    <!-- p class="form-control-static"></p -->
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ old('password') }}"/>
+                    <select class="form-control select2" id="department" name="department" value="{{ old('department') }}" data-placeholder="Department" style="width: 100%;"></select>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
@@ -117,6 +119,8 @@
 
 @section('section_script')
     @parent
+    <!-- Select2 -->
     <script src="{{ asset('node_modules/admin-lte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     @includeIf('partials.select_user_position')
+    @includeIf('partials.select_department')
 @endsection

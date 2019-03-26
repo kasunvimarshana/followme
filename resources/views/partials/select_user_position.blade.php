@@ -1,6 +1,10 @@
 <script>
 $(function(){
     "use strict";
+    $.fn.select2.defaults.set( "theme", "bootstrap" );
+    /*$('#id').select2({
+        theme: "bootstrap"
+    });*/
     ////////////////////////////////////////////////////////
     $('#user_position').select2({
         ajax          : {
