@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MeetingTWUserSeeder extends Seeder
+class TWUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.

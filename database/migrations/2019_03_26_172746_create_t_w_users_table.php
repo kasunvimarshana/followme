@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMeetingTWUsersTable extends Migration
+class CreateTWUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMeetingTWUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('meeting_t_w_users', function (Blueprint $table) {
+        Schema::create('t_w_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             
@@ -33,6 +33,6 @@ class CreateMeetingTWUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meeting_t_w_users');
+        Schema::dropIfExists('t_w_users');
     }
 }

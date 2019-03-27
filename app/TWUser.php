@@ -4,21 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MeetingInfo extends Model
+class TWUser extends Model
 {
     //
     // table name
-    protected $table = "meeting_infos";
+    protected $table = "t_w_users";
     // primary key
     protected $primaryKey = 'id';
     
     //one to many (inverse)
     public function User(){
-        return $this->belongsTo('App\User', 'created_by', 'id');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
     
     //one to many (inverse)
-    public function Meeting(){
-        return $this->belongsTo('App\Meeting', 'meeting_id', 'id');
+    public function MeetingTW(){
+        return $this->belongsTo('App\MeetingTW', 'meeting_t_w_id', 'id');
     }
 }

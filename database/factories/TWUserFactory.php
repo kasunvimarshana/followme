@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\MeetingTWUser::class, function (Faker $faker) {
+$factory->define(App\TWUser::class, function (Faker $faker) {
     return [
         //
     ];

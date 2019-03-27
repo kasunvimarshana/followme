@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\MeetingTWUser;
+use App\TWUser;
 use Illuminate\Http\Request;
 
-class MeetingTWUserController extends Controller
+class TWUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class MeetingTWUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\MeetingTWUser  $meetingTWUser
+     * @param  \App\TWUser  $tWUser
      * @return \Illuminate\Http\Response
      */
-    public function show(MeetingTWUser $meetingTWUser)
+    public function show(TWUser $tWUser)
     {
         //
     }
@@ -52,10 +52,10 @@ class MeetingTWUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\MeetingTWUser  $meetingTWUser
+     * @param  \App\TWUser  $tWUser
      * @return \Illuminate\Http\Response
      */
-    public function edit(MeetingTWUser $meetingTWUser)
+    public function edit(TWUser $tWUser)
     {
         //
     }
@@ -64,10 +64,10 @@ class MeetingTWUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MeetingTWUser  $meetingTWUser
+     * @param  \App\TWUser  $tWUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MeetingTWUser $meetingTWUser)
+    public function update(Request $request, TWUser $tWUser)
     {
         //
     }
@@ -75,10 +75,10 @@ class MeetingTWUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MeetingTWUser  $meetingTWUser
+     * @param  \App\TWUser  $tWUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MeetingTWUser $meetingTWUser)
+    public function destroy(TWUser $tWUser)
     {
         //
     }
