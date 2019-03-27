@@ -41,6 +41,7 @@ class CreateUsersTable extends Migration
             $table->foreign('user_position_id')->references('id')->on('user_positions')->onDelete('cascade')->onUpdate('cascade');
             //$table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             //$table->index('epf_no');
+            //$table->softDeletes();
         });
     }
 

@@ -25,38 +25,40 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 });
 */
 
-Route::get('/', array('uses' => 'LoginController@showLogin'));
+Route::get('/', array('uses' => 'LoginController@showLogin'))->name('home');
 // route to show the login form
-Route::get('login', array('uses' => 'LoginController@showLogin'));
+Route::get('login', array('uses' => 'LoginController@showLogin'))->name('login.showLogin');
 // route to process the form
-Route::post('login', array('uses' => 'LoginController@doLogin'));
+Route::post('login', array('uses' => 'LoginController@doLogin'))->name('login.doLogin');
 // route to procss logout
-Route::get('logout', array('uses' => 'LoginController@doLogout'));
+Route::get('logout', array('uses' => 'LoginController@doLogout'))->name('login.doLogout');
 
 // route group for auth users
 Route::group(['middleware' => 'memberMiddleWare'], function(){
     //Route::match(['get', 'post'], '/memberOnlyPage/', 'HomeController@index');
     
     // rout to main page
-    Route::get('config', array('uses' => 'ConfigController@index'));
+    Route::get('config', array('uses' => 'ConfigController@index'))->name('config.index');
     // route to user page
-    Route::get('config/users', array('uses' => 'UserController@index'));
+    Route::get('config/users', array('uses' => 'UserController@index'))->name('user.index');
+    // route to user list page
+    Route::get('config/users/list', array('uses' => 'UserController@index'))->name('user.list');
     // route to department page
-    Route::get('config/departments', array('uses' => 'DepartmentController@index'));
+    Route::get('config/departments', array('uses' => 'DepartmentController@index'))->name('department.index');
     // route to location page
-    Route::get('config/locations', array('uses' => 'CompanyLocationController@index'));
+    Route::get('config/locations', array('uses' => 'CompanyLocationController@index'))->name('companyLocation.index');
     // route to meeting type page
-    Route::get('config/meeting-types', array('uses' => 'MeetingTypeController@index'));
+    Route::get('config/meeting-types', array('uses' => 'MeetingTypeController@index'))->name('meetingType.index');
     // route to meeting group page
-    Route::get('config/meeting-groups', array('uses' => 'MeetingGroupController@index'));
+    Route::get('config/meeting-groups', array('uses' => 'MeetingGroupController@index'))->name('meetingGroup.index');
     // route to meeting group page
-    Route::get('meetings', array('uses' => 'MeetingController@index'));
+    Route::get('meetings', array('uses' => 'MeetingController@index'))->name('meeting.index');
     // route to meeting group page
-    Route::get('meeting/tws', array('uses' => 'MeetingTWController@index'));
+    Route::get('meetings/tws', array('uses' => 'MeetingTWController@index'))->name('meetingTW.index');
     // user create page
-    Route::get('config/users/create', array('uses' => 'UserController@showCreate'));
+    Route::get('config/users/create', array('uses' => 'UserController@create'))->name('user.create');
     // route to process create user
-    Route::post('config/users/create', array('uses' => 'UserController@doCreate'));
+    Route::post('config/users/create', array('uses' => 'UserController@store'))->name('user.store');
     // route to process edit user
-    Route::post('config/users/edit', array('uses' => 'UserController@doEdit'));
+    Route::post('config/users/edit', array('uses' => 'UserController@edit'))->name('user.edit');
 });

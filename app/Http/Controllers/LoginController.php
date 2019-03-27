@@ -17,7 +17,9 @@ class LoginController extends Controller
         //return view('login');
         if(Auth::check()){
             //Session::flash('message', 'Login !');
-            return Redirect::to('config');
+            //Redirect::back();
+            //return Redirect::to('config');
+            return redirect()->route('config.index');
         }
         if(view()->exists('login')){
             //Session::flash('message', 'Login !');
@@ -36,7 +38,7 @@ class LoginController extends Controller
         // if the validator fails, redirect back to the form
         if($validator->fails()){
             //Session::flash('message', 'Login !');
-            return Redirect::to('login')
+            return redirect()->route('login.showLogin')
             ->withErrors($validator) // send back all errors to the login form
             ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
         }else{
@@ -52,11 +54,11 @@ class LoginController extends Controller
                 // return Redirect::to('secure');
                 // for now we'll just echo success (even though echoing in a controller is bad)
                 //echo 'SUCCESS!';
-                return Redirect::to('config');
+                return redirect()->route('config.index');
             }else{        
                 // validation not successful, send back to form 
                 //Session::flash('message', 'Login !');
-                return Redirect::to('login')->withInput(Input::except('password'));
+                return redirect()->route('login.showLogin')->withInput(Input::except('password'));
             }
         }
         
@@ -64,6 +66,6 @@ class LoginController extends Controller
     
     public function doLogout(){
         Auth::logout(); // log the user out of our application
-        return Redirect::to('login'); // redirect the user to the login screen
+        return redirect()->route('login.showLogin'); // redirect the user to the login screen
     }
 }

@@ -1,7 +1,8 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="{{ url('/') }}" class="logo">
+    <!-- {{ url('/') }} -->
+    <a href="{{ route('home') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>F</b>ME</span>
         <!-- logo for regular state and mobile devices -->
@@ -46,7 +47,7 @@
 
                             <p>
                             @isset($auth_user)
-                                {{ $auth_user->name }} <!-- - {{ $auth_user->department->name }}-->
+                                {{ $auth_user->name }} - {{ $auth_user->department->name }}
                                 <small>{{ $auth_user->email }}</small>
                             @endisset
                             </p>
@@ -63,7 +64,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ url('logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{ route('login.doLogout') }}" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\MeetingType;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
+use DB;
+
 class MeetingTypeController extends Controller
 {
     /**
@@ -15,6 +22,11 @@ class MeetingTypeController extends Controller
     public function index()
     {
         //
+        //dd( Model::find(1) );
+        if(view()->exists('meeting_type')){
+            $count = MeetingType::where('active','=','1')->count();
+            return View::make('meeting_type', array('count' => $count));
+        }
     }
 
     /**

@@ -5,14 +5,16 @@ $(function(){
     /*$('#id').select2({
         theme: "bootstrap"
     });*/
-    ////////////////////////////////////////////////////////
+    
     $('#user_position').select2({
         ajax          : {
             url: '{{ url('/') }}',
+            // dataType: 'json',
+            delay: 250,
             data: function (params) {
                 var query = {
-                    search			: params.term,
-                    defect_type		: $('#defect_type').val(),
+                    search			: params.term, // $.trim(params.term)
+                    active		    : 1,
                     page  			: params.page || 1,
                     length			: 10
                 }
@@ -24,7 +26,7 @@ $(function(){
                     results: $.map(data.data, function (obj) {
                         return { 
                             id  : obj.id, 
-                            text: obj.name || obj.code, 
+                            text: obj.name || obj.id, 
                             data: obj 
                         };
                     }),
@@ -41,6 +43,6 @@ $(function(){
         closeOnSelect	  : true,
         escapeMarkup      : function (markup) { return markup; }
     });
-    ////////////////////////////////////////////////////////
+    
 });
 </script>

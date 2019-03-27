@@ -12,6 +12,27 @@ class MeetingGroup extends Model
     // primary key
     protected $primaryKey = 'id';
     
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = array('active', 'meeting_type_id', 'company_id', 'department_id', 'name', 'description');
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    //protected $hidden = array();
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    //protected $casts = array();
+    
     //one to many (inverse)
     public function meetingType(){
         return $this->belongsTo('App\MeetingType', 'meeting_type_id', 'id');

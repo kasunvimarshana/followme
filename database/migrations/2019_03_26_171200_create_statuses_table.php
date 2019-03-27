@@ -19,6 +19,7 @@ class CreateStatusesTable extends Migration
             
             $table->boolean('active')->default(1);
             $table->string('name')->unique();
+            //$table->softDeletes();
         });
     }
 

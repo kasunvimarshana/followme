@@ -26,8 +26,8 @@
             
             <li class="header">ACTIVITIES</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="{{ set_active(['meetings']) }}"><a href="{{ url('/meetings') }}"><i class="fa fa-edit"></i> <span>MEETING</span></a></li>
-            <li class="{{ set_active(['meetings/tws']) }}"><a href="{{ url('/meetings/tws') }}"><i class="fa fa-edit"></i> <span>3W</span></a></li>
+            <li class="{{ set_active(['meetings']) }}"><a href="{{ route('meeting.index') }}"><i class="fa fa-edit"></i> <span>MEETING</span></a></li>
+            <li class="{{ set_active(['meetings/tws']) }}"><a href="{{ route('meetingTW.index') }}"><i class="fa fa-edit"></i> <span>3W</span></a></li>
             <li class="header">ACTIVITIES</li>
             <li class="treeview {{ set_active(['config', 'config/*']) }}">
                 <a href="#">
@@ -37,11 +37,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ set_active(['config/users', 'config/users/*']) }}"><a href="{{ url('/config/user') }}"><i class="fa fa-circle-o"></i> User</a></li>
-                    <li class="{{ set_active(['config/departments', 'config/departments/*']) }}"><a href="{{ url('/config/departments') }}"><i class="fa fa-circle-o"></i> Department</a></li>
-                    <li class="{{ set_active(['config/locations', 'config/locations/*']) }}"><a href="{{ url('/config/locations') }}"><i class="fa fa-circle-o"></i> Location</a></li>
-                    <li class="{{ set_active(['config/meeting-types', 'config/meeting-types/*']) }}"><a href="{{ url('/config/meeting-types') }}"><i class="fa fa-circle-o"></i> Meeting Type</a></li>
-                    <li class="{{ set_active(['config/meeting-groups', 'config/meeting-groups/*']) }}"><a href="{{ url('/config/meeting-groups') }}"><i class="fa fa-circle-o"></i> Meeting Group</a></li>
+                    <li class="{{ set_active(['config/users', 'config/users/*']) }}"><a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> User</a></li>
+                    <li class="{{ set_active(['config/departments', 'config/departments/*']) }}"><a href="{{ route('department.index') }}"><i class="fa fa-circle-o"></i> Department</a></li>
+                    <li class="{{ set_active(['config/locations', 'config/locations/*']) }}"><a href="{{ route('companyLocation.index') }}"><i class="fa fa-circle-o"></i> Location</a></li>
+                    <li class="{{ set_active(['config/meeting-types', 'config/meeting-types/*']) }}"><a href="{{ route('meetingType.index') }}"><i class="fa fa-circle-o"></i> Meeting Type</a></li>
+                    <li class="{{ set_active(['config/meeting-groups', 'config/meeting-groups/*']) }}"><a href="{{ route('meetingGroup.index') }}"><i class="fa fa-circle-o"></i> Meeting Group</a></li>
                 </ul>
             </li>
             

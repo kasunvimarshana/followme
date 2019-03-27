@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Department;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
+use DB;
+
 class DepartmentController extends Controller
 {
     /**
@@ -15,6 +22,11 @@ class DepartmentController extends Controller
     public function index()
     {
         //
+        //dd( Model::find(1) );
+        if(view()->exists('department')){
+            $count = Department::where('active','=','1')->count();
+            //return View::make('department', array('count' => $count));
+        }
     }
 
     /**

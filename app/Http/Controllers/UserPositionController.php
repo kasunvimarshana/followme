@@ -82,4 +82,11 @@ class UserPositionController extends Controller
     {
         //
     }
+    
+    //other
+    public function listUserPosition(Request $request){
+        // Solution to get around integer overflow errors
+        // $model->latest()->limit(PHP_INT_MAX)->offset(1)->get();
+    }
+    
 }

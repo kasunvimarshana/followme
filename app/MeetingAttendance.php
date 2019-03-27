@@ -12,6 +12,27 @@ class MeetingAttendance extends Model
     // primary key
     protected $primaryKey = 'id';
     
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = array('active', 'user_id', 'meeting_id', 'is_attend', 'company_id', 'department_id', 'user_position_id');
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    //protected $hidden = array();
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    //protected $casts = array();
+    
     //one to many (inverse)
     public function user(){
         return $this->belongsTo('App\User', 'user_id', 'id');
