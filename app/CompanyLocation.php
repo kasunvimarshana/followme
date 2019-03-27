@@ -13,12 +13,12 @@ class CompanyLocation extends Model
     protected $primaryKey = 'id';
     
     //one to many (inverse)
-    public function Company(){
+    public function company(){
         return $this->belongsTo('App\Company', 'company_id', 'id');
     }
     
     //one to many
-    public function Meetings(){
+    public function meetings(){
         return $this->hasMany('App\Meeting', 'company_id', 'id');
     }
 }

@@ -13,12 +13,12 @@ class TWUser extends Model
     protected $primaryKey = 'id';
     
     //one to many (inverse)
-    public function User(){
+    public function user(){
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
     
     //one to many (inverse)
-    public function MeetingTW(){
+    public function meetingTW(){
         return $this->belongsTo('App\MeetingTW', 'meeting_t_w_id', 'id');
     }
 }

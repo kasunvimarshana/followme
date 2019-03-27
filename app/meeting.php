@@ -13,47 +13,47 @@ class Meeting extends Model
     protected $primaryKey = 'id';
     
     //one to many
-    public function MeetingInfos(){
+    public function meetingInfos(){
         return $this->hasMany('App\MeetingInfo', 'meeting_id', 'id');
     }
     
     //one to many (inverse)
-    public function User(){
+    public function createdUser(){
         return $this->belongsTo('App\User', 'created_by', 'id');
     }
     
     //one to many
-    public function MeetingTWs(){
+    public function meetingTWs(){
         return $this->hasMany('App\MeetingTW', 'meeting_id', 'id');
     }
     
     //one to many
-    public function MeetingAttendances(){
+    public function meetingAttendances(){
         return $this->hasMany('App\MeetingAttendance', 'meeting_id', 'id');
     }
     
     //one to many
-    public function MeetingPoints(){
+    public function meetingPoints(){
         return $this->hasMany('App\MeetingPoint', 'meeting_id', 'id');
     }
     
     //one to many (inverse)
-    public function Company(){
+    public function company(){
         return $this->belongsTo('App\Company', 'company_id', 'id');
     }
     
     //one to many (inverse)
-    public function CompanyLocation(){
+    public function companyLocation(){
         return $this->belongsTo('App\CompanyLocation', 'company_location_id', 'id');
     }
     
     //one to many (inverse)
-    public function MeetingType(){
+    public function meetingType(){
         return $this->belongsTo('App\MeetingType', 'meeting_type_id', 'id');
     }
     
     //one to many (inverse)
-    public function Department(){
+    public function department(){
         return $this->belongsTo('App\Department', 'department_id', 'id');
     }
 }

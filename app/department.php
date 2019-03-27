@@ -13,17 +13,17 @@ class Department extends Model
     protected $primaryKey = 'id';
     
     //one to many
-    public function Meetings(){
+    public function meetings(){
         return $this->hasMany('App\Meeting', 'department_id', 'id');
     }
     
     //one to many
-    public function MeetingAttendances(){
+    public function meetingAttendances(){
         return $this->hasMany('App\MeetingAttendance', 'department_id', 'id');
     }
     
     //one to many
-    public function Users(){
+    public function users(){
         return $this->hasMany('App\User', 'department_id', 'id');
     }
 }

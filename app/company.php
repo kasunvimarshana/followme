@@ -13,27 +13,27 @@ class Company extends Model
     protected $primaryKey = 'id';
     
     //one to many
-    public function CompanyLocations(){
+    public function companyLocations(){
         return $this->hasMany('App\CompanyLocation', 'company_id', 'id');
     }
     
     //one to many
-    public function Users(){
+    public function users(){
         return $this->hasMany('App\User', 'company_id', 'id');
     }
     
     //one to many
-    public function MeetingGroups(){
+    public function meetingGroups(){
         return $this->hasMany('App\MeetingGroup', 'company_id', 'id');
     }
     
     //one to many
-    public function Meetings(){
+    public function meetings(){
         return $this->hasMany('App\Meeting', 'company_id', 'id');
     }
     
     //one to many
-    public function MeetingAttendances(){
+    public function meetingAttendances(){
         return $this->hasMany('App\MeetingAttendance', 'company_id', 'id');
     }
 }

@@ -13,7 +13,7 @@ class MeetingInfo extends Model
     protected $primaryKey = 'id';
     
     //one to many (inverse)
-    public function User(){
+    public function createdUser(){
         return $this->belongsTo('App\User', 'created_by', 'id');
     }
     

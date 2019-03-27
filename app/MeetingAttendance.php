@@ -13,27 +13,27 @@ class MeetingAttendance extends Model
     protected $primaryKey = 'id';
     
     //one to many (inverse)
-    public function User(){
+    public function user(){
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
     
     //one to many (inverse)
-    public function UserPosition(){
+    public function userPosition(){
         return $this->belongsTo('App\UserPosition', 'user_position_id', 'id');
     }
     
     //one to many (inverse)
-    public function Company(){
+    public function company(){
         return $this->belongsTo('App\Company', 'company_id', 'id');
     }
     
     //one to many (inverse)
-    public function Meeting(){
+    public function meeting(){
         return $this->belongsTo('App\Meeting', 'meeting_id', 'id');
     }
     
     //one to many (inverse)
-    public function Department(){
+    public function department(){
         return $this->belongsTo('App\Department', 'department_id', 'id');
     }
 }

@@ -13,12 +13,12 @@ class MeetingGroupUser extends Model
     protected $primaryKey = 'id';
     
     //one to many (inverse)
-    public function User(){
+    public function user(){
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
     
     //one to many (inverse)
-    public function MeetingGroup(){
+    public function meetingGroup(){
         return $this->belongsTo('App\MeetingGroup', 'meeting_group_id', 'id');
     }
 }

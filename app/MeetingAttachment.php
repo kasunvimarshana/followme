@@ -13,7 +13,7 @@ class MeetingAttachment extends Model
     protected $primaryKey = 'id';
     
     //one to many (inverse)
-    public function MeetingPoint(){
+    public function meetingPoint(){
         return $this->belongsTo('App\MeetingPoint', 'meeting_point_id', 'id');
     }
 }

@@ -43,52 +43,52 @@ class User extends Authenticatable
     ];
     
     //one to many
-    public function MeetingGroupUsers(){
+    public function meetingGroupUsers(){
         return $this->hasMany('App\MeetingGroupUser', 'user_id', 'id');
     }
     
     //one to many (inverse)
-    public function Department(){
+    public function department(){
         return $this->belongsTo('App\Department', 'department_id', 'id');
     }
     
     //one to many
-    public function Meetings(){
+    public function meetings(){
         return $this->hasMany('App\Meeting', 'created_by', 'id');
     }
     
     //one to many
-    public function MeetingInfos(){
+    public function meetingInfos(){
         return $this->hasMany('App\MeetingInfo', 'created_by', 'id');
     }
     
     //one to many (inverse)
-    public function Company(){
+    public function company(){
         return $this->belongsTo('App\Company', 'company_id', 'id');
     }
     
     //one to many (inverse)
-    public function UserPosition(){
+    public function userPosition(){
         return $this->belongsTo('App\UserPosition', 'user_position_id', 'id');
     }
     
     //one to many
-    public function MeetingAttendances(){
+    public function meetingAttendances(){
         return $this->hasMany('App\MeetingAttendances', 'user_id', 'id');
     }
     
     //one to many
-    public function MeetingTWs(){
+    public function meetingTWs(){
         return $this->hasMany('App\MeetingTW', 'done_by', 'id');
     }
     
     //one to many
-    public function TWUsers(){
+    public function tWUsers(){
         return $this->hasMany('App\TWUser', 'user_id', 'id');
     }
     
     //one to many
-    public function MeetingPoints(){
+    public function meetingPoints(){
         return $this->hasMany('App\MeetingPoints', 'user_id', 'id');
     }
 }

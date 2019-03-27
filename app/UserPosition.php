@@ -13,12 +13,12 @@ class UserPosition extends Model
     protected $primaryKey = 'id';
     
     //one to many
-    public function Users(){
+    public function users(){
         return $this->hasMany('App\User', 'user_position_id', 'id');
     }
     
     //one to many
-    public function MeetingAttendances(){
+    public function meetingAttendances(){
         return $this->hasMany('App\MeetingAttendance', 'user_position_id', 'id');
     }
 }

@@ -13,12 +13,12 @@ class MeetingType extends Model
     protected $primaryKey = 'id';
     
     //one to many
-    public function Meetings(){
+    public function meetings(){
         return $this->hasMany('App\Meeting', 'meeting_type_id', 'id');
     }
     
     //one to many
-    public function MeetingGroups(){
+    public function meetingGroups(){
         return $this->hasMany('App\MeetingGroup', 'meeting_type_id', 'id');
     }
 }

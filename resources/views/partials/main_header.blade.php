@@ -46,7 +46,7 @@
 
                             <p>
                             @isset($auth_user)
-                                {{ $auth_user->name }} <!-- - -->
+                                {{ $auth_user->name }} <!-- - {{ $auth_user->department->name }}-->
                                 <small>{{ $auth_user->email }}</small>
                             @endisset
                             </p>

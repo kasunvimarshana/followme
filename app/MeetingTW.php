@@ -13,17 +13,17 @@ class MeetingTW extends Model
     protected $primaryKey = 'id';
     
     //one to many (inverse)
-    public function Meeting(){
+    public function meeting(){
         return $this->belongsTo('App\Meeting', 'meeting_id', 'id');
     }
     
     //one to many (inverse)
-    public function User(){
+    public function doneUser(){
         return $this->belongsTo('App\User', 'done_by', 'id');
     }
     
     //one to many
-    public function TWUsers(){
+    public function tWUsers(){
         return $this->hasMany('App\TWUser', 'meeting_t_w_id', 'id');
     }
 }
