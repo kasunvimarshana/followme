@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-use App\status;
+use App\Status;
 
 class StatusSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class StatusSeeder extends Seeder
     public function run()
     {
         //
-        status::create([
+        Status::create([
             'id' => 1,
             'name' => 'default'
         ]);

@@ -18,7 +18,7 @@
     <!-- col -->
     <div class="col-sm-12">
         <!-- form -->
-        <form action="{{ url('config/user/create') }}" method="POST" class="col-sm-6" autocomplete="off">
+        <form action="{{ url('config/users/create') }}" method="POST" class="col-sm-6" autocomplete="off">
             @csrf
             <!-- form-group -->
             <div class="form-group col-sm-12">

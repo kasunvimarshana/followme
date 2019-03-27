@@ -18,8 +18,9 @@ class UserController extends Controller
 {
     //
     public function index(){
+        //dd( User::find(1) );
         if(view()->exists('user')){
-            $count = \App\User::where('status','=','1')->count();
+            $count = User::where('active','=','1')->count();
             return View::make('user', array('count' => $count));
         }
     }
@@ -45,7 +46,7 @@ class UserController extends Controller
         $validator = Validator::make(Input::all(), $rules);
         // if the validator fails, redirect back to the form
         if ($validator->fails()) {
-            return Redirect::to('config/user/create')
+            return Redirect::to('config/users/create')
             ->withErrors($validator) // send back all errors to the form
             ->withInput(Input::except('password')); // send back the input so that we can repopulate the form
         } else {
@@ -56,12 +57,13 @@ class UserController extends Controller
                 'name'     => Input::get('name'),
                 'password'  => Hash::make(Input::get('password')),
                 'epf_no'  => Input::get('epf_no'),
-                'company'  => Input::get('company'),
-                'department'  => Input::get('department'),
-                'user_position'  => Input::get('user_position'),
+                'company_id'  => Input::get('company'),
+                'department_id'  => Input::get('department'),
+                'user_position_id'  => Input::get('user_position'),
                 'created_by'  => auth()->user()->id,
                 'phone'  => Input::get('phone'),
-                'status'  => '1'
+                'status'  => '1',
+                'active'  => '1'
             );
             // Start transaction!
             DB::beginTransaction();
@@ -73,13 +75,13 @@ class UserController extends Controller
                 // Rollback and then redirect
                 // back to form with errors
                 DB::rollback();
-                return Redirect::to('config/user/create')
+                return Redirect::to('config/users/create')
                 ->withErrors( $e->getErrors() )
                 ->withInput();
             }catch(\Exception $e){
                 DB::rollback();
                 //throw $e;
-                return Redirect::to('config/user/create')
+                return Redirect::to('config/users/create')
                 ->withErrors( $e->getErrors() )
                 ->withInput();
             }
@@ -94,7 +96,7 @@ class UserController extends Controller
                 'text' => 'success'
             ]);
             
-            return Redirect::to('config/user/create');
+            return Redirect::to('config/users/create');
         }
         
     }

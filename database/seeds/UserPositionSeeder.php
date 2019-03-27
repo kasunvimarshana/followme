@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-use App\user_position;
+use App\UserPosition;
 
 class UserPositionSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class UserPositionSeeder extends Seeder
     public function run()
     {
         //
-        user_position::create([
+        UserPosition::create([
             'id' => 1,
             'name' => 'default'
         ]);

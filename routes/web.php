@@ -40,23 +40,23 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     // rout to main page
     Route::get('config', array('uses' => 'ConfigController@index'));
     // route to user page
-    Route::get('config/user', array('uses' => 'UserController@index'));
+    Route::get('config/users', array('uses' => 'UserController@index'));
     // route to department page
-    Route::get('config/department', array('uses' => 'DepartmentController@index'));
+    Route::get('config/departments', array('uses' => 'DepartmentController@index'));
     // route to location page
-    Route::get('config/location', array('uses' => 'CompanyLocationController@index'));
+    Route::get('config/locations', array('uses' => 'CompanyLocationController@index'));
     // route to meeting type page
-    Route::get('config/meeting_type', array('uses' => 'MeetingTypeController@index'));
+    Route::get('config/meeting-types', array('uses' => 'MeetingTypeController@index'));
     // route to meeting group page
-    Route::get('config/meeting_group', array('uses' => 'MeetingGroupController@index'));
+    Route::get('config/meeting-groups', array('uses' => 'MeetingGroupController@index'));
     // route to meeting group page
-    Route::get('meeting', array('uses' => 'MeetingController@index'));
+    Route::get('meetings', array('uses' => 'MeetingController@index'));
     // route to meeting group page
-    Route::get('meeting/tw', array('uses' => 'MeetingTWController@index'));
+    Route::get('meeting/tws', array('uses' => 'MeetingTWController@index'));
     // user create page
-    Route::get('config/user/create', array('uses' => 'UserController@showCreate'));
+    Route::get('config/users/create', array('uses' => 'UserController@showCreate'));
     // route to process create user
-    Route::post('config/user/create', array('uses' => 'UserController@doCreate'));
+    Route::post('config/users/create', array('uses' => 'UserController@doCreate'));
     // route to process edit user
-    Route::post('config/user/edit', array('uses' => 'UserController@doEdit'));
+    Route::post('config/users/edit', array('uses' => 'UserController@doEdit'));
 });

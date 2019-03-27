@@ -34,26 +34,26 @@ class LoginController extends Controller
         // run the validation rules on the inputs from the form
         $validator = Validator::make(Input::all(), $rules);
         // if the validator fails, redirect back to the form
-        if ($validator->fails()) 
+        if($validator->fails()){
             //Session::flash('message', 'Login !');
             return Redirect::to('login')
             ->withErrors($validator) // send back all errors to the login form
             ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
-        } else {
+        }else{
             // create our user data for the authentication
             $userdata = array(
                 'email'     => Input::get('email'),
                 'password'  => Input::get('password')
             );
             // attempt to do the login
-            if (Auth::attempt($userdata)) {
+            if(Auth::attempt($userdata)){
                 // validation successful!
                 // redirect them to the secure section or whatever
                 // return Redirect::to('secure');
                 // for now we'll just echo success (even though echoing in a controller is bad)
                 //echo 'SUCCESS!';
                 return Redirect::to('config');
-            } else {        
+            }else{        
                 // validation not successful, send back to form 
                 //Session::flash('message', 'Login !');
                 return Redirect::to('login')->withInput(Input::except('password'));

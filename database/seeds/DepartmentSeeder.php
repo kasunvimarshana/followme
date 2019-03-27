@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-use App\department;
+use App\Department;
 
 class DepartmentSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         //
-        department::create([
+        Department::create([
             'id' => 1,
             'name' => 'default'
         ]);

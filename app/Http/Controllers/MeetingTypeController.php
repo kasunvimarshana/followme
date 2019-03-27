@@ -2,21 +2,84 @@
 
 namespace App\Http\Controllers;
 
+use App\MeetingType;
 use Illuminate\Http\Request;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
-use Auth;
 
 class MeetingTypeController extends Controller
 {
-    //
-    public function index(){
-        if(view()->exists('meeting_type')){
-            return View::make('meeting_type');
-        }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\MeetingType  $meetingType
+     * @return \Illuminate\Http\Response
+     */
+    public function show(MeetingType $meetingType)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\MeetingType  $meetingType
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(MeetingType $meetingType)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\MeetingType  $meetingType
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, MeetingType $meetingType)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\MeetingType  $meetingType
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(MeetingType $meetingType)
+    {
+        //
     }
 }

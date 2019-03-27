@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-use App\company_location;
+use App\CompanyLocation;
 
 class CompanyLocationSeeder extends Seeder
 {
@@ -14,10 +13,10 @@ class CompanyLocationSeeder extends Seeder
     public function run()
     {
         //
-        company_location::create([
+        CompanyLocation::create([
             'id' => 1,
             'name' => 'default',
-            'company' => 1
+            'company_id' => 1
         ]);
     }
 }

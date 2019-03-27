@@ -38,9 +38,9 @@ class UserSeeder extends Seeder
             'epf_no' => 1,
             'phone' => '0000000000',
             'status' => '1',
-            'company' => 1,
-            'department' => 1,
-            'user_position' => 1,
+            'company_id' => 1,
+            'department_id' => 1,
+            'user_position_id' => 1,
             'created_by' => 1
         ]);
     }

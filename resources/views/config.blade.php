@@ -16,7 +16,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('/config/user') }}">
+            <a href="{{ url('/config/users') }}">
                 <span class="info-box-icon bg-aqua"><i class="ion ion-person-add"></i></span>
             </a>
             <!-- info-box-content -->
@@ -34,7 +34,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('meeting') }}">
+            <a href="{{ url('meetings') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-calendar"></i></span>
             </a>
             <!-- info-box-content -->
@@ -52,7 +52,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('/meeting/tw') }}">
+            <a href="{{ url('/meetings/tws') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-bookmark-o"></i></span>
             </a>
             <!-- info-box-content -->
@@ -70,7 +70,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('/config/location') }}">
+            <a href="{{ url('/config/locations') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-flag-o"></i></span>
             </a>
             <!-- info-box-content -->
@@ -88,7 +88,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('/config/department') }}">
+            <a href="{{ url('/config/departments') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-tree"></i></span>
             </a>
             <!-- info-box-content -->
@@ -106,7 +106,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('/config/meeting_type') }}">
+            <a href="{{ url('/config/meeting-types') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-bookmark-o"></i></span>
             </a>
             <!-- info-box-content -->
@@ -124,7 +124,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ url('/config/meeting_group') }}">
+            <a href="{{ url('/config/meeting-groups') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-group"></i></span>
             </a>
             <!-- info-box-content -->
