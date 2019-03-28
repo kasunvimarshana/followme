@@ -5,6 +5,11 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/select2/dist/css/select2.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" />
+    <!-- DataTable -->
+    <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-select-bs/css/select.bootstrap.min.css') }}" />
 @endsection
 
 @section('section_script_main')
@@ -151,6 +156,47 @@
                 <div id="collapseTwo" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <!-- -------------------------- -->
+                        
+                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                                <th>Extn.</th>
+                                <th>E-mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tiger</td>
+                                <td>Nixon</td>
+                                <td>System Architect</td>
+                                <td>Edinburgh</td>
+                                <td>61</td>
+                                <td>2011/04/25</td>
+                                <td>$320,800</td>
+                                <td>5421</td>
+                                <td>t.nixon@datatables.net</td>
+                            </tr>
+                            <tr>
+                                <td>Garrett</td>
+                                <td>Winters</td>
+                                <td>Accountant</td>
+                                <td>Tokyo</td>
+                                <td>63</td>
+                                <td>2011/07/25</td>
+                                <td>$170,750</td>
+                                <td>8422</td>
+                                <td>g.winters@datatables.net</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        
                         <!-- -------------------------- -->
                     </div>
                 </div>
@@ -170,23 +216,24 @@
     @parent
     <!-- Select2 -->
     <script src="{{ asset('node_modules/admin-lte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+    <!-- DataTable -->
+    <script src="{{ asset('node_modules/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-responsive-bs/js/responsive.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-scroller-bs/js/scroller.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-select-bs/js/select.bootstrap.min.js') }}"></script>
+
+    <!-- -------------------------------------- -->
+    <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    </script>
+    <!-- -------------------------------------- -->
+
     @includeIf('partials.select_user_position')
     @includeIf('partials.select_department')
-    <!-- -------------------------------------------------- -->
-    <script>
-        $(document).ready(function(){
-            // Add minus icon for collapse element which is open by default
-            $(".collapse.in").each(function(){
-                $(this).siblings(".panel-heading").find(".glyphicon").addClass("glyphicon-minus").removeClass("glyphicon-plus");
-            });
-
-            // Toggle plus minus icon on show hide of collapse element
-            $(".collapse").on('show.bs.collapse', function(){
-                $(this).parent().find(".glyphicon").removeClass("glyphicon-plus").addClass("glyphicon-minus");
-            }).on('hide.bs.collapse', function(){
-                $(this).parent().find(".glyphicon").removeClass("glyphicon-minus").addClass("glyphicon-plus");
-            });
-        });
-    </script>
-    <!-- -------------------------------------------------- -->
 @endsection
