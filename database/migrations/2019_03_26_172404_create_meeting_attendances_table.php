@@ -24,7 +24,8 @@ class CreateMeetingAttendancesTable extends Migration
             $table->unsignedBigInteger('company_id')->index()->nullable();
             $table->unsignedBigInteger('department_id')->index()->nullable();
             $table->unsignedBigInteger('user_position_id')->index()->nullable();
-            
+            $table->string('user_type')->nullable()->default('0'); 
+            // 1 = for owner, 0 = others
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');

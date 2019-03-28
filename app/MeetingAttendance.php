@@ -17,7 +17,7 @@ class MeetingAttendance extends Model
      *
      * @var array
      */
-    protected $fillable = array('active', 'user_id', 'meeting_id', 'is_attend', 'company_id', 'department_id', 'user_position_id');
+    protected $fillable = array('active', 'user_id', 'meeting_id', 'is_attend', 'company_id', 'department_id', 'user_position_id', 'user_type');
 
     /**
      * The attributes that should be hidden for arrays.
