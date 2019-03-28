@@ -170,4 +170,9 @@ class UserController extends Controller
     {
         //
     }
+    
+    //other
+    public function showUsers(Request $request){
+        
+    }
 }

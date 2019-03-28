@@ -37,7 +37,7 @@
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
                     <select class="form-control select2" id="department_id" name="department_id" value="{{ old('department_id') }}" data-placeholder="Department" style="width: 100%;">
-                        @if(old('user_position_id'))
+                        @if(old('department_id'))
                             @php
                                 $oldDepartmentId = old('department_id');
                                 $oldDepartment = \App\Department::find( $oldDepartmentId );
@@ -64,7 +64,7 @@
                                 $oldMeetingType = \App\MeetingType::find( $oldMeetingTypeId );
                             @endphp
                             @isset($oldMeetingType)
-                                <option value="{{ $oldUserPosition->id }}" selected> {{ $oldUserPosition->name }} </option>
+                                <option value="{{ $oldMeetingType->id }}" selected> {{ $oldMeetingType->name }} </option>
                             @endisset
                         @endif
                     </select>
@@ -78,7 +78,7 @@
                 <label for="description" class="col-sm-2 control-label">Description</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5"></textarea>
+                    <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5">{{ old('description') }}</textarea>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
@@ -98,7 +98,7 @@
         </form>
         <!-- /.form -->
     </div>
-    <!-- /.col >
+    <!-- /.col -->
     
 </div>
 <!-- /.row -->

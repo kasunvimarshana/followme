@@ -24,7 +24,7 @@ class ConfigController extends Controller
         $meetingGroupCount = \App\MeetingGroup::where('active','=','1')->count();
         
         if(view()->exists('config')){
-            return View::make('config', array(
+            return View::make('test', array(
                 'userCount' => $userCount,
                 'meetingCount' => $meetingCount,
                 'meetingTWCount' => $meetingTWCount,
