@@ -77,10 +77,10 @@
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
-                <label for="user_position" class="col-sm-2 control-label">Position</label>
+                <label for="user_position_id" class="col-sm-2 control-label">Position</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <select class="form-control select2" id="user_position" name="user_position" value="{{ old('user_position') }}" data-placeholder="Position" style="width: 100%;"></select>
+                    <select class="form-control select2" id="user_position_id" name="user_position_id" value="{{ old('user_position_id') }}" data-placeholder="Position" style="width: 100%;"></select>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
@@ -88,10 +88,10 @@
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
-                <label for="department" class="col-sm-2 control-label">Department</label>
+                <label for="department_id" class="col-sm-2 control-label">Department</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <select class="form-control select2" id="department" name="department" value="{{ old('department') }}" data-placeholder="Department" style="width: 100%;"></select>
+                    <select class="form-control select2" id="department_id" name="department_id" value="{{ old('department_id') }}" data-placeholder="Department" style="width: 100%;"></select>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>

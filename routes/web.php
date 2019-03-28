@@ -61,4 +61,8 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::post('config/users/create', array('uses' => 'UserController@store'))->name('user.store');
     // route to process edit user
     Route::post('config/users/edit', array('uses' => 'UserController@edit'))->name('user.edit');
+    
+    Route::get('user-positions/list', array('uses' => 'UserPositionController@listUserPositions'))->name('userPosition.list');
+    
+    Route::get('departments/list', array('uses' => 'DepartmentController@listDepartments'))->name('department.list');
 });

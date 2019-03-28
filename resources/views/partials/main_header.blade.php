@@ -2,7 +2,7 @@
 
     <!-- Logo -->
     <!-- {{ url('/') }} -->
-    <a href="{{ route('home') }}" class="logo">
+    <a href="{!! route('home') !!}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>F</b>ME</span>
         <!-- logo for regular state and mobile devices -->
@@ -32,7 +32,7 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="{{ URL::asset('node_modules/admin-lte/dist/img/avatar5.png') }}" class="user-image" alt="User Image">
+                        <img src="{!! URL::asset('node_modules/admin-lte/dist/img/avatar5.png') !!}" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">
                             @isset($auth_user)
@@ -43,11 +43,14 @@
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="{{ URL::asset('node_modules/admin-lte/dist/img/avatar5.png') }}" class="img-circle" alt="User Image">
+                            <img src="{!! URL::asset('node_modules/admin-lte/dist/img/avatar5.png') !!}" class="img-circle" alt="User Image">
 
                             <p>
                             @isset($auth_user)
-                                {{ $auth_user->name }} - {{ $auth_user->department->name }}
+                                {{ $auth_user->name }}
+                                @isset($auth_user->department)
+                                    - {{ $auth_user->department->name }}
+                                @endisset
                                 <small>{{ $auth_user->email }}</small>
                             @endisset
                             </p>
@@ -64,7 +67,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ route('login.doLogout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{!! route('login.doLogout') !!}" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

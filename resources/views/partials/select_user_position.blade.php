@@ -6,9 +6,9 @@ $(function(){
         theme: "bootstrap"
     });*/
     
-    $('#user_position').select2({
+    $('#user_position_id').select2({
         ajax          : {
-            url: '{{ url('/') }}',
+            url: "{!! route('userPosition.list') !!}",
             // dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -37,7 +37,7 @@ $(function(){
             },
             cache: true
         },
-        placeholder	      : 'Search',
+        placeholder	      : 'Select Position',
         //minimumInputLength: 1,
         multiple		  : false,
         closeOnSelect	  : true,
