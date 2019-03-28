@@ -16,7 +16,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ route('user.create') }}">
+            <a href="{{ route('meetingGroup.create') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa  fa-plus-square-o"></i></span>
             </a>
             <!-- info-box-content -->
@@ -35,7 +35,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ route('user.list') }}">
+            <a href="{{ route('meetingGroup.list') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
             </a>
             <!-- info-box-content -->

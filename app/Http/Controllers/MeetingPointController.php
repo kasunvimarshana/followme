@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\MeetingPoint;
 use Illuminate\Http\Request;
 
+use \Response;
+
 class MeetingPointController extends Controller
 {
     /**

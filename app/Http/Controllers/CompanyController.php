@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Company;
 use Illuminate\Http\Request;
 
+use \Response;
+
 class CompanyController extends Controller
 {
     /**

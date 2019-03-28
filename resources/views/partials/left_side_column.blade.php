@@ -39,7 +39,7 @@
                 <ul class="treeview-menu">
                     <li class="{!! set_active(['config/users', 'config/users/*']) !!}"><a href="{!! route('user.index') !!}"><i class="fa fa-circle-o"></i> User</a></li>
                     <li class="{!! set_active(['config/departments', 'config/departments/*']) !!}"><a href="{!! route('department.index') !!}"><i class="fa fa-circle-o"></i> Department</a></li>
-                    <li class="{!! set_active(['config/locations', 'config/locations/*']) !!}"><a href="{!! route('companyLocation.index') !!}"><i class="fa fa-circle-o"></i> Location</a></li>
+                    <li class="{!! set_active(['config/company-locations', 'config/company-locations/*']) !!}"><a href="{!! route('companyLocation.index') !!}"><i class="fa fa-circle-o"></i> Location</a></li>
                     <li class="{!! set_active(['config/meeting-types', 'config/meeting-types/*']) !!}"><a href="{!! route('meetingType.index') !!}"><i class="fa fa-circle-o"></i> Meeting Type</a></li>
                     <li class="{!! set_active(['config/meeting-groups', 'config/meeting-groups/*']) !!}"><a href="{!! route('meetingGroup.index') !!}"><i class="fa fa-circle-o"></i> Meeting Group</a></li>
                 </ul>

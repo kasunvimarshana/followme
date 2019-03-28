@@ -18,7 +18,7 @@
     <!-- col -->
     <div class="col-sm-12">
         <!-- form -->
-        <form action="{{ route('user.store') }}" method="POST" class="col-sm-6" autocomplete="off">
+        <form action="{!! route('user.store') !!}" method="POST" class="col-sm-6" autocomplete="off">
             @csrf
             <!-- form-group -->
             <div class="form-group col-sm-12">
@@ -29,7 +29,7 @@
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
-            <!-- .form-group -->
+            <!-- /.form-group -->
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
@@ -40,7 +40,7 @@
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
-            <!-- .form-group -->
+            <!-- /.form-group -->
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
@@ -51,7 +51,7 @@
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
-            <!-- .form-group -->
+            <!-- /.form-group -->
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
@@ -62,7 +62,7 @@
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
-            <!-- .form-group -->
+            <!-- /.form-group -->
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
@@ -73,29 +73,49 @@
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
-            <!-- .form-group -->
+            <!-- /.form-group -->
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
                 <label for="user_position_id" class="col-sm-2 control-label">Position</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <select class="form-control select2" id="user_position_id" name="user_position_id" value="{{ old('user_position_id') }}" data-placeholder="Position" style="width: 100%;"></select>
+                    <select class="form-control select2" id="user_position_id" name="user_position_id" value="{{ old('user_position_id') }}" data-placeholder="Position" style="width: 100%;">
+                        @if(old('user_position_id'))
+                            @php
+                                $oldUserPositionId = old('user_position_id');
+                                $oldUserPosition = \App\UserPosition::find( $oldUserPositionId );
+                            @endphp
+                            @isset($oldUserPosition)
+                                <option value="{{ $oldUserPosition->id }}" selected> {{ $oldUserPosition->name }} </option>
+                            @endisset
+                        @endif
+                    </select>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
-            <!-- .form-group -->
+            <!-- /.form-group -->
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
                 <label for="department_id" class="col-sm-2 control-label">Department</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <select class="form-control select2" id="department_id" name="department_id" value="{{ old('department_id') }}" data-placeholder="Department" style="width: 100%;"></select>
+                    <select class="form-control select2" id="department_id" name="department_id" value="{{ old('department_id') }}" data-placeholder="Department" style="width: 100%;">
+                        @if(old('user_position_id'))
+                            @php
+                                $oldDepartmentId = old('department_id');
+                                $oldDepartment = \App\Department::find( $oldDepartmentId );
+                            @endphp
+                            @isset($oldDepartment)
+                                <option value="{{ $oldDepartment->id }}" selected> {{ $oldDepartment->name }} </option>
+                            @endisset
+                        @endif
+                    </select>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
-            <!-- .form-group -->
+            <!-- /.form-group -->
             
             <!-- form-group -->
             <div class="form-group col-sm-12">

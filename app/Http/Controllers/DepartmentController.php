@@ -26,7 +26,7 @@ class DepartmentController extends Controller
         //dd( Model::find(1) );
         if(view()->exists('department')){
             $count = Department::where('active','=','1')->count();
-            //return View::make('department', array('count' => $count));
+            return View::make('department', array('count' => $count));
         }
     }
 
@@ -38,6 +38,9 @@ class DepartmentController extends Controller
     public function create()
     {
         //
+        if(view()->exists('department_create')){
+            return View::make('department_create');
+        }
     }
 
     /**
@@ -49,6 +52,45 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         //
+        // do process
+        $departmentData = array(	
+            'name'     => Input::get('name'),
+            'active'  => '1'
+        );
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            // Validate, then create if valid
+            $newDepartment = Department::create( $departmentData );
+        }catch(ValidationException $e){
+            // Rollback and then redirect
+            // back to form with errors
+            DB::rollback();
+            return redirect()->route('department.create')
+            //->withErrors( $e->getErrors() )
+            ->withErrors( $e->getMessage() )
+            ->withInput();
+        }catch(\Exception $e){
+            DB::rollback();
+            //throw $e;
+            return redirect()->route('department.create')
+            //->withErrors( $e->getErrors() )
+            ->withErrors( $e->getMessage() )
+            ->withInput();
+        }
+
+        // If we reach here, then
+        // data is valid and working.
+        // Commit the queries!
+        DB::commit();
+
+        notify()->flash('Department Created', 'success', [
+            'timer' => 3000,
+            'text' => 'success'
+        ]);
+
+        return redirect()->route('department.create');
     }
 
     /**

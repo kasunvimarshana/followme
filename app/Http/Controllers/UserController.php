@@ -13,6 +13,8 @@ use Auth;
 use DB;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use \Response;
 
 class UserController extends Controller
 {
@@ -66,12 +68,12 @@ class UserController extends Controller
         $validator = Validator::make(Input::all(), $rules);
         // if the validator fails, redirect back to the form
         if ($validator->fails()) {
-            return Redirect::to('config/users/create')
+            return redirect()->route('user.create')
             ->withErrors($validator) // send back all errors to the form
             ->withInput(Input::except('password')); // send back the input so that we can repopulate the form
         } else {
             // do process
-            $userdata = array(	
+            $userData = array(	
                 'id'     => Input::get('epf_no'),
                 'email'     => Input::get('email'),
                 'name'     => Input::get('name'),
@@ -83,26 +85,29 @@ class UserController extends Controller
                 'created_by'  => auth()->user()->id,
                 'phone'  => Input::get('phone'),
                 'status'  => '1',
-                'active'  => '1'
+                'active'  => '1',
+                'remember_token'  => Str::random(10)
             );
             // Start transaction!
             DB::beginTransaction();
 
             try {
                 // Validate, then create if valid
-                $newUser = User::create( $userdata );
+                $newUser = User::create( $userData );
             }catch(ValidationException $e){
                 // Rollback and then redirect
                 // back to form with errors
                 DB::rollback();
-                return Redirect::to('config/users/create')
-                ->withErrors( $e->getErrors() )
+                return redirect()-route('user.create')
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
                 ->withInput();
             }catch(\Exception $e){
                 DB::rollback();
                 //throw $e;
-                return Redirect::to('config/users/create')
-                ->withErrors( $e->getErrors() )
+                return redirect()->route('user.create')
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
                 ->withInput();
             }
 
@@ -116,7 +121,7 @@ class UserController extends Controller
                 'text' => 'success'
             ]);
             
-            return Redirect::to('config/users/create');
+            return redirect()->route('user.create');
         }
         
     }

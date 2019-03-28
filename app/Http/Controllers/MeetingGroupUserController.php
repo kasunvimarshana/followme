@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\MeetingGroupUser;
 use Illuminate\Http\Request;
 
+use \Response;
+
 class MeetingGroupUserController extends Controller
 {
     /**

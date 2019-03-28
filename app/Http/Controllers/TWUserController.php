@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\TWUser;
 use Illuminate\Http\Request;
 
+use \Response;
+
 class TWUserController extends Controller
 {
     /**

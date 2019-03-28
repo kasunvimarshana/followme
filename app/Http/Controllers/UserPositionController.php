@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\UserPosition;
 use Illuminate\Http\Request;
+
 use \Response;
 
 class UserPositionController extends Controller

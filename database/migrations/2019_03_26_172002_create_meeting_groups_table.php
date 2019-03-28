@@ -21,7 +21,7 @@ class CreateMeetingGroupsTable extends Migration
             $table->unsignedBigInteger('meeting_type_id')->index()->nullable();
             $table->unsignedBigInteger('company_id')->index()->nullable();
             $table->unsignedBigInteger('department_id')->index()->nullable();
-            $table->string('name')->nullable();
+            $table->string('name')->unique()->nullable();
             $table->text('description')->nullable();
             
             $table->foreign('meeting_type_id')->references('id')->on('meeting_types')->onDelete('cascade')->onUpdate('cascade');

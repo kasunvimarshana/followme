@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Status;
 use Illuminate\Http\Request;
 
+use \Response;
+
 class StatusController extends Controller
 {
     /**
