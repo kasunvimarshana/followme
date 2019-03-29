@@ -10,6 +10,7 @@
 page. However, you can choose any other skin. Make sure you
 apply the skin class to the body tag so the changes take effect. -->
 <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/dist/css/skins/_all-skins.min.css') }}"/>
+<!-- custom stylesheet -->
 <link rel="stylesheet" href="{{ asset('css/custom_style.css') }}"/>
 <link rel="stylesheet" href="{{ asset('css/custom_scrollbar.css') }}"/>
 <!-- Styles -->

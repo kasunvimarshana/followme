@@ -145,6 +145,7 @@
                 <div id="collapseTwo" class="panel-collapse collapse in">
                     <div class="panel-body">
                         
+                        <!-- --- -->
                         <!-- row -->
                         <div class="row">
                             <!-- col -->
@@ -156,6 +157,7 @@
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
+                        <!-- --- -->
                         
                     </div>
                 </div>

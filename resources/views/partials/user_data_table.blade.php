@@ -124,7 +124,11 @@ $(function(){
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-edit');
                 //button_1_body.text('text');
-                //button1.bind("click", function(){});
+                button_1.bind("click", function(){
+                    var url = "{!! route('user.edit', ['#userIdParam']) !!}";
+                    url = url.replace("#userIdParam", rowData.id);
+                    $( location ).attr("href", url);
+                });
                 button_1.append(button_1_body);
                 buttonGroup_1.append(button_1);
                 
@@ -135,6 +139,31 @@ $(function(){
                 button_2.addClass('btn btn-danger');
                 var button_2_body = $('<i></i>');
                 button_2_body.addClass('fa fa-trash-o');
+                button_2.bind("click", function(){
+                    
+                    bootbox.confirm({
+                        message: "are you sure tht you want to delete <strong>" + rowData.email + "</strong>",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            //console.log('This was logged in the callback: ' + result);
+                            if( result == true ){
+                                var url = "{!! route('user.destroy', ['#userIdParam']) !!}";
+                                url = url.replace("#userIdParam", rowData.id);
+                                $( location ).attr("href", url);
+                            }
+                        }
+                    });
+                    
+                })
                 button_2.append(button_2_body);
                 buttonGroup_2.append(button_2);
                 

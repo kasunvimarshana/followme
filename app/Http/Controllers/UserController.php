@@ -145,6 +145,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+        if(view()->exists('user_edit')){
+            return View::make('user_edit', ['user' => $user]);
+        }
     }
 
     /**
@@ -157,6 +160,68 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $userClone = clone $user;
+        // validate the info, create rules for the inputs
+        $rules = array(
+            'email'    => 'required|email'
+        );
+        
+        // run the validation rules on the inputs from the form
+        $validator = Validator::make(Input::all(), $rules);
+        // if the validator fails, redirect back to the form
+        if ($validator->fails()) {
+            return redirect()->route('user.edit', [$user->id])
+            ->withErrors($validator) // send back all errors to the form
+            ->withInput(); // send back the input so that we can repopulate the form
+        } else {
+            // do process
+            $userData = array(	
+                'id'     => Input::get('epf_no'),
+                'email'     => Input::get('email'),
+                'name'     => Input::get('name'),
+                'epf_no'  => Input::get('epf_no'),
+                'company_id'  => Input::get('company'),
+                'department_id'  => Input::get('department_id'),
+                'user_position_id'  => Input::get('user_position_id'),
+                'phone'  => Input::get('phone')
+            );
+            // Start transaction!
+            DB::beginTransaction();
+
+            try {
+                // Validate, then update if valid
+                $updatedUser = $userClone->update( $userData );
+            }catch(ValidationException $e){
+                // Rollback and then redirect
+                // back to form with errors
+                DB::rollback();
+                //throw $e;
+                return redirect()-route('user.edit', [$user->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }catch(\Exception $e){
+                DB::rollback();
+                //throw $e;
+                return redirect()->route('user.edit', [$user->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }
+
+            // If we reach here, then
+            // data is valid and working.
+            // Commit the queries!
+            DB::commit();
+            
+            notify()->flash('User Updated', 'success', [
+                'timer' => 3000,
+                'text' => 'success'
+            ]);
+            
+            return redirect()->route('user.index');
+        }
+        
     }
 
     /**
@@ -168,6 +233,32 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+        //Model::find(explode(',', $id))->delete();
+        // do process
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            // Validate, then delete if valid
+            //$user->delete();
+            $user->delete();
+        }catch(\Exception $e){
+            DB::rollback();
+            //throw $e;
+            return redirect()->route('user.showAllUsers');
+        }
+
+        // If we reach here, then
+        // data is valid and working.
+        // Commit the queries!
+        DB::commit();
+
+        notify()->flash('User Deleted', 'success', [
+            'timer' => 3000,
+            'text' => 'success'
+        ]);
+
+        return redirect()->route('user.showAllUsers');
     }
     
     //other
@@ -286,6 +377,67 @@ class UserController extends Controller
         );
         
         return Response::json( $data );   
+    }
+    
+    public function resetPassword(Request $request, User $user){
+        //
+        $userClone = clone $user;
+        
+        $password_old = Input::get('password_old');
+        $password_new = Input::get('password_new');
+        $password_old_hash = Hash::make($password_old);
+        $password_new_hash = Hash::make($password_new);
+        
+        if( Hash::check($password_old, $user->password) ){
+            // do process
+            $userData = array(	
+                'password'     => $password_new
+            );
+            // Start transaction!
+            DB::beginTransaction();
+
+            try {
+                // Validate, then update if valid
+                $updatedUser = $userClone->update( $userData );
+            }catch(ValidationException $e){
+                // Rollback and then redirect
+                // back to form with errors
+                DB::rollback();
+                throw $e;
+                return redirect()-route('user.edit', [$user->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }catch(\Exception $e){
+                DB::rollback();
+                //throw $e;
+                return redirect()->route('user.edit', [$user->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }
+
+            // If we reach here, then
+            // data is valid and working.
+            // Commit the queries!
+            DB::commit();
+            
+            notify()->flash('Password Reset', 'success', [
+                'timer' => 3000,
+                'text' => 'success'
+            ]);
+            
+            return redirect()->route('user.index');
+        }else{
+            return redirect()->route('user.edit', [$user->id]);
+        }
+        
+    }
+    
+    public function showAllUsers(Request $request){
+        if(view()->exists('user_list_all')){
+            return View::make('user_list_all');
+        }
     }
     
 }

@@ -89,10 +89,24 @@ class User extends Authenticatable
     
     //one to many
     public function meetingPoints(){
-        return $this->hasMany('App\MeetingPoints', 'user_id', 'id');
+        return $this->hasMany('App\MeetingPoint', 'user_id', 'id');
     }
     
     /*function getEpfNo($value) {
         return str_pad($this->epf_no, 4, '0', STR_PAD_LEFT);
     }*/
+    
+    /*public function delete() {
+        $this->meetingGroupUsers()->delete();
+        parent::delete();
+    }*/
+    
+    protected static function boot() {
+        parent::boot();
+        static::deleting(function($check) {
+            //$check->meetingPoints()->delete();
+            $check->meetingGroupUsers()->delete();
+        });
+    }
+
 }

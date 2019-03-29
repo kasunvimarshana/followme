@@ -70,7 +70,11 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     // route to process create user
     Route::post('config/users/create', array('uses' => 'UserController@store'))->name('user.store');
     // route to process edit user
-    Route::post('config/users/edit', array('uses' => 'UserController@edit'))->name('user.edit');
+    Route::get('config/users/{user}/edit', array('uses' => 'UserController@edit'))->name('user.edit')->where(['user' => '[0-9]+']);
+    Route::post('config/users/{user}/update', array('uses' => 'UserController@update'))->name('user.update')->where(['user' => '[0-9]+']);
+    Route::post('config/users/{user}/reset-password', array('uses' => 'UserController@resetPassword'))->name('user.resetPassword')->where(['user' => '[0-9]+']);
+    Route::get('config/users/show-all', array('uses' => 'UserController@showAllUsers'))->name('user.showAllUsers');
+    Route::get('config/users/{user}/destroy', array('uses' => 'UserController@destroy'))->name('user.destroy')->where(['user' => '[0-9]+']);
     // department
     // route to department page
     Route::get('config/departments', array('uses' => 'DepartmentController@index'))->name('department.index');

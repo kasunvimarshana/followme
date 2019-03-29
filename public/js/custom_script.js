@@ -6,6 +6,11 @@
 //    });
 //});
 
+$(function(){
+    /* Resolve conflict in jQuery UI tooltip with Bootstrap tooltip */
+    //$.widget.bridge('uibutton', $.ui.button);
+});
+
 // accordion
 $(function(){
     "use strict";
@@ -42,3 +47,5 @@ const maskedNumber = last4Digits.padStart(fullNumber.length, '*');
 console.log(maskedNumber);
 // expected output: "************0000"
 */
+
+/* headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } */
