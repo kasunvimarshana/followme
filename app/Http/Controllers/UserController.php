@@ -204,44 +204,46 @@ class UserController extends Controller
                 //$search = (string) $search;
                 $query = $query->where('email', 'like', '%' . $search . '%');
             }
-            $recordsFiltered = $query->count();
         }
         
         // name
         if( ($request->get('name')) && (!empty($request->get('name'))) ){
-            $name = intval( $request->get('name') );
-            $query = $query->whare('name', 'like', '%' . $name . '%');
+            $name =  $request->get('name');
+            $query = $query->where('name', 'like', '%' . $name . '%');
         }
         
         // email
         if( ($request->get('email')) && (!empty($request->get('email'))) ){
-            $email = intval( $request->get('email') );
-            $query = $query->whare('email', 'like', '%' . $email . '%');
+            $email = $request->get('email');
+            $query = $query->where('email', 'like', '%' . $email . '%');
         }
         
         // epf_no
         if( ($request->get('epf_no')) && (!empty($request->get('epf_no'))) ){
-            $epf_no = intval( $request->get('epf_no') );
-            $query = $query->whare('epf_no', 'like', '%' . $epf_no . '%');
+            $epf_no = $request->get('epf_no');
+            $query = $query->where('epf_no', 'like', '%' . $epf_no . '%');
         }
         
         // phone
         if( ($request->get('phone')) && (!empty($request->get('phone'))) ){
-            $phone = intval( $request->get('phone') );
-            $query = $query->whare('phone', 'like', '%' . $phone . '%');
+            $phone = $request->get('phone');
+            $query = $query->where('phone', 'like', '%' . $phone . '%');
         }
         
         // user_position_id
         if( ($request->get('user_position_id')) && (!empty($request->get('user_position_id'))) ){
             $user_position_id = intval( $request->get('user_position_id') );
-            $query = $query->whare('user_position_id', '=', $user_position_id);
+            $query = $query->where('user_position_id', '=', $user_position_id);
         }
         
         // department_id
         if( ($request->get('department_id')) && (!empty($request->get('department_id'))) ){
             $department_id = intval( $request->get('department_id') );
-            $query = $query->whare('department_id', '=', $department_id);
+            $query = $query->where('department_id', '=', $department_id);
         }
+        
+        // get filtered record count
+        $recordsFiltered = $query->count();
         
         // get limit value
         if( $request->get('length') ){
@@ -272,6 +274,7 @@ class UserController extends Controller
         // get data
         $queryResult = $query->get();
         
+        $recordsTotal = $recordsFiltered;
         $data = array(
             'draw' => $draw,
             'start' => $start,

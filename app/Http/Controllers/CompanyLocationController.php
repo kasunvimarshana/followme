@@ -173,8 +173,10 @@ class CompanyLocationController extends Controller
                 //$search = (string) $search;
                 $query = $query->where('name', 'like', '%' . $search . '%');
             }
-            $recordsFiltered = $query->count();
         }
+        
+        // get filtered record count
+        $recordsFiltered = $query->count();
         
         // get limit value
         if( $request->get('length') ){
@@ -205,6 +207,7 @@ class CompanyLocationController extends Controller
         // get data
         $queryResult = $query->get();
         
+        $recordsTotal = $recordsFiltered;
         $data = array(
             'draw' => $draw,
             'start' => $start,

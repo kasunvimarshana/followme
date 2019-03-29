@@ -176,24 +176,27 @@ class MeetingGroupController extends Controller
                 //$search = (string) $search;
                 $query = $query->where('name', 'like', '%' . $search . '%');
             }
-            $recordsFiltered = $query->count();
         }
         
         // meeting type
         if( $request->get('meeting_type_id') ){
             $meetingTypeId = intval( $request->get('meeting_type_id') );
-            $query = $query->whare('meeting_type_id', '=', $meetingTypeId);
+            $query = $query->where('meeting_type_id', '=', $meetingTypeId);
         }
         // company
         if( $request->get('company_id') ){
             $companyId = intval( $request->get('company_id') );
-            $query = $query->whare('company_id', '=', $companyId);
+            $query = $query->where('company_id', '=', $companyId);
         }
         // department
         if( $request->get('department_id') ){
             $departmentId = intval( $request->get('department_id') );
-            $query = $query->whare('department_id', '=', $departmentId);
+            $query = $query->where('department_id', '=', $departmentId);
         }
+        
+        // get filtered record count
+        $recordsFiltered = $query->count();
+        
         // get limit value
         if( $request->get('length') ){
             $length = intval( $request->get('length') );
@@ -223,6 +226,7 @@ class MeetingGroupController extends Controller
         // get data
         $queryResult = $query->get();
         
+        $recordsTotal = $recordsFiltered;
         $data = array(
             'draw' => $draw,
             'start' => $start,

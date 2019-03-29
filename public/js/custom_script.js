@@ -21,3 +21,24 @@ $(function(){
         $(this).parent().find(".glyphicon").removeClass("glyphicon-minus").addClass("glyphicon-plus");
     });
 });
+
+
+/*$(function(){
+    Number.prototype.pad = function(size) {
+        var s = String(this);
+        while (s.length < (size || 2)) {s = "0" + s;}
+        return s;
+    }
+    //(1).pad(3) // => "001"
+});*/
+
+/*
+const str1 = '5';
+console.log(str1.padStart(2, '0'));
+// expected output: "05"
+const fullNumber = '00000000000000000';
+const last4Digits = fullNumber.slice(-4);
+const maskedNumber = last4Digits.padStart(fullNumber.length, '*');
+console.log(maskedNumber);
+// expected output: "************0000"
+*/

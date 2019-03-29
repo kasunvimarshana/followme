@@ -42,7 +42,7 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- form -->
-                                <form action="{!! route('user.store') !!}" method="GET" class="col-sm-8" autocomplete="off">
+                                <form action="#" method="GET" class="col-sm-8" autocomplete="off" id="userSearchForm">
                                     @csrf
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
@@ -144,7 +144,7 @@
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <!-- -------------------------- -->
+                        
                         <!-- row -->
                         <div class="row">
                             <!-- col -->
@@ -156,7 +156,7 @@
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
-                        <!-- -------------------------- -->
+                        
                     </div>
                 </div>
             </div>
@@ -188,4 +188,14 @@
     @includeIf('partials.user_position_select')
     @includeIf('partials.department_select')
     @includeIf('partials.user_data_table')
+    <script>
+        $(function(){
+            var userSearchForm = $('#userSearchForm');
+            userSearchForm.submit(function(event){
+                event.preventDefault();
+                var userDataTable = $('#userDataTable').DataTable();
+                userDataTable.ajax.reload( null, false ); // user paging is not reset on reload
+            });
+        });
+    </script>
 @endsection
