@@ -41,6 +41,7 @@ $(function(){
         //minimumInputLength: 1,
         multiple		  : false,
         closeOnSelect	  : true,
+        allowClear	  : true,
         escapeMarkup      : function (markup) { return markup; }
     });
     
