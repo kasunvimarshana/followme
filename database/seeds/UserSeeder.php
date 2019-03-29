@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-            'epf_no' => 1,
+            'epf_no' => 00001,
             'phone' => '0000000000',
             'status' => '1',
             'company_id' => 1,

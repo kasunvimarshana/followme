@@ -18,7 +18,7 @@
     <!-- col -->
     <div class="col-sm-12">
         <!-- form -->
-        <form action="{!! route('meetingGroup.store') !!}" method="POST" class="col-sm-6" autocomplete="off">
+        <form action="{!! route('meetingGroup.store') !!}" method="POST" class="col-sm-8" autocomplete="off">
             @csrf
             <!-- form-group -->
             <div class="form-group col-sm-12">
@@ -108,6 +108,6 @@
     @parent
     <!-- Select2 -->
     <script src="{{ asset('node_modules/admin-lte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
-    @includeIf('partials.select_meeting_type')
-    @includeIf('partials.select_department')
+    @includeIf('partials.meeting_type_select')
+    @includeIf('partials.department_select')
 @endsection

@@ -22,7 +22,7 @@
     
     <!-- col -->
     <div class="col-sm-12">
-        <!-- ----------------------------------------------------------- -->
+        
         <!-- accordion -->
         <div class="panel-group" id="accordion">
             
@@ -35,14 +35,14 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <!-- -------------------------- -->
+                        <!-- --- -->
                         <!-- row -->
                         <div class="row">
 
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- form -->
-                                <form action="{!! route('user.store') !!}" method="GET" class="col-sm-6" autocomplete="off">
+                                <form action="{!! route('user.store') !!}" method="GET" class="col-sm-8" autocomplete="off">
                                     @csrf
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
@@ -90,17 +90,6 @@
 
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="password" class="col-sm-2 control-label">Password</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ old('password') }}"/>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
                                         <label for="user_position_id" class="col-sm-2 control-label">Position</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
@@ -141,7 +130,7 @@
 
                         </div>
                         <!-- /.row -->
-                        <!-- -------------------------- -->
+                        <!-- --- -->
                     </div>
                 </div>
             </div>
@@ -156,47 +145,17 @@
                 <div id="collapseTwo" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <!-- -------------------------- -->
-                        
-                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                                <th>Extn.</th>
-                                <th>E-mail</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                                <td>5421</td>
-                                <td>t.nixon@datatables.net</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett</td>
-                                <td>Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011/07/25</td>
-                                <td>$170,750</td>
-                                <td>8422</td>
-                                <td>g.winters@datatables.net</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                        
+                        <!-- row -->
+                        <div class="row">
+                            <!-- col -->
+                            <div class="col-sm-12">
+                                <!-- table -->
+                                <table id="userDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <!-- /.table -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
                         <!-- -------------------------- -->
                     </div>
                 </div>
@@ -204,7 +163,7 @@
             <!-- /.panel -->
         </div>
         <!-- /.accordion -->
-        <!-- ----------------------------------------------------------- -->
+        
     </div>
     <!-- /.col -->
     
@@ -226,14 +185,7 @@
     <script src="{{ asset('node_modules/datatables.net-select/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables.net-select-bs/js/select.bootstrap.min.js') }}"></script>
 
-    <!-- -------------------------------------- -->
-    <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
-    </script>
-    <!-- -------------------------------------- -->
-
-    @includeIf('partials.select_user_position')
-    @includeIf('partials.select_department')
+    @includeIf('partials.user_position_select')
+    @includeIf('partials.department_select')
+    @includeIf('partials.user_data_table')
 @endsection

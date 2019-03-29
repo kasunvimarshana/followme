@@ -64,14 +64,13 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     // route to user page
     Route::get('config/users', array('uses' => 'UserController@index'))->name('user.index');
     // route to user list page
-    Route::get('config/users/list', array('uses' => 'UserController@index'))->name('user.list');
+    Route::get('config/users/list', array('uses' => 'UserController@listUsers'))->name('user.list');
     // user create page
     Route::get('config/users/create', array('uses' => 'UserController@create'))->name('user.create');
     // route to process create user
     Route::post('config/users/create', array('uses' => 'UserController@store'))->name('user.store');
     // route to process edit user
     Route::post('config/users/edit', array('uses' => 'UserController@edit'))->name('user.edit');
-    Route::get('config/users/show-users', array('uses' => 'UserController@showUsers'))->name('user.showUsers');
     // department
     // route to department page
     Route::get('config/departments', array('uses' => 'DepartmentController@index'))->name('department.index');

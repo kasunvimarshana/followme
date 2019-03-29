@@ -85,8 +85,7 @@ class UserController extends Controller
                 'created_by'  => auth()->user()->id,
                 'phone'  => Input::get('phone'),
                 'status'  => '1',
-                'active'  => '1',
-                'remember_token'  => Str::random(10)
+                'active'  => '1'
             );
             // Start transaction!
             DB::beginTransaction();
@@ -172,8 +171,6 @@ class UserController extends Controller
     }
     
     //other
-    ////////////////////////////////////////////////////////////////
-    //other
     public function listUsers(Request $request){
         // Solution to get around integer overflow errors
         // $model->latest()->limit(PHP_INT_MAX)->offset(1)->get();
@@ -191,17 +188,59 @@ class UserController extends Controller
         
         $draw = $request->get('draw');
         
-        $metingType = new MeetingType();
+        $user = new User();
         
-        $query = $metingType->where('active', '=', '1');
+        $query = $user->with(['company', 'department', 'userPosition'])->where('active', '=', '1');
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;
             
         // get search query value
-        if( $request->get('search') && !empty($request->get('search')) ){
-            $search = (string) $request->get('search');
-            $query = $query->where('name', 'like', '%' . $search . '%');
+        if( ($request->get('search')) && (!empty($request->get('search'))) ){
+            $search = $request->get('search');
+            if( $search && (key_exists('value', $search)) ){
+                $search = $search['value'];
+            }
+            if($search && (!empty($search))){
+                //$search = (string) $search;
+                $query = $query->where('email', 'like', '%' . $search . '%');
+            }
             $recordsFiltered = $query->count();
+        }
+        
+        // name
+        if( ($request->get('name')) && (!empty($request->get('name'))) ){
+            $name = intval( $request->get('name') );
+            $query = $query->whare('name', 'like', '%' . $name . '%');
+        }
+        
+        // email
+        if( ($request->get('email')) && (!empty($request->get('email'))) ){
+            $email = intval( $request->get('email') );
+            $query = $query->whare('email', 'like', '%' . $email . '%');
+        }
+        
+        // epf_no
+        if( ($request->get('epf_no')) && (!empty($request->get('epf_no'))) ){
+            $epf_no = intval( $request->get('epf_no') );
+            $query = $query->whare('epf_no', 'like', '%' . $epf_no . '%');
+        }
+        
+        // phone
+        if( ($request->get('phone')) && (!empty($request->get('phone'))) ){
+            $phone = intval( $request->get('phone') );
+            $query = $query->whare('phone', 'like', '%' . $phone . '%');
+        }
+        
+        // user_position_id
+        if( ($request->get('user_position_id')) && (!empty($request->get('user_position_id'))) ){
+            $user_position_id = intval( $request->get('user_position_id') );
+            $query = $query->whare('user_position_id', '=', $user_position_id);
+        }
+        
+        // department_id
+        if( ($request->get('department_id')) && (!empty($request->get('department_id'))) ){
+            $department_id = intval( $request->get('department_id') );
+            $query = $query->whare('department_id', '=', $department_id);
         }
         
         // get limit value
@@ -245,9 +284,5 @@ class UserController extends Controller
         
         return Response::json( $data );   
     }
-    ////////////////////////////////////////////////////////////////
-    public function showUsers(Request $request){
-        $user = User::with('company', 'department', 'userPosition')->get();
-        return Response::json( $user ); 
-    }
+    
 }
