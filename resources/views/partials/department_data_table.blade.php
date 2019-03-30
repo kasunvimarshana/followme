@@ -1,14 +1,7 @@
-<!-- script>
-$(function(){
-    "use strict";
-    var dataTableUserList = $('#userDataTable').DataTable();
-});
-</script -->
-
 <script>
 $(function(){
     "use strict";
-    var dataTableUserList = $('#userDataTable').DataTable({
+    var dataTableDepartmentList = $('#departmentDataTable').DataTable({
         'columns' : [/*{
             'title' : '',
             'className' : 'details-control',
@@ -21,62 +14,22 @@ $(function(){
                 return data.epf_no;
             }
         },*/{
-            'title' : 'Email',
-            'orderable' : false,
-            'data' : 'email',
-            'render' : function(data, type, row){
-                return data;
-            }
-        },{
-            'title' : 'EPF-No',
-            'orderable' : false,
-            'data' : 'epf_no',
-            'render' : function(data, type, row){
-                return String(data).padStart(4, '0');
-            }
-        },{
             'title' : 'Name',
             'orderable' : false,
             'data' : 'name',
             'render' : function(data, type, row){
-                return data;
+                return 'controls';
             }
         },{
-            'title' : 'Phone',
-            'orderable' : false,
-            'data' : 'phone',
-            'render' : function(data, type, row){
-                return data;
-            }
-        },{
-            'title' : 'Department',
-            'orderable' : false,
-            'data' : 'department',
-            'render' : function(data, type, row){
-                var department = data || {};
-                var departmentName = department.name || '';
-                return departmentName;
-            }
-        },{
-            'title' : 'Position',
-            'orderable' : false,
-            'data' : 'user_position',
-            'render' : function(data, type, row){
-                var userPosition = data || {};
-                var userPositionName = userPosition.name || '';
-                return userPositionName;
-            }
-        },{
-            'title' : 'Controls',
+            'title' : '',
             'orderable' : false,
             'className' : 'center',
             'data' : null,
             'render' : function(data, type, row){
-                return '';
+                return data;
             }
         }],
         'responsive' : true,
-        'scrollX' : true,
         'paging' : true,
         'lengthChange' : true,
         'lengthMenu' : [[5, 10, 25, 50, 100, {!! PHP_INT_MAX !!}], [5, 10, 25, 50, 100, 'all']],
@@ -87,24 +40,16 @@ $(function(){
         'processing' : false,
         'serverSide' : true,
         'jQueryUI' : false,
-        'initComplete' : function(){
-            //console.log("initComplete");
-            //$(this).show();
-        },
         'ajax' : {
-            'url' : "{!! route('user.list') !!}",
+            'url' : "{!! route('department.list') !!}",
             'dataSrc' : 'data',
             'type' : 'GET',
             'deferRender' : true,
             //'dataType' : 'json',
             'delay' : 300,
             'data' : function(data){
-                data.name = $('#name').val();
-                data.email = $('#email').val();
-                data.epf_no = $('#epf_no').val();
-                data.phone = $('#phone').val();
-                data.user_position_id = $('#user_position_id').val();
-                data.department_id = $('#department_id').val();
+                var name = $('#name').val();
+                data.search = name || data.search;
                 //console.log(data);
             },
             'error' : function(e){
@@ -113,16 +58,8 @@ $(function(){
         },
         'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){},
         'createRow' : function(row, data, dataIndex){},
-        //'order' : [[1, 'asc']],
         'columnDefs' : [{
-            'targets' : [1, 2],
-            'responsivePriorty' : 1
-        },{
-            'targets' : [-1],
-            'responsivePriority' : 2,
-            'visible' : true,
-            //'width' : '250px',
-            'data' : null, // Use the full data source object for the renderer's source
+            'targets' : -1,
             'createdCell' : function(td, cellData, rowData, row, col){
                 var parentTd = $(td);
                 parentTd.empty();
@@ -138,8 +75,8 @@ $(function(){
                 button_1_body.addClass('fa fa-edit');
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
-                    var url = "{!! route('user.edit', ['#userIdParam']) !!}";
-                    url = url.replace("#userIdParam", rowData.id);
+                    var url = "{!! route('department.edit', ['#departmentIdParam']) !!}";
+                    url = url.replace("#departmentIdParam", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_1.append(button_1_body);
@@ -155,7 +92,7 @@ $(function(){
                 button_2.bind("click", function(){
                     
                     bootbox.confirm({
-                        message: "are you sure tht you want to delete <strong>" + rowData.email + "</strong>",
+                        message: "are you sure tht you want to delete <strong>" + rowData.name + "</strong>",
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -169,8 +106,8 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result == true ){
-                                var url = "{!! route('user.destroy', ['#userIdParam']) !!}";
-                                url = url.replace("#userIdParam", rowData.id);
+                                var url = "{!! route('department.destroy', ['#departmentIdParam']) !!}";
+                                url = url.replace("#departmentIdParam", rowData.id);
                                 $( location ).attr("href", url);
                             }
                         }

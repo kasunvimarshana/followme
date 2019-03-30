@@ -112,7 +112,7 @@ class UserPositionController extends Controller
         // get search query value
         if( ($request->get('search')) && (!empty($request->get('search'))) ){
             $search = $request->get('search');
-            if( $search && (key_exists('value', $search)) ){
+            if( $search && (@key_exists('value', $search)) ){
                 $search = $search['value'];
             }
             if($search && (!empty($search))){

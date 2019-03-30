@@ -49,3 +49,13 @@ console.log(maskedNumber);
 */
 
 /* headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } */
+
+/*
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+    console.log(e);
+    $($.fn.dataTable.tables(true)).DataTable()
+        .columns.adjust()
+        .responsive.recalc()
+        .fixedColumns().relayout();
+});
+*/

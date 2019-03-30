@@ -30,7 +30,7 @@
             <div id="collapseOneParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Search User</a>
+                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Search Department</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse out">
@@ -54,64 +54,6 @@
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
                                     <!-- /.form-group -->
-
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="email" class="col-sm-2 control-label">E-mail</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" value="{{ old('email') }}"/>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="epf_no" class="col-sm-2 control-label">EPF-NO</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <input type="text" class="form-control" id="epf_no" name="epf_no" placeholder="EPF-NO" value="{{ old('epf_no') }}"/>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="phone" class="col-sm-2 control-label">Phone</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ old('phone') }}"/>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="user_position_id" class="col-sm-2 control-label">Position</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="user_position_id" name="user_position_id" value="{{ old('user_position_id') }}" data-placeholder="Position" style="width: 100%;">
-                                            </select>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="department_id" class="col-sm-2 control-label">Department</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="department_id" name="department_id" value="{{ old('department_id') }}" data-placeholder="Department" style="width: 100%;">
-                                            </select>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
                                         <!-- btn-toolbar -->
@@ -139,7 +81,7 @@
             <div id="collapseTwoParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Users</a>
+                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Departments</a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
@@ -151,7 +93,7 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- table -->
-                                <table id="userDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <table id="departmentDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
                                 <!-- /.table -->
                             </div>
                             <!-- /.col -->
@@ -187,16 +129,14 @@
     <script src="{{ asset('node_modules/datatables.net-select/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables.net-select-bs/js/select.bootstrap.min.js') }}"></script>
 
-    @includeIf('partials.user_position_select')
-    @includeIf('partials.department_select')
-    @includeIf('partials.user_data_table')
+    @includeIf('partials.department_data_table')
     <script>
         $(function(){
             var searchForm = $('#searchForm');
             searchForm.submit(function(event){
                 event.preventDefault();
-                var userDataTable = $('#userDataTable').DataTable();
-                userDataTable.ajax.reload( null, false ); // user paging is not reset on reload
+                var departmentDataTable = $('#departmentDataTable').DataTable();
+                departmentDataTable.ajax.reload( null, false ); // user paging is not reset on reload
             });
         });
     </script>

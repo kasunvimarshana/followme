@@ -288,7 +288,7 @@ class UserController extends Controller
         // get search query value
         if( ($request->get('search')) && (!empty($request->get('search'))) ){
             $search = $request->get('search');
-            if( $search && (key_exists('value', $search)) ){
+            if( $search && (@key_exists('value', $search)) ){
                 $search = $search['value'];
             }
             if($search && (!empty($search))){
@@ -391,7 +391,7 @@ class UserController extends Controller
         if( Hash::check($password_old, $user->password) ){
             // do process
             $userData = array(	
-                'password'     => $password_new
+                'password'     => $password_new_hash
             );
             // Start transaction!
             DB::beginTransaction();

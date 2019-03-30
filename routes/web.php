@@ -81,6 +81,10 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('departments/list', array('uses' => 'DepartmentController@listDepartments'))->name('department.list');
     Route::get('config/departments/create', array('uses' => 'DepartmentController@create'))->name('department.create');
     Route::post('config/departments/create', array('uses' => 'DepartmentController@store'))->name('department.store');
+    Route::get('config/departments/{department}/edit', array('uses' => 'DepartmentController@edit'))->name('department.edit')->where(['user' => '[0-9]+']);
+    Route::post('config/departments/{department}/update', array('uses' => 'DepartmentController@update'))->name('department.update')->where(['user' => '[0-9]+']);
+    Route::get('config/departments/show-all', array('uses' => 'DepartmentController@showAllDepartments'))->name('department.showAllDepartments');
+    Route::get('config/departments/{department}/destroy', array('uses' => 'DepartmentController@destroy'))->name('department.destroy')->where(['user' => '[0-9]+']);
     // company location
     // route to location page
     Route::get('config/company-locations', array('uses' => 'CompanyLocationController@index'))->name('companyLocation.index');

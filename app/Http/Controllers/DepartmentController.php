@@ -113,6 +113,9 @@ class DepartmentController extends Controller
     public function edit(Department $department)
     {
         //
+        if(view()->exists('department_edit')){
+            return View::make('department_edit', ['department' => $department]);
+        }
     }
 
     /**
@@ -125,6 +128,62 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         //
+        $departmentClone = clone $department;
+        // validate the info, create rules for the inputs
+        $rules = array(
+            'name'    => 'required'
+        );
+        
+        // run the validation rules on the inputs from the form
+        $validator = Validator::make(Input::all(), $rules);
+        // if the validator fails, redirect back to the form
+        if ($validator->fails()) {
+            return redirect()->route('department.edit', [$department->id])
+            ->withErrors($validator) // send back all errors to the form
+            ->withInput(); // send back the input so that we can repopulate the form
+        } else {
+            // do process
+            $departmentData = array(	
+                'name'     => Input::get('name'),
+                'active'  => '1'
+            );
+            // Start transaction!
+            DB::beginTransaction();
+
+            try {
+                // Validate, then update if valid
+                $updatedDepartment = $departmentClone->update( $departmentData );
+            }catch(ValidationException $e){
+                // Rollback and then redirect
+                // back to form with errors
+                DB::rollback();
+                //throw $e;
+                return redirect()-route('department.edit', [$department->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }catch(\Exception $e){
+                DB::rollback();
+                //throw $e;
+                return redirect()->route('department.edit', [$department->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }
+
+            // If we reach here, then
+            // data is valid and working.
+            // Commit the queries!
+            DB::commit();
+            
+            notify()->flash('Department Updated', 'success', [
+                'timer' => 3000,
+                'text' => 'success'
+            ]);
+            
+            return redirect()->route('department.index');
+        }
+        
     }
 
     /**
@@ -136,6 +195,31 @@ class DepartmentController extends Controller
     public function destroy(Department $department)
     {
         //
+        //Model::find(explode(',', $id))->delete();
+        // do process
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            // Validate, then delete if valid
+            $department->delete();
+        }catch(\Exception $e){
+            DB::rollback();
+            //throw $e;
+            return redirect()->route('department.showAllDepartments');
+        }
+
+        // If we reach here, then
+        // data is valid and working.
+        // Commit the queries!
+        DB::commit();
+
+        notify()->flash('Department Deleted', 'success', [
+            'timer' => 3000,
+            'text' => 'success'
+        ]);
+
+        return redirect()->route('department.showAllDepartments');
     }
     
     //other
@@ -165,7 +249,7 @@ class DepartmentController extends Controller
         // get search query value
         if( ($request->get('search')) && (!empty($request->get('search'))) ){
             $search = $request->get('search');
-            if( $search && (key_exists('value', $search)) ){
+            if( $search && (@key_exists('value', $search)) ){
                 $search = $search['value'];
             }
             if($search && (!empty($search))){
@@ -218,6 +302,12 @@ class DepartmentController extends Controller
         );
         
         return Response::json( $data );   
+    }
+    
+    public function showAllDepartments(Request $request){
+        if(view()->exists('department_list_all')){
+            return View::make('department_list_all');
+        }
     }
     
 }
