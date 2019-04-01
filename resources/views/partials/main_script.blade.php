@@ -12,5 +12,13 @@
 <!-- bootbox -->
 <script src="{{ asset('node_modules/bootbox/dist/bootbox.min.js') }}"></script>
 <script src="{{ asset('node_modules/bootbox/dist/bootbox.locales.min.js') }}"></script>
+<!-- Bootstrap FileInput -->
+<script src="{!! asset('node_modules/bootstrap-fileinput/js/plugins/piexif.js') !!}" type="text/javascript"></script>
+<script src="{!! asset('node_modules/bootstrap-fileinput/js/plugins/sortable.js') !!}" type="text/javascript"></script>
+<script src="{!! asset('node_modules/bootstrap-fileinput/js/fileinput.js') !!}" type="text/javascript"></script>
+<script src="{!! asset('node_modules/bootstrap-fileinput/js/locales/fr.js') !!}" type="text/javascript"></script>
+<script src="{!! asset('node_modules/bootstrap-fileinput/js/locales/es.js') !!}" type="text/javascript"></script>
+<script src="{!! asset('node_modules/bootstrap-fileinput/themes/fas/theme.js') !!}" type="text/javascript"></script>
+<script src="{!! asset('node_modules/bootstrap-fileinput/themes/explorer-fas/theme.js') !!}" type="text/javascript"></script>
 <!-- custom script -->
 <script src="{{ asset('js/custom_script.js') }}"></script>

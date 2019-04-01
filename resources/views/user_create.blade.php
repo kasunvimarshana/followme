@@ -18,7 +18,7 @@
     <!-- col -->
     <div class="col-sm-12">
         <!-- form -->
-        <form action="{!! route('user.store') !!}" method="POST" class="col-sm-8" autocomplete="off">
+        <form action="{!! route('user.store') !!}" method="POST" class="col-sm-8" enctype="multipart/form-data" autocomplete="off">
             @csrf
             <!-- form-group -->
             <div class="form-group col-sm-12">
