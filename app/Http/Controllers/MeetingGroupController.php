@@ -117,6 +117,9 @@ class MeetingGroupController extends Controller
     public function edit(MeetingGroup $meetingGroup)
     {
         //
+        if(view()->exists('meeting_group_edit')){
+            return View::make('meeting_group_edit', ['meetingGroup' => $meetingGroup]);
+        }
     }
 
     /**
@@ -129,6 +132,66 @@ class MeetingGroupController extends Controller
     public function update(Request $request, MeetingGroup $meetingGroup)
     {
         //
+        $meetingGroupClone = clone $meetingGroup;
+        // validate the info, create rules for the inputs
+        $rules = array(
+            'name'    => 'required'
+        );
+        
+        // run the validation rules on the inputs from the form
+        $validator = Validator::make(Input::all(), $rules);
+        // if the validator fails, redirect back to the form
+        if ($validator->fails()) {
+            return redirect()->route('meetingGroup.edit', [$meetingGroup->id])
+            ->withErrors($validator) // send back all errors to the form
+            ->withInput(); // send back the input so that we can repopulate the form
+        } else {
+            // do process
+            $meetingGroupData = array(	
+                'meeting_type_id'     => Input::get('meeting_type_id'),
+                'company_id'     => Input::get('company_id'),
+                'department_id'     => Input::get('department_id'),
+                'name'     => Input::get('name'),
+                'description'     => Input::get('description'),
+                'active'     => '1'
+            );
+            // Start transaction!
+            DB::beginTransaction();
+
+            try {
+                // Validate, then update if valid
+                $updatedMeetingGroup = $meetingGroupClone->update( $meetingGroupData );
+            }catch(ValidationException $e){
+                // Rollback and then redirect
+                // back to form with errors
+                DB::rollback();
+                //throw $e;
+                return redirect()-route('meetingGroup.edit', [$meetingGroup->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }catch(\Exception $e){
+                DB::rollback();
+                //throw $e;
+                return redirect()->route('meetingGroup.edit', [$meetingGroup->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }
+
+            // If we reach here, then
+            // data is valid and working.
+            // Commit the queries!
+            DB::commit();
+            
+            notify()->flash('Group Updated', 'success', [
+                'timer' => 3000,
+                'text' => 'success'
+            ]);
+            
+            return redirect()->route('meetingGroup.index');
+        }
+        
     }
 
     /**
@@ -140,6 +203,32 @@ class MeetingGroupController extends Controller
     public function destroy(MeetingGroup $meetingGroup)
     {
         //
+        //Model::find(explode(',', $id))->delete();
+        // do process
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            // Validate, then delete if valid
+            $meetingGroup->delete();
+        }catch(\Exception $e){
+            DB::rollback();
+            //throw $e;
+            return redirect()->route('meetingGroup.showAllMeetingGroups');
+        }
+
+        // If we reach here, then
+        // data is valid and working.
+        // Commit the queries!
+        DB::commit();
+
+        notify()->flash('Group Deleted', 'success', [
+            'timer' => 3000,
+            'text' => 'success'
+        ]);
+
+        return redirect()->route('meetingGroup.showAllMeetingGroups');
+        
     }
     
     //other
@@ -162,7 +251,7 @@ class MeetingGroupController extends Controller
         
         $meetingGroup = new MeetingGroup();
         
-        $query = $meetingGroup->where('active', '=', '1');
+        $query = $meetingGroup->with(['meetingType', 'company', 'department'])->where('active', '=', '1');
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;
             
@@ -238,6 +327,12 @@ class MeetingGroupController extends Controller
         );
         
         return Response::json( $data );   
+    }
+    
+    public function showAllMeetingGroups(Request $request){
+        if(view()->exists('meeting_group_list_all')){
+            return View::make('meeting_group_list_all');
+        }
     }
     
 }

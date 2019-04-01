@@ -1,7 +1,14 @@
+<!-- script>
+$(function(){
+    "use strict";
+    var dataTableUserList = $('#userDataTable').DataTable();
+});
+</script -->
+
 <script>
 $(function(){
     "use strict";
-    var dataTableDepartmentList = $('#departmentDataTable').DataTable({
+    var dataTableUserList = $('#meetingGroupDataTable').DataTable({
         'columns' : [/*{
             'title' : '',
             'className' : 'details-control',
@@ -21,12 +28,37 @@ $(function(){
                 return data;
             }
         },{
+            'title' : 'Meeting Type',
+            'orderable' : false,
+            'data' : 'meeting_type',
+            'render' : function(data, type, row){
+                var meetingType = data || {};
+                var meetingTypeName = meetingType.name || '';
+                return meetingTypeName;
+            }
+        },{
+            'title' : 'Department',
+            'orderable' : false,
+            'data' : 'department',
+            'render' : function(data, type, row){
+                var department = data || {};
+                var departmentName = department.name || '';
+                return departmentName;
+            }
+        },{
+            'title' : 'Description',
+            'orderable' : false,
+            'data' : 'description',
+            'render' : function(data, type, row){
+                return data;
+            }
+        },{
             'title' : '',
             'orderable' : false,
             'className' : 'center',
             'data' : null,
             'render' : function(data, type, row){
-                return data;
+                return '';
             }
         }],
         'responsive' : true,
@@ -46,15 +78,16 @@ $(function(){
             //$(this).show();
         },
         'ajax' : {
-            'url' : "{!! route('department.list') !!}",
+            'url' : "{!! route('meetingGroup.list') !!}",
             'dataSrc' : 'data',
             'type' : 'GET',
             'deferRender' : true,
             //'dataType' : 'json',
             'delay' : 300,
             'data' : function(data){
-                var name = $('#name').val();
-                data.search = name || data.search;
+                data.name = $('#name').val();
+                data.meeting_type_id = $('#meeting_type_id').val();
+                data.department_id = $('#department_id').val();
                 //console.log(data);
             },
             'error' : function(e){
@@ -63,8 +96,9 @@ $(function(){
         },
         'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){},
         'createRow' : function(row, data, dataIndex){},
+        //'order' : [[1, 'asc']],
         'columnDefs' : [{
-            'targets' : [1],
+            'targets' : [1, 2],
             'responsivePriorty' : 1
         },{
             'targets' : [-1],
@@ -87,8 +121,8 @@ $(function(){
                 button_1_body.addClass('fa fa-edit');
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
-                    var url = "{!! route('department.edit', ['#departmentIdParam']) !!}";
-                    url = url.replace("#departmentIdParam", rowData.id);
+                    var url = "{!! route('meetingGroup.edit', ['#meetingGroupIdParam']) !!}";
+                    url = url.replace("#meetingGroupIdParam", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_1.append(button_1_body);
@@ -118,8 +152,8 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result == true ){
-                                var url = "{!! route('department.destroy', ['#departmentIdParam']) !!}";
-                                url = url.replace("#departmentIdParam", rowData.id);
+                                var url = "{!! route('meetingGroup.destroy', ['#meetingGroupIdParam']) !!}";
+                                url = url.replace("#meetingGroupIdParam", rowData.id);
                                 $( location ).attr("href", url);
                             }
                         }
@@ -129,7 +163,23 @@ $(function(){
                 button_2.append(button_2_body);
                 buttonGroup_2.append(button_2);
                 
+                //button group
+                var buttonGroup_3 = $('<div></div>');
+                buttonGroup_3.addClass('btn-group');
+                var button_3 = $('<button></button>');
+                button_3.addClass('btn btn-success');
+                var button_3_body = $('<i></i>');
+                button_3_body.addClass('fa fa-user-plus');
+                //button_1_body.text('text');
+                button_3.bind("click", function(){
+                    var url = "{!! route('meetingGroup.edit', ['#meetingGroupIdParam']) !!}";
+                    url = url.replace("#meetingGroupIdParam", rowData.id);
+                    $( location ).attr("href", url);
+                });
+                button_3.append(button_3_body);
+                buttonGroup_3.append(button_3);
                 
+                buttonToolbar.append(buttonGroup_3);
                 buttonToolbar.append(buttonGroup_1);
                 buttonToolbar.append(buttonGroup_2);
                 buttonToolbar.appendTo(parentTd);

@@ -67,7 +67,7 @@ $(function(){
                 return userPositionName;
             }
         },{
-            'title' : 'Controls',
+            'title' : '',
             'orderable' : false,
             'className' : 'center',
             'data' : null,

@@ -2,6 +2,9 @@
 
 @section('section_stylesheet')
     @parent
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/select2/dist/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" />
     <!-- DataTable -->
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" />
@@ -27,7 +30,7 @@
             <div id="collapseOneParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Search Department</a>
+                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Search Group</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse out">
@@ -51,6 +54,31 @@
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
                                     <!-- /.form-group -->
+
+                                    <!-- form-group -->
+                                    <div class="form-group col-sm-12">
+                                        <label for="department_id" class="col-sm-2 control-label">Department</label>
+                                        <div class="col-sm-10">
+                                            <!-- p class="form-control-static"></p -->
+                                            <select class="form-control select2" id="department_id" name="department_id" value="{{ old('department_id') }}" data-placeholder="Department" style="width: 100%;">
+                                            </select>
+                                        </div>
+                                        <!-- span id="form-control" class="help-block"></span -->
+                                    </div>
+                                    <!-- /.form-group -->
+
+                                    <!-- form-group -->
+                                    <div class="form-group col-sm-12">
+                                        <label for="meeting_type_id" class="col-sm-2 control-label">Meeting Type</label>
+                                        <div class="col-sm-10">
+                                            <!-- p class="form-control-static"></p -->
+                                            <select class="form-control select2" id="meeting_type_id" name="meeting_type_id" value="{{ old('meeting_type_id') }}" data-placeholder="Meeting Type" style="width: 100%;">
+                                            </select>
+                                        </div>
+                                        <!-- span id="form-control" class="help-block"></span -->
+                                    </div>
+                                    <!-- /.form-group -->
+
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
                                         <!-- btn-toolbar -->
@@ -61,7 +89,6 @@
                                         </div>
                                     </div>
                                     <!-- /.form-group -->
-
                                 </form>
                                 <!-- /.form -->
                             </div>
@@ -78,7 +105,7 @@
             <div id="collapseTwoParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Departments</a>
+                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Groups</a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
@@ -90,7 +117,7 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- table -->
-                                <table id="departmentDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <table id="meetingGroupDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
                                 <!-- /.table -->
                             </div>
                             <!-- /.col -->
@@ -114,6 +141,8 @@
 
 @section('section_script')
     @parent
+    <!-- Select2 -->
+    <script src="{{ asset('node_modules/admin-lte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- DataTable -->
     <script src="{{ asset('node_modules/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
@@ -124,14 +153,16 @@
     <script src="{{ asset('node_modules/datatables.net-select/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables.net-select-bs/js/select.bootstrap.min.js') }}"></script>
 
-    @includeIf('partials.department_data_table')
+    @includeIf('partials.meeting_type_select')
+    @includeIf('partials.department_select')
+    @includeIf('partials.meeting_group_data_table')
     <script>
         $(function(){
             var searchForm = $('#searchForm');
             searchForm.submit(function(event){
                 event.preventDefault();
-                var departmentDataTable = $('#departmentDataTable').DataTable();
-                departmentDataTable.ajax.reload( null, false ); // user paging is not reset on reload
+                var meetingGroupDataTable = $('#meetingGroupDataTable').DataTable();
+                meetingGroupDataTable.ajax.reload( null, false ); // user paging is not reset on reload
             });
         });
     </script>

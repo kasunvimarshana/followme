@@ -114,6 +114,9 @@ class CompanyLocationController extends Controller
     public function edit(CompanyLocation $companyLocation)
     {
         //
+        if(view()->exists('company_location_edit')){
+            return View::make('company_location_edit', ['companyLocation' => $companyLocation]);
+        }
     }
 
     /**
@@ -126,6 +129,62 @@ class CompanyLocationController extends Controller
     public function update(Request $request, CompanyLocation $companyLocation)
     {
         //
+        $companyLocationClone = clone $companyLocation;
+        // validate the info, create rules for the inputs
+        $rules = array(
+            'name'    => 'required'
+        );
+        
+        // run the validation rules on the inputs from the form
+        $validator = Validator::make(Input::all(), $rules);
+        // if the validator fails, redirect back to the form
+        if ($validator->fails()) {
+            return redirect()->route('companyLocation.edit', [$companyLocation->id])
+            ->withErrors($validator) // send back all errors to the form
+            ->withInput(); // send back the input so that we can repopulate the form
+        } else {
+            // do process
+            $companyLocationData = array(	
+                'name'     => Input::get('name'),
+                'active'  => '1'
+            );
+            // Start transaction!
+            DB::beginTransaction();
+
+            try {
+                // Validate, then update if valid
+                $updatedCompanyLocation = $companyLocationClone->update( $companyLocationData );
+            }catch(ValidationException $e){
+                // Rollback and then redirect
+                // back to form with errors
+                DB::rollback();
+                //throw $e;
+                return redirect()-route('companyLocation.edit', [$companyLocation->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }catch(\Exception $e){
+                DB::rollback();
+                //throw $e;
+                return redirect()->route('companyLocation.edit', [$companyLocation->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }
+
+            // If we reach here, then
+            // data is valid and working.
+            // Commit the queries!
+            DB::commit();
+            
+            notify()->flash('Location Updated', 'success', [
+                'timer' => 3000,
+                'text' => 'success'
+            ]);
+            
+            return redirect()->route('companyLocation.index');
+        }
+        
     }
 
     /**
@@ -137,6 +196,32 @@ class CompanyLocationController extends Controller
     public function destroy(CompanyLocation $companyLocation)
     {
         //
+        //Model::find(explode(',', $id))->delete();
+        // do process
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            // Validate, then delete if valid
+            $companyLocation->delete();
+        }catch(\Exception $e){
+            DB::rollback();
+            //throw $e;
+            return redirect()->route('companyLocation.showAllCompanyLocations');
+        }
+
+        // If we reach here, then
+        // data is valid and working.
+        // Commit the queries!
+        DB::commit();
+
+        notify()->flash('Location Deleted', 'success', [
+            'timer' => 3000,
+            'text' => 'success'
+        ]);
+
+        return redirect()->route('companyLocation.showAllCompanyLocations');
+        
     }
     
     //other
@@ -219,6 +304,12 @@ class CompanyLocationController extends Controller
         );
         
         return Response::json( $data );   
+    }
+    
+    public function showAllCompanyLocations(Request $request){
+        if(view()->exists('company_location_list_all')){
+            return View::make('company_location_list_all');
+        }
     }
     
 }

@@ -46,12 +46,21 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('meeting-types/list', array('uses' => 'MeetingTypeController@listMeetingTypes'))->name('meetingType.list');
     Route::get('config/meeting-types/create', array('uses' => 'MeetingTypeController@create'))->name('meetingType.create');
     Route::post('config/meeting-types/create', array('uses' => 'MeetingTypeController@store'))->name('meetingType.store');
+    Route::get('config/meeting-types/{meetingType}/edit', array('uses' => 'MeetingTypeController@edit'))->name('meetingType.edit')->where(['user' => '[0-9]+']);
+    Route::post('config/meeting-types/{meetingType}/update', array('uses' => 'MeetingTypeController@update'))->name('meetingType.update')->where(['user' => '[0-9]+']);
+    Route::get('config/meeting-types/show-all', array('uses' => 'MeetingTypeController@showAllMeetingTypes'))->name('meetingType.showAllMeetingTypes');
+    Route::get('config/meeting-types/{meetingType}/destroy', array('uses' => 'MeetingTypeController@destroy'))->name('meetingType.destroy')->where(['user' => '[0-9]+']);
     // meeting group
     // route to meeting group page
     Route::get('config/meeting-groups', array('uses' => 'MeetingGroupController@index'))->name('meetingGroup.index');
     Route::get('meeting-groups/list', array('uses' => 'MeetingGroupController@listMeetingGroups'))->name('meetingGroup.list');
     Route::get('config/meeting-groups/create', array('uses' => 'MeetingGroupController@create'))->name('meetingGroup.create');
     Route::post('config/meeting-groups/create', array('uses' => 'MeetingGroupController@store'))->name('meetingGroup.store');
+    
+    Route::get('config/meeting-groups/{meetingGroup}/edit', array('uses' => 'MeetingGroupController@edit'))->name('meetingGroup.edit')->where(['user' => '[0-9]+']);
+    Route::post('config/meeting-groups/{meetingGroup}/update', array('uses' => 'MeetingGroupController@update'))->name('meetingGroup.update')->where(['user' => '[0-9]+']);
+    Route::get('config/meeting-groups/show-all', array('uses' => 'MeetingGroupController@showAllMeetingGroups'))->name('meetingGroup.showAllMeetingGroups');
+    Route::get('config/meeting-groups/{meetingGroup}/destroy', array('uses' => 'MeetingGroupController@destroy'))->name('meetingGroup.destroy')->where(['user' => '[0-9]+']);
     // meting
     // route to meeting page
     Route::get('meetings', array('uses' => 'MeetingController@index'))->name('meeting.index');
@@ -91,5 +100,17 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('company-locations/list', array('uses' => 'CompanyLocationController@listCompanyLocations'))->name('companyLocation.list');
     Route::get('config/company-locations/create', array('uses' => 'CompanyLocationController@create'))->name('companyLocation.create');
     Route::post('config/company-locations/create', array('uses' => 'CompanyLocationController@store'))->name('companyLocation.store');
+    Route::get('config/company-locations/{companyLocation}/edit', array('uses' => 'CompanyLocationController@edit'))->name('companyLocation.edit')->where(['user' => '[0-9]+']);
+    Route::post('config/company-locations/{companyLocation}/update', array('uses' => 'CompanyLocationController@update'))->name('companyLocation.update')->where(['user' => '[0-9]+']);
+    Route::get('config/company-locations/show-all', array('uses' => 'CompanyLocationController@showAllCompanyLocations'))->name('companyLocation.showAllCompanyLocations');
+    Route::get('config/company-locations/{companyLocation}/destroy', array('uses' => 'CompanyLocationController@destroy'))->name('companyLocation.destroy')->where(['user' => '[0-9]+']);
+    // meeting group user
+    // route to meeting group user page
+    Route::get('config/meeting-groups/meeting-group-users', array('uses' => 'MeetingGroupUserController@index'))->name('meetingGroupUser.index');
+    Route::get('meeting-group-users/list', array('uses' => 'MeetingGroupUserController@listMeetingGroupUsers'))->name('meetingGroupUser.list');
+    Route::get('config/meeting-groups/{meetingGroup}/meeting-group-users/create', array('uses' => 'MeetingGroupUserController@create'))->name('meetingGroupUser.createMeetingGroupUser');
+    Route::post('config/meeting-groups/{meetingGroup}/meeting-group-users/create', array('uses' => 'MeetingGroupUserController@store'))->name('meetingGroupUser.storeMeetingGroupUser');
+    Route::get('config/meeting-groups/{meetingGroup}/meeting-group-users/show-all', array('uses' => 'MeetingGroupUserController@showAllMeetingGroupUsers'))->name('meetingGroupUser.showAllMeetingGroupUsers');
+    Route::get('config/meeting-groups/meeting-group-users/{meetingGroupUser}/destroy', array('uses' => 'MeetingGroupUserController@destroy'))->name('meetingGroupUser.destroy')->where(['user' => '[0-9]+']);
     
 });

@@ -22,10 +22,10 @@
             @csrf
             <!-- form-group -->
             <div class="form-group col-sm-12">
-                <label for="name" class="col-sm-2 control-label">Name</label>
+                <label for="email" class="col-sm-2 control-label">E-mail</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ old('name') }}" required/>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" value="{{ old('email') }}" required/>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>
@@ -33,10 +33,10 @@
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
-                <label for="email" class="col-sm-2 control-label">E-mail</label>
+                <label for="name" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
-                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" value="{{ old('email') }}" required/>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ old('name') }}" required/>
                 </div>
                 <!-- span id="form-control" class="help-block"></span -->
             </div>

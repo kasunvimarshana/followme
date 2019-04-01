@@ -27,7 +27,7 @@
             <div id="collapseOneParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Search Department</a>
+                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Search Location</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse out">
@@ -78,7 +78,7 @@
             <div id="collapseTwoParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Departments</a>
+                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Locations</a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
@@ -90,7 +90,7 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- table -->
-                                <table id="departmentDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <table id="companyLocationDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
                                 <!-- /.table -->
                             </div>
                             <!-- /.col -->
@@ -124,14 +124,14 @@
     <script src="{{ asset('node_modules/datatables.net-select/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables.net-select-bs/js/select.bootstrap.min.js') }}"></script>
 
-    @includeIf('partials.department_data_table')
+    @includeIf('partials.company_location_data_table')
     <script>
         $(function(){
             var searchForm = $('#searchForm');
             searchForm.submit(function(event){
                 event.preventDefault();
-                var departmentDataTable = $('#departmentDataTable').DataTable();
-                departmentDataTable.ajax.reload( null, false ); // user paging is not reset on reload
+                var companyLocationDataTable = $('#companyLocationDataTable').DataTable();
+                companyLocationDataTable.ajax.reload( null, false ); // user paging is not reset on reload
             });
         });
     </script>

@@ -113,6 +113,9 @@ class MeetingTypeController extends Controller
     public function edit(MeetingType $meetingType)
     {
         //
+        if(view()->exists('meeting_type_edit')){
+            return View::make('meeting_type_edit', ['meetingType' => $meetingType]);
+        }
     }
 
     /**
@@ -125,6 +128,62 @@ class MeetingTypeController extends Controller
     public function update(Request $request, MeetingType $meetingType)
     {
         //
+        $meetingTypeClone = clone $meetingType;
+        // validate the info, create rules for the inputs
+        $rules = array(
+            'name'    => 'required'
+        );
+        
+        // run the validation rules on the inputs from the form
+        $validator = Validator::make(Input::all(), $rules);
+        // if the validator fails, redirect back to the form
+        if ($validator->fails()) {
+            return redirect()->route('meetingType.edit', [$meetingType->id])
+            ->withErrors($validator) // send back all errors to the form
+            ->withInput(); // send back the input so that we can repopulate the form
+        } else {
+            // do process
+            $meetingTypeData = array(	
+                'name'     => Input::get('name'),
+                'active'  => '1'
+            );
+            // Start transaction!
+            DB::beginTransaction();
+
+            try {
+                // Validate, then update if valid
+                $updatedMeetingType = $meetingTypeClone->update( $meetingTypeData );
+            }catch(ValidationException $e){
+                // Rollback and then redirect
+                // back to form with errors
+                DB::rollback();
+                //throw $e;
+                return redirect()-route('meetingType.edit', [$meetingType->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }catch(\Exception $e){
+                DB::rollback();
+                //throw $e;
+                return redirect()->route('meetingType.edit', [$meetingType->id])
+                //->withErrors( $e->getErrors() )
+                ->withErrors( $e->getMessage() )
+                ->withInput();
+            }
+
+            // If we reach here, then
+            // data is valid and working.
+            // Commit the queries!
+            DB::commit();
+            
+            notify()->flash('Meeting Type Updated', 'success', [
+                'timer' => 3000,
+                'text' => 'success'
+            ]);
+            
+            return redirect()->route('meetingType.index');
+        }
+        
     }
 
     /**
@@ -136,6 +195,32 @@ class MeetingTypeController extends Controller
     public function destroy(MeetingType $meetingType)
     {
         //
+        //Model::find(explode(',', $id))->delete();
+        // do process
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            // Validate, then delete if valid
+            $meetingType->delete();
+        }catch(\Exception $e){
+            DB::rollback();
+            //throw $e;
+            return redirect()->route('meetingType.showAllMeetingTypes');
+        }
+
+        // If we reach here, then
+        // data is valid and working.
+        // Commit the queries!
+        DB::commit();
+
+        notify()->flash('Meeting Type Deleted', 'success', [
+            'timer' => 3000,
+            'text' => 'success'
+        ]);
+
+        return redirect()->route('meetingType.showAllMeetingTypes');
+        
     }
     
     //other
@@ -218,6 +303,12 @@ class MeetingTypeController extends Controller
         );
         
         return Response::json( $data );   
+    }
+    
+    public function showAllMeetingTypes(Request $request){
+        if(view()->exists('meeting_type_list_all')){
+            return View::make('meeting_type_list_all');
+        }
     }
     
 }

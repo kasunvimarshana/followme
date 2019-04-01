@@ -35,7 +35,7 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
         <!-- info-box -->
         <div class="info-box">
-            <a href="{{ route('meetingGroup.list') }}">
+            <a href="{{ route('meetingGroup.showAllMeetingGroups') }}">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
             </a>
             <!-- info-box-content -->

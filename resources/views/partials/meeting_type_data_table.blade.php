@@ -1,7 +1,7 @@
 <script>
 $(function(){
     "use strict";
-    var dataTableDepartmentList = $('#departmentDataTable').DataTable({
+    var dataTableDepartmentList = $('#meetingTypeDataTable').DataTable({
         'columns' : [/*{
             'title' : '',
             'className' : 'details-control',
@@ -46,7 +46,7 @@ $(function(){
             //$(this).show();
         },
         'ajax' : {
-            'url' : "{!! route('department.list') !!}",
+            'url' : "{!! route('meetingType.list') !!}",
             'dataSrc' : 'data',
             'type' : 'GET',
             'deferRender' : true,
@@ -87,8 +87,8 @@ $(function(){
                 button_1_body.addClass('fa fa-edit');
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
-                    var url = "{!! route('department.edit', ['#departmentIdParam']) !!}";
-                    url = url.replace("#departmentIdParam", rowData.id);
+                    var url = "{!! route('meetingType.edit', ['#meetingTypeIdParam']) !!}";
+                    url = url.replace("#meetingTypeIdParam", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_1.append(button_1_body);
@@ -118,8 +118,8 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result == true ){
-                                var url = "{!! route('department.destroy', ['#departmentIdParam']) !!}";
-                                url = url.replace("#departmentIdParam", rowData.id);
+                                var url = "{!! route('meetingType.destroy', ['#meetingTypeIdParam']) !!}";
+                                url = url.replace("#meetingTypeIdParam", rowData.id);
                                 $( location ).attr("href", url);
                             }
                         }
