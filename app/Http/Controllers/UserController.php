@@ -297,6 +297,12 @@ class UserController extends Controller
             }
         }
         
+        // id
+        if( ($request->get('id')) && (!empty($request->get('id'))) ){
+            $id = $request->get('id');
+            $query = $query->where('id', '=', $id);
+        }
+        
         // name
         if( ($request->get('name')) && (!empty($request->get('name'))) ){
             $name =  $request->get('name');

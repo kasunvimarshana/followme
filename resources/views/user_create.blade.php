@@ -77,27 +77,6 @@
             
             <!-- form-group -->
             <div class="form-group col-sm-12">
-                <label for="user_position_id" class="col-sm-2 control-label">Position</label>
-                <div class="col-sm-10">
-                    <!-- p class="form-control-static"></p -->
-                    <select class="form-control select2" id="user_position_id" name="user_position_id" value="{{ old('user_position_id') }}" data-placeholder="Position" style="width: 100%;">
-                        @if(old('user_position_id'))
-                            @php
-                                $oldUserPositionId = old('user_position_id');
-                                $oldUserPosition = \App\UserPosition::find( $oldUserPositionId );
-                            @endphp
-                            @isset($oldUserPosition)
-                                <option value="{{ $oldUserPosition->id }}" selected> {{ $oldUserPosition->name }} </option>
-                            @endisset
-                        @endif
-                    </select>
-                </div>
-                <!-- span id="form-control" class="help-block"></span -->
-            </div>
-            <!-- /.form-group -->
-            
-            <!-- form-group -->
-            <div class="form-group col-sm-12">
                 <label for="department_id" class="col-sm-2 control-label">Department</label>
                 <div class="col-sm-10">
                     <!-- p class="form-control-static"></p -->
@@ -109,6 +88,27 @@
                             @endphp
                             @isset($oldDepartment)
                                 <option value="{{ $oldDepartment->id }}" selected> {{ $oldDepartment->name }} </option>
+                            @endisset
+                        @endif
+                    </select>
+                </div>
+                <!-- span id="form-control" class="help-block"></span -->
+            </div>
+            <!-- /.form-group -->
+            
+            <!-- form-group -->
+            <div class="form-group col-sm-12">
+                <label for="user_position_id" class="col-sm-2 control-label">Position</label>
+                <div class="col-sm-10">
+                    <!-- p class="form-control-static"></p -->
+                    <select class="form-control select2" id="user_position_id" name="user_position_id" value="{{ old('user_position_id') }}" data-placeholder="Position" style="width: 100%;">
+                        @if(old('user_position_id'))
+                            @php
+                                $oldUserPositionId = old('user_position_id');
+                                $oldUserPosition = \App\UserPosition::find( $oldUserPositionId );
+                            @endphp
+                            @isset($oldUserPosition)
+                                <option value="{{ $oldUserPosition->id }}" selected> {{ $oldUserPosition->name }} </option>
                             @endisset
                         @endif
                     </select>
