@@ -177,7 +177,7 @@ return [
         // custom service providers
         App\Providers\AuthUserProvider::class,
         // provider for flash message
-        Codecourse\Notify\NotifyServiceProvider::class,
+        Codecourse\Notify\NotifyServiceProvider::class
 
     ],
 
@@ -231,7 +231,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //alias for flash message
         'Notify' => Codecourse\Notify\Facades\Notify::class
-
     ],
 
 ];

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
+class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -85,10 +85,7 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'caf31cc6ec7cf2241cb6f12c226c3846' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/alias.php',
         '0d8253363903f0ac7b0978dcde4e28a0' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/helpers.php',
         'd92e6dafb93e67e5b59c39d9b9d00659' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/functions.php',
-        'f472b1734887fbff321b8210de15ae2a' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/functions/register.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
-        'a806c12c6e24e7e4e900847766218dba' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/functions.php',
-        'fdb3b5f01b3ed818a713c5450349237f' => __DIR__ . '/../..' . '/app/Helpers/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -104,10 +101,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         array (
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
-        ),
-        'U' => 
-        array (
-            'UxWeb\\SweetAlert\\' => 17,
         ),
         'T' => 
         array (
@@ -238,10 +231,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
-        ),
-        'UxWeb\\SweetAlert\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -500,13 +489,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
         ),
-        'K' => 
-        array (
-            'Ken\\Sweetanimation\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/ken/sweetanimation/src',
-            ),
-        ),
         'D' => 
         array (
             'Doctrine\\Common\\Lexer\\' => 
@@ -610,67 +592,28 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Adldap\\Schemas\\Schema' => __DIR__ . '/..' . '/adldap2/adldap2/src/Schemas/Schema.php',
         'Adldap\\Schemas\\SchemaInterface' => __DIR__ . '/..' . '/adldap2/adldap2/src/Schemas/SchemaInterface.php',
         'Adldap\\Utilities' => __DIR__ . '/..' . '/adldap2/adldap2/src/Utilities.php',
-        'App\\Company' => __DIR__ . '/../..' . '/app/company.php',
-        'App\\CompanyLocation' => __DIR__ . '/../..' . '/app/CompanyLocation.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
-        'App\\Department' => __DIR__ . '/../..' . '/app/department.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
-        'App\\Http\\Controllers\\CompanyController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompanyController.php',
-        'App\\Http\\Controllers\\CompanyLocationController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompanyLocationController.php',
-        'App\\Http\\Controllers\\ConfigController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConfigController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\DepartmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/DepartmentController.php',
-        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
-        'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
-        'App\\Http\\Controllers\\MeetingAttachmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingAttachmentController.php',
-        'App\\Http\\Controllers\\MeetingAttendanceController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingAttendanceController.php',
-        'App\\Http\\Controllers\\MeetingController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingController.php',
-        'App\\Http\\Controllers\\MeetingGroupController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingGroupController.php',
-        'App\\Http\\Controllers\\MeetingGroupUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingGroupUserController.php',
-        'App\\Http\\Controllers\\MeetingInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingInfoController.php',
-        'App\\Http\\Controllers\\MeetingPointController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingPointController.php',
-        'App\\Http\\Controllers\\MeetingTWController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingTWController.php',
-        'App\\Http\\Controllers\\MeetingTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingTypeController.php',
-        'App\\Http\\Controllers\\StatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/StatusController.php',
-        'App\\Http\\Controllers\\TWUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/TWUserController.php',
-        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
-        'App\\Http\\Controllers\\UserPositionController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserPositionController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
-        'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
-        'App\\Http\\Middleware\\CORSMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/CORSMiddleware.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
-        'App\\Http\\Middleware\\MemberMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/MemberMiddleware.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
-        'App\\Http\\Middleware\\SuperAdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/SuperAdminMiddleware.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-        'App\\Meeting' => __DIR__ . '/../..' . '/app/meeting.php',
-        'App\\MeetingAttachment' => __DIR__ . '/../..' . '/app/MeetingAttachment.php',
-        'App\\MeetingAttendance' => __DIR__ . '/../..' . '/app/MeetingAttendance.php',
-        'App\\MeetingGroup' => __DIR__ . '/../..' . '/app/MeetingGroup.php',
-        'App\\MeetingGroupUser' => __DIR__ . '/../..' . '/app/MeetingGroupUser.php',
-        'App\\MeetingInfo' => __DIR__ . '/../..' . '/app/MeetingInfo.php',
-        'App\\MeetingPoint' => __DIR__ . '/../..' . '/app/MeetingPoint.php',
-        'App\\MeetingTW' => __DIR__ . '/../..' . '/app/MeetingTW.php',
-        'App\\MeetingType' => __DIR__ . '/../..' . '/app/MeetingType.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
-        'App\\Providers\\AuthUserProvider' => __DIR__ . '/../..' . '/app/Providers/AuthUserProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
-        'App\\Status' => __DIR__ . '/../..' . '/app/status.php',
-        'App\\TWUser' => __DIR__ . '/../..' . '/app/TWUser.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
-        'App\\UserPosition' => __DIR__ . '/../..' . '/app/UserPosition.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
         'BeyondCode\\DumpServer\\Dumper' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/Dumper.php',
@@ -708,8 +651,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Codecourse\\Notify\\Notifier' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/Notifier.php',
         'Codecourse\\Notify\\NotifyServiceProvider' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/NotifyServiceProvider.php',
         'Codecourse\\Notify\\Storage\\Session' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/Storage/Session.php',
-        'CompanyLocationSeeder' => __DIR__ . '/../..' . '/database/seeds/CompanyLocationSeeder.php',
-        'CompanySeeder' => __DIR__ . '/../..' . '/database/seeds/CompanySeeder.php',
         'Complex\\Complex' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Complex.php',
         'Complex\\Exception' => __DIR__ . '/..' . '/markbaker/complex/classes/src/Exception.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
@@ -745,7 +686,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'DeepCopy\\TypeFilter\\Spl\\SplDoublyLinkedListFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Spl/SplDoublyLinkedListFilter.php',
         'DeepCopy\\TypeFilter\\TypeFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/TypeFilter.php',
         'DeepCopy\\TypeMatcher\\TypeMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeMatcher/TypeMatcher.php',
-        'DepartmentSeeder' => __DIR__ . '/../..' . '/database/seeds/DepartmentSeeder.php',
         'Doctrine\\Common\\Inflector\\Inflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector/Inflector.php',
         'Doctrine\\Common\\Lexer\\AbstractLexer' => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer/AbstractLexer.php',
         'Doctrine\\Instantiator\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator/Exception/ExceptionInterface.php',
@@ -1801,7 +1741,10 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Illuminate\\Foundation\\Console\\ConsoleMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ConsoleMakeCommand.php',
         'Illuminate\\Foundation\\Console\\DownCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/DownCommand.php',
         'Illuminate\\Foundation\\Console\\EnvironmentCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/EnvironmentCommand.php',
+        'Illuminate\\Foundation\\Console\\EventCacheCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/EventCacheCommand.php',
+        'Illuminate\\Foundation\\Console\\EventClearCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/EventClearCommand.php',
         'Illuminate\\Foundation\\Console\\EventGenerateCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/EventGenerateCommand.php',
+        'Illuminate\\Foundation\\Console\\EventListCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/EventListCommand.php',
         'Illuminate\\Foundation\\Console\\EventMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/EventMakeCommand.php',
         'Illuminate\\Foundation\\Console\\ExceptionMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ExceptionMakeCommand.php',
         'Illuminate\\Foundation\\Console\\JobMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/JobMakeCommand.php',
@@ -1838,6 +1781,7 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Illuminate\\Foundation\\Console\\ViewCacheCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ViewCacheCommand.php',
         'Illuminate\\Foundation\\Console\\ViewClearCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/ViewClearCommand.php',
         'Illuminate\\Foundation\\EnvironmentDetector' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/EnvironmentDetector.php',
+        'Illuminate\\Foundation\\Events\\DiscoverEvents' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Events/DiscoverEvents.php',
         'Illuminate\\Foundation\\Events\\Dispatchable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Events/Dispatchable.php',
         'Illuminate\\Foundation\\Events\\LocaleUpdated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Events/LocaleUpdated.php',
         'Illuminate\\Foundation\\Exceptions\\Handler' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php',
@@ -2238,10 +2182,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
-        'Ken\\Sweetanimation\\Facades\\Sweetanimation' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/Facades/Sweetanimation.php',
-        'Ken\\Sweetanimation\\Provider\\SpiderServiceProvider' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/Provider/SpiderServiceProvider.php',
-        'Ken\\Sweetanimation\\Spider\\Slice' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/Spider/Slice.php',
-        'Ken\\Sweetanimation\\Storage\\Session' => __DIR__ . '/..' . '/ken/sweetanimation/src/Ken/Sweetanimation/Storage/Session.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
@@ -2443,15 +2383,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Matrix\\Operators\\Multiplication' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Multiplication.php',
         'Matrix\\Operators\\Operator' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Operator.php',
         'Matrix\\Operators\\Subtraction' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Subtraction.php',
-        'MeetingAttachmentSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingAttachmentSeeder.php',
-        'MeetingAttendanceSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingAttendanceSeeder.php',
-        'MeetingGroupSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingGroupSeeder.php',
-        'MeetingGroupUserSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingGroupUserSeeder.php',
-        'MeetingInfoSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingInfoSeeder.php',
-        'MeetingPointSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingPointSeeder.php',
-        'MeetingSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingSeeder.php',
-        'MeetingTWSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingTWSeeder.php',
-        'MeetingTypeSeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingTypeSeeder.php',
         'Microsoft\\Graph\\Core\\Enum' => __DIR__ . '/..' . '/microsoft/microsoft-graph/src/Core/Enum.php',
         'Microsoft\\Graph\\Core\\GraphConstants' => __DIR__ . '/..' . '/microsoft/microsoft-graph/src/Core/GraphConstants.php',
         'Microsoft\\Graph\\Exception\\GraphException' => __DIR__ . '/..' . '/microsoft/microsoft-graph/src/Exception/GraphException.php',
@@ -4676,7 +4607,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Spatie\\Permission\\Traits\\HasPermissions' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasPermissions.php',
         'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
         'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
-        'StatusSeeder' => __DIR__ . '/../..' . '/database/seeds/StatusSeeder.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
@@ -5280,7 +5210,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'Symfony\\Polyfill\\Intl\\Idn\\Idn' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/Idn.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
-        'TWUserSeeder' => __DIR__ . '/../..' . '/database/seeds/TWUserSeeder.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
@@ -5308,14 +5237,6 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
-        'UserPositionSeeder' => __DIR__ . '/../..' . '/database/seeds/UserPositionSeeder.php',
-        'UserSeeder' => __DIR__ . '/../..' . '/database/seeds/UserSeeder.php',
-        'UxWeb\\SweetAlert\\ConvertMessagesIntoSweetAlert' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/ConvertMessagesIntoSweetAlert.php',
-        'UxWeb\\SweetAlert\\LaravelSessionStore' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/LaravelSessionStore.php',
-        'UxWeb\\SweetAlert\\SessionStore' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/SessionStore.php',
-        'UxWeb\\SweetAlert\\SweetAlert' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/SweetAlert.php',
-        'UxWeb\\SweetAlert\\SweetAlertNotifier' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/SweetAlertNotifier.php',
-        'UxWeb\\SweetAlert\\SweetAlertServiceProvider' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/SweetAlertServiceProvider.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',
@@ -5409,10 +5330,10 @@ class ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitd91f406e3d11b1bb4082cd070b6d4506::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite036f8a123c2e9c858abca97ef207a8e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite036f8a123c2e9c858abca97ef207a8e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInite036f8a123c2e9c858abca97ef207a8e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInite036f8a123c2e9c858abca97ef207a8e::$classMap;
 
         }, null, ClassLoader::class);
     }
