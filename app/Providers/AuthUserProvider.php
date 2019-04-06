@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Session;
+use App\Login;
 
 class AuthUserProvider extends ServiceProvider
 {
@@ -39,7 +42,8 @@ class AuthUserProvider extends ServiceProvider
     {
         //
         view()->composer('*', function($view){
-            $view->with('auth_user', auth()->user());
+            $user = Login::getUserData();
+            $view->with('auth_user', $user);
         });
     }
 }

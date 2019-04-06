@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 //use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Response;
 //use \Response;
+use App\Login;
 
 class MemberMiddleware
 {
@@ -15,6 +16,9 @@ class MemberMiddleware
         /*if(!Auth::check()){
             return redirect('/login');
         }*/
+        if( (!Login::isLogin()) ){
+            return redirect('/login');
+        }
         return $next($request);
     }
 }

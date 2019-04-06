@@ -8,5 +8,28 @@ if(!function_exists('set_active')){
     }
 }
 
+if(!function_exists('arrayToObject')){
+    function arrayToObject($array){
+        //$myArray = json_decode(json_encode($object), true);
+        //(object) $array;
+        if (!is_array($array)) {
+            return $array;
+        }
+
+        $object = new stdClass();
+        if (is_array($array) && count($array) > 0) {
+            foreach ($array as $name=>$value) {
+                $name = strtolower(trim($name));
+                if (!empty($name)) {
+                    $object->$name = arrayToObject($value);
+                }
+            }
+            return $object;
+        }
+        else {
+            return false;
+        }
+    }
+}
 
 ?>
