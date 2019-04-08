@@ -10,7 +10,7 @@ $(function(){
         ajax          : {
             url: "{!! route('meetingCategory.list') !!}",
             // dataType: 'json',
-            delay: 250,
+            delay: 50,
             data: function (params) {
                 var query = {
                     search			: params.term, // $.trim(params.term)

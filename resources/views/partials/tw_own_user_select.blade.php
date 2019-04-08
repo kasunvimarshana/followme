@@ -11,7 +11,7 @@ $(function(){
             url: "{!! route('user.list') !!}", //user.list
             cache: true,
             // dataType: 'json',
-            delay: 250,
+            delay: 50,
             data: function (params) {
                 var query = {
                     search			: params.term, // $.trim(params.term)
@@ -27,7 +27,7 @@ $(function(){
                     results: $.map(data.data, function (obj) {
                         return { 
                             id  : obj.mail, 
-                            text: obj.mail || obj.employeenumber, 
+                            text: obj.mail + ' | ' + obj.displayname || obj.employeenumber, 
                             data: obj 
                         };
                     }),

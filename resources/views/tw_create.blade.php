@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-select-bs/css/select.bootstrap.min.css') }}" />
     <!-- Bootstrap Datepicker -->
     <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" />
+    <!-- Bootstrap FileInput -->
+    <link href="{!! asset('node_modules/bootstrap-fileinput/css/fileinput.css') !!}" media="all" rel="stylesheet" type="text/css"/>
+    <!-- link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous" -->
+    <link href="{!! asset('node_modules/bootstrap-fileinput/themes/explorer-fas/theme.css') !!}" media="all" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('section_script_main')
@@ -44,14 +48,14 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- form -->
-                                <form action="{!! route('tw.store') !!}" method="POST" class="col-sm-8" autocomplete="off" id="twForm">
+                                <form action="{!! route('tw.store') !!}" method="POST" class="col-sm-8" autocomplete="off" id="twForm" enctype="multipart/form-data">
                                     @csrf
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
                                         <label for="own_user" class="col-sm-2 control-label">Owner</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple" required>
+                                            <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple">
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -63,7 +67,7 @@
                                         <label for="meeting_category_id" class="col-sm-2 control-label">Category</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;" required>
+                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;">
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -127,6 +131,17 @@
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
                                             <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5">{{ old('description') }}</textarea>
+                                        </div>
+                                        <!-- span id="form-control" class="help-block"></span -->
+                                    </div>
+                                    <!-- /.form-group -->
+                                    
+                                    <!-- form-group -->
+                                    <div class="form-group col-sm-12">
+                                        <label for="var_user_attachment" class="col-sm-2 control-label">File</label>
+                                        <div class="col-sm-10">
+                                            <!-- p class="form-control-static"></p -->
+                                            <input type="file" multiple=true class="form-control file" id="var_user_attachment" name="var_user_attachment[]" value="{{ old('var_user_attachment[]') }}"/>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
@@ -209,6 +224,14 @@
     <!-- Bootstrap Datepicker -->
     <script src="{{ asset('node_modules/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
     <script src="{{ asset('node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <!-- Bootstrap FileInput -->
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/plugins/piexif.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/plugins/sortable.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/fileinput.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/locales/fr.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/locales/es.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/themes/fas/theme.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/themes/explorer-fas/theme.js') !!}" type="text/javascript"></script>
 
     @includeIf('partials.meeting_category_select')
     @includeIf('partials.tw_own_user_select')
@@ -216,6 +239,12 @@
     <script>
     $(function() {
         "use strict";
+        
+        $("#var_user_attachment").fileinput({
+            'showUpload': false,
+            'previewFileType': 'any',
+            'showRemove': false
+        });
         
         $('#start_date').datepicker({
             'autoclose': true,
@@ -253,16 +282,34 @@
             var start_date = form.find('#start_date');
             var due_date = form.find('#due_date');
             var description = form.find('#description');
+            var var_user_attachment = form.find('#var_user_attachment');
+            
+            //var files = $('#var_user_attachment').fileinput('getFileStack');
+            //console.log( files );
+            //console.log( var_user_attachment.val() );
+            console.log( var_user_attachment.prop('files') );
+            //var_user_attachment.fileinput('clear');
 
+            //var formdata = new FormData( this );
             var formdata = new FormData();
 
             formdata.append('_token', _token);
-            formdata.append('own_user[]', own_user.val());
+            
+            var own_user_val = own_user.val();
+            if(($.isArray(own_user_val))){
+                $.each(own_user_val, function( key, value ){
+                    formdata.append("own_user[]", value);
+                });
+            }else{
+                formdata.append("own_user", defect_val);
+            }
+            
             formdata.append('meeting_category_id', meeting_category_id.val());
             formdata.append('title', title.val());
             formdata.append('start_date', start_date.val());
             formdata.append('due_date', due_date.val());
             formdata.append('description', description.val());
+            formdata.append('var_user_attachment[]', var_user_attachment.prop('files'));
             formdata.append('submit', true);
             // process the form
             $.ajax({
@@ -272,7 +319,8 @@
                 //dataType    : 'json', // what type of data do we expect back from the server
                 //encode      : true,
                 processData : false,
-                contentType : false
+                contentType : false,
+                cache : false
             })
                 // using the done promise callback
                 .done(function(data) {

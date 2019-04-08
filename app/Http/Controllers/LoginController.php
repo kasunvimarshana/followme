@@ -64,6 +64,5 @@ class LoginController extends Controller
         Login::doLogout();
         return redirect()->route('login.showLogin');
     }
-
-    
+ 
 }

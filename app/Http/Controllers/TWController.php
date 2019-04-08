@@ -15,6 +15,9 @@ use \Response;
 
 use DB;
 use App\Login;
+use App\Enums\Status;
+use App\TWUser;
+use App\User;
 
 class TWController extends Controller
 {
@@ -83,14 +86,19 @@ class TWController extends Controller
                 'start_date'     => Input::get('start_date'),
                 'due_date'     => Input::get('due_date'),
                 'description'     => Input::get('description'),
-                'created_user'     => $created_user
+                'created_user'     => $created_user,
+                'is_visible' => 1
             );
             
-            var_dump( $twData ); exit();
+            $twUserData = (array) Input::get('own_user');
             
-            $twUserData = array(	
-                'own_user'     => (array) Input::get('own_user')
-            );
+            if( $request->hasFile('var_user_attachment') ){
+                echo "file catch";
+            }
+            
+            $userAttachmentData = (array) $request->file('var_user_attachment');
+            
+            var_dump($userAttachmentData); exit();
             
             // Start transaction!
             DB::beginTransaction();
@@ -98,7 +106,22 @@ class TWController extends Controller
             try {
                 // Validate, then create if valid
                 $newTW = TW::create( $twData );
+                foreach($twUserData as $key => $value){
+                    $tempTWUser = new User();
+                    $tempTWUser->mail = $value;
+                    $tempTWUser = $tempTWUser->getUser();
+                    
+                    $newTWUser = TWUser::create(array(
+                        'tw_id' => $newTW->id,
+                        'is_visible' => 1,
+                        'own_user' => $tempTWUser->mail,
+                        'company_name' => $tempTWUser->company,
+                        'department_name' => $tempTWUser->department
+                    ));
+                }
             }catch(\Exception $e){
+                
+                DB::rollback();
                 
                 $data = array(
                     'title' => 'error',
