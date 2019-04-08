@@ -11,6 +11,11 @@ use App\LDAPModel;
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    // table name
+    protected $table = "users";
+    // primary key
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +25,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto'
     ];
+    /*protected $fillable = [
+        'name', 'email', 'password'
+    ];*/
 
     /**
      * The attributes that should be hidden for arrays.
@@ -48,22 +56,7 @@ class User extends Authenticatable
         }
     }
     
-    public function getUserFromEmployeeNumber(){
-        $ldapModel = new LDAPModel();
-        $employeenumber = $this->employeenumber;
-        $filter = "(employeenumber=" . $employeenumber . ")";
-        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto');
-        $result = $ldapModel->doSearch($filter, $attributes);
-        $result = $ldapModel->formatEntries( $result );
-        if( $result ){
-            //$result = (object) array_shift($result);
-            $result = array_shift($result);
-            $this->setDataArray($result);
-            return $this;
-        }
-    }
-    
-    public function getUserFromEmail(){
+    public function getUser(){
         $ldapModel = new LDAPModel();
         $mail = $this->mail;
         $filter = "(mail=" . $mail . ")";
@@ -74,8 +67,27 @@ class User extends Authenticatable
             //$result = (object) array_shift($result);
             $result = array_shift($result);
             $this->setDataArray($result);
-            return $this;
         }
+        
+        return $this;
+    }
+    
+    public function findUsers($filter = '(mail=*)'){
+        $users = array();
+        $ldapModel = new LDAPModel();
+        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto');
+        $results = $ldapModel->doSearch($filter, $attributes);
+        $results = $ldapModel->formatEntries( $results );
+        if( $results ){
+            foreach($results as $result){
+                $user = new User();
+                $user->setDataArray($result);
+                $user->thumbnailphoto = null;
+                array_push($users, $user);
+            }
+        }
+        
+        return $users;
     }
     
 }

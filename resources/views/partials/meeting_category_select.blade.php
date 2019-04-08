@@ -6,9 +6,9 @@ $(function(){
         theme: "bootstrap"
     });*/
     
-    $('#meeting_type_id').select2({
+    $('#meeting_category_id').select2({
         ajax          : {
-            url: "{!! route('meetingType.list') !!}",
+            url: "{!! route('meetingCategory.list') !!}",
             // dataType: 'json',
             delay: 250,
             data: function (params) {

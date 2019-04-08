@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TWInfo extends Model
+class TWUser extends Model
 {
     //
     // table name
-    protected $table = "t_w_infos";
+    protected $table = "t_w_users";
     // primary key
     protected $primaryKey = 'id';
 
@@ -17,7 +17,7 @@ class TWInfo extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible', 't_w_id', 'description', 'created_user');
+    protected $fillable = array('is_visible', 'tw_id', 'own_user', 'company_name', 'department_name');
 
     /**
     * The attributes that should be hidden for arrays.

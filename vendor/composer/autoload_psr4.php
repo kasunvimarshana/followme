@@ -70,6 +70,7 @@ return array(
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'BeyondCode\\DumpServer\\' => array($vendorDir . '/beyondcode/laravel-dump-server/src'),
+    'BenSampo\\Enum\\' => array($vendorDir . '/bensampo/laravel-enum/src'),
     'App\\' => array($baseDir . '/app'),
     'Adldap\\' => array($vendorDir . '/adldap2/adldap2/src'),
 );

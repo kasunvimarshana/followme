@@ -6,9 +6,10 @@ $(function(){
         theme: "bootstrap"
     });*/
     
-    $('#user_position_id').select2({
+    $('#own_user').select2({
         ajax          : {
-            url: "{!! route('userPosition.list') !!}",
+            url: "{!! route('user.list') !!}", //user.list
+            cache: true,
             // dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -25,8 +26,8 @@ $(function(){
                 return {
                     results: $.map(data.data, function (obj) {
                         return { 
-                            id  : obj.id, 
-                            text: obj.name || obj.id, 
+                            id  : obj.mail, 
+                            text: obj.mail || obj.employeenumber, 
                             data: obj 
                         };
                     }),
@@ -37,12 +38,39 @@ $(function(){
             },
             cache: true
         },
-        placeholder	      : 'Select Position',
+        placeholder	      : 'Select Type',
         //minimumInputLength: 1,
-        multiple		  : false,
+        multiple		  : true,
         closeOnSelect	  : true,
         allowClear	  : true,
         escapeMarkup      : function (markup) { return markup; }
+    });
+    
+    $('#own_user').on('select2:unselecting', function (e) {
+        
+        var unselect_values = Number( e.params.args.data.id );
+        bootbox.confirm({
+            message: "are you sure",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                //console.log('This was logged in the callback: ' + result);
+                if( result == true ){
+                    
+                }else{
+                    e.preventDefault();
+                }
+            }
+        });
+        
     });
     
 });

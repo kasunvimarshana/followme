@@ -15,4 +15,22 @@
     return view('welcome');
 });*/
 
+Route::get('/', array('uses' => 'LoginController@showLogin'))->name('home');
+// route to show the login form
+Route::get('login', array('uses' => 'LoginController@showLogin'))->name('login.showLogin');
+// route to process the form
+Route::post('login', array('uses' => 'LoginController@doLogin'))->name('login.doLogin');
+// route to procss logout
+Route::get('logout', array('uses' => 'LoginController@doLogout'))->name('login.doLogout');
+
+Route::group(['middleware' => 'memberMiddleWare'], function(){
+    Route::get('home', array('uses' => 'HomeController@index'))->name('home.index');
+    Route::get('home/tws/create', array('uses' => 'TWController@create'))->name('tw.create');
+    Route::post('home/tws/create', array('uses' => 'TWController@store'))->name('tw.store');
+    Route::get('users/list', array('uses' => 'UserController@listUsers'))->name('user.list');
+    Route::get('tws/list', array('uses' => 'TWController@listTWs'))->name('tw.list');
+    Route::get('home/tws/show-all', array('uses' => 'HomeController@index'))->name('tw.showAll');
+    Route::get('meeting-categories/list', array('uses' => 'MeetingCategoryController@listMeetingCategories'))->name('meetingCategory.list');
+});
+
 

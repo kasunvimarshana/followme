@@ -10,23 +10,24 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
-use Auth;
+//use Auth;
 use \Response;
 
 class LoginController extends Controller
 {
+    //private $loginObj;
     
-    public function index(){
-        //
-        //return view('login');
-        if(Auth::check()){
-            //Session::flash('message', 'Login !');
-            //Redirect::back();
-            //return Redirect::to('config');
-            return redirect()->route('config.index');
+    function __construct(){
+        //$loginObj = new Login();
+    }
+    
+    public function index(){}
+    
+    public function showLogin(){
+        if( Login::isLogin() ){
+            return redirect()->route('home.index');
         }
         if(view()->exists('login')){
-            //Session::flash('message', 'Login !');
             return View::make('login');
         }
     }
@@ -34,35 +35,25 @@ class LoginController extends Controller
     public function doLogin(){
         // validate the info, create rules for the inputs
         $rules = array(
-            'email'    => 'required|email',
+            'email'    => 'required',
             'password' => 'required|min:3'
         );
         // run the validation rules on the inputs from the form
         $validator = Validator::make(Input::all(), $rules);
         // if the validator fails, redirect back to the form
         if($validator->fails()){
-            //Session::flash('message', 'Login !');
             return redirect()->route('login.showLogin')
-            ->withErrors($validator) // send back all errors to the login form
-            ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+            ->withErrors($validator)
+            ->withInput(Input::except('password'));
         }else{
-            // create our user data for the authentication
-            $userdata = array(
-                'email'     => Input::get('email'),
-                'password'  => Input::get('password'),
-                'active'  => '1'
-            );
+            $email = Input::get('email');
+            $email = $email . '@brandix.com';
+            $password = Input::get('password');
             // attempt to do the login
-            if(Auth::attempt($userdata)){
-                // validation successful!
-                // redirect them to the secure section or whatever
-                // return Redirect::to('secure');
-                // for now we'll just echo success (even though echoing in a controller is bad)
-                //echo 'SUCCESS!';
-                return redirect()->route('config.index');
-            }else{        
-                // validation not successful, send back to form 
-                //Session::flash('message', 'Login !');
+            Login::doLogin($email, $password);
+            if( Login::isLogin() ){
+                return redirect()->route('home.index');
+            }else{
                 return redirect()->route('login.showLogin')->withInput(Input::except('password'));
             }
         }
@@ -70,8 +61,8 @@ class LoginController extends Controller
     }
     
     public function doLogout(){
-        //Auth::logout(); // log the user out of our application
-        return redirect()->route('login.showLogin'); // redirect the user to the login screen
+        Login::doLogout();
+        return redirect()->route('login.showLogin');
     }
 
     

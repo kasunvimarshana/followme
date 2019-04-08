@@ -177,7 +177,9 @@ return [
         // custom service providers
         App\Providers\AuthUserProvider::class,
         // provider for flash message
-        Codecourse\Notify\NotifyServiceProvider::class
+        Codecourse\Notify\NotifyServiceProvider::class,
+        // provider for bensampo/laravel-enum (Laravel < 5.5)
+        // BenSampo\Enum\EnumServiceProvider
 
     ],
 

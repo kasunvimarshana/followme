@@ -16,6 +16,10 @@ class CreateMeetingCategoriesTable extends Migration
         Schema::create('meeting_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            
+            $table->boolean('is_visible')->default(1)->nullable();
+            $table->string('name')->unique();
+            //$table->softDeletes();
         });
     }
 

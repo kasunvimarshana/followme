@@ -1,7 +1,14 @@
+<!-- script>
+$(function(){
+    "use strict";
+    var dataTableUserList = $('#userDataTable').DataTable();
+});
+</script -->
+
 <script>
 $(function(){
     "use strict";
-    var dataTableDepartmentList = $('#companyLocationDataTable').DataTable({
+    var dataTableTWList = $('#twDataTable').DataTable({
         'columns' : [/*{
             'title' : '',
             'className' : 'details-control',
@@ -14,9 +21,23 @@ $(function(){
                 return data.epf_no;
             }
         },*/{
-            'title' : 'Name',
+            'title' : 'Title',
             'orderable' : false,
-            'data' : 'name',
+            'data' : 'title',
+            'render' : function(data, type, row){
+                return data;
+            }
+        },{
+            'title' : 'Description',
+            'orderable' : false,
+            'data' : 'description',
+            'render' : function(data, type, row){
+                return String(data).padStart(4, '0');
+            }
+        },{
+            'title' : 'Due Date',
+            'orderable' : false,
+            'data' : 'due_date',
             'render' : function(data, type, row){
                 return data;
             }
@@ -26,7 +47,7 @@ $(function(){
             'className' : 'center',
             'data' : null,
             'render' : function(data, type, row){
-                return data;
+                return '';
             }
         }],
         'responsive' : true,
@@ -46,15 +67,14 @@ $(function(){
             //$(this).show();
         },
         'ajax' : {
-            'url' : "{!! route('companyLocation.list') !!}",
+            'url' : "{!! route('tw.list') !!}",
+            'cache' : true,
             'dataSrc' : 'data',
             'type' : 'GET',
             'deferRender' : true,
             //'dataType' : 'json',
             'delay' : 300,
             'data' : function(data){
-                var name = $('#name').val();
-                data.search = name || data.search;
                 //console.log(data);
             },
             'error' : function(e){
@@ -63,8 +83,9 @@ $(function(){
         },
         'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){},
         'createRow' : function(row, data, dataIndex){},
+        //'order' : [[1, 'asc']],
         'columnDefs' : [{
-            'targets' : [1],
+            'targets' : [1, 2],
             'responsivePriorty' : 1
         },{
             'targets' : [-1],
@@ -87,8 +108,7 @@ $(function(){
                 button_1_body.addClass('fa fa-edit');
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
-                    var url = "{!! route('companyLocation.edit', ['#companyLocationIdParam']) !!}";
-                    url = url.replace("#companyLocationIdParam", rowData.id);
+                    var url = "{!! route('home.index') !!}";
                     $( location ).attr("href", url);
                 });
                 button_1.append(button_1_body);
@@ -104,7 +124,7 @@ $(function(){
                 button_2.bind("click", function(){
                     
                     bootbox.confirm({
-                        message: "are you sure tht you want to delete <strong>" + rowData.name + "</strong>",
+                        message: "are you sure tht you want to delete <strong>" + rowData.title + "</strong>",
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -118,8 +138,7 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result == true ){
-                                var url = "{!! route('companyLocation.destroy', ['#companyLocationIdParam']) !!}";
-                                url = url.replace("#companyLocationIdParam", rowData.id);
+                                var url = "{!! route('home.index') !!}";
                                 $( location ).attr("href", url);
                             }
                         }

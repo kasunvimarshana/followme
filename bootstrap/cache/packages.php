@@ -1,4 +1,11 @@
 <?php return array (
+  'bensampo/laravel-enum' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BenSampo\\Enum\\EnumServiceProvider',
+    ),
+  ),
   'beyondcode/laravel-dump-server' => 
   array (
     'providers' => 

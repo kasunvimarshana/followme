@@ -80,19 +80,19 @@ class Login extends Model
         $user->mobile = self::getData("mobile");
         $user->directreports = self::getData("directreports");
         $user->thumbnailphoto = self::getData("thumbnailphoto");
-        //$user->getUserFromEmployeeNumber();
+        //$user->getUser();
         return $user;
     }
     
     public static function doLogin($username, $password){
         $ldapModel = new LDAPModel();
         $user = new User();
-        /*if($ldapModel->isBind($username, $password)){
+        if($ldapModel->isBind($username, $password)){
             self::setLoginTrue();
             $user->mail = $username;
-            $user->getUserFromEmail();
+            $user->getUser();
             self::setUserData($user);
-        }*/
+        }
     }
     
     public static function doLogout(){

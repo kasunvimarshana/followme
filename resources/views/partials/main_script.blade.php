@@ -20,5 +20,10 @@
 <script src="{!! asset('node_modules/bootstrap-fileinput/js/locales/es.js') !!}" type="text/javascript"></script>
 <script src="{!! asset('node_modules/bootstrap-fileinput/themes/fas/theme.js') !!}" type="text/javascript"></script>
 <script src="{!! asset('node_modules/bootstrap-fileinput/themes/explorer-fas/theme.js') !!}" type="text/javascript"></script>
+<!-- Moment -->
+<script src="{{ asset('node_modules/admin-lte/bower_components/moment/min/moment.min.js') }}"></script>
+<!-- InputMask -->
+<script src="{{ asset('node_modules/admin-lte/plugins/input-mask/jquery.inputmask.js') }}"></script>
+<script src="{{ asset('node_modules/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
 <!-- custom script -->
 <script src="{{ asset('js/custom_script.js') }}"></script>

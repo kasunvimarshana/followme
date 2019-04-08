@@ -16,11 +16,18 @@ use App\User;
 use Illuminate\Support\Str;
 use \Response;
 
+use App\LDAPModel;
+use LdapQuery\Builder; 
+use Illuminate\Http\JsonResponse;
+
 class UserController extends Controller
 {
     
     //other
     public function listUsers(Request $request){
+        // Solution to get around integer overflow errors
+        // $model->latest()->limit(PHP_INT_MAX)->offset(1)->get();
+        // function will process the ajax request
         $draw = null;
         $start = 0;
         $length = 0;
@@ -30,10 +37,14 @@ class UserController extends Controller
         $recordsFiltered = 0;
         $query = null;
         $queryResult = null;
+        //$recordsTotal = Model::where('active','=','1')->count();
         
         $draw = $request->get('draw');
         
         $user = new User();
+        $ldapModel = new LDAPModel();
+        $query = new Builder();
+        //$ldapModel->setOption(LDAP_OPT_SIZELIMIT, 1000);
             
         // get search query value
         if( ($request->get('search')) && (!empty($request->get('search'))) ){
@@ -43,42 +54,37 @@ class UserController extends Controller
             }
             if($search && (!empty($search))){
                 //$search = (string) $search;
-                $query = $query->where('email', 'like', '%' . $search . '%');
+                $query = $query->whereRaw('mail', '=', $search . '*');
             }
         }
         
-        
-        // get filtered record count
-        $recordsFiltered = $query->count();
-        
-        // get limit value
-        if( $request->get('length') ){
-            $length = intval( $request->get('length') );
-            $query = $query->limit($length);
-        }
-        // set default value for length (PHP_INT_MAX)
-        if( $length <= 0 ){
-            $length = PHP_INT_MAX;
-            //$length = 0;
+        // employeenumber
+        if( ($request->get('employeenumber')) && (!empty($request->get('employeenumber'))) ){
+            $employeenumber = $request->get('employeenumber');
+            $query = $query->whereRaw('employeenumber', '=', $employeenumber);
         }
         
-        // get offset value
-        if( $request->get('start') ){
-            $start = intval( $request->get('start') );
-        }else if( $request->get('page') ){
-            $start = intval( $request->get('page') );
-            //$start = abs( ( ( $start - 1 ) * $length ) );
-            $start = ( ( $start - 1 ) * $length );
+        // cn
+        if( ($request->get('cn')) && (!empty($request->get('cn'))) ){
+            $cn =  $request->get('cn');
+            $query = $query->whereRaw('cn', '=', '*' . $cn . '*');
         }
         
-        // filter with offset value
-        if( $start > 0 ){
-            //$query = $query->limit($length)->skip($start);
-            $query = $query->limit($length)->offset($start);
+        // department
+        if( ($request->get('department')) && (!empty($request->get('department'))) ){
+            $department = $request->get('department');
+            $query = $query->whereRaw('department', '=', $department);
+        }
+        
+        // mobile
+        if( ($request->get('mobile')) && (!empty($request->get('mobile'))) ){
+            $mobile = $request->get('mobile');
+            $query = $query->whereRaw('mobile', '=', $mobile);
         }
         
         // get data
-        $queryResult = $query->get();
+        $queryResult = (array) $user->findUsers( $query->stringify() );
+        $recordsFiltered = count($queryResult, 0);
         
         $recordsTotal = $recordsFiltered;
         $data = array(
@@ -88,9 +94,15 @@ class UserController extends Controller
             'search' => $search,
             'recordsTotal' => $recordsTotal,
             'recordsFiltered' => $recordsFiltered,
-            'data' => $queryResult,
+            'data' => $queryResult
         );
         
-        return Response::json( $data );   
+        //echo "<pre>";
+            //print_r( $data );
+        //echo "</pre>";
+        
+        //exit(); json_encode ::jsonSerialize
+        return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        //return Response::json( $data );
     }    
 }

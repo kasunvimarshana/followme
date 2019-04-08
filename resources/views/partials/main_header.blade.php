@@ -32,26 +32,34 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="{!! URL::asset('node_modules/admin-lte/dist/img/avatar5.png') !!}" class="user-image" alt="User Image">
+                        @if( (isset($auth_user)) && ($auth_user->thumbnailphoto) )
+                            <img src="data:image/jpeg;base64, {!! base64_encode( $auth_user->thumbnailphoto ) !!}" class="user-image" alt="User Image"/>
+                        @else
+                            <img src="{!! URL::asset('node_modules/admin-lte/dist/img/avatar5.png') !!}" class="user-image" alt="User Image"/>
+                        @endif
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">
                             @isset($auth_user)
-                                {{ $auth_user->email }}
+                                {{ $auth_user->mail }}
                             @endisset
                         </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="{!! URL::asset('node_modules/admin-lte/dist/img/avatar5.png') !!}" class="img-circle" alt="User Image">
+                            @if( (isset($auth_user)) && ($auth_user->thumbnailphoto) )
+                                <img src="data:image/jpeg;base64, {!! base64_encode( $auth_user->thumbnailphoto ) !!}" class="img-circle" alt="User Image"/>
+                            @else
+                                <img src="{!! URL::asset('node_modules/admin-lte/dist/img/avatar5.png') !!}" class="img-circle" alt="User Image"/>
+                            @endif
 
                             <p>
                             @isset($auth_user)
-                                {{ $auth_user->name }}
-                                @isset($auth_user->department)
-                                    - {{ $auth_user->department->name }}
+                                {{ $auth_user->displayname }}
+                                @isset($auth_user->description)
+                                    - {{ $auth_user->description }}
                                 @endisset
-                                <small>{{ $auth_user->email }}</small>
+                                <small>{{ $auth_user->mail }}</small>
                             @endisset
                             </p>
                         </li>

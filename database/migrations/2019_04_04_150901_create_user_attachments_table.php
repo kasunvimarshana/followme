@@ -16,6 +16,13 @@ class CreateUserAttachmentsTable extends Migration
         Schema::create('user_attachments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            
+            $table->boolean('is_visible')->default(1)->nullable();
+            //$table->unsignedBigInteger('attached_by')->index()->nullable();
+            $table->string('attached_by')->index()->nullable();
+            $table->morphs('attachable');
+            $table->string('file_type')->nullable();
+            $table->text('link_url');
         });
     }
 

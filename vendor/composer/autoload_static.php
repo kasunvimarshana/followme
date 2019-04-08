@@ -11,14 +11,16 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
+        'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
+        '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
         '21a5860fbef5be28db5ddfbc3cca67c4' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acos.php',
         '1546e3f9d127f2a9bb2d1b6c31c26ef1' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -78,8 +80,6 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
         '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
-        'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
-        '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'fe62ba7e10580d903cc46d808b5961a4' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/helpers.php',
         'caf31cc6ec7cf2241cb6f12c226c3846' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/alias.php',
@@ -210,6 +210,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'B' => 
         array (
             'BeyondCode\\DumpServer\\' => 22,
+            'BenSampo\\Enum\\' => 14,
         ),
         'A' => 
         array (
@@ -477,6 +478,10 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         array (
             0 => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src',
         ),
+        'BenSampo\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bensampo/laravel-enum/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -617,6 +622,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'App\\ChainableExe2' => __DIR__ . '/../..' . '/app/ChainableExe2.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\ConverterModel' => __DIR__ . '/../..' . '/app/ConverterModel.php',
+        'App\\Enums\\Status' => __DIR__ . '/../..' . '/app/Enums/Status.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -624,6 +630,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\MeetingCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/MeetingCategoryController.php',
         'App\\Http\\Controllers\\StatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/StatusController.php',
@@ -656,8 +663,17 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'App\\Status' => __DIR__ . '/../..' . '/app/Status.php',
         'App\\TW' => __DIR__ . '/../..' . '/app/TW.php',
         'App\\TWInfo' => __DIR__ . '/../..' . '/app/TWInfo.php',
+        'App\\TWUser' => __DIR__ . '/../..' . '/app/TWUser.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\UserAttachment' => __DIR__ . '/../..' . '/app/UserAttachment.php',
+        'BenSampo\\Enum\\Commands\\MakeEnumCommand' => __DIR__ . '/..' . '/bensampo/laravel-enum/src/Commands/MakeEnumCommand.php',
+        'BenSampo\\Enum\\Contracts\\EnumContract' => __DIR__ . '/..' . '/bensampo/laravel-enum/src/Contracts/EnumContract.php',
+        'BenSampo\\Enum\\Contracts\\LocalizedEnum' => __DIR__ . '/..' . '/bensampo/laravel-enum/src/Contracts/LocalizedEnum.php',
+        'BenSampo\\Enum\\Enum' => __DIR__ . '/..' . '/bensampo/laravel-enum/src/Enum.php',
+        'BenSampo\\Enum\\EnumServiceProvider' => __DIR__ . '/..' . '/bensampo/laravel-enum/src/EnumServiceProvider.php',
+        'BenSampo\\Enum\\Exceptions\\InvalidEnumMemberException' => __DIR__ . '/..' . '/bensampo/laravel-enum/src/Exceptions/InvalidEnumMemberException.php',
+        'BenSampo\\Enum\\Rules\\EnumKey' => __DIR__ . '/..' . '/bensampo/laravel-enum/src/Rules/EnumKey.php',
+        'BenSampo\\Enum\\Rules\\EnumValue' => __DIR__ . '/..' . '/bensampo/laravel-enum/src/Rules/EnumValue.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
         'BeyondCode\\DumpServer\\Dumper' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/Dumper.php',
@@ -2608,6 +2624,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'Matrix\\Operators\\Multiplication' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Multiplication.php',
         'Matrix\\Operators\\Operator' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Operator.php',
         'Matrix\\Operators\\Subtraction' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Subtraction.php',
+        'MeetingCategorySeeder' => __DIR__ . '/../..' . '/database/seeds/MeetingCategorySeeder.php',
         'Microsoft\\Graph\\Core\\Enum' => __DIR__ . '/..' . '/microsoft/microsoft-graph/src/Core/Enum.php',
         'Microsoft\\Graph\\Core\\GraphConstants' => __DIR__ . '/..' . '/microsoft/microsoft-graph/src/Core/GraphConstants.php',
         'Microsoft\\Graph\\Exception\\GraphException' => __DIR__ . '/..' . '/microsoft/microsoft-graph/src/Exception/GraphException.php',

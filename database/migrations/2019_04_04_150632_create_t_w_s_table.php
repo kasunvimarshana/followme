@@ -16,6 +16,24 @@ class CreateTWSTable extends Migration
         Schema::create('t_w_s', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            
+            $table->boolean('is_visible')->default(1)->nullable();
+            //$table->unsignedBigInteger('created_user')->index()->nullable();
+            $table->string('created_user')->index()->nullable();
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('meeting_category_id')->index()->nullable();
+            $table->string('status')->default(null)->nullable();
+            $table->dateTime('start_date')->nullable()->useCurrent();
+            $table->dateTime('due_date')->nullable()->useCurrent();
+            $table->integer('piority')->default(0)->nullable();
+            $table->boolean('is_done')->default(0)->nullable();
+            //$table->unsignedBigInteger('done_user')->index()->nullable();
+            $table->string('done_user')->index()->nullable();
+            $table->dateTime('done_date')->nullable()->useCurrent();
+            //$table->softDeletes();
+            
+            $table->foreign('meeting_category_id')->references('id')->on('meeting_categories')->onUpdate('cascade');
         });
     }
 
