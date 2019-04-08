@@ -80,10 +80,13 @@ class TWController extends Controller
             $twData = array(	
                 'meeting_category_id'     => Input::get('meeting_category_id'),
                 'title'     => Input::get('title'),
+                'start_date'     => Input::get('start_date'),
                 'due_date'     => Input::get('due_date'),
                 'description'     => Input::get('description'),
                 'created_user'     => $created_user
             );
+            
+            var_dump( $twData ); exit();
             
             $twUserData = array(	
                 'own_user'     => (array) Input::get('own_user')

@@ -51,7 +51,7 @@
                                         <label for="own_user" class="col-sm-2 control-label">Owner</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple">
+                                            <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple" required>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -63,7 +63,7 @@
                                         <label for="meeting_category_id" class="col-sm-2 control-label">Category</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;">
+                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;" required>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -75,7 +75,7 @@
                                         <label for="title" class="col-sm-2 control-label">3W</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="3W" value="{{ old('title') }}"/>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="3W" value="{{ old('title') }}" required/>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
@@ -83,17 +83,41 @@
                                     
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="due_date" class="col-sm-2 control-label">Due Date</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
+                                        <!-- skip div -->
+                                        <div class="col-sm-2"></div>
+                                        <!-- /.skip div -->
+                                        
+                                        <!-- form-group -->
+                                        <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                            <label for="start_date" class="col-sm-2 control-label">Start Date</label>
+                                            <div class="col-sm-10">
+                                                <!-- p class="form-control-static"></p -->
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}" required/>
                                                 </div>
-                                                <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}"/>
                                             </div>
+                                            <!-- span id="form-control" class="help-block"></span -->
                                         </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
+                                        <!-- /.form-group -->
+                                        
+                                        <!-- form-group -->
+                                        <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                            <label for="due_date" class="col-sm-2 control-label">Due Date</label>
+                                            <div class="col-sm-10">
+                                                <!-- p class="form-control-static"></p -->
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}" required/>
+                                                </div>
+                                            </div>
+                                            <!-- span id="form-control" class="help-block"></span -->
+                                        </div>
+                                        <!-- /.form-group -->
                                     </div>
                                     <!-- /.form-group -->
                                     
@@ -193,13 +217,29 @@
     $(function() {
         "use strict";
         
-        $('#due_date').datepicker({
+        $('#start_date').datepicker({
             'autoclose': true,
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
             'todayHighlight': true
         }).datepicker("setDate", new Date());
+        
+        $('#due_date').datepicker({
+            'autoclose': true,
+            'format': "yyyy-mm-dd",
+            'immediateUpdates': true,
+            'todayBtn': true,
+            'todayHighlight': true
+        }).datepicker("setDate", $('#start_date').val());
+        
+        /*$('#due_date').datepicker({
+            'autoclose': true,
+            'format': "yyyy-mm-dd",
+            'immediateUpdates': true,
+            'todayBtn': true,
+            'todayHighlight': true
+        }).datepicker('setStartDate', $('#start_date').val()).datepicker("setDate", $('#start_date').val());*/
         
         $('#twForm').submit(function(event) {
             event.preventDefault();
@@ -210,6 +250,7 @@
             var own_user = form.find('#own_user');
             var meeting_category_id = form.find('#meeting_category_id');
             var title = form.find('#title');
+            var start_date = form.find('#start_date');
             var due_date = form.find('#due_date');
             var description = form.find('#description');
 
@@ -219,6 +260,7 @@
             formdata.append('own_user[]', own_user.val());
             formdata.append('meeting_category_id', meeting_category_id.val());
             formdata.append('title', title.val());
+            formdata.append('start_date', start_date.val());
             formdata.append('due_date', due_date.val());
             formdata.append('description', description.val());
             formdata.append('submit', true);
