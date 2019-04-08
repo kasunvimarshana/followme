@@ -30,7 +30,8 @@ class CreateTWSTable extends Migration
             $table->boolean('is_done')->default(0)->nullable();
             //$table->unsignedBigInteger('done_user')->index()->nullable();
             $table->string('done_user')->index()->nullable();
-            $table->dateTime('done_date')->nullable()->useCurrent();
+            //$table->dateTime('done_date')->nullable()->useCurrent();
+            $table->dateTime('done_date')->nullable()->default(null);
             //$table->softDeletes();
             
             $table->foreign('meeting_category_id')->references('id')->on('meeting_categories')->onUpdate('cascade');

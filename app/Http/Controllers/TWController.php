@@ -18,6 +18,8 @@ use App\Login;
 use App\Enums\Status;
 use App\TWUser;
 use App\User;
+use App\TWInfo;
+use App\UserAttachment;
 
 class TWController extends Controller
 {
@@ -78,7 +80,7 @@ class TWController extends Controller
             
         } else {
             // do process
-            $created_user = Login::getUserData()->employeenumber;
+            $created_user = Login::getUserData()->mail;
             
             $twData = array(	
                 'meeting_category_id'     => Input::get('meeting_category_id'),
@@ -92,13 +94,7 @@ class TWController extends Controller
             
             $twUserData = (array) Input::get('own_user');
             
-            if( $request->hasFile('var_user_attachment') ){
-                echo "file catch";
-            }
-            
             $userAttachmentData = (array) $request->file('var_user_attachment');
-            
-            var_dump($userAttachmentData); exit();
             
             // Start transaction!
             DB::beginTransaction();
@@ -106,6 +102,14 @@ class TWController extends Controller
             try {
                 // Validate, then create if valid
                 $newTW = TW::create( $twData );
+                
+                $newTWInfo = TWInfo::create(array(
+                    'is_visible' => 0,
+                    't_w_id' => $newTW->id,
+                    'description' => null,
+                    'created_user' => $created_user
+                ));
+                
                 foreach($twUserData as $key => $value){
                     $tempTWUser = new User();
                     $tempTWUser->mail = $value;
@@ -118,6 +122,21 @@ class TWController extends Controller
                         'company_name' => $tempTWUser->company,
                         'department_name' => $tempTWUser->department
                     ));
+                }
+                
+                if( $request->hasFile('var_user_attachment') ){
+                    foreach($userAttachmentData as $key => $value){
+                        //$name = $value->getClientOriginalName();
+                        $filename = $value->store('attachments');
+                        $newUserAttachment = UserAttachment::create(array(
+                            'is_visible' => 1,
+                            'attached_by' => $created_user,
+                            'attachable_type' => 'TWInfo',
+                            'attachable_id' => $newTWInfo->id,
+                            'file_type' => null,
+                            'link_url' => $filename
+                        ));
+                    }
                 }
             }catch(\Exception $e){
                 
@@ -215,7 +234,7 @@ class TWController extends Controller
         
         $tw = new TW();
         
-        $query = $tw->where('is_visible', '=', '1');
+        $query = $tw->with(['twUsers', 'twInfos'])->where('is_visible', '=', '1');
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;
             
@@ -241,6 +260,42 @@ class TWController extends Controller
         if( ($request->get('meeting_category_id')) && (!empty($request->get('meeting_category_id'))) ){
             $meeting_category_id =  $request->get('meeting_category_id');
             $query = $query->where('meeting_category_id', '=', $meeting_category_id);
+        }
+        
+        // status
+        if( ($request->get('status')) && (!empty($request->get('status'))) ){
+            $status =  $request->get('status');
+            $query = $query->where('status', '=', $status);
+        }
+        
+        // start date
+        if( ($request->get('start_date')) && (!empty($request->get('start_date'))) ){
+            $start_date =  $request->get('start_date');
+            $query = $query->where('start_date', 'like', $start_date . '%');
+        }
+        
+        // due date
+        if( ($request->get('due_date')) && (!empty($request->get('due_date'))) ){
+            $due_date =  $request->get('due_date');
+            $query = $query->where('due_date', 'like', $due_date . '%');
+        }
+        
+        // created date
+        if( ($request->get('created_at')) && (!empty($request->get('created_at'))) ){
+            $created_at =  $request->get('created_at');
+            $query = $query->where('created_at', 'like', $created_at . '%');
+        }
+        
+        // updated date
+        if( ($request->get('updated_at')) && (!empty($request->get('updated_at'))) ){
+            $updated_at =  $request->get('updated_at');
+            $query = $query->where('updated_at', 'like', $updated_at . '%');
+        }
+        
+        // is_visible
+        if( ($request->get('is_visible')) ){
+            $is_visible =  $request->get('is_visible');
+            $query = $query->where('is_visible', '=', $is_visible);
         }
         
         // get filtered record count

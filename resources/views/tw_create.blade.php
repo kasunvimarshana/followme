@@ -152,7 +152,7 @@
                                         <!-- btn-toolbar -->
                                         <div class="col col-sm-12">
                                             <!-- div class="btn-group btn-group-lg pull-right" -->
-                                                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                                                <button type="submit" class="btn btn-primary pull-right" id="submit">Submit</button>
                                             <!-- /div -->
                                         </div>
                                     </div>
@@ -283,33 +283,26 @@
             var due_date = form.find('#due_date');
             var description = form.find('#description');
             var var_user_attachment = form.find('#var_user_attachment');
+            var submit = form.find('#submit');
             
-            //var files = $('#var_user_attachment').fileinput('getFileStack');
-            //console.log( files );
-            //console.log( var_user_attachment.val() );
-            console.log( var_user_attachment.prop('files') );
+            submit.attr("disabled", true);
+            
+            //var files = var_user_attachment.fileinput('getFileStack');
+            //var files = var_user_attachment.val();
+            //var files = var_user_attachment.prop('files');
             //var_user_attachment.fileinput('clear');
 
-            //var formdata = new FormData( this );
-            var formdata = new FormData();
-
-            formdata.append('_token', _token);
+            var formdata = new FormData( this );
             
-            var own_user_val = own_user.val();
+            /*var own_user_val = own_user.val();
             if(($.isArray(own_user_val))){
                 $.each(own_user_val, function( key, value ){
                     formdata.append("own_user[]", value);
                 });
             }else{
                 formdata.append("own_user", defect_val);
-            }
+            }*/
             
-            formdata.append('meeting_category_id', meeting_category_id.val());
-            formdata.append('title', title.val());
-            formdata.append('start_date', start_date.val());
-            formdata.append('due_date', due_date.val());
-            formdata.append('description', description.val());
-            formdata.append('var_user_attachment[]', var_user_attachment.prop('files'));
             formdata.append('submit', true);
             // process the form
             $.ajax({
@@ -324,7 +317,7 @@
             })
                 // using the done promise callback
                 .done(function(data) {
-                    console.log(data);
+                    //console.log(data);
                     swal({
                         'title': data.title,
                         'text': data.text,
@@ -335,13 +328,17 @@
                     $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
                     title.val(null);
                     description.val(null);
+                    start_date.datepicker("setDate", new Date());
                     due_date.datepicker("setDate", new Date());
+                    var_user_attachment.fileinput('clear');
                 })
                 .fail(function() {
                     //console.log( "error" );
                 })
                 .always(function() {
                     //console.log( "complete" );
+                    submit.attr("disabled", false);
+                    //submit.removeAttr("disabled");
                 });
         });
     });

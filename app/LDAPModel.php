@@ -32,6 +32,7 @@ class LDAPModel extends Model
         
         $this->setOption(LDAP_OPT_PROTOCOL_VERSION, 3);
         $this->setOption(LDAP_OPT_REFERRALS, 0);
+        $this->setOption(LDAP_OPT_SIZELIMIT, 10);
         //@ldap_set_option($this->ldapconn, LDAP_OPT_NETWORK_TIMEOUT, 10);
         
         //@ldap_bind($this->ldapconn);
@@ -92,7 +93,10 @@ class LDAPModel extends Model
      * $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto');
      * @return array
      */
-    public function doSearch($filter = '(cn=*)', $attributes = array(), $ldaptree = 'OU=Users,OU=BLIW,OU=BLI,OU=Brandix Users,DC=brandixlk,DC=org'){
+    //OU=Brandix Users,DC=brandixlk,DC=org
+    //OU=BLSC,OU=BLI,OU=Brandix Users,DC=brandixlk,DC=org
+    //OU=Users,OU=BLIW,OU=BLI,OU=Brandix Users,DC=brandixlk,DC=org
+    public function doSearch($filter = '(cn=*)', $attributes = array(), $ldaptree = 'OU=Brandix Users,DC=brandixlk,DC=org'){
         $results = array();
         
         $searchResults = @ldap_search($this->ldapconn, $ldaptree, $filter, $attributes);

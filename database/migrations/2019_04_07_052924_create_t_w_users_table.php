@@ -18,14 +18,14 @@ class CreateTWUsersTable extends Migration
             $table->timestamps();
             
             $table->boolean('is_visible')->default(1)->nullable();
-            $table->unsignedBigInteger('tw_id')->index()->nullable();
+            $table->unsignedBigInteger('t_w_id')->index()->nullable();
             //$table->unsignedBigInteger('own_user')->index()->nullable();
             $table->string('own_user')->index()->nullable();
             $table->string('company_name')->nullable();
             $table->string('department_name')->nullable();
             //$table->softDeletes();
             
-            $table->foreign('tw_id')->references('id')->on('t_w_s')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('t_w_id')->references('id')->on('t_w_s')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

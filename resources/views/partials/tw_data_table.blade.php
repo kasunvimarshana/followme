@@ -35,11 +35,34 @@ $(function(){
                 return String(data).padStart(4, '0');
             }
         },{
+            'title' : 'Start Date',
+            'orderable' : false,
+            'data' : 'start_date',
+            'render' : function(data, type, row){
+                var date = moment(data, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+                return date;
+            }
+        },{
             'title' : 'Due Date',
             'orderable' : false,
             'data' : 'due_date',
             'render' : function(data, type, row){
-                return data;
+                var date = moment(data, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+                return date;
+            }
+        },{
+            'title' : 'Owners',
+            'orderable' : false,
+            'data' : 'tw_users',
+            'render' : function(data, type, row){
+                var data_str = '';
+                if(($.isArray(data))){
+                    $.each(data, function( key, value ){
+                        data_str =  value.own_user + ' | ' + data_str;
+                    });
+                }
+                
+                return data_str;
             }
         },{
             'title' : '',

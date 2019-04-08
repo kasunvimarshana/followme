@@ -27,6 +27,15 @@ $(function(){
     });
 });
 
+// ajax function
+$(function(){
+    $( document ).ajaxStart(function(){
+        $('#container_fluid').loading('start');
+    });
+    $( document ).ajaxComplete(function(){
+        $('#container_fluid').loading('stop');
+    });
+});
 
 /*$(function(){
     Number.prototype.pad = function(size) {

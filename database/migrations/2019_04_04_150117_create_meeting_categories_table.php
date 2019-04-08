@@ -18,7 +18,7 @@ class CreateMeetingCategoriesTable extends Migration
             $table->timestamps();
             
             $table->boolean('is_visible')->default(1)->nullable();
-            $table->string('name')->unique();
+            $table->string('name')->index()->unique();
             //$table->softDeletes();
         });
     }

@@ -17,5 +17,7 @@
 <!-- InputMask -->
 <script src="{{ asset('node_modules/admin-lte/plugins/input-mask/jquery.inputmask.js') }}"></script>
 <script src="{{ asset('node_modules/admin-lte/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
+<!-- Jquery Easy Loading -->
+<script src="{{ asset('node_modules/jquery-easy-loading/dist/jquery.loading.min.js') }}"></script>
 <!-- custom script -->
 <script src="{{ asset('js/custom_script.js') }}"></script>

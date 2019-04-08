@@ -32,4 +32,9 @@ class TWInfo extends Model
     * @var array
     */
     //protected $casts = array();
+    
+    //one to many (inverse)
+    public function tw(){
+        return $this->belongsTo('App\TW', 't_w_id', 'id');
+    }
 }

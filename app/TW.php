@@ -32,4 +32,14 @@ class TW extends Model
     * @var array
     */
     //protected $casts = array();
+    
+    //one to many
+    public function twUsers(){
+        return $this->hasMany('App\TWUser', 't_w_id', 'id');
+    }
+    
+    //one to many
+    public function twInfos(){
+        return $this->hasMany('App\TWInfo', 't_w_id', 'id');
+    }
 }

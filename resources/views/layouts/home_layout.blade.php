@@ -62,7 +62,7 @@ desired effect
     @show
     <!-- ./Content Header (Page header) -->
     <!-- Main content -->
-    <section class="content container-fluid">
+    <section class="content container-fluid" id="container_fluid">
 
       <!--------------------------
         | Your Page Content Here |

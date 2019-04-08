@@ -17,7 +17,7 @@ class TWUser extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible', 'tw_id', 'own_user', 'company_name', 'department_name');
+    protected $fillable = array('is_visible', 't_w_id', 'own_user', 'company_name', 'department_name');
 
     /**
     * The attributes that should be hidden for arrays.
@@ -32,4 +32,9 @@ class TWUser extends Model
     * @var array
     */
     //protected $casts = array();
+    
+    //one to many (inverse)
+    public function tw(){
+        return $this->belongsTo('App\TW', 't_w_id', 'id');
+    }
 }

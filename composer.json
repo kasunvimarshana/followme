@@ -20,6 +20,7 @@
         "league/oauth2-client": "^2.4",
         "maatwebsite/excel": "^3.1",
         "microsoft/microsoft-graph": "^1.6",
+        "spatie/flysystem-dropbox": "^1.0",
         "spatie/laravel-permission": "^2.36"
     },
     "require-dev": {
