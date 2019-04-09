@@ -17,7 +17,7 @@ class UserAttachment extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible', 'attached_by', 'attachable_type', 'attachable_id', 'file_type', 'link_url');
+    protected $fillable = array('is_visible', 'attached_by', 'file_original_name', 'attachable_type', 'attachable_id', 'file_type', 'link_url');
 
     /**
     * The attributes that should be hidden for arrays.

@@ -175,7 +175,37 @@ $(function(){
                 button_2.append(button_2_body);
                 buttonGroup_2.append(button_2);
                 
+                //button group
+                var buttonGroup_3 = $('<div></div>');
+                buttonGroup_3.addClass('btn-group');
+                var button_3 = $('<button></button>');
+                button_3.addClass('btn btn-success');
+                var button_3_body = $('<i></i>');
+                button_3_body.addClass('fa fa-eye');
+                button_3.bind("click", function(){
+                    var url = "{!! route('home.index') !!}";
+                    $( location ).attr("href", url);
+                });
+                button_3.append(button_3_body);
+                buttonGroup_3.append(button_3);
                 
+                //button group
+                var buttonGroup_4 = $('<div></div>');
+                buttonGroup_4.addClass('btn-group');
+                var button_4 = $('<button></button>');
+                button_4.addClass('btn btn-warning');
+                var button_4_body = $('<i></i>');
+                button_4_body.addClass('fa fa-book');
+                button_4.bind("click", function(){
+                    var url = "{!! route('home.index') !!}";
+                    $( location ).attr("href", url);
+                });
+                button_4.append(button_4_body);
+                buttonGroup_4.append(button_4);
+                
+                
+                buttonToolbar.append(buttonGroup_3);
+                buttonToolbar.append(buttonGroup_4);
                 buttonToolbar.append(buttonGroup_1);
                 buttonToolbar.append(buttonGroup_2);
                 buttonToolbar.appendTo(parentTd);

@@ -127,11 +127,12 @@ class TWController extends Controller
                 
                 if( $request->hasFile('var_user_attachment') ){
                     foreach($userAttachmentData as $key => $value){
-                        //$name = $value->getClientOriginalName();
+                        $file_original_name = $value->getClientOriginalName();
                         $filename = $value->store('attachments');
                         $newUserAttachment = UserAttachment::create(array(
                             'is_visible' => 1,
                             'attached_by' => $created_user,
+                            'file_original_name' => $file_original_name,
                             'attachable_type' => get_class( $newTWInfo ),
                             'attachable_id' => $newTWInfo->id,
                             'file_type' => null,

@@ -20,6 +20,7 @@ class CreateUserAttachmentsTable extends Migration
             $table->boolean('is_visible')->default(1)->nullable();
             //$table->unsignedBigInteger('attached_by')->index()->nullable();
             $table->string('attached_by')->index()->nullable();
+            $table->string('file_original_name')->index()->nullable();
             $table->morphs('attachable');
             $table->string('file_type')->nullable();
             $table->text('link_url');
