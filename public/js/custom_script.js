@@ -68,3 +68,6 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         .fixedColumns().relayout();
 });
 */
+
+// Disable automatic style injection
+//Chart.platform.disableCSSInjection = true;

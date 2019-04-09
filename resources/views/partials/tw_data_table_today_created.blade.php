@@ -149,7 +149,7 @@ $(function(){
                 var button_2_body = $('<i></i>');
                 button_2_body.addClass('fa fa-trash-o');
                 button_2.bind("click", function(){
-                    
+                    button_2.attr("disabled", true);
                     bootbox.confirm({
                         message: "are you sure tht you want to delete <strong>" + rowData.title + "</strong>",
                         buttons: {
@@ -167,7 +167,37 @@ $(function(){
                             if( result == true ){
                                 var url = "{!! route('tw.destroy', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);
-                                $( location ).attr("href", url);
+                                //$( location ).attr("href", url);
+                                
+                                $.ajax({
+                                    type: "GET",
+                                    url: url,
+                                    data: null,
+                                    //success: success,
+                                    //dataType: dataType,
+                                    //context: document.body
+                                })
+                                .done(function( data ) {
+                                    swal({
+                                        'title': data.title,
+                                        'text': data.text,
+                                        'type': data.type,
+                                        'timer': data.timer,
+                                        'showConfirmButton': false
+                                    });
+                                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                                })
+                                .fail(function() {
+                                    //console.log( "error" );
+                                    alert('fail');
+                                })
+                                .always(function() {
+                                    //console.log( "finished" );
+                                    button_2.attr("disabled", false);
+                                });
+                                
+                            }else{
+                                button_2.attr("disabled", false);
                             }
                         }
                     });

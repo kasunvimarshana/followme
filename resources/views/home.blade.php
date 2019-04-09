@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-select-bs/css/select.bootstrap.min.css') }}" />
+    <!-- ChartJS -->
+    <link rel="stylesheet" href="{{ asset('node_modules/chart.js/dist/Chart.min.css') }}" />
 @endsection
 
 @section('section_script_main')
@@ -27,7 +29,7 @@
             <div id="collapseOneParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Today 3W</a>
+                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Today Events</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in">
@@ -56,10 +58,10 @@
             <div id="collapseThreeParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseThreeParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> 3W</a>
+                        <a data-toggle="collapse" data-parent="#collapseThreeParent" href="#collapseThree"><span class="glyphicon glyphicon-plus"></span> Event Progress</a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
+                <div id="collapseThree" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <!-- --- -->
                         
@@ -75,13 +77,9 @@
                             
                             <!-- col -->
                             <div class="col-sm-6">
-                                <!-- img -->
-                                @if( (isset($auth_user)) && ($auth_user->thumbnailphoto) )
-                                    <img src="data:image/jpeg;base64, {!! base64_encode( $auth_user->thumbnailphoto ) !!}" class="img-responsive img-thumbnail" alt="User Image"/>
-                                @else
-                                    <img src="{!! URL::asset('node_modules/admin-lte/dist/img/avatar5.png') !!}" class="img-responsive img-thumbnail" alt="User Image"/>
-                                @endif
-                                <!-- /.img -->
+                                <!-- table -->
+                                <table id="twProgressDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <!-- /.table -->
                             </div>
                             <!-- /.col -->
                         </div>
@@ -225,52 +223,72 @@
     <script src="{{ asset('node_modules/datatables.net-select/js/dataTables.select.min.js') }}"></script>
     <script src="{{ asset('node_modules/datatables.net-select-bs/js/select.bootstrap.min.js') }}"></script>
     <!-- ChartJS -->
-    <script src="{{ asset('node_modules/admin-lte/bower_components/chart.js/Chart.js') }}"></script>
+    <script src="{{ asset('node_modules/chart.js/dist/Chart.bundle.min.js') }}"></script>
+    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
     @includeIf('partials.tw_data_table_today_pending')
+    @includeIf('partials.tw_data_table_progress')
 
     <script>
-    var pieChartCanvas = $('#twChart').get(0).getContext('2d')
-    var pieChart       = new Chart(pieChartCanvas)
-    var PieData        = [
-      {
-        value    : 300,
-        color    : '#f56954',
-        highlight: '#f56954',
-        label    : 'Fail'
-      },
-      {
-        value    : 700,
-        color    : '#00a65a',
-        highlight: '#00a65a',
-        label    : 'Success'
-      }
-    ]
-    var pieOptions     = {
-      //Boolean - Whether we should show a stroke on each segment
-      segmentShowStroke    : true,
-      //String - The colour of each segment stroke
-      segmentStrokeColor   : '#fff',
-      //Number - The width of each segment stroke
-      segmentStrokeWidth   : 2,
-      //Number - The percentage of the chart that we cut out of the middle
-      percentageInnerCutout: 50, // This is 0 for Pie charts
-      //Number - Amount of animation steps
-      animationSteps       : 100,
-      //String - Animation easing effect
-      animationEasing      : 'easeOutBounce',
-      //Boolean - Whether we animate the rotation of the Doughnut
-      animateRotate        : true,
-      //Boolean - Whether we animate scaling the Doughnut from the centre
-      animateScale         : false,
-      //Boolean - whether to make the chart responsive to window resizing
-      responsive           : true,
-      // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-      maintainAspectRatio  : true,
-      //String - A legend template
-      legendTemplate       : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+    //var canvasCtx = $('#twChart').get(0).getContext('2d');
+    var canvasCtx = $('#twChart').get(0).getContext('2d');
+    var chartConfig = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [
+                    10,
+                    20
+                ],
+                backgroundColor: [
+                    'rgb(0, 0, 255)',
+                    'rgb(255, 0, 0)'
+                ],
+                label: [
+                    '1',
+                    '2'
+                ]
+            }],
+            labels: [
+                'Pass',
+                'Fail'
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+                position: 'right',
+            },
+            tooltips: {
+                mode: 'nearest'
+            },
+            title: {
+                display: true,
+                text: 'Chart'
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            },
+            'onClick': function (event, item) {
+                //var activePoints = chart.getElementsAtEvent(event);
+                var itemArray = Array.from( item );
+                var itemObj = itemArray.shift();
+                try{
+                    console.log( itemObj._model.label );
+                }catch( e ){}
+            }
+        }
     }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    pieChart.Doughnut(PieData, pieOptions)
+    var chartObj = new Chart(canvasCtx, chartConfig); 
+        
+    $(chartObj).click( //#twChart
+        function(evt) {
+            console.log('click');
+            var activePoints = chartObj.getDatasetAtEvent(evt);
+            console.log( event );
+            console.log( activePoints );
+        }
+    );
     </script>
 @endsection

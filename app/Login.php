@@ -66,6 +66,21 @@ class Login extends Model
         self::setData("thumbnailphoto", $user->thumbnailphoto);
     }
     
+    public static function unsetUserData(){
+        self::setData("userprincipalname", null);
+        self::setData("employeenumber", null);
+        self::setData("cn", null);
+        self::setData("title", null);
+        self::setData("description", null);
+        self::setData("displayname", null);
+        self::setData("department", null);
+        self::setData("company", null);
+        self::setData("mail", null);
+        self::setData("mobile", null);
+        self::setData("directreports", null);
+        self::setData("thumbnailphoto", null);
+    }
+    
     public static function getUserData(){
         $user = new User();
         $user->userprincipalname = self::getData("userprincipalname");
@@ -87,15 +102,17 @@ class Login extends Model
     public static function doLogin($username, $password){
         $ldapModel = new LDAPModel();
         $user = new User();
-        if($ldapModel->isBind($username, $password)){
+        /*if($ldapModel->isBind($username, $password)){
             self::setLoginTrue();
             $user->mail = $username;
             $user->getUser();
             self::setUserData($user);
-        }
+        }*/
+        self::setLoginTrue();
     }
     
     public static function doLogout(){
+        self::unsetUserData();
         self::flushData();
     }
     

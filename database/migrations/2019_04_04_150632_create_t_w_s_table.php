@@ -23,7 +23,7 @@ class CreateTWSTable extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('meeting_category_id')->index()->nullable();
-            $table->string('status')->default(null)->nullable();
+            $table->unsignedBigInteger('status_id')->default(null)->nullable();
             $table->dateTime('start_date')->nullable()->useCurrent();
             $table->dateTime('due_date')->nullable()->useCurrent();
             $table->integer('piority')->default(0)->nullable();
@@ -32,9 +32,11 @@ class CreateTWSTable extends Migration
             $table->string('done_user')->index()->nullable();
             //$table->dateTime('done_date')->nullable()->useCurrent();
             $table->dateTime('done_date')->nullable()->default(null);
+            $table->text('resource_dir')->nullable()->default(null);
             //$table->softDeletes();
             
             $table->foreign('meeting_category_id')->references('id')->on('meeting_categories')->onUpdate('cascade');
+            $table->foreign('status_id')->references('id')->on('statuses')->onUpdate('cascade');
         });
     }
 

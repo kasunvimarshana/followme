@@ -7,6 +7,6 @@ use BenSampo\Enum\Enum;
 final class Status extends Enum
 {
     const DEFAULT = 1;
-    const IN_PROGRESS = 2;
-    const COMPLETED = 3;
+    const OPEN = 2;
+    const CLOSE = 3;
 }

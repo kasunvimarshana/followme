@@ -3,6 +3,11 @@
     use Illuminate\Http\File;
     use Illuminate\Support\Facades\Storage;
 
+    echo \Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix() . '<br/>';
+    echo \Storage::disk('public')->path('') . '<br/>';
+    echo \Storage::disk('local')->url('') . '<br/>';
+    echo \Storage::url('') . '<br/>';
+
     return Storage::download('file.jpg');
     return Storage::download('file.jpg', $name, $headers);
 
@@ -71,6 +76,15 @@
         $response->header('Content-Type', 'application/pdf'); 
         return $response; 
     }
+
+    $path = public_path().'/images/article/imagegallery/' . $galleryId;
+    File::makeDirectory($path, $mode = 0777, true, true);
+
+    if(!Storage::exists('/path/to/your/directory')) {
+        Storage::makeDirectory('/path/to/create/your/directory', 0775, true); //creates directory
+    }
+
+    if (Storage::directories($directory)->has('someDirectory')) {
 
 
 ?>

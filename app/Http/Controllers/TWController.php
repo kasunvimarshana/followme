@@ -16,10 +16,12 @@ use \Response;
 use DB;
 use App\Login;
 use App\Enums\Status;
+use App\Enums\TWMeta;
 use App\TWUser;
 use App\User;
 use App\TWInfo;
 use App\UserAttachment;
+use Storage;
 
 class TWController extends Controller
 {
@@ -81,6 +83,7 @@ class TWController extends Controller
         } else {
             // do process
             $created_user = Login::getUserData()->mail;
+            $twResourceDir = TWMeta::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
             
             $twData = array(	
                 'meeting_category_id'     => Input::get('meeting_category_id'),
@@ -90,7 +93,8 @@ class TWController extends Controller
                 'description'     => Input::get('description'),
                 'created_user'     => $created_user,
                 'is_visible' => 1,
-                'status' => Status::IN_PROGRESS
+                'status_id' => Status::OPEN,
+                'resource_dir' => $twResourceDir
             );
             
             $twUserData = (array) Input::get('own_user');
@@ -101,6 +105,10 @@ class TWController extends Controller
             DB::beginTransaction();
 
             try {
+                //create directory
+                if(!Storage::exists($twResourceDir)) {
+                    Storage::makeDirectory($twResourceDir, 0775, true); //creates directory
+                }
                 // Validate, then create if valid
                 $newTW = TW::create( $twData );
                 
@@ -128,7 +136,7 @@ class TWController extends Controller
                 if( $request->hasFile('var_user_attachment') ){
                     foreach($userAttachmentData as $key => $value){
                         $file_original_name = $value->getClientOriginalName();
-                        $filename = $value->store('attachments');
+                        $filename = $value->store( $twResourceDir );
                         $newUserAttachment = UserAttachment::create(array(
                             'is_visible' => 1,
                             'attached_by' => $created_user,
@@ -146,7 +154,7 @@ class TWController extends Controller
                 
                 $data = array(
                     'title' => 'error',
-                    'text' => 'error',
+                    'text' => $e,
                     'type' => 'warning',
                     'timer' => 3000
                 );

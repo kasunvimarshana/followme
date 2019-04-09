@@ -22,13 +22,13 @@ class StatusSeeder extends Seeder
         
         Status::create([
             'id' => 2,
-            'name' => 'In Progress',
+            'name' => 'OPEN',
             'is_visible' => 1
         ]);
         
         Status::create([
             'id' => 3,
-            'name' => 'Compleated',
+            'name' => 'CLOSE',
             'is_visible' => 1
         ]);
     }

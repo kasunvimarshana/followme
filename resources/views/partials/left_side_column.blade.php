@@ -40,9 +40,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{!! set_active(['home/tws/create', 'home/tws/create/*']) !!}"><a href="{!! route('tw.create') !!}"><i class="fa fa-circle-o"></i> Create New 3W</a></li>
-                    <li class="{!! set_active(['home/tws/created', 'home/tws/created/*']) !!}"><a href="{!! route('home.index') !!}"><i class="fa fa-circle-o"></i> Created 3W</a></li>
-                    <li class="{!! set_active(['home/tws/find', 'home/tws/find/*']) !!}"><a href="{!! route('home.index') !!}"><i class="fa fa-circle-o"></i> Find 3W</a></li>
+                    <li class="{!! set_active(['home/tws/create', 'home/tws/create/*']) !!}"><a href="{!! route('tw.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Create New 3W</a></li>
+                    <li class="{!! set_active(['home/tws/created', 'home/tws/created/*']) !!}"><a href="{!! route('home.index') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Created 3W</a></li>
+                    <li class="{!! set_active(['home/tws/find', 'home/tws/find/*']) !!}"><a href="{!! route('home.index') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Find 3W</a></li>
                 </ul>
             </li>
             
