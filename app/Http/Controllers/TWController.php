@@ -214,6 +214,41 @@ class TWController extends Controller
     public function destroy(TW $tW)
     {
         //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        //Model::find(explode(',', $id))->delete();
+        // do process
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            
+            $tW->twInfos()->delete();
+            $tW->twUsers()->delete();
+            $tW->delete();
+            
+        }catch(\Exception $e){
+            DB::rollback();
+            
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data );
+        }
+
+        DB::commit();
+
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+
+        return Response::json( $data );
     }
     
     //other

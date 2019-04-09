@@ -64,5 +64,13 @@
 
     $image = Image::make(storage_path('app/public/profile.jpg'))->resize(300, 200);
 
+    $file = Book::findOrFail($id); 
+    if (File::isFile($file->path)) { 
+        $file = File::get($file); 
+        $response = Response::make($file, 200); 
+        $response->header('Content-Type', 'application/pdf'); 
+        return $response; 
+    }
+
 
 ?>

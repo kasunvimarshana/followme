@@ -165,7 +165,8 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result == true ){
-                                var url = "{!! route('home.index') !!}";
+                                var url = "{!! route('tw.destroy', ['#tW']) !!}";
+                                url = url.replace("#tW", rowData.id);
                                 $( location ).attr("href", url);
                             }
                         }

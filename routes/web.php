@@ -29,6 +29,7 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::post('home/tws/create', array('uses' => 'TWController@store'))->name('tw.store');
     Route::get('users/list', array('uses' => 'UserController@listUsers'))->name('user.list');
     Route::get('tws/list', array('uses' => 'TWController@listTWs'))->name('tw.list');
+    Route::get('tws/{tW}/destroy', array('uses' => 'TWController@destroy'))->name('tw.destroy');
     Route::get('home/tws/show-all', array('uses' => 'HomeController@index'))->name('tw.showAll');
     Route::get('meeting-categories/list', array('uses' => 'MeetingCategoryController@listMeetingCategories'))->name('meetingCategory.list');
 });

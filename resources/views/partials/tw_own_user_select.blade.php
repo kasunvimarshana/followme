@@ -48,7 +48,7 @@ $(function(){
     
     $('#own_user').on('select2:unselecting', function (e) {
         
-        var unselect_values = Number( e.params.args.data.id );
+        /*var unselect_values = Number( e.params.args.data.id );
         bootbox.confirm({
             message: "are you sure",
             buttons: {
@@ -69,7 +69,7 @@ $(function(){
                     e.preventDefault();
                 }
             }
-        });
+        });*/
         
     });
     
