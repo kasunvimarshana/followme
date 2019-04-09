@@ -235,6 +235,7 @@ class TWController extends Controller
         $tw = new TW();
         
         $query = $tw->with(['twUsers', 'twInfos'])->where('is_visible', '=', '1');
+        
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;
             
@@ -271,25 +272,33 @@ class TWController extends Controller
         // start date
         if( ($request->get('start_date')) && (!empty($request->get('start_date'))) ){
             $start_date =  $request->get('start_date');
-            $query = $query->where('start_date', 'like', $start_date . '%');
+            $query = $query->whereDate('start_date', '=', $start_date);
         }
         
         // due date
         if( ($request->get('due_date')) && (!empty($request->get('due_date'))) ){
             $due_date =  $request->get('due_date');
-            $query = $query->where('due_date', 'like', $due_date . '%');
+            $query = $query->whereDate('due_date', '=', $due_date);
         }
         
         // created date
         if( ($request->get('created_at')) && (!empty($request->get('created_at'))) ){
             $created_at =  $request->get('created_at');
-            $query = $query->where('created_at', 'like', $created_at . '%');
+            $query = $query->whereDate('created_at', '=', $created_at);
         }
         
         // updated date
         if( ($request->get('updated_at')) && (!empty($request->get('updated_at'))) ){
             $updated_at =  $request->get('updated_at');
-            $query = $query->where('updated_at', 'like', $updated_at . '%');
+            $query = $query->whereDate('updated_at', '=', $updated_at);
+        }
+        
+        // own user
+        if( ($request->get('own_user')) && (!empty($request->get('own_user'))) ){
+            $own_user =  $request->get('own_user');
+            $query = $query->whereHas('twUsers', function($query) use ($own_user){
+                $query->where('own_user', '=', $own_user);
+            });
         }
         
         // is_visible

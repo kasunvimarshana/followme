@@ -99,6 +99,8 @@ $(function(){
             'delay' : 300,
             'data' : function(data){
                 //console.log(data);
+                data.created_user = "{!! $auth_user->mail !!}";
+                data.created_at = "{!! date('Y-m-d') !!}";
             },
             'error' : function(e){
                 //console.log(e);

@@ -235,7 +235,7 @@
 
     @includeIf('partials.meeting_category_select')
     @includeIf('partials.tw_own_user_select')
-    @includeIf('partials.tw_data_table')
+    @includeIf('partials.tw_data_table_today_created')
     <script>
     $(function() {
         "use strict";
