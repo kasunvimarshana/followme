@@ -60,6 +60,8 @@ $(function(){
                     $.each(data, function( key, value ){
                         data_str =  value.own_user + ' | ' + data_str;
                     });
+                }else{
+                    data_str = value.own_user;
                 }
                 
                 return data_str;

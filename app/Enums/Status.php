@@ -6,7 +6,7 @@ use BenSampo\Enum\Enum;
 
 final class Status extends Enum
 {
-    const COMPLETED = 'completed';
-    const IN_PROGRESS = 'in_progress';
-    const NOT_ATTEND = 'not_attend';
+    const DEFAULT = 1;
+    const IN_PROGRESS = 2;
+    const COMPLETED = 3;
 }

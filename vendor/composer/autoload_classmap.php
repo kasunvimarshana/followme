@@ -4328,6 +4328,7 @@ return array(
     'Spatie\\Permission\\Traits\\HasPermissions' => $vendorDir . '/spatie/laravel-permission/src/Traits/HasPermissions.php',
     'Spatie\\Permission\\Traits\\HasRoles' => $vendorDir . '/spatie/laravel-permission/src/Traits/HasRoles.php',
     'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => $vendorDir . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
+    'StatusSeeder' => $baseDir . '/database/seeds/StatusSeeder.php',
     'Symfony\\Component\\Console\\Application' => $vendorDir . '/symfony/console/Application.php',
     'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => $vendorDir . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
     'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => $vendorDir . '/symfony/console/CommandLoader/ContainerCommandLoader.php',

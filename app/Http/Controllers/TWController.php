@@ -89,7 +89,8 @@ class TWController extends Controller
                 'due_date'     => Input::get('due_date'),
                 'description'     => Input::get('description'),
                 'created_user'     => $created_user,
-                'is_visible' => 1
+                'is_visible' => 1,
+                'status' => Status::IN_PROGRESS
             );
             
             $twUserData = (array) Input::get('own_user');
@@ -116,7 +117,7 @@ class TWController extends Controller
                     $tempTWUser = $tempTWUser->getUser();
                     
                     $newTWUser = TWUser::create(array(
-                        'tw_id' => $newTW->id,
+                        't_w_id' => $newTW->id,
                         'is_visible' => 1,
                         'own_user' => $tempTWUser->mail,
                         'company_name' => $tempTWUser->company,
@@ -131,7 +132,7 @@ class TWController extends Controller
                         $newUserAttachment = UserAttachment::create(array(
                             'is_visible' => 1,
                             'attached_by' => $created_user,
-                            'attachable_type' => 'TWInfo',
+                            'attachable_type' => get_class( $newTWInfo ),
                             'attachable_id' => $newTWInfo->id,
                             'file_type' => null,
                             'link_url' => $filename

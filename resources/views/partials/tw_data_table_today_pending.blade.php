@@ -175,8 +175,8 @@ $(function(){
                 buttonGroup_2.append(button_2);
                 
                 
-                buttonToolbar.append(buttonGroup_1);
-                buttonToolbar.append(buttonGroup_2);
+                //buttonToolbar.append(buttonGroup_1);
+                //buttonToolbar.append(buttonGroup_2);
                 buttonToolbar.appendTo(parentTd);
             }
         }],
