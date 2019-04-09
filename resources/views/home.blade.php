@@ -72,6 +72,18 @@
                                 <!-- /.canvas -->
                             </div>
                             <!-- /.col -->
+                            
+                            <!-- col -->
+                            <div class="col-sm-6">
+                                <!-- img -->
+                                @if( (isset($auth_user)) && ($auth_user->thumbnailphoto) )
+                                    <img src="data:image/jpeg;base64, {!! base64_encode( $auth_user->thumbnailphoto ) !!}" class="img-responsive img-thumbnail" alt="User Image"/>
+                                @else
+                                    <img src="{!! URL::asset('node_modules/admin-lte/dist/img/avatar5.png') !!}" class="img-responsive img-thumbnail" alt="User Image"/>
+                                @endif
+                                <!-- /.img -->
+                            </div>
+                            <!-- /.col -->
                         </div>
                         <!-- /.row -->
                         
