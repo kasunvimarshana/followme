@@ -118,8 +118,8 @@
                                     <div class="info-box-content">
                                         <span class="info-box-text">Today 3W</span>
                                         <span class="info-box-number">
-                                            @isset($userCount)
-                                                {{ number_format($userCount) }}
+                                            @isset($twToday)
+                                                {{ number_format($twToday) }}
                                             @endisset
                                         </span>
                                     </div>
@@ -140,8 +140,8 @@
                                     <div class="info-box-content">
                                         <span class="info-box-text">Created 3W</span>
                                         <span class="info-box-number">
-                                            @isset($count)
-                                                {{ number_format($count) }}
+                                            @isset($twTodayCreated)
+                                                {{ number_format($twTodayCreated) }}
                                             @endisset
                                         </span>
                                     </div>
@@ -228,7 +228,6 @@
     <script src="{{ asset('node_modules/admin-lte/bower_components/chart.js/Chart.js') }}"></script>
     @includeIf('partials.tw_data_table_today_pending')
 
-    ////////////////////////////////////////////////////
     <script>
     var pieChartCanvas = $('#twChart').get(0).getContext('2d')
     var pieChart       = new Chart(pieChartCanvas)
@@ -274,5 +273,4 @@
     // You can switch between pie and douhnut using the method below.
     pieChart.Doughnut(PieData, pieOptions)
     </script>
-    ////////////////////////////////////////////////////
 @endsection

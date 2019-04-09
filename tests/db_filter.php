@@ -1,5 +1,12 @@
 <?php
 
+Config::set('app.timezone', Company::where('id', COMPANY_ID)->value('time_zone'));
+config(['app.timezone' => $timezone]);
+date_default_timezone_set($timezone);
+$timezone = date_default_timezone_get();
+date_default_timezone_set('Asia/Colombo');
+\Config::set('app.timezone', 'Asia/Colombo');
+
 $posts = Post::whereHas('categories', function($q){
     $q->where('slug', '=', Input::get('category_slug'));
 })->get();
