@@ -10,7 +10,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/plugins/iCheck/square/blue.css') }}"/>
-    @include('partials.main_stylesheet')
+    @includeIf('partials.main_stylesheet', array())
     <style>
         canvas {
             display: fixed;
@@ -47,7 +47,7 @@
     <!-- Scripts -->
     <!-- script src="{{ asset('js/app.js') }}" defer></script -->
     <!-- REQUIRED JS SCRIPTS -->
-    @include('partials.main_script')
+    @includeIf('partials.main_script', array())
     <!-- REQUIRED JS SCRIPTS -->
 </head>
 <body class="hold-transition login-page">

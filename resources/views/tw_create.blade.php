@@ -233,9 +233,9 @@
     <script src="{!! asset('node_modules/bootstrap-fileinput/themes/fas/theme.js') !!}" type="text/javascript"></script>
     <script src="{!! asset('node_modules/bootstrap-fileinput/themes/explorer-fas/theme.js') !!}" type="text/javascript"></script>
 
-    @includeIf('partials.meeting_category_select')
-    @includeIf('partials.tw_own_user_select')
-    @includeIf('partials.tw_data_table_today_created')
+    @includeIf('partials.meeting_category_select', array())
+    @includeIf('partials.tw_own_user_select', array())
+    @includeIf('partials.tw_data_table_today_created', array())
     <script>
     $(function() {
         "use strict";

@@ -25,6 +25,8 @@ Route::get('logout', array('uses' => 'LoginController@doLogout'))->name('login.d
 
 Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('home', array('uses' => 'HomeController@index'))->name('home.index');
+    Route::get('tw-infos/list', array('uses' => 'TWInfoController@listTWInfos'))->name('twInfo.list');
+    Route::get('tw-infos/{tWInfo}/destroy', array('uses' => 'TWInfoController@destroy'))->name('twInfo.destroy');
     Route::get('home/tws/{tW}/tw-infos/create', array('uses' => 'TWInfoController@create'))->name('twInfo.create');
     Route::post('home/tws/{tW}/tw-infos/create', array('uses' => 'TWInfoController@store'))->name('twInfo.store');
     Route::get('home/tws/create', array('uses' => 'TWController@create'))->name('tw.create');

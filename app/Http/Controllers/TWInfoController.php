@@ -87,12 +87,12 @@ class TWInfoController extends Controller
                 foreach($userAttachmentData as $key => $value){
                     $file_original_name = $value->getClientOriginalName();
                     $filename = $value->store( $twResourceDir );
-                    $newUserAttachment = UserAttachment::create(array(
+                    $newUserAttachment = $newTWInfo->userAttachments()->create(array(
                         'is_visible' => 1,
                         'attached_by' => $current_user,
                         'file_original_name' => $file_original_name,
-                        'attachable_type' => get_class( $newTWInfo ),
-                        'attachable_id' => $newTWInfo->id,
+                        //'attachable_type' => get_class( $newTWInfo ),
+                        //'attachable_id' => $newTWInfo->id,
                         'file_type' => null,
                         'link_url' => $filename
                     ));
@@ -168,5 +168,162 @@ class TWInfoController extends Controller
     public function destroy(TWInfo $tWInfo)
     {
         //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        //Model::find(explode(',', $id))->delete();
+        // do process
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            
+            //delete directory
+            $userAttachments = $tWInfo->userAttachments;
+            if( $userAttachments ){
+                foreach($userAttachments as $userAttachment){
+                    if(Storage::exists( $userAttachment->link_url )) {
+                        Storage::delete( $userAttachment->link_url );
+                    }
+                    $userAttachment->delete();
+                }
+            }
+            
+            $tWInfo->delete();
+            
+        }catch(\Exception $e){
+            DB::rollback();
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data );
+        }
+
+        DB::commit();
+
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+
+        return Response::json( $data );
     }
+    
+    //other
+    public function listTWInfos(Request $request){
+        // Solution to get around integer overflow errors
+        // $model->latest()->limit(PHP_INT_MAX)->offset(1)->get();
+        // function will process the ajax request
+        $draw = null;
+        $start = 0;
+        $length = 0;
+        $search = null;
+        
+        $recordsTotal = 0;
+        $recordsFiltered = 0;
+        $query = null;
+        $queryResult = null;
+        //$recordsTotal = Model::where('active','=','1')->count();
+        
+        $draw = $request->get('draw');
+        
+        $twInfo = new TWInfo();
+        
+        $query = $twInfo->with(['tw', 'userAttachments'])->where('is_visible', '=', '1');
+        
+        $recordsTotal = $query->count();
+        $recordsFiltered = $recordsTotal;
+            
+        // get search query value
+        if( ($request->get('search')) && (!empty($request->get('search'))) ){
+            $search = $request->get('search');
+            if( $search && (@key_exists('value', $search)) ){
+                $search = $search['value'];
+            }
+            if($search && (!empty($search))){
+                //$search = (string) $search;
+                $query = $query->where('created_user', 'like', '%' . $search . '%');
+            }
+        }
+        
+        // created_user
+        if( ($request->get('created_user')) && (!empty($request->get('created_user'))) ){
+            $created_user = $request->get('created_user');
+            $query = $query->where('created_user', '=', $created_user);
+        }
+        
+        // t_w_id
+        if( ($request->get('t_w_id')) && (!empty($request->get('t_w_id'))) ){
+            $t_w_id =  $request->get('t_w_id');
+            $query = $query->where('t_w_id', '=', $t_w_id);
+        }
+        
+        // created date
+        if( ($request->get('created_at')) && (!empty($request->get('created_at'))) ){
+            $created_at =  $request->get('created_at');
+            $query = $query->whereDate('created_at', '=', $created_at);
+        }
+        
+        // updated date
+        if( ($request->get('updated_at')) && (!empty($request->get('updated_at'))) ){
+            $updated_at =  $request->get('updated_at');
+            $query = $query->whereDate('updated_at', '=', $updated_at);
+        }
+        
+        // is_visible
+        if( ($request->get('is_visible') != null) ){
+            $is_visible =  $request->get('is_visible');
+            $query = $query->where('is_visible', '=', $is_visible);
+        }
+        
+        // get filtered record count
+        $recordsFiltered = $query->count();
+        
+        // get limit value
+        if( $request->get('length') ){
+            $length = intval( $request->get('length') );
+            $query = $query->limit($length);
+        }
+        // set default value for length (PHP_INT_MAX)
+        if( $length <= 0 ){
+            $length = PHP_INT_MAX;
+            //$length = 0;
+        }
+        
+        // get offset value
+        if( $request->get('start') ){
+            $start = intval( $request->get('start') );
+        }else if( $request->get('page') ){
+            $start = intval( $request->get('page') );
+            //$start = abs( ( ( $start - 1 ) * $length ) );
+            $start = ( ( $start - 1 ) * $length );
+        }
+        
+        // filter with offset value
+        if( $start > 0 ){
+            //$query = $query->limit($length)->skip($start);
+            $query = $query->limit($length)->offset($start);
+        }
+        
+        // get data
+        $queryResult = $query->get();
+        
+        $recordsTotal = $recordsFiltered;
+        $data = array(
+            'draw' => $draw,
+            'start' => $start,
+            'length' => $length,
+            'search' => $search,
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $queryResult,
+        );
+        
+        return Response::json( $data );   
+    }
+    
 }

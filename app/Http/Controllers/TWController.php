@@ -92,7 +92,7 @@ class TWController extends Controller
                 'due_date'     => Input::get('due_date'),
                 'description'     => Input::get('description'),
                 'created_user'     => $current_user,
-                'is_visible' => 1,
+                'is_visible' => true,
                 'status_id' => Status::OPEN,
                 'resource_dir' => $twResourceDir
             );
@@ -113,7 +113,7 @@ class TWController extends Controller
                 $newTW = TW::create( $twData );
                 
                 $newTWInfo = TWInfo::create(array(
-                    'is_visible' => 0,
+                    'is_visible' => true,
                     't_w_id' => $newTW->id,
                     'description' => $newTW->description,
                     'created_user' => $current_user
@@ -126,7 +126,7 @@ class TWController extends Controller
                     
                     $newTWUser = TWUser::create(array(
                         't_w_id' => $newTW->id,
-                        'is_visible' => 1,
+                        'is_visible' => true,
                         'own_user' => $tempTWUser->mail,
                         'company_name' => $tempTWUser->company,
                         'department_name' => $tempTWUser->department
@@ -138,11 +138,11 @@ class TWController extends Controller
                         $file_original_name = $value->getClientOriginalName();
                         $filename = $value->store( $twResourceDir );
                         $newUserAttachment = $newTWInfo->userAttachments()->create(array(
-                            'is_visible' => 1,
+                            'is_visible' => true,
                             'attached_by' => $current_user,
                             'file_original_name' => $file_original_name,
-                            'attachable_type' => get_class( $newTWInfo ),
-                            'attachable_id' => $newTWInfo->id,
+                            //'attachable_type' => get_class( $newTWInfo ),
+                            //'attachable_id' => $newTWInfo->id,
                             'file_type' => null,
                             'link_url' => $filename
                         ));
@@ -151,6 +151,11 @@ class TWController extends Controller
             }catch(\Exception $e){
                 
                 DB::rollback();
+                
+                //delete directory
+                if(Storage::exists($twResourceDir)) {
+                    Storage::deleteDirectory($twResourceDir);
+                }
                 
                 $data = array(
                     'title' => 'error',
@@ -230,6 +235,11 @@ class TWController extends Controller
 
         try {
             
+            //delete directory
+            if(Storage::exists($tW->resource_dir)) {
+                Storage::deleteDirectory($tW->resource_dir);
+            }
+            
             $tW->twInfos()->delete();
             $tW->twUsers()->delete();
             $tW->delete();
@@ -279,7 +289,7 @@ class TWController extends Controller
         
         $tw = new TW();
         
-        $query = $tw->with(['twUsers', 'twInfos', 'status'])->where('is_visible', '=', '1');
+        $query = $tw->with(['twUsers', 'twInfos', 'status'])->where('is_visible', '=', true);
         
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;

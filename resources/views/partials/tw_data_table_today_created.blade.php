@@ -32,7 +32,7 @@ $(function(){
             'orderable' : false,
             'data' : 'description',
             'render' : function(data, type, row){
-                return String(data).padStart(4, '0');
+                return data;
             }
         },{
             'title' : 'Start Date',

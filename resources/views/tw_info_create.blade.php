@@ -148,7 +148,7 @@
     <script src="{!! asset('node_modules/bootstrap-fileinput/themes/fas/theme.js') !!}" type="text/javascript"></script>
     <script src="{!! asset('node_modules/bootstrap-fileinput/themes/explorer-fas/theme.js') !!}" type="text/javascript"></script>
 
-    @includeIf('partials.twInfo_data_table_created')
+    @includeIf('partials.tw_info_data_table_created', array())
     <script>
     $(function() {
         "use strict";

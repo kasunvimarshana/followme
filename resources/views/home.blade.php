@@ -225,8 +225,8 @@
     <!-- ChartJS -->
     <script src="{{ asset('node_modules/chart.js/dist/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    @includeIf('partials.tw_data_table_today_pending')
-    @includeIf('partials.tw_data_table_progress')
+    @includeIf('partials.tw_data_table_today_pending', array())
+    @includeIf('partials.tw_data_table_progress', array())
 
     <script>
     //var canvasCtx = $('#twChart').get(0).getContext('2d');

@@ -13,10 +13,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
     @section('section_stylesheet')
-        @includeIf('partials.main_stylesheet')
+        @includeIf('partials.main_stylesheet', array())
     @show
     @section('section_script_main')
-        @includeIf('partials.main_script')
+        @includeIf('partials.main_script', array())
     @show
 </head>
 <!--
@@ -44,13 +44,13 @@ desired effect
 
   <!-- Main Header -->
   @section('main_header')
-    @includeIf('partials.main_header')
+    @includeIf('partials.main_header', array())
   @show
   <!-- ./main-header -->
     
   <!-- Left side column. contains the logo and sidebar -->
     @section('left_side_column')
-        @includeIf('partials.left_side_column')
+        @includeIf('partials.left_side_column', array())
     @show
   <!-- ./left-side-column. contains the logo and sidebar -->
 
@@ -80,7 +80,7 @@ desired effect
 
   <!-- Main Footer -->
   @section('main_footer')
-    @includeIf('partials.main_footer')
+    @includeIf('partials.main_footer', array())
   @show
   <!-- ./main-footer -->
 
