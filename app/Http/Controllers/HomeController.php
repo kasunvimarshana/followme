@@ -22,16 +22,21 @@ class HomeController extends Controller
     public function index(){
         $loginUser = Login::getUserData();
         
-        $twToday = TW::where('is_visible','=','1')->where('is_done', 0)->where('due_date', date('Y-m-d'))->whereHas('twUsers', function($query) use ($loginUser){
+        $twTodayCount = TW::where('is_visible','=','1')->where('is_done', 0)->where('due_date', date('Y-m-d'))->whereHas('twUsers', function($query) use ($loginUser){
             $query->where('own_user', '=', $loginUser->mail);
         })->count();
         
-        $twTodayCreated = TW::where('is_visible','=','1')->where('created_user', $loginUser->mail)->count();
+        $twTodayCreatedCount = TW::where('is_visible','=','1')->where('created_user', $loginUser->mail)->count();
+        
+        $twPassCount = 10;
+        $twFailCount = 20;
         
         if(view()->exists('home')){
             return View::make('home', array(
-                'twToday' => $twToday,
-                'twTodayCreated' => $twTodayCreated
+                'twTodayCount' => $twTodayCount,
+                'twTodayCreatedCount' => $twTodayCreatedCount,
+                'twPassCount' => $twPassCount,
+                'twFailCount' => $twFailCount,
             ));
         }
     }

@@ -25,11 +25,13 @@ Route::get('logout', array('uses' => 'LoginController@doLogout'))->name('login.d
 
 Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('home', array('uses' => 'HomeController@index'))->name('home.index');
+    Route::get('home/tws/{tW}/tw-infos/create', array('uses' => 'TWInfoController@create'))->name('twInfo.create');
     Route::get('home/tws/create', array('uses' => 'TWController@create'))->name('tw.create');
     Route::post('home/tws/create', array('uses' => 'TWController@store'))->name('tw.store');
     Route::get('users/list', array('uses' => 'UserController@listUsers'))->name('user.list');
     Route::get('tws/list', array('uses' => 'TWController@listTWs'))->name('tw.list');
     Route::get('tws/{tW}/destroy', array('uses' => 'TWController@destroy'))->name('tw.destroy');
+    Route::get('tws/{tW}/change-done-true', array('uses' => 'TWController@changeDoneTrue'))->name('tw.changeDoneTrue');
     Route::get('home/tws/show-all', array('uses' => 'HomeController@index'))->name('tw.showAll');
     Route::get('meeting-categories/list', array('uses' => 'MeetingCategoryController@listMeetingCategories'))->name('meetingCategory.list');
 });

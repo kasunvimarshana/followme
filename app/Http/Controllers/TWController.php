@@ -82,7 +82,7 @@ class TWController extends Controller
             
         } else {
             // do process
-            $created_user = Login::getUserData()->mail;
+            $current_user = Login::getUserData()->mail;
             $twResourceDir = TWMeta::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
             
             $twData = array(	
@@ -91,7 +91,7 @@ class TWController extends Controller
                 'start_date'     => Input::get('start_date'),
                 'due_date'     => Input::get('due_date'),
                 'description'     => Input::get('description'),
-                'created_user'     => $created_user,
+                'created_user'     => $current_user,
                 'is_visible' => 1,
                 'status_id' => Status::OPEN,
                 'resource_dir' => $twResourceDir
@@ -116,7 +116,7 @@ class TWController extends Controller
                     'is_visible' => 0,
                     't_w_id' => $newTW->id,
                     'description' => null,
-                    'created_user' => $created_user
+                    'created_user' => $current_user
                 ));
                 
                 foreach($twUserData as $key => $value){
@@ -139,7 +139,7 @@ class TWController extends Controller
                         $filename = $value->store( $twResourceDir );
                         $newUserAttachment = UserAttachment::create(array(
                             'is_visible' => 1,
-                            'attached_by' => $created_user,
+                            'attached_by' => $current_user,
                             'file_original_name' => $file_original_name,
                             'attachable_type' => get_class( $newTWInfo ),
                             'attachable_id' => $newTWInfo->id,
@@ -154,7 +154,7 @@ class TWController extends Controller
                 
                 $data = array(
                     'title' => 'error',
-                    'text' => $e,
+                    'text' => 'error',
                     'type' => 'warning',
                     'timer' => 3000
                 );
@@ -309,9 +309,9 @@ class TWController extends Controller
         }
         
         // status
-        if( ($request->get('status')) && (!empty($request->get('status'))) ){
-            $status =  $request->get('status');
-            $query = $query->where('status', '=', $status);
+        if( ($request->get('status_id')) && (!empty($request->get('status_id'))) ){
+            $status_id =  $request->get('status_id');
+            $query = $query->where('status_id', '=', $status_id);
         }
         
         // start date
@@ -347,9 +347,15 @@ class TWController extends Controller
         }
         
         // is_visible
-        if( ($request->get('is_visible')) ){
+        if( ($request->get('is_visible') != null) ){
             $is_visible =  $request->get('is_visible');
             $query = $query->where('is_visible', '=', $is_visible);
+        }
+            
+        // is_done
+        if( ($request->get('is_done') != null) ){
+            $is_done =  $request->get('is_done');
+            $query = $query->where('is_done', '=', $is_done);
         }
         
         // get filtered record count
@@ -396,5 +402,47 @@ class TWController extends Controller
         );
         
         return Response::json( $data );   
+    }
+    
+    public function changeDoneTrue(Request $request, TW $tW){
+        //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        $current_user = Login::getUserData()->mail;
+        $tWClone = clone $tW;
+        // do process
+        $twData = array(	
+            'is_done' => 1,
+            'done_user' => $current_user,
+            'status_id' => Status::CLOSE,
+            'done_date' => DB::raw('now()')
+        );
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            $updatedTW = $tWClone->update( $twData );
+        }catch(\Exception $e){
+            DB::rollback();
+            
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+        }
+        
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data ); 
     }
 }

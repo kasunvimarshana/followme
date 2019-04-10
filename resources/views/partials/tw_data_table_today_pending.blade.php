@@ -100,6 +100,7 @@ $(function(){
             'data' : function(data){
                 //console.log(data);
                 data.due_date = moment().format('YYYY-MM-DD');
+                data.is_done = 0;
                 data.own_user = "{!! $auth_user->mail !!}";
                 data.status = null;
             },
@@ -126,31 +127,44 @@ $(function(){
                 var buttonToolbar = $('<div></div>');
                 buttonToolbar.addClass('btn-toolbar pull-right');
                 //button group
-                var buttonGroup_1 = $('<div></div>');
-                buttonGroup_1.addClass('btn-group');
-                var button_1 = $('<button></button>');
-                button_1.addClass('btn btn-info');
-                var button_1_body = $('<i></i>');
-                button_1_body.addClass('fa fa-edit');
-                //button_1_body.text('text');
-                button_1.bind("click", function(){
+                var buttonGroup_3 = $('<div></div>');
+                buttonGroup_3.addClass('btn-group');
+                var button_3 = $('<button></button>');
+                button_3.addClass('btn btn-success');
+                var button_3_body = $('<i></i>');
+                button_3_body.addClass('fa fa-eye');
+                button_3.bind("click", function(){
                     var url = "{!! route('home.index') !!}";
                     $( location ).attr("href", url);
                 });
-                button_1.append(button_1_body);
-                buttonGroup_1.append(button_1);
+                button_3.append(button_3_body);
+                buttonGroup_3.append(button_3);
                 
                 //button group
-                var buttonGroup_2 = $('<div></div>');
-                buttonGroup_2.addClass('btn-group');
-                var button_2 = $('<button></button>');
-                button_2.addClass('btn btn-danger');
-                var button_2_body = $('<i></i>');
-                button_2_body.addClass('fa fa-trash-o');
-                button_2.bind("click", function(){
-                    
+                var buttonGroup_4 = $('<div></div>');
+                buttonGroup_4.addClass('btn-group');
+                var button_4 = $('<button></button>');
+                button_4.addClass('btn btn-warning');
+                var button_4_body = $('<i></i>');
+                button_4_body.addClass('fa fa-book');
+                button_4.bind("click", function(){
+                    var url = "{!! route('home.index') !!}";
+                    $( location ).attr("href", url);
+                });
+                button_4.append(button_4_body);
+                buttonGroup_4.append(button_4);
+                
+                //button group
+                var buttonGroup_5 = $('<div></div>');
+                buttonGroup_5.addClass('btn-group');
+                var button_5 = $('<button></button>');
+                button_5.addClass('btn btn-info');
+                var button_5_body = $('<i></i>');
+                button_5_body.addClass('fa fa-clipboard');
+                button_5.bind("click", function(){
+                    button_5.attr("disabled", true);
                     bootbox.confirm({
-                        message: "are you sure tht you want to delete <strong>" + rowData.title + "</strong>",
+                        message: "please confirm",
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -164,19 +178,50 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result == true ){
-                                var url = "{!! route('home.index') !!}";
-                                $( location ).attr("href", url);
+                                var url = "{!! route('tw.changeDoneTrue', ['#tW']) !!}";
+                                url = url.replace("#tW", rowData.id);
+                                //$( location ).attr("href", url);
+                                
+                                $.ajax({
+                                    type: "GET",
+                                    url: url,
+                                    data: null,
+                                    //success: success,
+                                    //dataType: dataType,
+                                    //context: document.body
+                                })
+                                .done(function( data ) {
+                                    swal({
+                                        'title': data.title,
+                                        'text': data.text,
+                                        'type': data.type,
+                                        'timer': data.timer,
+                                        'showConfirmButton': false
+                                    });
+                                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                                })
+                                .fail(function() {
+                                    //console.log( "error" );
+                                    alert('fail');
+                                })
+                                .always(function() {
+                                    //console.log( "finished" );
+                                    button_5.attr("disabled", false);
+                                });
+                                
+                            }else{
+                                button_5.attr("disabled", false);
                             }
                         }
                     });
                     
                 })
-                button_2.append(button_2_body);
-                buttonGroup_2.append(button_2);
+                button_5.append(button_5_body);
+                buttonGroup_5.append(button_5);
                 
-                
-                //buttonToolbar.append(buttonGroup_1);
-                //buttonToolbar.append(buttonGroup_2);
+                buttonToolbar.append(buttonGroup_3);
+                buttonToolbar.append(buttonGroup_4);
+                buttonToolbar.append(buttonGroup_5);
                 buttonToolbar.appendTo(parentTd);
             }
         }],

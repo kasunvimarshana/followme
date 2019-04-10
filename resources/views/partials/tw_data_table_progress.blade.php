@@ -6,6 +6,7 @@ $(function(){
 </script -->
 
 <script>
+var twProgressDataTableCustomData = {};
 $(function(){
     "use strict";
     var dataTableTWList = $('#twProgressDataTable').DataTable({
@@ -78,15 +79,23 @@ $(function(){
             'delay' : 300,
             'data' : function(data){
                 //console.log(data);
-                data.due_date = moment().format('YYYY-MM-DD');
                 data.own_user = "{!! $auth_user->mail !!}";
-                data.status = null;
+                //data.status_id = null;
+                data = $.extend(data, twProgressDataTableCustomData);
             },
             'error' : function(e){
                 //console.log(e);
             }
         },
-        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){},
+        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){
+            if( data.status_id == {!! App\Enums\Status::OPEN !!} ){
+                $(row).addClass( 'success' );
+                $(row).removeClass( 'danger' );
+            }else if( data.status_id == {!! App\Enums\Status::CLOSE !!} ){
+                $(row).addClass( 'danger' );
+                $(row).removeClass( 'success' );
+            }
+        },
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
@@ -108,9 +117,9 @@ $(function(){
                 var buttonGroup_1 = $('<div></div>');
                 buttonGroup_1.addClass('btn-group');
                 var button_1 = $('<button></button>');
-                button_1.addClass('btn btn-info');
+                button_1.addClass('btn btn-success');
                 var button_1_body = $('<i></i>');
-                button_1_body.addClass('fa fa-edit');
+                button_1_body.addClass('fa fa-eye');
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
                     var url = "{!! route('home.index') !!}";
@@ -119,43 +128,7 @@ $(function(){
                 button_1.append(button_1_body);
                 buttonGroup_1.append(button_1);
                 
-                //button group
-                var buttonGroup_2 = $('<div></div>');
-                buttonGroup_2.addClass('btn-group');
-                var button_2 = $('<button></button>');
-                button_2.addClass('btn btn-danger');
-                var button_2_body = $('<i></i>');
-                button_2_body.addClass('fa fa-trash-o');
-                button_2.bind("click", function(){
-                    
-                    bootbox.confirm({
-                        message: "are you sure tht you want to delete <strong>" + rowData.title + "</strong>",
-                        buttons: {
-                            confirm: {
-                                label: 'Yes',
-                                className: 'btn-success'
-                            },
-                            cancel: {
-                                label: 'No',
-                                className: 'btn-danger'
-                            }
-                        },
-                        callback: function (result) {
-                            //console.log('This was logged in the callback: ' + result);
-                            if( result == true ){
-                                var url = "{!! route('home.index') !!}";
-                                $( location ).attr("href", url);
-                            }
-                        }
-                    });
-                    
-                })
-                button_2.append(button_2_body);
-                buttonGroup_2.append(button_2);
-                
-                
-                //buttonToolbar.append(buttonGroup_1);
-                //buttonToolbar.append(buttonGroup_2);
+                buttonToolbar.append(buttonGroup_1);
                 buttonToolbar.appendTo(parentTd);
             }
         }],

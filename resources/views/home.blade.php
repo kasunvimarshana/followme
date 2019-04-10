@@ -116,8 +116,8 @@
                                     <div class="info-box-content">
                                         <span class="info-box-text">Today 3W</span>
                                         <span class="info-box-number">
-                                            @isset($twToday)
-                                                {{ number_format($twToday) }}
+                                            @isset($twTodayCount)
+                                                {{ number_format($twTodayCount) }}
                                             @endisset
                                         </span>
                                     </div>
@@ -138,8 +138,8 @@
                                     <div class="info-box-content">
                                         <span class="info-box-text">Created 3W</span>
                                         <span class="info-box-number">
-                                            @isset($twTodayCreated)
-                                                {{ number_format($twTodayCreated) }}
+                                            @isset($twTodayCreatedCount)
+                                                {{ number_format($twTodayCreatedCount) }}
                                             @endisset
                                         </span>
                                     </div>
@@ -236,16 +236,21 @@
         data: {
             datasets: [{
                 data: [
-                    10,
-                    20
+                    @isset($twPassCount)
+                        {!! $twPassCount !!}
+                    @endisset
+                    ,
+                    @isset($twPassCount)
+                        {!! $twFailCount !!}
+                    @endisset
                 ],
                 backgroundColor: [
-                    'rgb(0, 0, 255)',
-                    'rgb(255, 0, 0)'
+                    'rgba(0, 255, 0, 1)',
+                    'rgba(255, 0, 0, 1)'
                 ],
                 label: [
-                    '1',
-                    '2'
+                    {!! App\Enums\Status::OPEN !!},
+                    {!! App\Enums\Status::CLOSE !!}
                 ]
             }],
             labels: [
@@ -275,20 +280,21 @@
                 var itemArray = Array.from( item );
                 var itemObj = itemArray.shift();
                 try{
-                    console.log( itemObj._model.label );
+                    var tableObj = $('#twProgressDataTable');
+                    if( itemObj ){
+                        var _model_val = itemObj._model;
+                        var label_val = _model_val.label;
+                        //var data = tableObj.DataTable().ajax.json();
+                        //var data = tableObj.DataTable().ajax.params();
+                        twProgressDataTableCustomData.status_id = label_val;
+                    }else{
+                        twProgressDataTableCustomData.status_id = null;
+                    }
+                    tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
                 }catch( e ){}
             }
         }
     }
     var chartObj = new Chart(canvasCtx, chartConfig); 
-        
-    $(chartObj).click( //#twChart
-        function(evt) {
-            console.log('click');
-            var activePoints = chartObj.getDatasetAtEvent(evt);
-            console.log( event );
-            console.log( activePoints );
-        }
-    );
     </script>
 @endsection

@@ -228,7 +228,8 @@ $(function(){
                 var button_4_body = $('<i></i>');
                 button_4_body.addClass('fa fa-book');
                 button_4.bind("click", function(){
-                    var url = "{!! route('home.index') !!}";
+                    var url = "{!! route('twInfo.create', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_4.append(button_4_body);
