@@ -115,7 +115,7 @@ class TWController extends Controller
                 $newTWInfo = TWInfo::create(array(
                     'is_visible' => 0,
                     't_w_id' => $newTW->id,
-                    'description' => null,
+                    'description' => $newTW->description,
                     'created_user' => $current_user
                 ));
                 
@@ -137,7 +137,7 @@ class TWController extends Controller
                     foreach($userAttachmentData as $key => $value){
                         $file_original_name = $value->getClientOriginalName();
                         $filename = $value->store( $twResourceDir );
-                        $newUserAttachment = UserAttachment::create(array(
+                        $newUserAttachment = $newTWInfo->userAttachments()->create(array(
                             'is_visible' => 1,
                             'attached_by' => $current_user,
                             'file_original_name' => $file_original_name,
@@ -279,7 +279,7 @@ class TWController extends Controller
         
         $tw = new TW();
         
-        $query = $tw->with(['twUsers', 'twInfos'])->where('is_visible', '=', '1');
+        $query = $tw->with(['twUsers', 'twInfos', 'status'])->where('is_visible', '=', '1');
         
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;

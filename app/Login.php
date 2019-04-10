@@ -108,11 +108,12 @@ class Login extends Model
             $user->getUser();
             self::setUserData($user);
         }*/
-        self::setLoginTrue();
+        self::setLoginTrue();//for test
     }
     
     public static function doLogout(){
         self::unsetUserData();
+        Session::put(self::LOGIN_CHECK_KEY, false);
         self::flushData();
     }
     

@@ -42,4 +42,9 @@ class TW extends Model
     public function twInfos(){
         return $this->hasMany('App\TWInfo', 't_w_id', 'id');
     }
+    
+    //one to many (inverse)
+    public function status(){
+        return $this->belongsTo('App\Status', 'status_id', 'id');
+    }
 }

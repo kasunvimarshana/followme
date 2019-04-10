@@ -32,4 +32,9 @@ class Status extends Model
     * @var array
     */
     //protected $casts = array();
+    
+    //one to many
+    public function tws(){
+        return $this->hasMany('App\TW', 'status_id', 'id');
+    }
 }

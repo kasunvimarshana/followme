@@ -31,5 +31,9 @@ class UserAttachment extends Model
     *
     * @var array
     */
-    //protected $casts = array();
+    //protected $casts = array
+    
+    public function attachable(){
+        return $this->morphTo();
+    }
 }

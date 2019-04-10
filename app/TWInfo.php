@@ -37,4 +37,9 @@ class TWInfo extends Model
     public function tw(){
         return $this->belongsTo('App\TW', 't_w_id', 'id');
     }
+    
+    //many to many
+    public function userAttachments(){
+        return $this->morphMany('App\UserAttachment', 'attachable');
+    }
 }
