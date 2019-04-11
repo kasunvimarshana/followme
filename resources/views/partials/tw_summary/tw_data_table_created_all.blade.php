@@ -6,6 +6,7 @@ $(function(){
 </script -->
 
 <script>
+//var twDataTableCustomData = {};
 $(function(){
     "use strict";
     var dataTableTWList = $('#twDataTable').DataTable({
@@ -102,6 +103,13 @@ $(function(){
             'data' : function(data){
                 //console.log(data);
                 data.created_user = "{!! $auth_user->mail !!}";
+                ///////////////////////////////////////////////////
+                console.log( $('#twDataTable').DataTable().data() );
+                console.log( $('#twDataTable').DataTable().data().table() );
+                console.log( $('#twDataTable').DataTable().data().table().ajax.params() );
+                console.log( $('#twDataTable').DataTable().data().table().ajax.data );
+                //console.log( $('#twDataTable').DataTable().data().table().ajax.params() );
+                ///////////////////////////////////////////////////
             },
             'error' : function(e){
                 //console.log(e);

@@ -243,19 +243,26 @@
                     @isset($twPassCount)
                         {!! $twFailCount !!}
                     @endisset
+                    ,
+                    @isset($twPassCount)
+                        {!! $twFailCount !!}
+                    @endisset
                 ],
                 backgroundColor: [
                     'rgba(0, 255, 0, 1)',
-                    'rgba(255, 0, 0, 1)'
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(255, 255, 0, 1)'
                 ],
                 label: [
                     {!! App\Enums\TWStatusEnum::OPEN !!},
+                    {!! App\Enums\TWStatusEnum::CLOSE !!},
                     {!! App\Enums\TWStatusEnum::CLOSE !!}
                 ]
             }],
             labels: [
-                'Pass',
-                'Fail'
+                'Completed',
+                'Fail',
+                'Inprogress'
             ]
         },
         options: {

@@ -6,6 +6,7 @@ $(function(){
 </script -->
 
 <script>
+//var twDataTableCustomData = {};
 $(function(){
     "use strict";
     var dataTableTWList = $('#twDataTable').DataTable({
