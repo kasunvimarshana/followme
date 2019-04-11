@@ -291,11 +291,9 @@
                     if( itemObj ){
                         var _model_val = itemObj._model;
                         var label_val = _model_val.label;
-                        //var data = tableObj.DataTable().ajax.json();
-                        //var data = tableObj.DataTable().ajax.params();
-                        twProgressDataTableCustomData.status_id = label_val;
+                        tableObj.data('status_id', label_val);
                     }else{
-                        twProgressDataTableCustomData.status_id = null;
+                        tableObj.data('status_id', null);
                     }
                     tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
                 }catch( e ){}

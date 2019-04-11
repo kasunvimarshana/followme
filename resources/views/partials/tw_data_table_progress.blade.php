@@ -6,7 +6,7 @@ $(function(){
 </script -->
 
 <script>
-var twProgressDataTableCustomData = {};
+//var twProgressDataTableCustomData = {};
 $(function(){
     "use strict";
     var dataTableTWList = $('#twProgressDataTable').DataTable({
@@ -63,9 +63,15 @@ $(function(){
             'delay' : 250,
             'data' : function(data){
                 //console.log(data);
+                var tableObj = $('#twProgressDataTable');
+                var tableObjData = {};
+                //jQuery.hasData( p )
+                //if(){
+                   
+                //}
                 data.own_user = "{!! $auth_user->mail !!}";
-                //data.status_id = null;
-                data = $.extend(data, twProgressDataTableCustomData);
+                data.status_id = tableObj.data('status_id');
+                //data = $.extend(data, twProgressDataTableCustomData);
             },
             'error' : function(e){
                 //console.log(e);
