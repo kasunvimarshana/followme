@@ -94,6 +94,10 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'Z' => 
+        array (
+            'ZanySoft\\Zip\\' => 13,
+        ),
         'X' => 
         array (
             'XdgBaseDir\\' => 11,
@@ -207,6 +211,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         array (
             'Cron\\' => 5,
             'Complex\\' => 8,
+            'Chumper\\Zipper\\' => 15,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -227,6 +232,10 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'ZanySoft\\Zip\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zanysoft/laravel-zip/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -480,6 +489,10 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
+        'Chumper\\Zipper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -617,6 +630,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'Adldap\\Models\\UserPasswordIncorrectException' => __DIR__ . '/..' . '/adldap2/adldap2/src/Models/UserPasswordIncorrectException.php',
         'Adldap\\Models\\UserPasswordPolicyException' => __DIR__ . '/..' . '/adldap2/adldap2/src/Models/UserPasswordPolicyException.php',
         'Adldap\\Query\\Builder' => __DIR__ . '/..' . '/adldap2/adldap2/src/Query/Builder.php',
+        'Adldap\\Query\\Collection' => __DIR__ . '/..' . '/adldap2/adldap2/src/Query/Collection.php',
         'Adldap\\Query\\Factory' => __DIR__ . '/..' . '/adldap2/adldap2/src/Query/Factory.php',
         'Adldap\\Query\\Grammar' => __DIR__ . '/..' . '/adldap2/adldap2/src/Query/Grammar.php',
         'Adldap\\Query\\Operator' => __DIR__ . '/..' . '/adldap2/adldap2/src/Query/Operator.php',
@@ -633,6 +647,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\ConverterModel' => __DIR__ . '/../..' . '/app/ConverterModel.php',
         'App\\Enums\\Status' => __DIR__ . '/../..' . '/app/Enums/Status.php',
+        'App\\Enums\\TWMeta' => __DIR__ . '/../..' . '/app/Enums/TWMeta.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -720,6 +735,11 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Chumper\\Zipper\\Facades\\Zipper' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Facades/Zipper.php',
+        'Chumper\\Zipper\\Repositories\\RepositoryInterface' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Repositories/RepositoryInterface.php',
+        'Chumper\\Zipper\\Repositories\\ZipRepository' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Repositories/ZipRepository.php',
+        'Chumper\\Zipper\\Zipper' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/Zipper.php',
+        'Chumper\\Zipper\\ZipperServiceProvider' => __DIR__ . '/..' . '/chumper/zipper/src/Chumper/Zipper/ZipperServiceProvider.php',
         'Codecourse\\Notify\\Facades\\Notify' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/Facades/Notify.php',
         'Codecourse\\Notify\\Notifier' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/Notifier.php',
         'Codecourse\\Notify\\NotifyServiceProvider' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/NotifyServiceProvider.php',
@@ -2595,6 +2615,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'Maatwebsite\\Excel\\HasEventBus' => __DIR__ . '/..' . '/maatwebsite/excel/src/HasEventBus.php',
         'Maatwebsite\\Excel\\HeadingRowImport' => __DIR__ . '/..' . '/maatwebsite/excel/src/HeadingRowImport.php',
         'Maatwebsite\\Excel\\Helpers\\ArrayHelper' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/ArrayHelper.php',
+        'Maatwebsite\\Excel\\Helpers\\CellHelper' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/CellHelper.php',
         'Maatwebsite\\Excel\\Helpers\\FileTypeDetector' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/FileTypeDetector.php',
         'Maatwebsite\\Excel\\Importer' => __DIR__ . '/..' . '/maatwebsite/excel/src/Importer.php',
         'Maatwebsite\\Excel\\Imports\\EndRowFinder' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/EndRowFinder.php',
@@ -4847,6 +4868,7 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'Spatie\\Permission\\Commands\\CacheReset' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CacheReset.php',
         'Spatie\\Permission\\Commands\\CreatePermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreatePermission.php',
         'Spatie\\Permission\\Commands\\CreateRole' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreateRole.php',
+        'Spatie\\Permission\\Commands\\Show' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/Show.php',
         'Spatie\\Permission\\Contracts\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Permission.php',
         'Spatie\\Permission\\Contracts\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Role.php',
         'Spatie\\Permission\\Exceptions\\GuardDoesNotMatch' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/GuardDoesNotMatch.php',
@@ -5518,6 +5540,10 @@ class ComposerStaticInite036f8a123c2e9c858abca97ef207a8e
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
+        'ZanySoft\\Zip\\Zip' => __DIR__ . '/..' . '/zanysoft/laravel-zip/src/Zip.php',
+        'ZanySoft\\Zip\\ZipFacade' => __DIR__ . '/..' . '/zanysoft/laravel-zip/src/ZipFacade.php',
+        'ZanySoft\\Zip\\ZipManager' => __DIR__ . '/..' . '/zanysoft/laravel-zip/src/ZipManager.php',
+        'ZanySoft\\Zip\\ZipServiceProvider' => __DIR__ . '/..' . '/zanysoft/laravel-zip/src/ZipServiceProvider.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',

@@ -41,8 +41,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{!! set_active(['home/tws/create', 'home/tws/create/*']) !!}"><a href="{!! route('tw.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Create New 3W</a></li>
-                    <li class="{!! set_active(['home/tws/created', 'home/tws/created/*']) !!}"><a href="{!! route('home.index') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Created 3W</a></li>
-                    <li class="{!! set_active(['home/tws/find', 'home/tws/find/*']) !!}"><a href="{!! route('home.index') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Find 3W</a></li>
+                    <li class="{!! set_active(['home/tws/show-created-tws', 'home/tws/show-created-tws/*']) !!}"><a href="{!! route('tw.showCreatedTW') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Created 3W</a></li>
+                    <li class="{!! set_active(['home/tws/show-owne-tws', 'home/tws/show-owne-tws/*']) !!}"><a href="{!! route('tw.showOwneTW') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned 3W</a></li>
                 </ul>
             </li>
             

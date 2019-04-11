@@ -22,6 +22,7 @@ use App\User;
 use App\TW;
 use App\UserAttachment;
 use Storage;
+use Chumper\Zipper\Zipper;
 
 class TWInfoController extends Controller
 {
@@ -63,7 +64,7 @@ class TWInfoController extends Controller
         $twResourceDir = $tW->resource_dir;
 
         $twInfoData = array(	
-            'is_visible' => 1,
+            'is_visible' => true,
             't_w_id' => $tW->id,
             'description' => Input::get('description'),
             'created_user' => $current_user
@@ -86,14 +87,15 @@ class TWInfoController extends Controller
             if( $request->hasFile('var_user_attachment') ){
                 foreach($userAttachmentData as $key => $value){
                     $file_original_name = $value->getClientOriginalName();
+                    $file_type = $value->getClientOriginalExtension();
                     $filename = $value->store( $twResourceDir );
                     $newUserAttachment = $newTWInfo->userAttachments()->create(array(
-                        'is_visible' => 1,
+                        'is_visible' => true,
                         'attached_by' => $current_user,
                         'file_original_name' => $file_original_name,
                         //'attachable_type' => get_class( $newTWInfo ),
                         //'attachable_id' => $newTWInfo->id,
-                        'file_type' => null,
+                        'file_type' => $file_type,
                         'link_url' => $filename
                     ));
                 }
@@ -134,6 +136,9 @@ class TWInfoController extends Controller
     public function show(TWInfo $tWInfo)
     {
         //
+        if(view()->exists('tw_info_show')){
+            return View::make('tw_info_show', ['tWInfo' => $tWInfo]);
+        }
     }
 
     /**
@@ -145,6 +150,10 @@ class TWInfoController extends Controller
     public function edit(TWInfo $tWInfo)
     {
         //
+        if(view()->exists('tw_info_edit')){
+            return View::make('tw_info_edit', ['tWInfo' => $tWInfo]);
+        }
+        
     }
 
     /**
@@ -157,6 +166,69 @@ class TWInfoController extends Controller
     public function update(Request $request, TWInfo $tWInfo)
     {
         //
+        $tWInfoClone = clone $tWInfo;
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        // do process
+        $current_user = Login::getUserData()->mail;
+        $twResourceDir = $tWInfoClone->tw->resource_dir;
+
+        $twInfoData = array(
+            'description' => Input::get('description')
+        );
+
+        $userAttachmentData = (array) $request->file('var_user_attachment');
+
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            //create directory
+            if(!Storage::exists($twResourceDir)) {
+                Storage::makeDirectory($twResourceDir, 0775, true); //creates directory
+            }
+            // Validate, then create if valid
+            $tWInfoClone->update( $twInfoData );
+
+            if( $request->hasFile('var_user_attachment') ){
+                foreach($userAttachmentData as $key => $value){
+                    $file_original_name = $value->getClientOriginalName();
+                    $file_type = $value->getClientOriginalExtension();
+                    $filename = $value->store( $twResourceDir );
+                    $newUserAttachment = $tWInfoClone->userAttachments()->create(array(
+                        'is_visible' => true,
+                        'attached_by' => $current_user,
+                        'file_original_name' => $file_original_name,
+                        //'attachable_type' => get_class( $newTWInfo ),
+                        //'attachable_id' => $newTWInfo->id,
+                        'file_type' => $file_type,
+                        'link_url' => $filename
+                    ));
+                }
+            }
+        }catch(\Exception $e){
+
+            DB::rollback();
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+
+        }
+
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data );
     }
 
     /**
@@ -233,7 +305,7 @@ class TWInfoController extends Controller
         
         $twInfo = new TWInfo();
         
-        $query = $twInfo->with(['tw', 'userAttachments'])->where('is_visible', '=', '1');
+        $query = $twInfo->with(['tw', 'userAttachments'])->where('is_visible', '=', true);
         
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;
@@ -324,6 +396,33 @@ class TWInfoController extends Controller
         );
         
         return Response::json( $data );   
+    }
+    
+    public function getFile(Request $request, TWInfo $tWInfo){
+        $userAttachments = $tWInfo->userAttachments;
+        if( $userAttachments ){
+            $twResourceDir = TWMeta::RESOURCE_DIR . '/' . 'tep_files';
+            if(!Storage::exists($twResourceDir)) {
+                Storage::makeDirectory($twResourceDir, 0775, true); //creates directory
+            }
+            $zipperName = $twResourceDir . '/attachments.zip';
+            
+            $zipper = new Zipper();
+            $zipper->make(Storage::path($zipperName))->folder('attachments');
+            foreach($userAttachments as $userAttachment){
+                if(Storage::exists( $userAttachment->link_url )) {
+                    $zipper->add( Storage::path( $userAttachment->link_url ) );
+                }
+            }
+            $zipper->close();
+            
+            if(Storage::exists($zipperName)) {
+                //return response()->download( Storage::url( $zipperName ) );
+                return Storage::download( $zipperName );
+            }else{
+                return redirect()->back();
+            }
+        } 
     }
     
 }

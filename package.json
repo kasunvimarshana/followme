@@ -53,6 +53,7 @@
         "pdfmake": "^0.1.54",
         "select2-bootstrap-theme": "0.1.0-beta.10",
         "simplemde": "^1.11.2",
-        "sweetalert": "^2.1.2"
+        "sweetalert": "^2.1.2",
+        "vue-frame": "^1.0.7"
     }
 }

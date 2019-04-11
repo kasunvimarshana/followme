@@ -73,7 +73,7 @@ $(function(){
                 return '';
             }
         }],
-        'responsive' : true,
+        'responsive' : false,
         'scrollX' : true,
         'paging' : true,
         'lengthChange' : true,
@@ -81,7 +81,7 @@ $(function(){
         'searching' : true,
         'ordering' : false,
         'info' : true,
-        'autoWidth' : true,
+        'autoWidth' : false,
         'processing' : false,
         'serverSide' : true,
         'jQueryUI' : false,
@@ -100,7 +100,7 @@ $(function(){
             'data' : function(data){
                 //console.log(data);
                 data.due_date = moment().format('YYYY-MM-DD');
-                data.is_done = 0;
+                data.is_done = false;
                 data.own_user = "{!! $auth_user->mail !!}";
                 data.status = null;
             },
@@ -148,7 +148,8 @@ $(function(){
                 var button_4_body = $('<i></i>');
                 button_4_body.addClass('fa fa-book');
                 button_4.bind("click", function(){
-                    var url = "{!! route('home.index') !!}";
+                    var url = "{!! route('twInfo.create', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_4.append(button_4_body);

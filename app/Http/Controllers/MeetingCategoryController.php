@@ -111,7 +111,7 @@ class MeetingCategoryController extends Controller
         
         $meetingCategory = new MeetingCategory();
         
-        $query = $meetingCategory->where('is_visible', '=', '1');
+        $query = $meetingCategory->where('is_visible', '=', true);
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;
             

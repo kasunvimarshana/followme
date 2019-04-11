@@ -11,6 +11,8 @@
     return Storage::download('file.jpg');
     return Storage::download('file.jpg', $name, $headers);
 
+    $path = Storage::disk('local')->path($filename);
+
     $url = Storage::url('file.jpg');
 
     $contents = Storage::get('file.jpg');
@@ -84,7 +86,18 @@
         Storage::makeDirectory('/path/to/create/your/directory', 0775, true); //creates directory
     }
 
-    if (Storage::directories($directory)->has('someDirectory')) {
+    if (Storage::directories($directory)->has('someDirectory')) {}
 
+    //$file = Storage::disk('public')->get($filename);
+    //return (new Response($file, 200))->header('Content-Type', 'image/jpeg');
+    $value->link_url = Storage::url( $value->link_url );
+    return Storage::download('file.jpg', $name, $headers);
+
+    Storage::disk('local')->put('file.txt', 'Contents');
+    $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+    $storagePath = Storage::disk('local')->getAdapter()->getPathPrefix();
+    $path = Storage::disk('local')->getAdapter()->applyPathPrefix($filename);
+    $storagePath = Storage::disk('local')->path();
+    $path = Storage::disk('local')->path($filename);
 
 ?>

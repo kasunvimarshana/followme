@@ -9,3 +9,9 @@
 .sidebar-menu>li.active>a {
     background-color: transparent !important;
 }
+
+/* datatable */
+table.dataTable tbody td{
+    word-break: break-word;
+    vertical-align: top;
+}

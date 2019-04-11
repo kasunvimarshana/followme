@@ -181,6 +181,8 @@ return [
         Codecourse\Notify\NotifyServiceProvider::class,
         // provider for bensampo/laravel-enum (Laravel < 5.5)
         // BenSampo\Enum\EnumServiceProvider
+        // provider for chumper\zipper
+        Chumper\Zipper\ZipperServiceProvider::class
 
     ],
 
@@ -233,7 +235,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         //alias for flash message
-        'Notify' => Codecourse\Notify\Facades\Notify::class
+        'Notify' => Codecourse\Notify\Facades\Notify::class,
+        //alias for chumper\zipper
+        'Zipper' => Chumper\Zipper\Zipper::class
     ],
 
 ];

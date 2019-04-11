@@ -29,22 +29,6 @@ $(function(){
                 return data;
             }
         },{
-            'title' : 'Start Date',
-            'orderable' : false,
-            'data' : 'start_date',
-            'render' : function(data, type, row){
-                var date = moment(data, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
-                return date;
-            }
-        },{
-            'title' : 'Due Date',
-            'orderable' : false,
-            'data' : 'due_date',
-            'render' : function(data, type, row){
-                var date = moment(data, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
-                return date;
-            }
-        },{
             'title' : '',
             'orderable' : false,
             'className' : 'center',
@@ -53,7 +37,7 @@ $(function(){
                 return '';
             }
         }],
-        'responsive' : true,
+        'responsive' : false,
         'scrollX' : true,
         'paging' : true,
         'lengthChange' : true,
@@ -61,7 +45,7 @@ $(function(){
         'searching' : false,
         'ordering' : false,
         'info' : true,
-        'autoWidth' : true,
+        'autoWidth' : false,
         'processing' : false,
         'serverSide' : true,
         'jQueryUI' : false,
@@ -76,7 +60,7 @@ $(function(){
             'type' : 'GET',
             'deferRender' : true,
             //'dataType' : 'json',
-            'delay' : 300,
+            'delay' : 250,
             'data' : function(data){
                 //console.log(data);
                 data.own_user = "{!! $auth_user->mail !!}";
@@ -99,8 +83,8 @@ $(function(){
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
-            'targets' : [1, 2],
-            'responsivePriorty' : 1
+            'targets' : [0],
+            'responsivePriorty' : 0
         },{
             'targets' : [-1],
             'responsivePriority' : 2,

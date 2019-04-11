@@ -136,6 +136,7 @@ class TWController extends Controller
                 if( $request->hasFile('var_user_attachment') ){
                     foreach($userAttachmentData as $key => $value){
                         $file_original_name = $value->getClientOriginalName();
+                        $file_type = $value->getClientOriginalExtension();
                         $filename = $value->store( $twResourceDir );
                         $newUserAttachment = $newTWInfo->userAttachments()->create(array(
                             'is_visible' => true,
@@ -143,7 +144,7 @@ class TWController extends Controller
                             'file_original_name' => $file_original_name,
                             //'attachable_type' => get_class( $newTWInfo ),
                             //'attachable_id' => $newTWInfo->id,
-                            'file_type' => null,
+                            'file_type' => $file_type,
                             'link_url' => $filename
                         ));
                     }
@@ -421,7 +422,7 @@ class TWController extends Controller
         $tWClone = clone $tW;
         // do process
         $twData = array(	
-            'is_done' => 1,
+            'is_done' => true,
             'done_user' => $current_user,
             'status_id' => Status::CLOSE,
             'done_date' => DB::raw('now()')
@@ -455,4 +456,17 @@ class TWController extends Controller
         
         return Response::json( $data ); 
     }
+    
+    public function showCreatedTW(Request $request, TW $tW){
+        if(view()->exists('tw_created_show_all')){
+            return View::make('tw_created_show_all');
+        }
+    }
+    
+    public function showOwneTW(Request $request, TW $tW){
+        if(view()->exists('tw_owne_show_all')){
+            return View::make('tw_owne_show_all');
+        }
+    }
+    
 }
