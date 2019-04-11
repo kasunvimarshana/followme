@@ -56,22 +56,14 @@ class User extends Authenticatable
         }
     }
     
-    public function getUser(){
+    public function getUser($filteringAttribute = 'mail'){
         $ldapModel = new LDAPModel();
-        $mail = $this->mail;
-        $filter = "(mail=" . $mail . ")";
+        $filteringAttributeValue = $this->$filteringAttribute;
+        $filter = "({$filteringAttribute}={$filteringAttributeValue})";
         $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto');
         $result = $ldapModel->doSearch($filter, $attributes);
-        
-        echo "<pre>";
-        var_dump( $result );
-        echo "</pre>";
-        
         $result = $ldapModel->formatEntries( $result );
         
-        echo "<pre>";
-        var_dump( $result );
-        echo "</pre>";
         if( $result ){
             //$result = (object) array_shift($result);
             $result = array_shift($result);

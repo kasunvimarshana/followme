@@ -134,7 +134,13 @@ class LDAPModel extends Model
                             unset($inf[$key]["count"]);
                         }
                         //$temp_result[$key] = $inf[$key];
-                        $temp_result[$key] = array_shift( $inf[$key] );
+                        //$temp_result[$key] = array_shift( $inf[$key] );
+                        $count = count( $inf[$key] , 0);
+                        if( $count == 1 ){
+                            $temp_result[$key] = array_shift( $inf[$key] );
+                        }else{
+                            $temp_result[$key] = $inf[$key];
+                        }
                     }
                 }
                 $temp_result["dn"] = @explode(',', $inf["dn"]);

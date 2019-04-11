@@ -42,6 +42,10 @@
         .login-logo a, .register-logo a, .login-box-msg{
             color: #F0F0F0;
         }
+        .logo-img{
+            width: 100%;
+            height: 75px;
+        }
     </style>
     
     <!-- Scripts -->
@@ -54,12 +58,13 @@
     <div id="particles-js"></div>
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ url('/') }}"><b>Follow </b>Me</a>
-    <p style="color: white;"> Event Tracker </p>
+    <!-- a href="{{ url('/') }}"><b>Follow </b>Me</a -->
+    <a href="{{ url('/') }}"><img class="img img-responsive logo-img" src="{!! asset('img/logo_1.png') !!}"/></a>
+    <!-- p style="color: white;"> Event Tracker </p -->
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <!-- p class="login-box-msg">Sign in to start your session</p -->
 
     <form action="{{ url('login') }}" method="POST" autocomplete="off">
       <!-- {{ csrf_field() }} || {{ Session::token() }} -->
