@@ -29,10 +29,18 @@ $(function(){
 
 // ajax function
 $(function(){
-    $( document ).ajaxStart(function(){
+    /*$( document ).ajaxStart(function(){
         $('#container_fluid').loading('start');
-    });
-    $( document ).ajaxComplete(function(){
+    });*/
+    /*$( document ).ajaxComplete(function(){
+        $('#container_fluid').loading('stop');
+    });*/
+    /*$( document ).ajaxStop(function(){
+        $('#container_fluid').loading('stop');
+    });*/
+    $(document).bind("ajaxStart", function(event, request, settings){
+        $('#container_fluid').loading('start');
+    }).bind("ajaxStop", function(event, request, settings){
         $('#container_fluid').loading('stop');
     });
 });

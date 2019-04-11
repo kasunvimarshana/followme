@@ -100,8 +100,8 @@ class Login extends Model
     }
     
     public static function doLogin($username, $password){
-        $ldapModel = new LDAPModel();
-        $user = new User();
+        //$ldapModel = new LDAPModel();
+        //$user = new User();
         /*if($ldapModel->isBind($username, $password)){
             self::setLoginTrue();
             $user->mail = $username;
