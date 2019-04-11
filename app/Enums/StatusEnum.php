@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use BenSampo\Enum\Enum;
 
-final class Status extends Enum
+final class StatusEnum extends Enum
 {
     const DEFAULT = 1;
     const OPEN = 2;

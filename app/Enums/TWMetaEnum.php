@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use BenSampo\Enum\Enum;
 
-final class TWMeta extends Enum
+final class TWMetaEnum extends Enum
 {
     const RESOURCE_DIR = 'attachments';
 }

@@ -16,7 +16,7 @@ class StatusSeeder extends Seeder
         //
         Status::create([
             'id' => 1,
-            'name' => 'Default',
+            'name' => 'DEFAULT',
             'is_visible' => 1
         ]);
         

@@ -120,6 +120,21 @@
                                         <!-- /.form-group -->
                                     </div>
                                     <!-- /.form-group -->
+                                    
+                                    <!-- form-group -->
+                                    <div class="form-group col-sm-12">
+                                        <label for="status_id" class="col-sm-2 control-label">Status</label>
+                                        <div class="col-sm-10">
+                                            <!-- p class="form-control-static"></p -->
+                                            <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" data-placeholder="Status" style="width: 100%;">
+                                                <option value=""> All </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::OPEN !!}"> Open </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::CLOSE !!}"> Close </option>
+                                            </select>
+                                        </div>
+                                        <!-- span id="form-control" class="help-block"></span -->
+                                    </div>
+                                    <!-- /.form-group -->
 
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">

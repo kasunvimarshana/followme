@@ -249,8 +249,8 @@
                     'rgba(255, 0, 0, 1)'
                 ],
                 label: [
-                    {!! App\Enums\Status::OPEN !!},
-                    {!! App\Enums\Status::CLOSE !!}
+                    {!! App\Enums\TWStatusEnum::OPEN !!},
+                    {!! App\Enums\TWStatusEnum::CLOSE !!}
                 ]
             }],
             labels: [

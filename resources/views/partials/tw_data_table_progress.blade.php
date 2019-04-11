@@ -72,10 +72,10 @@ $(function(){
             }
         },
         'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){
-            if( data.status_id == {!! App\Enums\Status::OPEN !!} ){
+            if( data.status_id == {!! App\Enums\TWStatusEnum::OPEN !!} ){
                 $(row).addClass( 'success' );
                 $(row).removeClass( 'danger' );
-            }else if( data.status_id == {!! App\Enums\Status::CLOSE !!} ){
+            }else if( data.status_id == {!! App\Enums\TWStatusEnum::CLOSE !!} ){
                 $(row).addClass( 'danger' );
                 $(row).removeClass( 'success' );
             }

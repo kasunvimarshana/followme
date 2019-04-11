@@ -15,8 +15,8 @@ use \Response;
 
 use DB;
 use App\Login;
-use App\Enums\Status;
-use App\Enums\TWMeta;
+use App\Enums\StatusEnum;
+use App\Enums\TWMetaEnum;
 use App\TWUser;
 use App\User;
 use App\TWInfo;
@@ -83,7 +83,7 @@ class TWController extends Controller
         } else {
             // do process
             $current_user = Login::getUserData()->mail;
-            $twResourceDir = TWMeta::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
+            $twResourceDir = TWMetaEnum::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
             
             $twData = array(	
                 'meeting_category_id'     => Input::get('meeting_category_id'),
@@ -93,7 +93,7 @@ class TWController extends Controller
                 'description'     => Input::get('description'),
                 'created_user'     => $current_user,
                 'is_visible' => true,
-                'status_id' => Status::OPEN,
+                'status_id' => StatusEnum::OPEN,
                 'resource_dir' => $twResourceDir
             );
             
@@ -424,7 +424,7 @@ class TWController extends Controller
         $twData = array(	
             'is_done' => true,
             'done_user' => $current_user,
-            'status_id' => Status::CLOSE,
+            'status_id' => StatusEnum::CLOSE,
             'done_date' => DB::raw('now()')
         );
         // Start transaction!

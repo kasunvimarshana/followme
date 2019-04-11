@@ -235,10 +235,145 @@ $(function(){
                 button_4.append(button_4_body);
                 buttonGroup_4.append(button_4);
                 
+                ////////////////////////////////////////////////////////
+                //button group
+                var buttonGroup_5 = $('<div></div>');
+                buttonGroup_5.addClass('btn-group');
+                var button_5 = $('<button></button>');
+                button_5.addClass('btn btn-info');
+                var button_5_body = $('<i></i>');
+                button_5_body.addClass('fa fa-clipboard');
+                button_5.bind("click", function(){
+                    button_5.attr("disabled", true);
+                    bootbox.confirm({
+                        message: "please confirm",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            //console.log('This was logged in the callback: ' + result);
+                            if( result == true ){
+                                var url = "{!! route('tw.changeDoneTrue', ['#tW']) !!}";
+                                url = url.replace("#tW", rowData.id);
+                                //$( location ).attr("href", url);
+                                
+                                $.ajax({
+                                    type: "GET",
+                                    url: url,
+                                    data: null,
+                                    //success: success,
+                                    //dataType: dataType,
+                                    //context: document.body
+                                })
+                                .done(function( data ) {
+                                    swal({
+                                        'title': data.title,
+                                        'text': data.text,
+                                        'type': data.type,
+                                        'timer': data.timer,
+                                        'showConfirmButton': false
+                                    });
+                                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                                })
+                                .fail(function() {
+                                    //console.log( "error" );
+                                    alert('fail');
+                                })
+                                .always(function() {
+                                    //console.log( "finished" );
+                                    button_5.attr("disabled", false);
+                                });
+                                
+                            }else{
+                                button_5.attr("disabled", false);
+                            }
+                        }
+                    });
+                    
+                })
+                button_5.append(button_5_body);
+                buttonGroup_5.append(button_5);
+                ////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////
+                //button group
+                var buttonGroup_6 = $('<div></div>');
+                buttonGroup_6.addClass('btn-group');
+                var button_6 = $('<button></button>');
+                button_6.addClass('btn btn-info');
+                var button_6_body = $('<i></i>');
+                button_6_body.addClass('fa fa-refresh');
+                button_6.bind("click", function(){
+                    button_6.attr("disabled", true);
+                    bootbox.confirm({
+                        message: "please confirm",
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            //console.log('This was logged in the callback: ' + result);
+                            if( result == true ){
+                                var url = "{!! route('tw.changeDoneTrue', ['#tW']) !!}";
+                                url = url.replace("#tW", rowData.id);
+                                //$( location ).attr("href", url);
+                                
+                                $.ajax({
+                                    type: "GET",
+                                    url: url,
+                                    data: null,
+                                    //success: success,
+                                    //dataType: dataType,
+                                    //context: document.body
+                                })
+                                .done(function( data ) {
+                                    swal({
+                                        'title': data.title,
+                                        'text': data.text,
+                                        'type': data.type,
+                                        'timer': data.timer,
+                                        'showConfirmButton': false
+                                    });
+                                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                                })
+                                .fail(function() {
+                                    //console.log( "error" );
+                                    alert('fail');
+                                })
+                                .always(function() {
+                                    //console.log( "finished" );
+                                    button_6.attr("disabled", false);
+                                });
+                                
+                            }else{
+                                button_6.attr("disabled", false);
+                            }
+                        }
+                    });
+                    
+                })
+                button_6.append(button_6_body);
+                buttonGroup_6.append(button_6);
+                ////////////////////////////////////////////////////////
+                
                 
                 buttonToolbar.append(buttonGroup_3);
                 buttonToolbar.append(buttonGroup_4);
                 buttonToolbar.append(buttonGroup_1);
+                buttonToolbar.append(buttonGroup_5);
+                buttonToolbar.append(buttonGroup_6);
                 buttonToolbar.append(buttonGroup_2);
                 buttonToolbar.appendTo(parentTd);
             }

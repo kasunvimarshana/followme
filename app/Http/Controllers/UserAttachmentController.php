@@ -15,8 +15,6 @@ use \Response;
 
 use DB;
 use App\Login;
-use App\Enums\Status;
-use App\Enums\TWMeta;
 use Storage;
 
 class UserAttachmentController extends Controller

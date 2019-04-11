@@ -15,8 +15,7 @@ use \Response;
 
 use DB;
 use App\Login;
-use App\Enums\Status;
-use App\Enums\TWMeta;
+use App\Enums\TWMetaEnum;
 use App\TWUser;
 use App\User;
 use App\TW;
@@ -401,7 +400,7 @@ class TWInfoController extends Controller
     public function getFile(Request $request, TWInfo $tWInfo){
         $userAttachments = $tWInfo->userAttachments;
         if( $userAttachments ){
-            $twResourceDir = TWMeta::RESOURCE_DIR . '/' . 'tep_files';
+            $twResourceDir = TWMetaEnum::RESOURCE_DIR . '/' . 'tep_files';
             if(!Storage::exists($twResourceDir)) {
                 Storage::makeDirectory($twResourceDir, 0775, true); //creates directory
             }
