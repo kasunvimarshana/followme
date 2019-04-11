@@ -101,8 +101,7 @@ $(function(){
             'delay' : 300,
             'data' : function(data){
                 //console.log(data);
-                data.created_user = "{!! $auth_user->mail !!}";
-                data.created_at = "{!! date('Y-m-d') !!}";
+                data.own_user = "{!! $auth_user->mail !!}";
             },
             'error' : function(e){
                 //console.log(e);
@@ -223,7 +222,9 @@ $(function(){
                 
                 buttonToolbar.append(buttonGroup_3);
                 buttonToolbar.append(buttonGroup_4);
-                buttonToolbar.append(buttonGroup_5);
+                if( !rowData.is_done ){
+                    buttonToolbar.append(buttonGroup_5);
+                }
                 buttonToolbar.appendTo(parentTd);
             }
         }],

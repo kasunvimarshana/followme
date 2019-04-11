@@ -44,6 +44,7 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('home/tws/show-owne-tws', array('uses' => 'TWController@showOwneTW'))->name('tw.showOwneTW');
     Route::get('tws/{tW}/destroy', array('uses' => 'TWController@destroy'))->name('tw.destroy');
     Route::get('tws/{tW}/change-done-true', array('uses' => 'TWController@changeDoneTrue'))->name('tw.changeDoneTrue');
+    Route::get('tws/{tW}/change-done-false', array('uses' => 'TWController@changeDoneFalse'))->name('tw.changeDoneFalse');
     Route::get('home/tws/show-all', array('uses' => 'HomeController@index'))->name('tw.showAll');
     Route::get('meeting-categories/list', array('uses' => 'MeetingCategoryController@listMeetingCategories'))->name('meetingCategory.list');
 });

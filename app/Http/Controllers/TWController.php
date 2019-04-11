@@ -15,7 +15,7 @@ use \Response;
 
 use DB;
 use App\Login;
-use App\Enums\StatusEnum;
+use App\Enums\TWStatusEnum;
 use App\Enums\TWMetaEnum;
 use App\TWUser;
 use App\User;
@@ -93,7 +93,7 @@ class TWController extends Controller
                 'description'     => Input::get('description'),
                 'created_user'     => $current_user,
                 'is_visible' => true,
-                'status_id' => StatusEnum::OPEN,
+                'status_id' => TWStatusEnum::OPEN,
                 'resource_dir' => $twResourceDir
             );
             
@@ -424,7 +424,49 @@ class TWController extends Controller
         $twData = array(	
             'is_done' => true,
             'done_user' => $current_user,
-            'status_id' => StatusEnum::CLOSE,
+            'status_id' => TWStatusEnum::CLOSE,
+            'done_date' => DB::raw('now()')
+        );
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            $updatedTW = $tWClone->update( $twData );
+        }catch(\Exception $e){
+            DB::rollback();
+            
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+        }
+        
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data ); 
+    }
+    
+    public function changeDoneFalse(Request $request, TW $tW){
+        //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        $current_user = Login::getUserData()->mail;
+        $tWClone = clone $tW;
+        // do process
+        $twData = array(	
+            'is_done' => false,
+            'done_user' => $current_user,
+            'status_id' => TWStatusEnum::CLOSE,
             'done_date' => DB::raw('now()')
         );
         // Start transaction!

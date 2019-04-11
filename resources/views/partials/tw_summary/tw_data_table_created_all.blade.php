@@ -102,7 +102,6 @@ $(function(){
             'data' : function(data){
                 //console.log(data);
                 data.created_user = "{!! $auth_user->mail !!}";
-                data.created_at = "{!! date('Y-m-d') !!}";
             },
             'error' : function(e){
                 //console.log(e);
@@ -235,7 +234,6 @@ $(function(){
                 button_4.append(button_4_body);
                 buttonGroup_4.append(button_4);
                 
-                ////////////////////////////////////////////////////////
                 //button group
                 var buttonGroup_5 = $('<div></div>');
                 buttonGroup_5.addClass('btn-group');
@@ -300,8 +298,7 @@ $(function(){
                 })
                 button_5.append(button_5_body);
                 buttonGroup_5.append(button_5);
-                ////////////////////////////////////////////////////////
-                ////////////////////////////////////////////////////////
+                
                 //button group
                 var buttonGroup_6 = $('<div></div>');
                 buttonGroup_6.addClass('btn-group');
@@ -326,7 +323,7 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result == true ){
-                                var url = "{!! route('tw.changeDoneTrue', ['#tW']) !!}";
+                                var url = "{!! route('tw.changeDoneFalse', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);
                                 //$( location ).attr("href", url);
                                 
@@ -366,14 +363,14 @@ $(function(){
                 })
                 button_6.append(button_6_body);
                 buttonGroup_6.append(button_6);
-                ////////////////////////////////////////////////////////
-                
-                
                 buttonToolbar.append(buttonGroup_3);
                 buttonToolbar.append(buttonGroup_4);
                 buttonToolbar.append(buttonGroup_1);
-                buttonToolbar.append(buttonGroup_5);
-                buttonToolbar.append(buttonGroup_6);
+                if( rowData.is_done ){
+                    buttonToolbar.append(buttonGroup_6);
+                }else{
+                    buttonToolbar.append(buttonGroup_5);
+                }
                 buttonToolbar.append(buttonGroup_2);
                 buttonToolbar.appendTo(parentTd);
             }

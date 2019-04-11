@@ -226,7 +226,8 @@
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
-            'todayHighlight': true
+            'todayHighlight': true,
+            'clearBtn': true
         }).datepicker("setDate", new Date());
         
         $('#due_date').datepicker({
@@ -234,7 +235,8 @@
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
-            'todayHighlight': true
+            'todayHighlight': true,
+            'clearBtn': true
         }).datepicker("setDate", $('#start_date').val());
         
         $('#twForm').submit(function(event) {
