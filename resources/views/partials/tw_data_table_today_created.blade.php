@@ -8,6 +8,9 @@ $(function(){
 <script>
 $(function(){
     "use strict";
+    //$.fn.dataTable.ext.errMode = 'none';
+    //$.fn.dataTableExt.errMode = 'ignore';
+    $.fn.dataTableExt.sErrMode = "console";
     var dataTableTWList = $('#twDataTable').DataTable({
         'columns' : [/*{
             'title' : '',
@@ -83,7 +86,7 @@ $(function(){
         'searching' : true,
         'ordering' : false,
         'info' : true,
-        'autoWidth' : false,
+        'autoWidth' : true,
         'processing' : false,
         'serverSide' : true,
         'jQueryUI' : false,
@@ -102,7 +105,8 @@ $(function(){
             'data' : function(data){
                 //console.log(data);
                 data.created_user = "{!! $auth_user->mail !!}";
-                data.created_at = "{!! date('Y-m-d') !!}";
+                data.created_at = moment().format('YYYY-MM-DD');
+                //data.created_at = "{!! date('Y-m-d') !!}";
             },
             'error' : function(e){
                 //console.log(e);

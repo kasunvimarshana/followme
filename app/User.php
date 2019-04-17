@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\LDAPModel;
+use LdapQuery\Builder; 
 
 class User extends Authenticatable
 {

@@ -236,16 +236,16 @@
         data: {
             datasets: [{
                 data: [
-                    @isset($twPassCount)
-                        {!! $twPassCount !!}
+                    @isset($twCompletedCount)
+                        {!! $twCompletedCount !!}
                     @endisset
                     ,
-                    @isset($twPassCount)
+                    @isset($twFailCount)
                         {!! $twFailCount !!}
                     @endisset
                     ,
-                    @isset($twPassCount)
-                        {!! $twFailCount !!}
+                    @isset($twInprogressCount)
+                        {!! $twInprogressCount !!}
                     @endisset
                 ],
                 backgroundColor: [
@@ -254,9 +254,9 @@
                     'rgba(255, 255, 0, 1)'
                 ],
                 label: [
-                    {!! App\Enums\TWStatusEnum::OPEN !!},
-                    {!! App\Enums\TWStatusEnum::CLOSE !!},
-                    {!! App\Enums\TWStatusEnum::CLOSE !!}
+                    {!! App\Enums\TWStatusEnum::COMPLETED !!},
+                    {!! App\Enums\TWStatusEnum::FAIL !!},
+                    {!! App\Enums\TWStatusEnum::INPROGRESS !!}
                 ]
             }],
             labels: [
@@ -292,8 +292,10 @@
                         var _model_val = itemObj._model;
                         var label_val = _model_val.label;
                         tableObj.data('status_id', label_val);
+                        tableObj.parents('div.dataTables_wrapper').first().show();
                     }else{
                         tableObj.data('status_id', null);
+                        tableObj.parents('div.dataTables_wrapper').first().hide();
                     }
                     tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
                 }catch( e ){}

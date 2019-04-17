@@ -8,6 +8,9 @@ $(function(){
 <script>
 $(function(){
     "use strict";
+    //$.fn.dataTable.ext.errMode = 'none';
+    //$.fn.dataTableExt.errMode = 'ignore';
+    $.fn.dataTableExt.sErrMode = "console";
     var dataTableUserAttachmentList = $('#userAttachmentDataTable').DataTable({
         'columns' : [/*{
             'title' : '',
@@ -44,7 +47,7 @@ $(function(){
         'searching' : true,
         'ordering' : false,
         'info' : true,
-        'autoWidth' : false,
+        'autoWidth' : true,
         'processing' : false,
         'serverSide' : true,
         'jQueryUI' : false,

@@ -9,6 +9,9 @@ $(function(){
 //var twDataTableCustomData = {};
 $(function(){
     "use strict";
+    //$.fn.dataTable.ext.errMode = 'none';
+    //$.fn.dataTableExt.errMode = 'ignore';
+    $.fn.dataTableExt.sErrMode = "console";
     var dataTableTWList = $('#twDataTable').DataTable({
         'columns' : [/*{
             'title' : '',
@@ -84,7 +87,7 @@ $(function(){
         'searching' : true,
         'ordering' : false,
         'info' : true,
-        'autoWidth' : false,
+        'autoWidth' : true,
         'processing' : false,
         'serverSide' : true,
         'jQueryUI' : false,
@@ -102,7 +105,16 @@ $(function(){
             'delay' : 300,
             'data' : function(data){
                 //console.log(data);
+                var tableObj = $('#twDataTable');
+                var tableObjData = {};
+                var tableObjDataTemp = tableObj.data();
                 data.own_user = "{!! $auth_user->mail !!}";
+                if( tableObjDataTemp.hasOwnProperty('status_id') ){
+                    tableObjData.progress = tableObjDataTemp.status_id;
+                    tableObjData.progress_due_date_from = moment().subtract(5, 'M').format('YYYY-MM-DD');
+                    tableObjData.progress_due_date_to = moment().format('YYYY-MM-DD');
+                }
+                data = $.extend(data, tableObjData);
             },
             'error' : function(e){
                 //console.log(e);

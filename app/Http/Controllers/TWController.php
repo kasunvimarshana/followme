@@ -328,13 +328,37 @@ class TWController extends Controller
         // start date
         if( ($request->get('start_date')) && (!empty($request->get('start_date'))) ){
             $start_date =  $request->get('start_date');
-            $query = $query->whereDate('start_date', '=', $start_date);
+            $query = $query->whereDate('start_date', 'like', $start_date . '%');
+        }
+        
+        // start date from
+        if( ($request->get('start_date_from')) && (!empty($request->get('start_date_from'))) ){
+            $start_date_from =  $request->get('start_date_from');
+            $query = $query->whereDate('start_date', '>=', $start_date_from);
+        }
+        
+        // start date to
+        if( ($request->get('start_date_to')) && (!empty($request->get('start_date_to'))) ){
+            $start_date_to =  $request->get('start_date_to');
+            $query = $query->whereDate('start_date', '<=', $start_date_to);
         }
         
         // due date
         if( ($request->get('due_date')) && (!empty($request->get('due_date'))) ){
             $due_date =  $request->get('due_date');
-            $query = $query->whereDate('due_date', '=', $due_date);
+            $query = $query->whereDate('due_date', 'like', $due_date . '%');
+        }
+        
+        // due date from
+        if( ($request->get('due_date_from')) && (!empty($request->get('due_date_from'))) ){
+            $due_date_from =  $request->get('due_date_from');
+            $query = $query->whereDate('due_date', '>=', $due_date_from);
+        }
+        
+        // due date to
+        if( ($request->get('due_date_to')) && (!empty($request->get('due_date_to'))) ){
+            $due_date_to =  $request->get('due_date_to');
+            $query = $query->whereDate('due_date', '<=', $due_date_to);
         }
         
         // created date
@@ -367,6 +391,20 @@ class TWController extends Controller
         if( ($request->get('is_done') != null) ){
             $is_done =  $request->get('is_done');
             $query = $query->where('is_done', '=', $is_done);
+        }
+        
+        // progress
+        if( ($request->get('progress')) && (!empty($request->get('progress'))) ){
+            $progress =  $request->get('progress');
+            $progress_due_date_from =  $request->get('progress_due_date_from');
+            $progress_due_date_to =  $request->get('progress_due_date_to');
+            if( $progress == TWStatusEnum::COMPLETED ){
+                $query = $query->where('is_done','=',true)->whereDate('due_date','>=',$progress_due_date_from);
+            }else if( $progress == TWStatusEnum::FAIL ){
+                $query = $query->where('is_done','=',false)->whereDate('due_date','>=',$progress_due_date_from)->whereDate('due_date','<',$progress_due_date_to);
+            }else if( $progress == TWStatusEnum::INPROGRESS ){
+                $query = $query->where('is_done','=',false)->whereDate('due_date','=',$progress_due_date_to);
+            }
         }
         
         // get filtered record count
@@ -465,9 +503,9 @@ class TWController extends Controller
         // do process
         $twData = array(	
             'is_done' => false,
-            'done_user' => $current_user,
-            'status_id' => TWStatusEnum::CLOSE,
-            'done_date' => DB::raw('now()')
+            'done_user' => null,
+            'status_id' => TWStatusEnum::OPEN,
+            'done_date' => null
         );
         // Start transaction!
         DB::beginTransaction();

@@ -126,7 +126,7 @@
                                         <label for="status_id" class="col-sm-2 control-label">Status</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" data-placeholder="Status" style="width: 100%;">
+                                            <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" style="width: 100%;">
                                                 <option value=""> All </option>
                                                 <option value="{!! App\Enums\TWStatusEnum::OPEN !!}"> Open </option>
                                                 <option value="{!! App\Enums\TWStatusEnum::CLOSE !!}"> Close </option>
@@ -239,8 +239,12 @@
             'clearBtn': true
         }).datepicker("setDate", $('#start_date').val());
         
+        $('#status_id').select2();
+        
         $('#twForm').submit(function(event) {
             event.preventDefault();
+            
+            var tableObj = $('#twDataTable');
         });
     });
     </script>

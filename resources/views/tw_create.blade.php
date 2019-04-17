@@ -331,6 +331,8 @@
                     start_date.datepicker("setDate", new Date());
                     due_date.datepicker("setDate", new Date());
                     var_user_attachment.fileinput('clear');
+                    own_user.val(null).trigger('change');
+                    meeting_category_id.val(null).trigger('change');
                 })
                 .fail(function() {
                     //console.log( "error" );

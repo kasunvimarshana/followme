@@ -97,11 +97,6 @@ class UserController extends Controller
             'data' => $queryResult
         );
         
-        //echo "<pre>";
-            //print_r( $data );
-        //echo "</pre>";
-        
-        //exit(); json_encode ::jsonSerialize
         return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         //return Response::json( $data );
     }    

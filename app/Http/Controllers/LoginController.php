@@ -26,8 +26,7 @@ class LoginController extends Controller
     public function showLogin(){
         if( Login::isLogin() ){
             return redirect()->route('home.index');
-        }
-        if(view()->exists('login')){
+        }else if(view()->exists('login')){
             return View::make('login');
         }
     }

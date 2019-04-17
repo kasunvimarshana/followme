@@ -9,6 +9,9 @@ $(function(){
 //var twProgressDataTableCustomData = {};
 $(function(){
     "use strict";
+    //$.fn.dataTable.ext.errMode = 'none';
+    //$.fn.dataTableExt.errMode = 'ignore';
+    $.fn.dataTableExt.sErrMode = "console";
     var dataTableTWList = $('#twProgressDataTable').DataTable({
         'columns' : [/*{
             'title' : '',
@@ -45,7 +48,7 @@ $(function(){
         'searching' : false,
         'ordering' : false,
         'info' : true,
-        'autoWidth' : false,
+        'autoWidth' : true,
         'processing' : false,
         'serverSide' : true,
         'jQueryUI' : false,
@@ -65,25 +68,39 @@ $(function(){
                 //console.log(data);
                 var tableObj = $('#twProgressDataTable');
                 var tableObjData = {};
-                //jQuery.hasData( p )
-                //if(){
-                   
-                //}
+                var tableObjDataTemp = tableObj.data();
                 data.own_user = "{!! $auth_user->mail !!}";
-                data.status_id = tableObj.data('status_id');
-                //data = $.extend(data, twProgressDataTableCustomData);
+                if( tableObjDataTemp.hasOwnProperty('status_id') ){
+                    tableObjData.progress = tableObjDataTemp.status_id;
+                    tableObjData.progress_due_date_from = moment().subtract(5, 'M').format('YYYY-MM-DD');
+                    tableObjData.progress_due_date_to = moment().format('YYYY-MM-DD');
+                }
+                data = $.extend(data, tableObjData);
             },
             'error' : function(e){
                 //console.log(e);
             }
         },
         'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){
-            if( data.status_id == {!! App\Enums\TWStatusEnum::OPEN !!} ){
-                $(row).addClass( 'success' );
-                $(row).removeClass( 'danger' );
-            }else if( data.status_id == {!! App\Enums\TWStatusEnum::CLOSE !!} ){
-                $(row).addClass( 'danger' );
-                $(row).removeClass( 'success' );
+            var tableObj = $('#twProgressDataTable');
+            var status_label = tableObj.data('status_id');
+            
+            if( status_label == {!! App\Enums\TWStatusEnum::COMPLETED !!} ){
+                $(row).addClass( 'bg-green' );
+                $(row).removeClass( 'bg-red' );
+                $(row).removeClass( 'bg-yellow' );
+            }else if( status_label == {!! App\Enums\TWStatusEnum::FAIL !!} ){
+                $(row).addClass( 'bg-red' );
+                $(row).removeClass( 'bg-green' );
+                $(row).removeClass( 'bg-yellow' );
+            }else if( status_label == {!! App\Enums\TWStatusEnum::INPROGRESS !!} ){
+                $(row).addClass( 'bg-yellow' );
+                $(row).removeClass( 'bg-green' );
+                $(row).removeClass( 'bg-red' );
+            }else{
+                $(row).removeClass( 'bg-green' );
+                $(row).removeClass( 'bg-red' );
+                $(row).removeClass( 'bg-yellow' );
             }
         },
         'createRow' : function(row, data, dataIndex){},
@@ -124,5 +141,7 @@ $(function(){
         }],
         'drawCallback' : function(settings){}
     });
+    
+    $('#twProgressDataTable').parents('div.dataTables_wrapper').first().hide();
 });
 </script>

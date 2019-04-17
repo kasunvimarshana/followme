@@ -11,43 +11,11 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/plugins/iCheck/square/blue.css') }}"/>
     @includeIf('partials.main_stylesheet', array())
-    <style>
-        canvas {
-            display: fixed;
-            vertical-align: bottom;
-        }
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #00356B;
-        }
-        .login-box {
-            /*
-            max-width: 90%;
-            text-shadow: 0px 0px 2px #131415;
-            font-family: 'Open Sans', sans-serif;
-            */
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 1em;
-            width: 45%;
-            position: absolute;
-            top: 25%;
-            right: 50%;
-            transform: translate(50%,-50%);
-        }
-        .login-box-body{
-            background-color: transparent;
-        }
-        .login-logo a, .register-logo a, .login-box-msg{
-            color: #F0F0F0;
-        }
-        .logo-img{
-            width: 100%;
-            height: 75px;
-        }
-    </style>
-    
+    <!-- custom fonts -->
+    <link rel="stylesheet" href="{{ asset('css/custom_fonts.css') }}"/>
+    <!-- custom stylesheet -->
+    <link rel="stylesheet" href="{{ asset('css/custom_style_login.css') }}"/>
+    <!-- style></style -->
     <!-- Scripts -->
     <!-- script src="{{ asset('js/app.js') }}" defer></script -->
     <!-- REQUIRED JS SCRIPTS -->
@@ -59,8 +27,11 @@
 <div class="login-box">
   <div class="login-logo">
     <!-- a href="{{ url('/') }}"><b>Follow </b>Me</a -->
-    <a href="{{ url('/') }}"><img class="img img-responsive logo-img" src="{!! asset('img/logo_1.png') !!}"/></a>
-    <!-- p style="color: white;"> Event Tracker </p -->
+    <a class="logo-link" href="{{ url('/') }}">
+        <img class="img img-responsive logo-img" src="{!! asset('img/logo_1.png') !!}"/>
+        <!-- p style="color: white;"> Event Tracker </p -->
+        <p class="logo-text"> Event Tracker </p>
+    </a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
