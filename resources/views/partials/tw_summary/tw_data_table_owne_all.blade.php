@@ -108,11 +108,24 @@ $(function(){
                 var tableObj = $('#twDataTable');
                 var tableObjData = {};
                 var tableObjDataTemp = tableObj.data();
+                tableObj.removeData();
                 data.own_user = "{!! $auth_user->mail !!}";
                 if( tableObjDataTemp.hasOwnProperty('status_id') ){
                     tableObjData.progress = tableObjDataTemp.status_id;
-                    tableObjData.progress_due_date_from = moment().subtract(5, 'M').format('YYYY-MM-DD');
-                    tableObjData.progress_due_date_to = moment().format('YYYY-MM-DD');
+                    tableObjData.progress_due_date_from = tableObjDataTemp.start_date;
+                    tableObjData.progress_due_date_to = tableObjDataTemp.due_date;
+                }else{
+                    tableObjData.start_date = tableObjDataTemp.start_date;
+                    tableObjData.due_date = tableObjDataTemp.due_date;
+                }
+                if( tableObjDataTemp.hasOwnProperty('created_user') ){
+                    tableObjData.created_user = tableObjDataTemp.created_user;
+                }
+                if( tableObjDataTemp.hasOwnProperty('meeting_category_id') ){
+                    tableObjData.meeting_category_id = tableObjDataTemp.meeting_category_id;
+                }
+                if( tableObjDataTemp.hasOwnProperty('title') ){
+                    tableObjData.search = tableObjDataTemp.title;
                 }
                 data = $.extend(data, tableObjData);
             },
@@ -147,7 +160,8 @@ $(function(){
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
                 button_3.bind("click", function(){
-                    var url = "{!! route('home.index') !!}";
+                    var url = "{!! route('tw.show', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_3.append(button_3_body);

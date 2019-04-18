@@ -139,7 +139,8 @@ $(function(){
                 button_1_body.addClass('fa fa-edit');
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
-                    var url = "{!! route('home.index') !!}";
+                    var url = "{!! route('tw.edit', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_1.append(button_1_body);
@@ -218,7 +219,8 @@ $(function(){
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
                 button_3.bind("click", function(){
-                    var url = "{!! route('home.index') !!}";
+                    var url = "{!! route('tw.show', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_3.append(button_3_body);

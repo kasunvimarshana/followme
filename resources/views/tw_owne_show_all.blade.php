@@ -48,10 +48,10 @@
                                     @csrf
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="own_user" class="col-sm-2 control-label">Assigned by</label>
+                                        <label for="created_user" class="col-sm-2 control-label">Assigned by</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="own_user" name="own_user" value="{{ old('own_user') }}" data-placeholder="Assigned by" style="width: 100%;">
+                                            <select class="form-control select2" id="created_user" name="created_user" value="{{ old('created_user') }}" data-placeholder="Assigned by" style="width: 100%;">
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -75,7 +75,7 @@
                                         <label for="title" class="col-sm-2 control-label">3W</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="3W" value="{{ old('title') }}" required/>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="3W" value="{{ old('title') }}"/>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
@@ -96,7 +96,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}" required/>
+                                                    <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}"/>
                                                 </div>
                                             </div>
                                             <!-- span id="form-control" class="help-block"></span -->
@@ -112,7 +112,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}" required/>
+                                                    <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}"/>
                                                 </div>
                                             </div>
                                             <!-- span id="form-control" class="help-block"></span -->
@@ -142,6 +142,7 @@
                                         <div class="col col-sm-12">
                                             <!-- div class="btn-group btn-group-lg pull-right" -->
                                                 <button type="submit" class="btn btn-primary pull-right" id="submit">Search</button>
+                                                <button type="reset" class="btn btn-info pull-right" id="reset">Reset</button>
                                             <!-- /div -->
                                         </div>
                                     </div>
@@ -241,10 +242,51 @@
         
         $('#status_id').select2();
         
+        $('#reset').on('click', function(event){
+            //$("form").get(0).reset();
+            //$('form > input[type=reset]').trigger('click');
+            $('#created_user').val(null).trigger('change');
+            $('#meeting_category_id').val(null).trigger('change');
+        });
+        
         $('#twForm').submit(function(event) {
             event.preventDefault();
             
             var tableObj = $('#twDataTable');
+            var created_user = $('#created_user');
+            var meeting_category_id = $('#meeting_category_id');
+            var title = $('#title');
+            var start_date = $('#start_date');
+            var due_date = $('#due_date');
+            var status_id = $('#status_id');
+            
+            var created_user_val = created_user.val();
+            var meeting_category_id_val = meeting_category_id.val();
+            var title_val = title.val();
+            var start_date_val = start_date.val();
+            var due_date_val = due_date.val();
+            var status_id_val = status_id.val();
+            
+            if( created_user_val ){
+               tableObj.data('created_user', created_user_val);
+            }
+            if( meeting_category_id_val ){
+               tableObj.data('meeting_category_id', meeting_category_id_val);
+            }
+            if( title_val ){
+               tableObj.data('title', title_val);
+            }
+            if( start_date_val ){
+               tableObj.data('start_date', start_date_val);
+            }
+            if( due_date_val ){
+               tableObj.data('due_date', due_date_val);
+            }
+            if( status_id_val ){
+               tableObj.data('status_id', status_id_val);
+            }
+            
+            tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
         });
     });
     </script>

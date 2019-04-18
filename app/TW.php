@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class TW extends Model
 {
     //
@@ -46,5 +48,28 @@ class TW extends Model
     //one to many (inverse)
     public function status(){
         return $this->belongsTo('App\Status', 'status_id', 'id');
+    }
+    
+    //one to many (inverse)
+    public function meetingCategory(){
+        return $this->belongsTo('App\MeetingCategory', 'meeting_category_id', 'id');
+    }
+    
+    //one to many (inverse)
+    public function createdUser(){
+        $user = new User();
+        $user->mail = $this->created_user;
+        $user->getUser();
+        $user->thumbnailphoto = null;
+        return $user;
+    }
+    
+    //one to many (inverse)
+    public function doneUser(){
+        $user = new User();
+        $user->mail = $this->done_user;
+        $user->getUser();
+        $user->thumbnailphoto = null;
+        return $user;
     }
 }

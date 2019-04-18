@@ -194,6 +194,9 @@ class TWController extends Controller
     public function show(TW $tW)
     {
         //
+        if(view()->exists('tw_show')){
+            return View::make('tw_show', ['tW' => $tW]);
+        }
     }
 
     /**
@@ -205,6 +208,9 @@ class TWController extends Controller
     public function edit(TW $tW)
     {
         //
+        if(view()->exists('tw_edit')){
+            return View::make('tw_edit', ['tW' => $tW]);
+        }
     }
 
     /**
@@ -217,6 +223,90 @@ class TWController extends Controller
     public function update(Request $request, TW $tW)
     {
         //
+        $tWClone = clone $tW;
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        // validate the info, create rules for the inputs
+        $rules = array(
+            'title'    => 'required'
+        );
+        // run the validation rules on the inputs from the form
+        $validator = Validator::make(Input::all(), $rules);
+        // if the validator fails, redirect back to the form
+        if ($validator->fails()) {
+            
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+            
+        } else {
+            // do process
+            $current_user = Login::getUserData()->mail;
+            
+            $twData = array(	
+                'meeting_category_id'     => Input::get('meeting_category_id'),
+                'title'     => Input::get('title'),
+                'start_date'     => Input::get('start_date'),
+                'due_date'     => Input::get('due_date'),
+                'description'     => Input::get('description'),
+                'status_id' => TWStatusEnum::OPEN
+            );
+            
+            $twUserData = (array) Input::get('own_user');
+            
+            // Start transaction!
+            DB::beginTransaction();
+
+            try {
+                // Validate, then create if valid
+                $tWClone->update( $twData );
+                
+                foreach($twUserData as $key => $value){
+                    $tempTWUser = new User();
+                    $tempTWUser->mail = $value;
+                    $tempTWUser = $tempTWUser->getUser();
+                    
+                    $newTWUser = TWUser::create(array(
+                        't_w_id' => $tWClone->id,
+                        'is_visible' => true,
+                        'own_user' => $tempTWUser->mail,
+                        'company_name' => $tempTWUser->company,
+                        'department_name' => $tempTWUser->department
+                    ));
+                }
+            }catch(\Exception $e){
+                
+                DB::rollback();
+                
+                $data = array(
+                    'title' => 'error',
+                    'text' => 'error',
+                    'type' => 'warning',
+                    'timer' => 3000
+                );
+
+                return Response::json( $data ); 
+                
+            }
+
+            // If we reach here, then
+            // data is valid and working.
+            // Commit the queries!
+            DB::commit();
+        }
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data );
     }
 
     /**
@@ -399,11 +489,23 @@ class TWController extends Controller
             $progress_due_date_from =  $request->get('progress_due_date_from');
             $progress_due_date_to =  $request->get('progress_due_date_to');
             if( $progress == TWStatusEnum::COMPLETED ){
-                $query = $query->where('is_done','=',true)->whereDate('due_date','>=',$progress_due_date_from);
+                $query = $query->where('is_done','=',true);
+                if( $progress_due_date_from ){
+                    $query = $query->whereDate('due_date','>=',$progress_due_date_from);
+                }
             }else if( $progress == TWStatusEnum::FAIL ){
-                $query = $query->where('is_done','=',false)->whereDate('due_date','>=',$progress_due_date_from)->whereDate('due_date','<',$progress_due_date_to);
+                $query = $query->where('is_done','=',false);
+                if( $progress_due_date_from ){
+                    $query = $query->whereDate('due_date','>=',$progress_due_date_from);
+                }
+                if( $progress_due_date_to ){
+                    $query = $query->whereDate('due_date','<',$progress_due_date_to);
+                }
             }else if( $progress == TWStatusEnum::INPROGRESS ){
-                $query = $query->where('is_done','=',false)->whereDate('due_date','=',$progress_due_date_to);
+                $query = $query->where('is_done','=',false);
+                if( $progress_due_date_to ){
+                    $query = $query->whereDate('due_date','=',$progress_due_date_to);
+                }
             }
         }
         

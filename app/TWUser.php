@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class TWUser extends Model
 {
     //
@@ -36,5 +38,14 @@ class TWUser extends Model
     //one to many (inverse)
     public function tw(){
         return $this->belongsTo('App\TW', 't_w_id', 'id');
+    }
+    
+    //one to many (inverse)
+    public function ownUser(){
+        $user = new User();
+        $user->mail = $this->own_user;
+        $user->getUser();
+        $user->thumbnailphoto = null;
+        return $user;
     }
 }

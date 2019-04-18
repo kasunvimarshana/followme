@@ -108,11 +108,27 @@ $(function(){
                 var tableObj = $('#twDataTable');
                 var tableObjData = {};
                 var tableObjDataTemp = tableObj.data();
+                tableObj.removeData();
                 data.created_user = "{!! $auth_user->mail !!}";
                 if( tableObjDataTemp.hasOwnProperty('status_id') ){
                     tableObjData.progress = tableObjDataTemp.status_id;
-                    tableObjData.progress_due_date_from = moment().subtract(5, 'M').format('YYYY-MM-DD');
-                    tableObjData.progress_due_date_to = moment().format('YYYY-MM-DD');
+                    tableObjData.progress_due_date_from = tableObjDataTemp.start_date;
+                    tableObjData.progress_due_date_to = tableObjDataTemp.due_date;
+                }else{
+                    tableObjData.start_date = tableObjDataTemp.start_date;
+                    tableObjData.due_date = tableObjDataTemp.due_date;
+                }
+                if( tableObjDataTemp.hasOwnProperty('own_user') ){
+                    tableObjData.own_user = tableObjDataTemp.own_user;
+                }
+                if( tableObjDataTemp.hasOwnProperty('meeting_category_id') ){
+                    tableObjData.meeting_category_id = tableObjDataTemp.meeting_category_id;
+                }
+                if( tableObjDataTemp.hasOwnProperty('meeting_category_id') ){
+                    tableObjData.meeting_category_id = tableObjDataTemp.meeting_category_id;
+                }
+                if( tableObjDataTemp.hasOwnProperty('title') ){
+                    tableObjData.search = tableObjDataTemp.title;
                 }
                 data = $.extend(data, tableObjData);
             },
@@ -147,7 +163,8 @@ $(function(){
                 button_1_body.addClass('fa fa-edit');
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
-                    var url = "{!! route('home.index') !!}";
+                    var url = "{!! route('tw.edit', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_1.append(button_1_body);
@@ -226,7 +243,8 @@ $(function(){
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
                 button_3.bind("click", function(){
-                    var url = "{!! route('home.index') !!}";
+                    var url = "{!! route('tw.show', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_3.append(button_3_body);

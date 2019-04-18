@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class UserAttachment extends Model
 {
     //
@@ -35,5 +37,14 @@ class UserAttachment extends Model
     
     public function attachable(){
         return $this->morphTo();
+    }
+    
+    //one to many (inverse)
+    public function attachedBy(){
+        $user = new User();
+        $user->mail = $this->attached_by;
+        $user->getUser();
+        $user->thumbnailphoto = null;
+        return $user;
     }
 }

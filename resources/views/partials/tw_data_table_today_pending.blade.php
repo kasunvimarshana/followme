@@ -137,7 +137,8 @@ $(function(){
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
                 button_3.bind("click", function(){
-                    var url = "{!! route('home.index') !!}";
+                    var url = "{!! route('tw.show', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
                     $( location ).attr("href", url);
                 });
                 button_3.append(button_3_body);

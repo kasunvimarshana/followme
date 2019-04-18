@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class TWInfo extends Model
 {
     //
@@ -41,5 +43,14 @@ class TWInfo extends Model
     //many to many
     public function userAttachments(){
         return $this->morphMany('App\UserAttachment', 'attachable');
+    }
+    
+    //one to many (inverse)
+    public function createdUser(){
+        $user = new User();
+        $user->mail = $this->created_user;
+        $user->getUser();
+        $user->thumbnailphoto = null;
+        return $user;
     }
 }
