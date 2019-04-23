@@ -10,6 +10,7 @@ final class TWStatusEnum extends Enum
     const OPEN = 2;
     const CLOSE = 3;
     const COMPLETED = 4;
+    const PASS = 7;
     const FAIL = 5;
     const INPROGRESS = 6;
 }

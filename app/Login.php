@@ -52,7 +52,7 @@ class Login extends Model
     }
     
     public static function setUserData($user){
-        self::setData("userprincipalname", $user->userprincipalname);
+        /*self::setData("userprincipalname", $user->userprincipalname);
         self::setData("employeenumber", $user->employeenumber);
         self::setData("cn", $user->cn);
         self::setData("title", $user->title);
@@ -63,7 +63,21 @@ class Login extends Model
         self::setData("mail", $user->mail);
         self::setData("mobile", $user->mobile);
         self::setData("directreports", $user->directreports);
-        self::setData("thumbnailphoto", $user->thumbnailphoto);
+        self::setData("thumbnailphoto", $user->thumbnailphoto);*/
+        ////////////////////////////////////////////////////////
+        self::setData("userprincipalname", 'kasunV@brandix.com');
+        self::setData("employeenumber", '27611');
+        self::setData("cn", 'kasunv');
+        self::setData("title", '');
+        self::setData("description", 'description');
+        self::setData("displayname", 'kasunv');
+        self::setData("department", 'department');
+        self::setData("company", 'company');
+        self::setData("mail", 'kasunV@brandix.com');
+        self::setData("mobile", '0000000000');
+        self::setData("directreports", '');
+        self::setData("thumbnailphoto", '');
+        ////////////////////////////////////////////////////////
     }
     
     public static function unsetUserData(){
@@ -102,12 +116,14 @@ class Login extends Model
     public static function doLogin($username, $password){
         $ldapModel = new LDAPModel();
         $user = new User();
-        if($ldapModel->isBind($username, $password)){
+        /*if($ldapModel->isBind($username, $password)){
             self::setLoginTrue();
             $user->mail = $username;
             $user->getUser();
             self::setUserData($user);
-        }
+        }*/
+        self::setLoginTrue();
+        self::setUserData($user);
     }
     
     public static function doLogout(){

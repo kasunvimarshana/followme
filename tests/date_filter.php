@@ -25,3 +25,15 @@
     }
 
 ?>
+
+<div>
+    <div class="form-group form-group-filled" id="event_period">
+       <input type="text" class="actual_range">
+       <input type="text" class="actual_range">
+    </div>
+    <script>
+    $('#event_period').datepicker({
+          inputs: $('.actual_range').toArray()
+    });
+    </script>
+</div>

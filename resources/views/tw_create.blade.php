@@ -251,7 +251,15 @@
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
-            'todayHighlight': true
+            'todayHighlight': true,
+            // 'widgetParent': ???,
+            'widgetPositioning': {
+                horizontal: "auto",
+                vertical: "auto"
+            },
+            'toggleActive': true,
+            'orientation': 'auto',
+            'container': 'body'
         }).datepicker("setDate", new Date());
         
         $('#due_date').datepicker({
@@ -259,7 +267,15 @@
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
-            'todayHighlight': true
+            'todayHighlight': true,
+            // 'widgetParent': ???,
+            'widgetPositioning': {
+                horizontal: "auto",
+                vertical: "auto"
+            },
+            'toggleActive': true,
+            'orientation': 'auto',
+            'container': 'body'
         }).datepicker("setDate", $('#start_date').val());
         
         /*$('#due_date').datepicker({

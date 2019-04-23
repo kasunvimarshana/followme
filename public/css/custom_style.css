@@ -2,10 +2,21 @@
     word-wrap: break-word;
 }
 
-/* backround color sidebar menu selected list item */
+/* tooltip */
+.tooltip{
+    position: fixed;
+    z-index: 999999999 !important;
+}
+
+/* treeview menu-open li */
 .sidebar-menu li{
     padding-left: 1em !important;
 }
+.treeview.active.menu-open{
+    padding-left: 0 !important;
+}
+
+/* backround color sidebar menu selected list item */
 .sidebar-menu li.active{
     background-color: rgba(60,141,188, 0.3) !important;
 }

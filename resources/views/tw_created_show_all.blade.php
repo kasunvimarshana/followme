@@ -247,6 +247,7 @@
             //$('form > input[type=reset]').trigger('click');
             $('#own_user').val(null).trigger('change');
             $('#meeting_category_id').val(null).trigger('change');
+            $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not 
         });
         
         $('#twForm').submit(function(event) {

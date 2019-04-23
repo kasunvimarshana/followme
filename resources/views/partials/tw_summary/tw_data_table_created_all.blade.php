@@ -190,9 +190,11 @@ $(function(){
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-edit');
                 button_1_body.attr('data-toggle', 'tooltip');
-                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-placement', 'auto');
                 button_1_body.attr('data-container', 'body');
-                button_1_body.attr('title', 'edit');
+                //button_1_body.attr('title', 'title');
+                button_1_body.attr('data-title', 'Edit');
+                //button_1_body.attr('data-content', 'content');
                 button_1_body.tooltip();
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
@@ -211,9 +213,11 @@ $(function(){
                 var button_2_body = $('<i></i>');
                 button_2_body.addClass('fa fa-trash-o');
                 button_2_body.attr('data-toggle', 'tooltip');
-                button_1_body.attr('data-placement', 'top');
-                button_1_body.attr('data-container', 'body');
-                button_2_body.attr('title', 'delete');
+                button_2_body.attr('data-placement', 'auto');
+                button_2_body.attr('data-container', 'body');
+                //button_2_body.attr('title', 'title');
+                button_2_body.attr('data-title', 'Delete');
+                //button_2_body.attr('data-content', 'content');
                 button_2_body.tooltip();
                 button_2.bind("click", function(){
                     button_2.attr("disabled", true);
@@ -281,9 +285,11 @@ $(function(){
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
                 button_3_body.attr('data-toggle', 'tooltip');
-                button_1_body.attr('data-placement', 'top');
-                button_1_body.attr('data-container', 'body');
-                button_3_body.attr('title', 'view');
+                button_3_body.attr('data-placement', 'auto');
+                button_3_body.attr('data-container', 'body');
+                //button_3_body.attr('title', 'title');
+                button_3_body.attr('data-title', 'View');
+                //button_3_body.attr('data-content', 'content');
                 button_3_body.tooltip();
                 button_3.bind("click", function(){
                     var url = "{!! route('tw.show', ['#tW']) !!}";
@@ -301,9 +307,11 @@ $(function(){
                 var button_4_body = $('<i></i>');
                 button_4_body.addClass('fa fa-book');
                 button_4_body.attr('data-toggle', 'tooltip');
-                button_1_body.attr('data-placement', 'top');
-                button_1_body.attr('data-container', 'body');
-                button_4_body.attr('title', 'update attachment');
+                button_4_body.attr('data-placement', 'auto');
+                button_4_body.attr('data-container', 'body');
+                //button_4_body.attr('title', 'title');
+                button_4_body.attr('data-title', 'Update Attachment');
+                //button_4_body.attr('data-content', 'content');
                 button_4_body.tooltip();
                 button_4.bind("click", function(){
                     var url = "{!! route('twInfo.create', ['#tW']) !!}";
@@ -321,9 +329,11 @@ $(function(){
                 var button_5_body = $('<i></i>');
                 button_5_body.addClass('fa fa-clipboard');
                 button_5_body.attr('data-toggle', 'tooltip');
-                button_1_body.attr('data-placement', 'top');
-                button_1_body.attr('data-container', 'body');
-                button_5_body.attr('title', 'update status');
+                button_5_body.attr('data-placement', 'auto');
+                button_5_body.attr('data-container', 'body');
+                //button_5_body.attr('title', 'title');
+                button_5_body.attr('data-title', 'Update Status');
+                //button_5_body.attr('data-content', 'content');
                 button_5_body.tooltip();
                 button_5.bind("click", function(){
                     button_5.attr("disabled", true);
@@ -391,9 +401,11 @@ $(function(){
                 var button_6_body = $('<i></i>');
                 button_6_body.addClass('fa fa-refresh');
                 button_6_body.attr('data-toggle', 'tooltip');
-                button_1_body.attr('data-placement', 'top');
-                button_1_body.attr('data-container', 'body');
-                button_6_body.attr('title', 'update status');
+                button_6_body.attr('data-placement', 'auto');
+                button_6_body.attr('data-container', 'body');
+                //button_6_body.attr('title', 'title');
+                button_6_body.attr('data-title', 'Update Status');
+                //button_6_body.attr('data-content', 'content');
                 button_6_body.tooltip();
                 button_6.bind("click", function(){
                     button_6.attr("disabled", true);
