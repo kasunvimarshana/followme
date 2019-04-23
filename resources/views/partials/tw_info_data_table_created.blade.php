@@ -104,6 +104,11 @@ $(function(){
                 button_1.addClass('btn btn-info');
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-edit');
+                button_1_body.attr('data-toggle', 'tooltip');
+                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-container', 'body');
+                button_1_body.attr('title', 'edit');
+                button_1_body.tooltip();
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
                     var url = "{!! route('twInfo.edit', ['#tWInfo']) !!}";
@@ -120,6 +125,11 @@ $(function(){
                 button_2.addClass('btn btn-danger');
                 var button_2_body = $('<i></i>');
                 button_2_body.addClass('fa fa-trash-o');
+                button_2_body.attr('data-toggle', 'tooltip');
+                button_2_body.attr('data-placement', 'top');
+                button_2_body.attr('data-container', 'body');
+                button_2_body.attr('title', 'delete');
+                button_2_body.tooltip();
                 button_2.bind("click", function(){
                     button_2.attr("disabled", true);
                     bootbox.confirm({
@@ -185,6 +195,11 @@ $(function(){
                 button_3.addClass('btn btn-success');
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
+                button_3_body.attr('data-toggle', 'tooltip');
+                button_3_body.attr('data-placement', 'top');
+                button_3_body.attr('data-container', 'body');
+                button_3_body.attr('title', 'view');
+                button_3_body.tooltip();
                 button_3.bind("click", function(){
                     var url = "{!! route('twInfo.show', ['#tWInfo']) !!}";
                     url = url.replace("#tWInfo", rowData.id);

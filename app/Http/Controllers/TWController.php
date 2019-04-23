@@ -494,7 +494,10 @@ class TWController extends Controller
                     $query = $query->whereDate('due_date','>=',$progress_due_date_from);
                 }
             }else if( $progress == TWStatusEnum::FAIL ){
-                $query = $query->where('is_done','=',false);
+                $query = $query->where(function($query){
+                    $query->where('is_done','=',false);
+                    $query->orWhereNull('is_done');
+                });
                 if( $progress_due_date_from ){
                     $query = $query->whereDate('due_date','>=',$progress_due_date_from);
                 }
@@ -502,9 +505,13 @@ class TWController extends Controller
                     $query = $query->whereDate('due_date','<',$progress_due_date_to);
                 }
             }else if( $progress == TWStatusEnum::INPROGRESS ){
+                $query = $query->where(function($query){
+                    $query->where('is_done','=',false);
+                    $query->orWhereNull('is_done');
+                });
                 $query = $query->where('is_done','=',false);
                 if( $progress_due_date_to ){
-                    $query = $query->whereDate('due_date','=',$progress_due_date_to);
+                    $query = $query->whereDate('due_date','>=',$progress_due_date_to);
                 }
             }
         }
@@ -540,6 +547,7 @@ class TWController extends Controller
         
         // get data
         $queryResult = $query->get();
+        //$query = $query->toSql()
         
         $recordsTotal = $recordsFiltered;
         $data = array(
@@ -549,7 +557,7 @@ class TWController extends Controller
             'search' => $search,
             'recordsTotal' => $recordsTotal,
             'recordsFiltered' => $recordsFiltered,
-            'data' => $queryResult,
+            'data' => $queryResult
         );
         
         return Response::json( $data );   

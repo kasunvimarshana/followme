@@ -23,23 +23,52 @@ class HomeController extends Controller
     public function index(){
         $loginUser = Login::getUserData();
         
-        $twTodayCount = TW::where('is_visible','=',true)->where('is_done','=',false)->whereDate('due_date','=',Carbon::now()->format('Y-m-d'))->whereHas('twUsers', function($query) use ($loginUser){
-            $query->where('own_user','=',$loginUser->mail);
-        })->count();
+        $twTodayCount = TW::where('is_visible','=',true)
+            ->where(function($query){
+                $query->where('is_done','=',false);
+                $query->orWhereNull('is_done');
+            })
+            ->whereDate('due_date','=',Carbon::now()->format('Y-m-d'))
+            ->whereHas('twUsers', function($query) use ($loginUser){
+                $query->where('own_user','=',$loginUser->mail);
+            })
+            ->count();
         
-        $twTodayCreatedCount = TW::where('is_visible','=',true)->where('created_user','=',$loginUser->mail)->whereDate('created_at','=',Carbon::now()->format('Y-m-d'))->count();
+        $twTodayCreatedCount = TW::where('is_visible','=',true)
+            ->where('created_user','=',$loginUser->mail)
+            ->whereDate('created_at','=',Carbon::now()->format('Y-m-d'))
+            ->count();
         
-        $twCompletedCount = TW::where('is_visible','=',true)->where('is_done','=',true)->whereDate('due_date','>=',Carbon::now()->subMonths(5)->format('Y-m-d'))->whereHas('twUsers', function($query) use ($loginUser){
-            $query->where('own_user','=',$loginUser->mail);
-        })->count();
+        $twCompletedCount = TW::where('is_visible','=',true)
+            ->where('is_done','=',true)
+            ->whereDate('due_date','>=',Carbon::now()->subMonths(5)->format('Y-m-d'))
+            ->whereHas('twUsers', function($query) use ($loginUser){
+                $query->where('own_user','=',$loginUser->mail);
+            })
+            ->count();
         
-        $twFailCount = TW::where('is_visible','=',true)->where('is_done','=',false)->whereDate('due_date','>=',Carbon::now()->subMonths(5)->format('Y-m-d'))->whereDate('due_date','<',Carbon::now()->format('Y-m-d'))->whereHas('twUsers', function($query) use ($loginUser){
-            $query->where('own_user','=',$loginUser->mail);
-        })->count();
+        $twFailCount = TW::where('is_visible','=',true)
+            ->where(function($query){
+                $query->where('is_done','=',false);
+                $query->orWhereNull('is_done');
+            })
+            ->whereDate('due_date','>=',Carbon::now()->subMonths(5)->format('Y-m-d'))
+            ->whereDate('due_date','<',Carbon::now()->format('Y-m-d'))
+            ->whereHas('twUsers', function($query) use ($loginUser){
+                $query->where('own_user','=',$loginUser->mail);
+            })
+            ->count();
         
-        $twInprogressCount = TW::where('is_visible','=',true)->where('is_done','=',false)->whereDate('due_date','=',Carbon::now()->format('Y-m-d'))->whereHas('twUsers', function($query) use ($loginUser){
-            $query->where('own_user','=',$loginUser->mail);
-        })->count();
+        $twInprogressCount = TW::where('is_visible','=',true)
+            ->where(function($query){
+                $query->where('is_done','=',false);
+                $query->orWhereNull('is_done');
+            })
+            ->whereDate('due_date','>=',Carbon::now()->format('Y-m-d'))
+            ->whereHas('twUsers', function($query) use ($loginUser){
+                $query->where('own_user','=',$loginUser->mail);
+            })
+            ->count();
         
         if(view()->exists('home')){
             return View::make('home', array(

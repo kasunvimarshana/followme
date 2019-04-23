@@ -32,10 +32,10 @@
             <div id="collapseOneParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Search Created 3W</a>
+                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Filter</a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
+                <div id="collapseOne" class="panel-collapse collapse out">
                     <div class="panel-body">
                         <!-- --- -->
                         <!-- row -->
@@ -128,8 +128,8 @@
                                             <!-- p class="form-control-static"></p -->
                                             <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" style="width: 100%;">
                                                 <option value=""> All </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::OPEN !!}"> Open </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::CLOSE !!}"> Close </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::INPROGRESS !!}"> Open </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::COMPLETED !!}"> Closed </option>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -164,7 +164,7 @@
             <div id="collapseTwoParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Created 3W</a>
+                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Assigned To Others</a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">

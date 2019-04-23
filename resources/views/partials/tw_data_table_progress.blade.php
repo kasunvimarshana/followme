@@ -127,6 +127,12 @@ $(function(){
                 button_1.addClass('btn btn-success');
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-eye');
+                button_1_body.attr('data-toggle', 'tooltip');
+                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-container', 'body');
+                button_1_body.attr('title', 'view');
+                //button_1_body.tooltip({container: '.btn'});
+                button_1.tooltip();
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
                     var url = "{!! route('tw.show', ['#tW']) !!}";

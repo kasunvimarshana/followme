@@ -62,10 +62,41 @@ $(function(){
                 var data_str = '';
                 if(($.isArray(data))){
                     $.each(data, function( key, value ){
-                        data_str =  value.own_user + ' | ' + data_str;
+                        data_str =  value.own_user + ' <br/> ' + data_str;
                     });
                 }else{
                     data_str = value.own_user;
+                }
+                
+                return data_str;
+            }
+        },{
+            'title' : 'Status',
+            'orderable' : false,
+            'data' : null,
+            'render' : function(data, type, row){
+                var data_str = '';
+                var is_done = data.is_done;
+                //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').toDate();
+                var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+                var today = moment().format('YYYY-MM-DD');
+                // pass
+                if( (is_done == true) ){
+                   if( (moment(due_date).isAfter(today)) || (moment(due_date).isBefore(today)) || (moment(due_date).isSame(today)) ){
+                      data_str = 'Done';
+                    }
+                }
+                // fail
+                if( (is_done == false) || (is_done == null) ){
+                   if( (moment(due_date).isBefore(today)) ){
+                      data_str = 'Faile';
+                    }
+                }
+                // inprogress
+                if( (is_done == false) || (is_done == null) ){
+                   if( (moment(due_date).isAfter(today)) || (moment(due_date).isSame(today)) ){
+                      data_str = 'Inprogress';
+                    }
                 }
                 
                 return data_str;
@@ -115,14 +146,11 @@ $(function(){
                     tableObjData.progress_due_date_from = tableObjDataTemp.start_date;
                     tableObjData.progress_due_date_to = tableObjDataTemp.due_date;
                 }else{
-                    tableObjData.start_date = tableObjDataTemp.start_date;
-                    tableObjData.due_date = tableObjDataTemp.due_date;
+                    //tableObjData.start_date = tableObjDataTemp.start_date;
+                    //tableObjData.due_date = tableObjDataTemp.due_date;
                 }
                 if( tableObjDataTemp.hasOwnProperty('own_user') ){
                     tableObjData.own_user = tableObjDataTemp.own_user;
-                }
-                if( tableObjDataTemp.hasOwnProperty('meeting_category_id') ){
-                    tableObjData.meeting_category_id = tableObjDataTemp.meeting_category_id;
                 }
                 if( tableObjDataTemp.hasOwnProperty('meeting_category_id') ){
                     tableObjData.meeting_category_id = tableObjDataTemp.meeting_category_id;
@@ -161,6 +189,11 @@ $(function(){
                 button_1.addClass('btn btn-info');
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-edit');
+                button_1_body.attr('data-toggle', 'tooltip');
+                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-container', 'body');
+                button_1_body.attr('title', 'edit');
+                button_1_body.tooltip();
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
                     var url = "{!! route('tw.edit', ['#tW']) !!}";
@@ -177,6 +210,11 @@ $(function(){
                 button_2.addClass('btn btn-danger');
                 var button_2_body = $('<i></i>');
                 button_2_body.addClass('fa fa-trash-o');
+                button_2_body.attr('data-toggle', 'tooltip');
+                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-container', 'body');
+                button_2_body.attr('title', 'delete');
+                button_2_body.tooltip();
                 button_2.bind("click", function(){
                     button_2.attr("disabled", true);
                     bootbox.confirm({
@@ -242,6 +280,11 @@ $(function(){
                 button_3.addClass('btn btn-success');
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
+                button_3_body.attr('data-toggle', 'tooltip');
+                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-container', 'body');
+                button_3_body.attr('title', 'view');
+                button_3_body.tooltip();
                 button_3.bind("click", function(){
                     var url = "{!! route('tw.show', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
@@ -257,6 +300,11 @@ $(function(){
                 button_4.addClass('btn btn-warning');
                 var button_4_body = $('<i></i>');
                 button_4_body.addClass('fa fa-book');
+                button_4_body.attr('data-toggle', 'tooltip');
+                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-container', 'body');
+                button_4_body.attr('title', 'update attachment');
+                button_4_body.tooltip();
                 button_4.bind("click", function(){
                     var url = "{!! route('twInfo.create', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
@@ -272,6 +320,11 @@ $(function(){
                 button_5.addClass('btn btn-info');
                 var button_5_body = $('<i></i>');
                 button_5_body.addClass('fa fa-clipboard');
+                button_5_body.attr('data-toggle', 'tooltip');
+                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-container', 'body');
+                button_5_body.attr('title', 'update status');
+                button_5_body.tooltip();
                 button_5.bind("click", function(){
                     button_5.attr("disabled", true);
                     bootbox.confirm({
@@ -337,6 +390,11 @@ $(function(){
                 button_6.addClass('btn btn-info');
                 var button_6_body = $('<i></i>');
                 button_6_body.addClass('fa fa-refresh');
+                button_6_body.attr('data-toggle', 'tooltip');
+                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-container', 'body');
+                button_6_body.attr('title', 'update status');
+                button_6_body.tooltip();
                 button_6.bind("click", function(){
                     button_6.attr("disabled", true);
                     bootbox.confirm({

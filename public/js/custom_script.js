@@ -45,6 +45,11 @@ $(function(){
     });
 });
 
+//set tooltips
+/*$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});*/
+
 /*$(function(){
     Number.prototype.pad = function(size) {
         var s = String(this);

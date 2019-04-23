@@ -3,6 +3,9 @@
 }
 
 /* backround color sidebar menu selected list item */
+.sidebar-menu li{
+    padding-left: 1em !important;
+}
 .sidebar-menu li.active{
     background-color: rgba(60,141,188, 0.3) !important;
 }

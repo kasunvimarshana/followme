@@ -61,7 +61,7 @@ $(function(){
                 var data_str = '';
                 if(($.isArray(data))){
                     $.each(data, function( key, value ){
-                        data_str =  value.own_user + ' | ' + data_str;
+                        data_str =  value.own_user + ' <br/> ' + data_str;
                     });
                 }
                 
@@ -136,6 +136,11 @@ $(function(){
                 button_3.addClass('btn btn-success');
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
+                button_3_body.attr('data-toggle', 'tooltip');
+                button_3_body.attr('data-placement', 'top');
+                button_3_body.attr('data-container', 'body');
+                button_3_body.attr('title', 'view');
+                button_3_body.tooltip();
                 button_3.bind("click", function(){
                     var url = "{!! route('tw.show', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
@@ -151,6 +156,11 @@ $(function(){
                 button_4.addClass('btn btn-warning');
                 var button_4_body = $('<i></i>');
                 button_4_body.addClass('fa fa-book');
+                button_4_body.attr('data-toggle', 'tooltip');
+                button_4_body.attr('data-placement', 'top');
+                button_4_body.attr('data-container', 'body');
+                button_4_body.attr('title', 'update attachment');
+                button_4_body.tooltip();
                 button_4.bind("click", function(){
                     var url = "{!! route('twInfo.create', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
@@ -166,6 +176,11 @@ $(function(){
                 button_5.addClass('btn btn-info');
                 var button_5_body = $('<i></i>');
                 button_5_body.addClass('fa fa-clipboard');
+                button_5_body.attr('data-toggle', 'tooltip');
+                button_5_body.attr('data-placement', 'top');
+                button_5_body.attr('data-container', 'body');
+                button_5_body.attr('title', 'update status');
+                button_5_body.tooltip();
                 button_5.bind("click", function(){
                     button_5.attr("disabled", true);
                     bootbox.confirm({
