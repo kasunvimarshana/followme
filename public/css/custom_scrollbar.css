@@ -1,7 +1,7 @@
 /* custom scrollbar start */
 ::-webkit-scrollbar
 {
-  width: 5px;
+  width: 8px;
   background-color: #F5F5F5;
 }
  
