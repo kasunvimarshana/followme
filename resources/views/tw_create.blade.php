@@ -55,7 +55,7 @@
                                         <label for="own_user" class="col-sm-2 control-label">Owner</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple">
+                                            <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple" required>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -67,7 +67,7 @@
                                         <label for="meeting_category_id" class="col-sm-2 control-label">Category</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;">
+                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;" required>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->

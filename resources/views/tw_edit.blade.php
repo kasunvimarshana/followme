@@ -67,7 +67,7 @@
                                         <label for="meeting_category_id" class="col-sm-2 control-label">Category</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ $tW->meeting_category_id }}" data-placeholder="Category" style="width: 100%;">
+                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ $tW->meeting_category_id }}" data-placeholder="Category" style="width: 100%;" required>
                                                 @if($tW)
                                                     @php
                                                         $oldMeetingCategory = $tW->meetingCategory;

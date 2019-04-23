@@ -39,7 +39,7 @@ $(function(){
             cache: true
         },
         placeholder	      : 'Select Type',
-        //minimumInputLength: 1,
+        minimumInputLength: 2,
         multiple		  : false,
         closeOnSelect	  : true,
         allowClear	  : true,
