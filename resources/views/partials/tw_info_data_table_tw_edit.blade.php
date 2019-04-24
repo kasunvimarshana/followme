@@ -104,13 +104,13 @@ $(function(){
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-edit');
                 /////////////////////////////////////
-                button_3_body.attr('data-toggle', 'tooltip');
+                /*button_3_body.attr('data-toggle', 'tooltip');
                 button_3_body.attr('data-placement', 'auto');
                 button_3_body.attr('data-container', 'body');
                 //button_3_body.attr('title', 'title');
                 button_3_body.attr('data-title', 'View');
                 //button_3_body.attr('data-content', 'content');
-                button_3_body.tooltip();
+                button_3_body.tooltip();*/
                 /////////////////////////////////////
                 button_1_body.attr('data-toggle', 'tooltip');
                 button_1_body.attr('data-placement', 'top');
@@ -134,13 +134,13 @@ $(function(){
                 var button_2_body = $('<i></i>');
                 button_2_body.addClass('fa fa-trash-o');
                 /////////////////////////////////////
-                button_3_body.attr('data-toggle', 'tooltip');
+                /*button_3_body.attr('data-toggle', 'tooltip');
                 button_3_body.attr('data-placement', 'auto');
                 button_3_body.attr('data-container', 'body');
                 //button_3_body.attr('title', 'title');
                 button_3_body.attr('data-title', 'View');
                 //button_3_body.attr('data-content', 'content');
-                button_3_body.tooltip();
+                button_3_body.tooltip();*/
                 /////////////////////////////////////
                 button_2_body.attr('data-toggle', 'tooltip');
                 button_2_body.attr('data-placement', 'top');
@@ -213,13 +213,13 @@ $(function(){
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
                 /////////////////////////////////////
-                button_3_body.attr('data-toggle', 'tooltip');
+                /*button_3_body.attr('data-toggle', 'tooltip');
                 button_3_body.attr('data-placement', 'auto');
                 button_3_body.attr('data-container', 'body');
                 //button_3_body.attr('title', 'title');
                 button_3_body.attr('data-title', 'View');
                 //button_3_body.attr('data-content', 'content');
-                button_3_body.tooltip();
+                button_3_body.tooltip();*/
                 /////////////////////////////////////
                 button_3_body.attr('data-toggle', 'tooltip');
                 button_3_body.attr('data-placement', 'top');
