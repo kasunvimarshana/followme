@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{{ asset('node_modules/datatables.net-select-bs/css/select.bootstrap.min.css') }}" />
     <!-- Bootstrap Datepicker -->
     <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" />
+    <!-- Bootstrap FileInput -->
+    <link href="{!! asset('node_modules/bootstrap-fileinput/css/fileinput.css') !!}" media="all" rel="stylesheet" type="text/css"/>
+    <!-- link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous" -->
+    <link href="{!! asset('node_modules/bootstrap-fileinput/themes/explorer-fas/theme.css') !!}" media="all" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('section_script_main')
@@ -32,10 +36,10 @@
             <div id="collapseOneParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Filter</a>
+                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Clone 3W</a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse out">
+                <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <!-- --- -->
                         <!-- row -->
@@ -44,14 +48,14 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- form -->
-                                <form action="#" method="POST" class="col-sm-8" autocomplete="off" id="twForm" enctype="multipart/form-data">
+                                <form action="{!! route('tw.doClone', ['tW' => $tW->id]) !!}" method="POST" class="col-sm-8" autocomplete="off" id="twForm" enctype="multipart/form-data">
                                     @csrf
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="created_user" class="col-sm-2 control-label">Assigned by</label>
+                                        <label for="own_user" class="col-sm-2 control-label">Owner</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="created_user" name="created_user" value="{{ old('created_user') }}" data-placeholder="Assigned by" style="width: 100%;">
+                                            <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple" required>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -63,7 +67,15 @@
                                         <label for="meeting_category_id" class="col-sm-2 control-label">Category</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;">
+                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ $tW->meeting_category_id }}" data-placeholder="Category" style="width: 100%;" required>
+                                                @if($tW)
+                                                    @php
+                                                        $oldMeetingCategory = $tW->meetingCategory;
+                                                    @endphp
+                                                    @isset($oldMeetingCategory)
+                                                        <option value="{{ $oldMeetingCategory->id }}" selected> {{ $oldMeetingCategory->name }} </option>
+                                                    @endisset
+                                                @endif
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -75,7 +87,7 @@
                                         <label for="title" class="col-sm-2 control-label">3W</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="3W" value="{{ old('title') }}"/>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="3W" value="{{ $tW->title }}" required/>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
@@ -96,7 +108,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}"/>
+                                                    <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}" required/>
                                                 </div>
                                             </div>
                                             <!-- span id="form-control" class="help-block"></span -->
@@ -112,7 +124,7 @@
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}"/>
+                                                    <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}" required/>
                                                 </div>
                                             </div>
                                             <!-- span id="form-control" class="help-block"></span -->
@@ -123,14 +135,10 @@
                                     
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="status_id" class="col-sm-2 control-label">Status</label>
+                                        <label for="description" class="col-sm-2 control-label">Description</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" style="width: 100%;">
-                                                <option value=""> All </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::OPEN !!}"> Open </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::CLOSE !!}"> Closed </option>
-                                            </select>
+                                            <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5">{{ $tW->description }}</textarea>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
@@ -141,8 +149,7 @@
                                         <!-- btn-toolbar -->
                                         <div class="col col-sm-12">
                                             <!-- div class="btn-group btn-group-lg pull-right" -->
-                                                <button type="submit" class="btn btn-primary pull-right" id="submit">Search</button>
-                                                <button type="reset" class="btn btn-info pull-right" id="reset">Reset</button>
+                                                <button type="submit" class="btn btn-primary pull-right" id="submit">Submit</button>
                                             <!-- /div -->
                                         </div>
                                     </div>
@@ -156,34 +163,6 @@
                         </div>
                         <!-- /.row -->
                         <!-- --- -->
-                    </div>
-                </div>
-            </div>
-            <!-- /.panel -->
-            <!-- panel -->
-            <div id="collapseTwoParent" class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Assigned To Me</a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        
-                        <!-- --- -->
-                        <!-- row -->
-                        <div class="row">
-                            <!-- col -->
-                            <div class="col-sm-12">
-                                <!-- table -->
-                                <table id="twDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
-                                <!-- /.table -->
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                        <!-- --- -->
-                        
                     </div>
                 </div>
             </div>
@@ -214,10 +193,17 @@
     <!-- Bootstrap Datepicker -->
     <script src="{{ asset('node_modules/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
     <script src="{{ asset('node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <!-- Bootstrap FileInput -->
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/plugins/piexif.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/plugins/sortable.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/fileinput.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/locales/fr.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/js/locales/es.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/themes/fas/theme.js') !!}" type="text/javascript"></script>
+    <script src="{!! asset('node_modules/bootstrap-fileinput/themes/explorer-fas/theme.js') !!}" type="text/javascript"></script>
 
     @includeIf('partials.meeting_category_select', array())
-    @includeIf('partials.tw_summary.tw_created_user_select', array())
-    @includeIf('partials.tw_summary.tw_data_table_owne_all', array())
+    @includeIf('partials.tw_own_user_select', array())
     <script>
     $(function() {
         "use strict";
@@ -228,8 +214,15 @@
             'immediateUpdates': true,
             'todayBtn': true,
             'todayHighlight': true,
-            'clearBtn': true
-        });//.datepicker("setDate", new Date());
+            // 'widgetParent': ???,
+            'widgetPositioning': {
+                horizontal: "auto",
+                vertical: "auto"
+            },
+            'toggleActive': true,
+            'orientation': 'auto',
+            'container': 'body'
+        }).datepicker("setDate", moment('{!! $tW->start_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate());
         
         $('#due_date').datepicker({
             'autoclose': true,
@@ -237,57 +230,71 @@
             'immediateUpdates': true,
             'todayBtn': true,
             'todayHighlight': true,
-            'clearBtn': true
-        });//.datepicker("setDate", $('#start_date').val());
-        
-        $('#status_id').select2();
-        
-        $('#reset').on('click', function(event){
-            //$("form").get(0).reset();
-            //$('form > input[type=reset]').trigger('click');
-            $('#created_user').val(null).trigger('change');
-            $('#meeting_category_id').val(null).trigger('change');
-            $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not 
-        });
+            // 'widgetParent': ???,
+            'widgetPositioning': {
+                horizontal: "auto",
+                vertical: "auto"
+            },
+            'toggleActive': true,
+            'orientation': 'auto',
+            'container': 'body'
+        }).datepicker("setDate", moment('{!! $tW->due_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate());
         
         $('#twForm').submit(function(event) {
             event.preventDefault();
+            var form = $(this);
+            var form_id = $(this).attr('id');
+            var _token = '{{ Session::token() }}';
+
+            var own_user = form.find('#own_user');
+            var meeting_category_id = form.find('#meeting_category_id');
+            var title = form.find('#title');
+            var start_date = form.find('#start_date');
+            var due_date = form.find('#due_date');
+            var description = form.find('#description');
+            var submit = form.find('#submit');
             
-            var tableObj = $('#twDataTable');
-            var created_user = $('#created_user');
-            var meeting_category_id = $('#meeting_category_id');
-            var title = $('#title');
-            var start_date = $('#start_date');
-            var due_date = $('#due_date');
-            var status_id = $('#status_id');
+            submit.attr("disabled", true);
+
+            var formdata = new FormData( this );
             
-            var created_user_val = created_user.val();
-            var meeting_category_id_val = meeting_category_id.val();
-            var title_val = title.val();
-            var start_date_val = start_date.val();
-            var due_date_val = due_date.val();
-            var status_id_val = status_id.val();
-            
-            if( created_user_val ){
-               tableObj.data('created_user', created_user_val);
-            }
-            if( meeting_category_id_val ){
-               tableObj.data('meeting_category_id', meeting_category_id_val);
-            }
-            if( title_val ){
-               tableObj.data('title', title_val);
-            }
-            if( start_date_val ){
-               tableObj.data('start_date', start_date_val);
-            }
-            if( due_date_val ){
-               tableObj.data('due_date', due_date_val);
-            }
-            if( status_id_val ){
-               tableObj.data('status_id', status_id_val);
-            }
-            
-            tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+            formdata.append('submit', true);
+            // process the form
+            $.ajax({
+                type        : form.attr('method'), // define the type of HTTP verb we want to use (POST for our form)
+                url         : form.attr('action'), // the url where we want to POST
+                data        : formdata, // our data object
+                //dataType    : 'json', // what type of data do we expect back from the server
+                //encode      : true,
+                processData : false,
+                contentType : false,
+                cache : false
+            })
+                // using the done promise callback
+                .done(function(data) {
+                    //console.log(data);
+                    swal({
+                        'title': data.title,
+                        'text': data.text,
+                        'type': data.type,
+                        'timer': data.timer,
+                        'showConfirmButton': false
+                    });
+                    title.val(null);
+                    description.val(null);
+                    start_date.datepicker("setDate", new Date());
+                    due_date.datepicker("setDate", new Date());
+                    own_user.val(null).trigger('change');
+                    meeting_category_id.val(null).trigger('change');
+                })
+                .fail(function() {
+                    //console.log( "error" );
+                })
+                .always(function() {
+                    //console.log( "complete" );
+                    submit.attr("disabled", false);
+                    //submit.removeAttr("disabled");
+                });
         });
     });
     </script>

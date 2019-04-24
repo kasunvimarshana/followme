@@ -124,7 +124,7 @@ $(function(){
                 var buttonGroup_1 = $('<div></div>');
                 buttonGroup_1.addClass('btn-group');
                 var button_1 = $('<button></button>');
-                button_1.addClass('btn btn-success');
+                button_1.addClass('btn btn-success btn-sm');
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-eye');
                 button_1_body.attr('data-toggle', 'tooltip');

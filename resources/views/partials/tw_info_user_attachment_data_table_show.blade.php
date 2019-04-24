@@ -95,7 +95,7 @@ $(function(){
                 var buttonGroup_1 = $('<div></div>');
                 buttonGroup_1.addClass('btn-group');
                 var button_1 = $('<button></button>');
-                button_1.addClass('btn btn-info');
+                button_1.addClass('btn btn-info btn-sm');
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-download');
                 button_1_body.attr('data-toggle', 'tooltip');

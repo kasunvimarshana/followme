@@ -128,8 +128,8 @@
                                             <!-- p class="form-control-static"></p -->
                                             <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" style="width: 100%;">
                                                 <option value=""> All </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::INPROGRESS !!}"> Open </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::COMPLETED !!}"> Closed </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::OPEN !!}"> Open </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::CLOSE !!}"> Closed </option>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -229,7 +229,7 @@
             'todayBtn': true,
             'todayHighlight': true,
             'clearBtn': true
-        }).datepicker("setDate", new Date());
+        });//.datepicker("setDate", new Date());
         
         $('#due_date').datepicker({
             'autoclose': true,
@@ -238,7 +238,7 @@
             'todayBtn': true,
             'todayHighlight': true,
             'clearBtn': true
-        }).datepicker("setDate", $('#start_date').val());
+        });//.datepicker("setDate", $('#start_date').val());
         
         $('#status_id').select2();
         

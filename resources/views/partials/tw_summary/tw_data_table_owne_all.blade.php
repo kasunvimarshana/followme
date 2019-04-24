@@ -75,30 +75,7 @@ $(function(){
             'orderable' : false,
             'data' : null,
             'render' : function(data, type, row){
-                var data_str = '';
-                var is_done = data.is_done;
-                //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').toDate();
-                var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
-                var today = moment().format('YYYY-MM-DD');
-                // pass
-                if( (is_done == true) ){
-                   if( (moment(due_date).isAfter(today)) || (moment(due_date).isBefore(today)) || (moment(due_date).isSame(today)) ){
-                      data_str = 'Done';
-                    }
-                }
-                // fail
-                if( (is_done == false) || (is_done == null) ){
-                   if( (moment(due_date).isBefore(today)) ){
-                      data_str = 'Fail';
-                    }
-                }
-                // inprogress
-                if( (is_done == false) || (is_done == null) ){
-                   if( (moment(due_date).isAfter(today)) || (moment(due_date).isSame(today)) ){
-                      data_str = 'Inprogress';
-                    }
-                }
-                
+                var data_str = 'Status';
                 return data_str;
             }
         },{
@@ -171,6 +148,39 @@ $(function(){
             'targets' : [1, 2],
             'responsivePriorty' : 1
         },{
+            'targets' : [5],
+            'responsivePriority' : 2,
+            'visible' : true,
+            'data' : null,
+            'createdCell' : function(td, cellData, rowData, row, col){
+                var parentTd = $(td);
+                parentTd.empty();
+                //parentTd.addClass('default');
+                //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').toDate();
+                var today = moment().format('YYYY-MM-DD');
+                var due_date = moment(rowData.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+                var done_date = moment(rowData.done_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+                var span_1 = $('<span></span>');
+                
+                if( (rowData.is_done == true) ){//completed
+                    parentTd.addClass('bg-green');
+                    //span_1.text('COMPLETED');
+                } 
+                if( (rowData.is_done == true) && ((rowData.done_date) && ((moment(due_date).isAfter(done_date)) || (moment(due_date).isSame(done_date)))) ){//pass
+                    //parentTd.addClass('default');
+                    span_1.text('PASSED');
+                }else if((moment(done_date).isAfter(due_date)) || ((moment(due_date).isBefore(today)) && ((rowData.is_done == false) || (rowData.is_done == null)))){//fail
+                    parentTd.addClass('bg-red');
+                    span_1.text('FAILED');
+                }else if(((moment(due_date).isAfter(today)) || (moment(due_date).isSame(today))) && ((rowData.is_done == false) || (rowData.is_done == null))){//inprogress
+                    parentTd.addClass('bg-yellow'); 
+                    span_1.text('INPROGRESS');
+                }else{
+                    //parentTd.addClass('default');
+                }
+                span_1.appendTo(parentTd);
+            }
+        },{
             'targets' : [-1],
             'responsivePriority' : 2,
             'visible' : true,
@@ -187,7 +197,7 @@ $(function(){
                 var buttonGroup_3 = $('<div></div>');
                 buttonGroup_3.addClass('btn-group');
                 var button_3 = $('<button></button>');
-                button_3.addClass('btn btn-success');
+                button_3.addClass('btn btn-success btn-sm');
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
                 button_3_body.attr('data-toggle', 'tooltip');
@@ -209,7 +219,7 @@ $(function(){
                 var buttonGroup_4 = $('<div></div>');
                 buttonGroup_4.addClass('btn-group');
                 var button_4 = $('<button></button>');
-                button_4.addClass('btn btn-warning');
+                button_4.addClass('btn btn-warning btn-sm');
                 var button_4_body = $('<i></i>');
                 button_4_body.addClass('fa fa-book');
                 button_4_body.attr('data-toggle', 'tooltip');
@@ -231,7 +241,7 @@ $(function(){
                 var buttonGroup_5 = $('<div></div>');
                 buttonGroup_5.addClass('btn-group');
                 var button_5 = $('<button></button>');
-                button_5.addClass('btn btn-info');
+                button_5.addClass('btn btn-info btn-sm');
                 var button_5_body = $('<i></i>');
                 button_5_body.addClass('fa fa-clipboard');
                 button_5_body.attr('data-toggle', 'tooltip');
@@ -299,10 +309,35 @@ $(function(){
                 button_5.append(button_5_body);
                 buttonGroup_5.append(button_5);
                 
+                //button group
+                var buttonGroup_6 = $('<div></div>');
+                buttonGroup_6.addClass('btn-group');
+                var button_6 = $('<button></button>');
+                button_6.addClass('btn btn-success btn-sm');
+                var button_6_body = $('<i></i>');
+                button_6_body.addClass('fa fa-child');
+                button_6_body.attr('data-toggle', 'tooltip');
+                button_6_body.attr('data-placement', 'auto');
+                button_6_body.attr('data-container', 'body');
+                //button_6_body.attr('title', 'title');
+                button_6_body.attr('data-title', 'Clone 3W');
+                //button_6_body.attr('data-content', 'content');
+                button_6_body.tooltip();
+                button_6.bind("click", function(){
+                    var url = "{!! route('tw.showClone', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
+                    $( location ).attr("href", url);
+                });
+                button_6.append(button_6_body);
+                buttonGroup_6.append(button_6);
+                
                 buttonToolbar.append(buttonGroup_3);
                 buttonToolbar.append(buttonGroup_4);
                 if( !rowData.is_done ){
                     buttonToolbar.append(buttonGroup_5);
+                }
+                if( ((rowData.is_done == false) || (rowData.is_done == null)) && ((rowData.is_cloned == false) || (rowData.is_cloned == null)) ){//completed
+                    buttonToolbar.append(buttonGroup_6);
                 }
                 buttonToolbar.appendTo(parentTd);
             }

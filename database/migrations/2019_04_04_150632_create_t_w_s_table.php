@@ -33,6 +33,7 @@ class CreateTWSTable extends Migration
             //$table->dateTime('done_date')->nullable()->useCurrent();
             $table->dateTime('done_date')->nullable()->default(null);
             $table->text('resource_dir')->nullable()->default(null);
+            $table->boolean('is_cloned')->default(0)->nullable();
             //$table->softDeletes();
             
             $table->foreign('meeting_category_id')->references('id')->on('meeting_categories')->onUpdate('cascade');

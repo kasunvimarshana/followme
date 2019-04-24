@@ -53,10 +53,14 @@ class HomeController extends Controller
         
         $twFailCount = TW::where('is_visible','=',true)
             ->where(function($query){
-                //$query->whereRaw('due_date > done_date');
                 $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
-                $query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
-                //$query->orWhereNull('done_date'); 
+                $query->orWhere(function($query){
+                    $query->whereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                    $query->where(function($query){
+                        $query->where('is_done','=',false);
+                        $query->orWhereNull('is_done');
+                    });
+                });
             })
             ->whereDate('due_date', '>=', $due_date_from)
             ->whereDate('due_date', '<=', $due_date_to)

@@ -19,7 +19,7 @@ class TW extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible', 'created_user', 'title', 'description', 'meeting_category_id', 'status_id', 'start_date', 'due_date', 'piority', 'is_done', 'done_user', 'done_date', 'resource_dir');
+    protected $fillable = array('is_visible', 'created_user', 'title', 'description', 'meeting_category_id', 'status_id', 'start_date', 'due_date', 'piority', 'is_done', 'done_user', 'done_date', 'resource_dir', 'is_cloned');
 
     /**
     * The attributes that should be hidden for arrays.

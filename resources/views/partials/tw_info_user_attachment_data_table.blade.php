@@ -95,7 +95,7 @@ $(function(){
                 var buttonGroup_1 = $('<div></div>');
                 buttonGroup_1.addClass('btn-group');
                 var button_1 = $('<button></button>');
-                button_1.addClass('btn btn-info');
+                button_1.addClass('btn btn-info btn-sm');
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-download');
                 button_1_body.attr('data-toggle', 'tooltip');
@@ -118,7 +118,7 @@ $(function(){
                 var buttonGroup_2 = $('<div></div>');
                 buttonGroup_2.addClass('btn-group');
                 var button_2 = $('<button></button>');
-                button_2.addClass('btn btn-danger');
+                button_2.addClass('btn btn-danger btn-sm');
                 var button_2_body = $('<i></i>');
                 button_2_body.addClass('fa fa-trash-o');
                 button_2_body.attr('data-toggle', 'tooltip');

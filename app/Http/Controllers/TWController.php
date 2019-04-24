@@ -499,12 +499,22 @@ class TWController extends Controller
                 /*$query = $query->where(function($query){
                     $query->where('is_done','=',false);
                     $query->orWhereNull('is_done');
-                });*/
+                });
                 $query = $query->where(function($query){
-                    //$query->whereRaw('due_date > done_date');
+                    $query->whereRaw('due_date > done_date');
                     $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
                     $query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
-                    //$query->orWhereNull('done_date'); 
+                    $query->orWhereNull('done_date'); 
+                });*/
+                $query = $query->where(function($query){
+                    $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
+                    $query->orWhere(function($query){
+                        $query->whereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                        $query->where(function($query){
+                            $query->where('is_done','=',false);
+                            $query->orWhereNull('is_done');
+                        });
+                    });
                 });
             }else if( $progress == TWStatusEnum::INPROGRESS ){
                 $query = $query->where(function($query){
@@ -668,6 +678,120 @@ class TWController extends Controller
         if(view()->exists('tw_owne_show_all')){
             return View::make('tw_owne_show_all');
         }
+    }
+    
+    public function showClone(Request $request, TW $tW){
+        if(view()->exists('tw_clone')){
+            return View::make('tw_clone', ['tW' => $tW]);
+        }
+    }
+    
+    public function doClone(Request $request, TW $tW){
+        $tWClone = clone $tW;
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        // do process
+        $current_user = Login::getUserData()->mail;
+        $twResourceDir = TWMetaEnum::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
+
+        $twData = array(	
+            'meeting_category_id'     => $tWClone->meeting_category_id,
+            'title'     => $tWClone->title,
+            'start_date'     => $tWClone->start_date,
+            'due_date'     => $tWClone->due_date,
+            'description'     => $tWClone->description,
+            'created_user'     => $current_user,
+            'is_visible' => $tWClone->is_visible,
+            'status_id' => $tWClone->status_id,
+            'resource_dir' => $twResourceDir,
+            'is_cloned' => false
+        );
+
+        $twUserData = (array) Input::get('own_user');
+
+        $userAttachmentData = (array) $request->file('var_user_attachment');
+
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            $updatedTW = $tWClone->update( array('is_cloned' => true) );
+            //create directory
+            if(!Storage::exists($twResourceDir)) {
+                Storage::makeDirectory($twResourceDir, 0775, true); //creates directory
+            }
+            // Validate, then create if valid
+            $newTW = TW::create( $twData );
+
+            $newTWInfo = TWInfo::create(array(
+                'is_visible' => true,
+                't_w_id' => $newTW->id,
+                'description' => $newTW->description,
+                'created_user' => $current_user
+            ));
+
+            foreach($twUserData as $key => $value){
+                $tempTWUser = new User();
+                $tempTWUser->mail = $value;
+                $tempTWUser = $tempTWUser->getUser();
+
+                $newTWUser = TWUser::create(array(
+                    't_w_id' => $newTW->id,
+                    'is_visible' => true,
+                    'own_user' => $tempTWUser->mail,
+                    'company_name' => $tempTWUser->company,
+                    'department_name' => $tempTWUser->department
+                ));
+            }
+
+            if( $request->hasFile('var_user_attachment') ){
+                foreach($userAttachmentData as $key => $value){
+                    $file_original_name = $value->getClientOriginalName();
+                    $file_type = $value->getClientOriginalExtension();
+                    $filename = $value->store( $twResourceDir );
+                    $newUserAttachment = $newTWInfo->userAttachments()->create(array(
+                        'is_visible' => true,
+                        'attached_by' => $current_user,
+                        'file_original_name' => $file_original_name,
+                        //'attachable_type' => get_class( $newTWInfo ),
+                        //'attachable_id' => $newTWInfo->id,
+                        'file_type' => $file_type,
+                        'link_url' => $filename
+                    ));
+                }
+            }
+        }catch(\Exception $e){
+
+            DB::rollback();
+
+            //delete directory
+            if(Storage::exists($twResourceDir)) {
+                Storage::deleteDirectory($twResourceDir);
+            }
+
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+
+        }
+
+        // If we reach here, then
+        // data is valid and working.
+        // Commit the queries!
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data );
     }
     
 }

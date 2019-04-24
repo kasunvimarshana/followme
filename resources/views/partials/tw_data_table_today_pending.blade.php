@@ -133,7 +133,7 @@ $(function(){
                 var buttonGroup_3 = $('<div></div>');
                 buttonGroup_3.addClass('btn-group');
                 var button_3 = $('<button></button>');
-                button_3.addClass('btn btn-success');
+                button_3.addClass('btn btn-success btn-sm');
                 var button_3_body = $('<i></i>');
                 button_3_body.addClass('fa fa-eye');
                 button_3_body.attr('data-toggle', 'tooltip');
@@ -155,7 +155,7 @@ $(function(){
                 var buttonGroup_4 = $('<div></div>');
                 buttonGroup_4.addClass('btn-group');
                 var button_4 = $('<button></button>');
-                button_4.addClass('btn btn-warning');
+                button_4.addClass('btn btn-warning btn-sm');
                 var button_4_body = $('<i></i>');
                 button_4_body.addClass('fa fa-book');
                 button_4_body.attr('data-toggle', 'tooltip');
@@ -177,7 +177,7 @@ $(function(){
                 var buttonGroup_5 = $('<div></div>');
                 buttonGroup_5.addClass('btn-group');
                 var button_5 = $('<button></button>');
-                button_5.addClass('btn btn-info');
+                button_5.addClass('btn btn-info btn-sm');
                 var button_5_body = $('<i></i>');
                 button_5_body.addClass('fa fa-clipboard');
                 button_5_body.attr('data-toggle', 'tooltip');
