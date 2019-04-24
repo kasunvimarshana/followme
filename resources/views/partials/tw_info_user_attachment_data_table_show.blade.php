@@ -98,19 +98,12 @@ $(function(){
                 button_1.addClass('btn btn-info');
                 var button_1_body = $('<i></i>');
                 button_1_body.addClass('fa fa-download');
-                /////////////////////////////////////
-                /*button_3_body.attr('data-toggle', 'tooltip');
-                button_3_body.attr('data-placement', 'auto');
-                button_3_body.attr('data-container', 'body');
-                //button_3_body.attr('title', 'title');
-                button_3_body.attr('data-title', 'View');
-                //button_3_body.attr('data-content', 'content');
-                button_3_body.tooltip();*/
-                /////////////////////////////////////
                 button_1_body.attr('data-toggle', 'tooltip');
-                button_1_body.attr('data-placement', 'top');
+                button_1_body.attr('data-placement', 'auto');
                 button_1_body.attr('data-container', 'body');
-                button_1_body.attr('title', 'download');
+                //button_1_body.attr('title', 'title');
+                button_1_body.attr('data-title', 'Download');
+                //button_1_body.attr('data-content', 'content');
                 button_1_body.tooltip();
                 //button_1_body.text('text');
                 button_1.bind("click", function(){
