@@ -143,11 +143,11 @@ $(function(){
                 data.created_user = "{!! $auth_user->mail !!}";
                 if( tableObjDataTemp.hasOwnProperty('status_id') ){
                     tableObjData.progress = tableObjDataTemp.status_id;
-                    tableObjData.progress_due_date_from = tableObjDataTemp.start_date;
-                    tableObjData.progress_due_date_to = tableObjDataTemp.due_date;
+                    tableObjData.due_date_from = tableObjDataTemp.start_date;
+                    tableObjData.due_date_to = tableObjDataTemp.due_date;
                 }else{
-                    //tableObjData.start_date = tableObjDataTemp.start_date;
-                    //tableObjData.due_date = tableObjDataTemp.due_date;
+                    tableObjData.start_date = tableObjDataTemp.start_date;
+                    tableObjData.due_date = tableObjDataTemp.due_date;
                 }
                 if( tableObjDataTemp.hasOwnProperty('own_user') ){
                     tableObjData.own_user = tableObjDataTemp.own_user;

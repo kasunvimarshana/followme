@@ -43,4 +43,6 @@ public function someFunction(Request $request){
     $ip = $this->getClientIp();
 }
 
+$q->where(DB::raw("DATE(created_at) = '".date('Y-m-d')."'"));
+
 ?>

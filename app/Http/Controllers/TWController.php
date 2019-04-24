@@ -491,9 +491,6 @@ class TWController extends Controller
             $progress_due_date_to =  $request->get('progress_due_date_to');
             if( $progress == TWStatusEnum::COMPLETED ){
                 $query = $query->where('is_done','=',true);
-                if( $progress_due_date_from ){
-                    $query = $query->whereDate('due_date','>=',$progress_due_date_from);
-                }
             }else if( $progress == TWStatusEnum::PASS ){
                 $query = $query->where(function($query){
                     $query->where('is_done','=',true);
@@ -507,16 +504,10 @@ class TWController extends Controller
                 });*/
                 $query = $query->where(function($query){
                     $query->whereRaw('due_date > done_date');
-                    $query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                    $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
+                    //$query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
                     //$query->orWhereNull('done_date'); 
                 });
-                
-                if( $progress_due_date_from ){
-                    $query = $query->whereDate('due_date','>=',$progress_due_date_from);
-                }
-                if( $progress_due_date_to ){
-                    $query = $query->whereDate('due_date','<',$progress_due_date_to);
-                }
             }else if( $progress == TWStatusEnum::INPROGRESS ){
                 $query = $query->where(function($query){
                     $query->where(function($query){
@@ -528,10 +519,6 @@ class TWController extends Controller
                         $query->orWhereDate('due_date','>=',Carbon::now()->format('Y-m-d'));
                     });
                 }); 
-                
-                if( $progress_due_date_to ){
-                    $query = $query->whereDate('due_date','>=',$progress_due_date_to);
-                }
             }else if( $progress == TWStatusEnum::OPEN ){
                 $query = $query->where(function($query){
                     $query->where('is_done','=',false);
