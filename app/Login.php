@@ -52,7 +52,7 @@ class Login extends Model
     }
     
     public static function setUserData($user){
-        /*self::setData("userprincipalname", $user->userprincipalname);
+        self::setData("userprincipalname", $user->userprincipalname);
         self::setData("employeenumber", $user->employeenumber);
         self::setData("cn", $user->cn);
         self::setData("title", $user->title);
@@ -61,20 +61,6 @@ class Login extends Model
         self::setData("department", $user->department);
         self::setData("company", $user->company);
         self::setData("mail", $user->mail);
-        self::setData("mobile", $user->mobile);
-        self::setData("directreports", $user->directreports);
-        self::setData("thumbnailphoto", $user->thumbnailphoto);*/
-        //self::setData("userprincipalname", 'KasunV@brandix.com');
-        self::setData("userprincipalname", 'SumithK@brandix.com');
-        self::setData("employeenumber", '27611');
-        self::setData("cn", 'kasunv');
-        self::setData("title", $user->title);
-        self::setData("description", $user->description);
-        self::setData("displayname", $user->displayname);
-        self::setData("department", $user->department);
-        self::setData("company", $user->company);
-        //self::setData("mail", 'KasunV@brandix.com');
-        self::setData("mail", 'SumithK@brandix.com');
         self::setData("mobile", $user->mobile);
         self::setData("directreports", $user->directreports);
         self::setData("thumbnailphoto", $user->thumbnailphoto);
@@ -116,14 +102,12 @@ class Login extends Model
     public static function doLogin($username, $password){
         $ldapModel = new LDAPModel();
         $user = new User();
-        /*if($ldapModel->isBind($username, $password)){
+        if($ldapModel->isBind($username, $password)){
             self::setLoginTrue();
             $user->mail = $username;
             $user->getUser();
             self::setUserData($user);
-        }*/
-        self::setLoginTrue();
-        self::setUserData($user);
+        }
     }
     
     public static function doLogout(){
