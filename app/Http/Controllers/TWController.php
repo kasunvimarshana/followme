@@ -487,8 +487,6 @@ class TWController extends Controller
         // progress
         if( ($request->get('progress')) && (!empty($request->get('progress'))) ){
             $progress =  $request->get('progress');
-            $progress_due_date_from =  $request->get('progress_due_date_from');
-            $progress_due_date_to =  $request->get('progress_due_date_to');
             if( $progress == TWStatusEnum::COMPLETED ){
                 $query = $query->where('is_done','=',true);
             }else if( $progress == TWStatusEnum::PASS ){
@@ -503,9 +501,9 @@ class TWController extends Controller
                     $query->orWhereNull('is_done');
                 });*/
                 $query = $query->where(function($query){
-                    $query->whereRaw('due_date > done_date');
+                    //$query->whereRaw('due_date > done_date');
                     $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
-                    //$query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                    $query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
                     //$query->orWhereNull('done_date'); 
                 });
             }else if( $progress == TWStatusEnum::INPROGRESS ){
@@ -515,7 +513,7 @@ class TWController extends Controller
                         $query->orWhereNull('is_done');
                     });
                     $query->where(function($query){
-                        $query->whereRaw('due_date >= done_date');
+                        //$query->whereRaw('due_date >= done_date');
                         $query->orWhereDate('due_date','>=',Carbon::now()->format('Y-m-d'));
                     });
                 }); 

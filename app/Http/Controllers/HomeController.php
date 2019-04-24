@@ -12,6 +12,7 @@ use \Response;
 use App\TW;
 use App\Login;
 use Carbon\Carbon;
+use DB;
 
 class HomeController extends Controller
 {
@@ -22,13 +23,15 @@ class HomeController extends Controller
     
     public function index(){
         $loginUser = Login::getUserData();
+        $due_date_from = Carbon::now()->subMonths(5)->format('Y-m-d');
+        $due_date_to = Carbon::now()->format('Y-m-d');
         
         $twTodayCount = TW::where('is_visible','=',true)
             ->where(function($query){
                 $query->where('is_done','=',false);
                 $query->orWhereNull('is_done');
             })
-            ->whereDate('due_date','=',Carbon::now()->format('Y-m-d'))
+            ->whereDate('due_date', '=', $due_date_to)
             ->whereHas('twUsers', function($query) use ($loginUser){
                 $query->where('own_user','=',$loginUser->mail);
             })
@@ -36,12 +39,13 @@ class HomeController extends Controller
         
         $twTodayCreatedCount = TW::where('is_visible','=',true)
             ->where('created_user','=',$loginUser->mail)
-            ->whereDate('created_at','=',Carbon::now()->format('Y-m-d'))
+            ->whereDate('created_at','=',$due_date_to)
             ->count();
         
         $twCompletedCount = TW::where('is_visible','=',true)
             ->where('is_done','=',true)
-            ->whereDate('due_date','>=',Carbon::now()->subMonths(5)->format('Y-m-d'))
+            ->whereDate('due_date', '>=', $due_date_from)
+            ->whereDate('due_date', '<=', $due_date_to)
             ->whereHas('twUsers', function($query) use ($loginUser){
                 $query->where('own_user','=',$loginUser->mail);
             })
@@ -49,12 +53,13 @@ class HomeController extends Controller
         
         $twFailCount = TW::where('is_visible','=',true)
             ->where(function($query){
-                $query->whereRaw('due_date > done_date');
+                //$query->whereRaw('due_date > done_date');
+                $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
                 $query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
                 //$query->orWhereNull('done_date'); 
             })
-            ->whereDate('due_date','>=',Carbon::now()->subMonths(5)->format('Y-m-d'))
-            ->whereDate('due_date','<',Carbon::now()->format('Y-m-d'))
+            ->whereDate('due_date', '>=', $due_date_from)
+            ->whereDate('due_date', '<=', $due_date_to)
             ->whereHas('twUsers', function($query) use ($loginUser){
                 $query->where('own_user','=',$loginUser->mail);
             })
@@ -65,7 +70,12 @@ class HomeController extends Controller
                 $query->where('is_done','=',false);
                 $query->orWhereNull('is_done');
             })
-            ->whereDate('due_date','>=',Carbon::now()->format('Y-m-d'))
+            ->where(function($query){
+                //$query->whereRaw('due_date >= done_date');
+                $query->orWhereDate('due_date','>=',Carbon::now()->format('Y-m-d'));
+            })
+            ->whereDate('due_date', '>=', $due_date_from)
+            ->whereDate('due_date', '<=', $due_date_to)
             ->whereHas('twUsers', function($query) use ($loginUser){
                 $query->where('own_user','=',$loginUser->mail);
             })
