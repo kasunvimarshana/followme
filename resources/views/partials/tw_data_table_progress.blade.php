@@ -82,7 +82,7 @@ $(function(){
             }
         },
         'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){
-            var tableObj = $('#twProgressDataTable');
+            /*var tableObj = $('#twProgressDataTable');
             var status_label = tableObj.data('status_id');
             
             if( status_label == {!! App\Enums\TWStatusEnum::COMPLETED !!} ){
@@ -101,7 +101,7 @@ $(function(){
                 $(row).removeClass( 'bg-green' );
                 $(row).removeClass( 'bg-red' );
                 $(row).removeClass( 'bg-yellow' );
-            }
+            }*/
         },
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],

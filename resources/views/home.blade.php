@@ -286,14 +286,34 @@
                 //var activePoints = chart.getElementsAtEvent(event);
                 var itemArray = Array.from( item );
                 var itemObj = itemArray.shift();
+                var chartObj = this;
                 try{
                     var tableObj = $('#twProgressDataTable');
+                    var chartDataSetArray = Array.from(chartObj.data.datasets);
+                    var chartDataSet = chartDataSetArray.shift();
                     if( itemObj ){
+                        $.each(chartDataSet._meta, function(key, value){
+                            var chartDataSetMetaDataArray = Array.from( value.data );
+                            $.each(chartDataSetMetaDataArray, function(key, value){
+                                value.hidden = true;
+                            });
+                        });
+                        itemObj.hidden = false;
+                        chartObj.update();
+                        
                         var _model_val = itemObj._model;
                         var label_val = _model_val.label;
                         tableObj.data('status_id', label_val);
                         tableObj.parents('div.dataTables_wrapper').first().show();
                     }else{
+                        $.each(chartDataSet._meta, function(key, value){
+                            var chartDataSetMetaDataArray = Array.from( value.data );
+                            $.each(chartDataSetMetaDataArray, function(key, value){
+                                value.hidden = false;
+                            });
+                        });
+                        chartObj.update();
+                        
                         tableObj.data('status_id', null);
                         tableObj.parents('div.dataTables_wrapper').first().hide();
                     }
