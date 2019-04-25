@@ -95,7 +95,8 @@ class TWController extends Controller
                 'created_user'     => $current_user,
                 'is_visible' => true,
                 'status_id' => TWStatusEnum::OPEN,
-                'resource_dir' => $twResourceDir
+                'resource_dir' => $twResourceDir,
+                'is_cloned' => false
             );
             
             $twUserData = (array) Input::get('own_user');
@@ -694,14 +695,14 @@ class TWController extends Controller
         $twResourceDir = TWMetaEnum::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
 
         $twData = array(	
-            'meeting_category_id'     => $tWClone->meeting_category_id,
-            'title'     => $tWClone->title,
-            'start_date'     => $tWClone->start_date,
-            'due_date'     => $tWClone->due_date,
-            'description'     => $tWClone->description,
+            'meeting_category_id'     => Input::get('meeting_category_id'),
+            'title'     => Input::get('title'),
+            'start_date'     => Input::get('start_date'),
+            'due_date'     => Input::get('due_date'),
+            'description'     => Input::get('description'),
             'created_user'     => $current_user,
-            'is_visible' => $tWClone->is_visible,
-            'status_id' => $tWClone->status_id,
+            'is_visible' => true,
+            'status_id' => TWStatusEnum::OPEN,
             'resource_dir' => $twResourceDir,
             'is_cloned' => false
         );
