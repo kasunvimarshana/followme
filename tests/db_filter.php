@@ -44,4 +44,7 @@ foreach ($users->flatMap->podcasts as $podcast) {
     echo $podcast->subscription->created_at;
 }
 
+DB::enableQueryLog();
+dd(DB::getQueryLog());
+
 ?>

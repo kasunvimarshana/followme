@@ -74,7 +74,7 @@ $(function(){
                     tableObjData.progress = tableObjDataTemp.status_id;
                 }
                 tableObjData.due_date_from = moment().subtract(5, 'M').format('YYYY-MM-DD');
-                tableObjData.due_date_to = moment().format('YYYY-MM-DD');
+                //tableObjData.due_date_to = moment().format('YYYY-MM-DD');
                 data = $.extend(data, tableObjData);
             },
             'error' : function(e){

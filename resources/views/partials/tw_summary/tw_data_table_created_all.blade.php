@@ -71,7 +71,7 @@ $(function(){
                 return data_str;
             }
         },{
-            'title' : 'Status',
+            'title' : 'Job Status',
             'orderable' : false,
             'data' : null,
             'render' : function(data, type, row){
@@ -161,23 +161,29 @@ $(function(){
                 var due_date = moment(rowData.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
                 var done_date = moment(rowData.done_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
                 var span_1 = $('<span></span>');
+                var span_1_text = null;
                 
-                if( (rowData.is_done == true) ){//completed
+                if( (rowData.is_done == true) ){//closed
                     parentTd.addClass('bg-green');
-                    //span_1.text('COMPLETED');
+                    span_1_text = null;
                 } 
                 if( (rowData.is_done == true) && ((rowData.done_date) && ((moment(due_date).isAfter(done_date)) || (moment(due_date).isSame(done_date)))) ){//pass
                     //parentTd.addClass('default');
-                    span_1.text('PASSED');
+                    span_1_text = 'CLOSED';
                 }else if(((rowData.done_date) && (moment(done_date).isAfter(due_date))) || ((moment(due_date).isBefore(today)) && ((rowData.is_done == false) || (rowData.is_done == null)))){//fail
                     parentTd.addClass('bg-red');
-                    span_1.text('FAILED');
+                    span_1_text = 'CLOSED';
                 }else if(((moment(due_date).isAfter(today)) || (moment(due_date).isSame(today))) && ((rowData.is_done == false) || (rowData.is_done == null))){//inprogress
                     parentTd.addClass('bg-yellow'); 
-                    span_1.text('INPROGRESS');
+                    span_1_text = 'OPEN';
                 }else{
                     //parentTd.addClass('default');
                 }
+                if( ((rowData.is_done == false) || (rowData.is_done == null)) ){//open
+                    parentTd.addClass('bg-yellow');
+                    span_1_text = 'OPEN';
+                }
+                span_1.text(span_1_text);
                 span_1.appendTo(parentTd);
             }
         },{
@@ -475,7 +481,9 @@ $(function(){
                 button_6.append(button_6_body);
                 buttonGroup_6.append(button_6);
                 buttonToolbar.append(buttonGroup_3);
-                buttonToolbar.append(buttonGroup_4);
+                if( ((rowData.is_done == false) || (rowData.is_done == null)) ){//open
+                    buttonToolbar.append(buttonGroup_4);
+                }
                 if( rowData.is_done ){
                     buttonToolbar.append(buttonGroup_6);
                 }else{

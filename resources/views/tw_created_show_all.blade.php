@@ -123,7 +123,7 @@
                                     
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="status_id" class="col-sm-2 control-label">Status</label>
+                                        <label for="status_id" class="col-sm-2 control-label">Job Status</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
                                             <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" style="width: 100%;">
