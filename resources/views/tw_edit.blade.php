@@ -345,6 +345,8 @@
                     //due_date.datepicker("setDate", new Date());
                     //own_user.val(null).trigger('change');
                     //meeting_category_id.val(null).trigger('change');
+                    // scroll top
+                    $('html, body').animate({scrollTop:0}, 'slow');
                 })
                 .fail(function() {
                     //console.log( "error" );

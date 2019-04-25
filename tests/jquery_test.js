@@ -16,3 +16,7 @@ console.log(object1.hasOwnProperty('toString'));
 // expected output: false
 console.log(object1.hasOwnProperty('hasOwnProperty'));
 // expected output: false
+
+//convert jquery object to html (string)
+//console.log($('#id').html());
+//console.log($('#id').prop('outerHTML'));

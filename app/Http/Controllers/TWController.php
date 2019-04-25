@@ -712,7 +712,8 @@ class TWController extends Controller
 
         $twUserData = (array) Input::get('own_user');
 
-        $userAttachmentData = (array) $request->file('var_user_attachment');
+        //$userAttachmentData = (array) $request->file('var_user_attachment');
+        $tempTWInfos = $tWClone->twInfos;
 
         // Start transaction!
         DB::beginTransaction();
@@ -725,14 +726,7 @@ class TWController extends Controller
             }
             // Validate, then create if valid
             $newTW = TW::create( $twData );
-
-            $newTWInfo = TWInfo::create(array(
-                'is_visible' => true,
-                't_w_id' => $newTW->id,
-                'description' => $newTW->description,
-                'created_user' => $current_user
-            ));
-
+            
             foreach($twUserData as $key => $value){
                 $tempTWUser = new User();
                 $tempTWUser->mail = $value;
@@ -746,21 +740,39 @@ class TWController extends Controller
                     'department_name' => $tempTWUser->department
                 ));
             }
-
-            if( $request->hasFile('var_user_attachment') ){
-                foreach($userAttachmentData as $key => $value){
-                    $file_original_name = $value->getClientOriginalName();
-                    $file_type = $value->getClientOriginalExtension();
-                    $filename = $value->store( $twResourceDir );
-                    $newUserAttachment = $newTWInfo->userAttachments()->create(array(
-                        'is_visible' => true,
-                        'attached_by' => $current_user,
-                        'file_original_name' => $file_original_name,
-                        //'attachable_type' => get_class( $newTWInfo ),
-                        //'attachable_id' => $newTWInfo->id,
-                        'file_type' => $file_type,
-                        'link_url' => $filename
-                    ));
+            
+            foreach($tempTWInfos as $key => $value){
+                $tempTWInfoClone = clone $value;
+                
+                $newTWInfo = TWInfo::create(array(
+                    'is_visible' => $tempTWInfoClone->is_visible,
+                    't_w_id' => $newTW->id,
+                    'description' => $tempTWInfoClone->description,
+                    'created_user' => $current_user
+                ));
+                
+                $tempUserAttachments = $tempTWInfoClone->userAttachments;
+                
+                foreach($tempUserAttachments as $key => $value){
+                    $tempUserAttachmentClone = clone $value;
+                    
+                    if(Storage::exists( $tempUserAttachmentClone->link_url )) {
+                        $is_visible = $tempUserAttachmentClone->is_visible;
+                        $file_original_name = $tempUserAttachmentClone->file_original_name;
+                        $file_type = $tempUserAttachmentClone->file_type;
+                        $newTWResourceDir = $newTW->resource_dir;
+                        $tWCloneResourceDir = $tWClone->resource_dir;
+                        $tempUserAttachmentCloneLinkUrl = $tempUserAttachmentClone->link_url;
+                        $newUserAttachmentLinkUrl = str_replace($tWCloneResourceDir, $newTWResourceDir, $tempUserAttachmentCloneLinkUrl);
+                        Storage::copy($tempUserAttachmentCloneLinkUrl, $newUserAttachmentLinkUrl);
+                        $newUserAttachment = $tempTWInfoClone->userAttachments()->create(array(
+                            'is_visible' => $is_visible,
+                            'attached_by' => $current_user,
+                            'file_original_name' => $file_original_name,
+                            'file_type' => $file_type,
+                            'link_url' => $newUserAttachmentLinkUrl
+                        ));
+                    }
                 }
             }
         }catch(\Exception $e){

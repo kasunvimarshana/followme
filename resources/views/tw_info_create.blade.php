@@ -198,6 +198,8 @@
                     $('#twInfoDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
                     description.val(null);
                     var_user_attachment.fileinput('clear');
+                    // scroll top
+                    $('html, body').animate({scrollTop:0}, 'slow');
                 })
                 .fail(function() {
                     //console.log( "error" );

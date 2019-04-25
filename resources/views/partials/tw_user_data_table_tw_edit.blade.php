@@ -95,7 +95,7 @@ $(function(){
                 parentTd.empty();
                 
                 var buttonToolbar = $('<div></div>');
-                buttonToolbar.addClass('btn-toolbar pull-right');
+                buttonToolbar.addClass('btn-toolbar');//pull-left
                 
                 //button group
                 var buttonGroup_2 = $('<div></div>');
@@ -193,7 +193,34 @@ $(function(){
                 
                 //buttonToolbar.append(buttonGroup_3);
                 buttonToolbar.append(buttonGroup_2);
-                buttonToolbar.appendTo(parentTd);
+                
+                var popoverButtonToolbar = $('<div></div>');
+                popoverButtonToolbar.addClass('btn-toolbar pull-left');
+                var popoverButtonGroup_1 = $('<div></div>');
+                popoverButtonGroup_1.addClass('btn-group');
+                
+                var popoverToggleButton = $('<button></button>');
+                var popoverToggleButtonId = 'id-' + moment().format('HH-mm-ss-SSS');
+                popoverToggleButton.addClass('btn btn-primary btn-sm my-popover');
+                popoverToggleButton.attr('id', popoverToggleButtonId);
+                popoverToggleButton.attr('data-toggle', 'popover');
+                popoverToggleButton.attr('data-placement', 'auto');
+                popoverToggleButton.attr('data-container', 'body');
+                var popoverToggleButtonSpan = $('<span></span>');
+                popoverToggleButtonSpan.addClass('fa fa-gears');
+                
+                popoverToggleButton.popover({
+                    html: true, 
+                    content: function() {
+                        //var content_string = buttonToolbar.html();
+                        return buttonToolbar;
+                    }
+                });
+
+                popoverToggleButton.append(popoverToggleButtonSpan);
+                popoverButtonGroup_1.append(popoverToggleButton);
+                popoverButtonToolbar.append(popoverButtonGroup_1);
+                popoverButtonToolbar.appendTo(parentTd);
             }
         }],
         'drawCallback' : function(settings){}

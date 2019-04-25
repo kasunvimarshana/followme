@@ -1,3 +1,19 @@
+// hide popovers and tooltips
+function hideTooltipAndPopover(){
+    "use strict";
+    $('.popover').popover('hide');
+    $('.tooltip').tooltip('hide');
+    //$('.popover').remove();
+    //$('.tooltip').remove();
+}
+$(document).on('focus', ':not(.popover)', function(){
+    hideTooltipAndPopover();
+});
+$(document).on('focus', ':not(.tooltip)', function(){
+    hideTooltipAndPopover();
+});
+
+// disable context menu
 $(function() {
     "use strict";
     /* disable right click */
@@ -29,6 +45,7 @@ $(function(){
 
 // ajax function
 $(function(){
+    "use strict";
     /*$( document ).ajaxStart(function(){
         $('#container_fluid').loading('start');
     });*/
@@ -39,6 +56,7 @@ $(function(){
         $('#container_fluid').loading('stop');
     });*/
     $(document).bind("ajaxStart", function(event, request, settings){
+        hideTooltipAndPopover();
         $('#container_fluid').loading('start');
     }).bind("ajaxStop", function(event, request, settings){
         $('#container_fluid').loading('stop');
@@ -84,3 +102,22 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
 
 // Disable automatic style injection
 //Chart.platform.disableCSSInjection = true;
+
+// generate unique id
+/*function IDGenerator(){	 
+    this.length = 8;
+    this.timestamp = +new Date;
+    var _getRandomInt = function( min, max ) {
+        return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+    }
+    this.generate = function() {
+        var ts = this.timestamp.toString();
+        var parts = ts.split( "" ).reverse();
+        var id = "";
+        for( var i = 0; i < this.length; ++i ){
+            var index = _getRandomInt( 0, parts.length - 1 );
+            id += parts[index];	 
+        }
+        return id;
+    }
+}*/
