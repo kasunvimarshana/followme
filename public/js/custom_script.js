@@ -1,10 +1,10 @@
-//$(function() {
-//    "use strict";
-//    /* disable right click */
-//    $(document).on("contextmenu",function(e){
-//        return false;
-//    });
-//});
+$(function() {
+    "use strict";
+    /* disable right click */
+    $(document).on("contextmenu",function(e){
+        return false;
+    });
+});
 
 $(function(){
     /* Resolve conflict in jQuery UI tooltip with Bootstrap tooltip */
