@@ -162,7 +162,7 @@
                         <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> 3W Owners</a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse in">
+                <div id="collapseTwo" class="panel-collapse collapse out">
                     <div class="panel-body">
                         
                         <!-- --- -->
@@ -190,7 +190,7 @@
                         <a data-toggle="collapse" data-parent="#collapseThreeParent" href="#collapseThree"><span class="glyphicon glyphicon-plus"></span> 3W Resourses</a>
                     </h4>
                 </div>
-                <div id="collapseThree" class="panel-collapse collapse in">
+                <div id="collapseThree" class="panel-collapse collapse out">
                     <div class="panel-body">
                         
                         <!-- --- -->

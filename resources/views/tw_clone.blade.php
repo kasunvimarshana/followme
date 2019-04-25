@@ -36,7 +36,7 @@
             <div id="collapseOneParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Clone 3W</a>
+                        <a data-toggle="collapse" data-parent="#collapseOneParent" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> Clone</a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in">
