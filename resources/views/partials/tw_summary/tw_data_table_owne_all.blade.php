@@ -169,7 +169,7 @@ $(function(){
                 if( (rowData.is_done == true) && ((rowData.done_date) && ((moment(due_date).isAfter(done_date)) || (moment(due_date).isSame(done_date)))) ){//pass
                     //parentTd.addClass('default');
                     span_1.text('PASSED');
-                }else if((moment(done_date).isAfter(due_date)) || ((moment(due_date).isBefore(today)) && ((rowData.is_done == false) || (rowData.is_done == null)))){//fail
+                }else if(((rowData.done_date) && (moment(done_date).isAfter(due_date))) || ((moment(due_date).isBefore(today)) && ((rowData.is_done == false) || (rowData.is_done == null)))){//fail
                     parentTd.addClass('bg-red');
                     span_1.text('FAILED');
                 }else if(((moment(due_date).isAfter(today)) || (moment(due_date).isSame(today))) && ((rowData.is_done == false) || (rowData.is_done == null))){//inprogress

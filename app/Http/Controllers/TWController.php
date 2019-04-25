@@ -508,7 +508,10 @@ class TWController extends Controller
                     $query->orWhereNull('done_date'); 
                 });*/
                 $query = $query->where(function($query){
-                    $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
+                    $query->where(function($query){
+                        $query->whereNotNull('done_date');
+                        $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
+                    });
                     $query->orWhere(function($query){
                         $query->whereDate('due_date','<',Carbon::now()->format('Y-m-d'));
                         $query->where(function($query){
