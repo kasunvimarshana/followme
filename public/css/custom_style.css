@@ -25,12 +25,12 @@
 }
 
 /* datatable */
-/*table.dataTable tbody td{
+table.dataTable tbody td{
     word-break: break-word !important;
     vertical-align: top;
 }
 
-table td {
+/*table td {
     transition: all .5s;
     max-width: 120px;
     white-space: nowrap;
