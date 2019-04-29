@@ -146,7 +146,8 @@ $(function(){
                     bootbox.confirm({
                         size: "small",
                         title: "Confirm",
-                        message: "Are You Sure",
+                        message: "Are You Sure ?",
+                        onEscape: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -154,12 +155,12 @@ $(function(){
                             },
                             cancel: {
                                 label: 'No',
-                                className: 'btn-danger'
+                                className: 'btn-danger  btn-primary'
                             }
                         },
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
-                            if( result == true ){
+                            if( result === true ){
                                 var url = "{!! route('twInfo.destroy', ['#tWInfo']) !!}";
                                 url = url.replace("#tWInfo", rowData.id);
                                 //$( location ).attr("href", url);
@@ -195,7 +196,10 @@ $(function(){
                                 button_2.attr("disabled", false);
                             }
                         }
-                    }).find('.modal-header').addClass('bg-danger');
+                    })
+                        .find('.modal-header').addClass('bg-danger')
+                        //.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true);
                     
                 })
                 button_2.append(button_2_body);

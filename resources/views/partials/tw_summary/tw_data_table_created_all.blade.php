@@ -248,7 +248,8 @@ $(function(){
                     bootbox.confirm({
                         size: "small",
                         title: "Confirm",
-                        message: "Are You Sure That You Want to Delete <strong>" + rowData.title + "</strong>",
+                        message: "Are You Sure That You Want to Delete <br/><strong>" + rowData.title + "</strong> ?",
+                        onEscape: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -256,12 +257,12 @@ $(function(){
                             },
                             cancel: {
                                 label: 'No',
-                                className: 'btn-danger'
+                                className: 'btn-danger btn-primary'
                             }
                         },
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
-                            if( result == true ){
+                            if( result === true ){
                                 var url = "{!! route('tw.destroy', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);
                                 //$( location ).attr("href", url);
@@ -297,7 +298,10 @@ $(function(){
                                 button_2.attr("disabled", false);
                             }
                         }
-                    }).find('.modal-header').addClass('bg-danger');
+                    })
+                        .find('.modal-header').addClass('bg-danger')
+                        //.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true);
                     
                 })
                 button_2.append(button_2_body);
@@ -366,7 +370,8 @@ $(function(){
                     bootbox.confirm({
                         size: "small",
                         title: "Confirm",
-                        message: "Job Done",
+                        message: "Job Done ?",
+                        onEscape: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -374,12 +379,12 @@ $(function(){
                             },
                             cancel: {
                                 label: 'No',
-                                className: 'btn-danger'
+                                className: 'btn-danger btn-primary'
                             }
                         },
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
-                            if( result == true ){
+                            if( result === true ){
                                 var url = "{!! route('tw.changeDoneTrue', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);
                                 //$( location ).attr("href", url);
@@ -415,7 +420,10 @@ $(function(){
                                 button_5.attr("disabled", false);
                             }
                         }
-                    }).find('.modal-header').addClass('bg-success');
+                    })
+                        .find('.modal-header').addClass('bg-success')
+                        //.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true);
                     
                 })
                 button_5.append(button_5_body);
@@ -440,7 +448,8 @@ $(function(){
                     bootbox.confirm({
                         size: "small",
                         title: "Confirm",
-                        message: "Job In Progress",
+                        message: "Job In Progress ?",
+                        onEscape: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -448,12 +457,12 @@ $(function(){
                             },
                             cancel: {
                                 label: 'No',
-                                className: 'btn-danger'
+                                className: 'btn-danger btn-primary'
                             }
                         },
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
-                            if( result == true ){
+                            if( result === true ){
                                 var url = "{!! route('tw.changeDoneFalse', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);
                                 //$( location ).attr("href", url);
@@ -489,7 +498,10 @@ $(function(){
                                 button_6.attr("disabled", false);
                             }
                         }
-                    }).find('.modal-header').addClass('bg-success');
+                    })
+                        .find('.modal-header').addClass('bg-success')
+                        //.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true);
                     
                 })
                 button_6.append(button_6_body);
