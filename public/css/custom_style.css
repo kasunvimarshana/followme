@@ -1,5 +1,9 @@
 .info-box-number{
-    word-wrap: break-word;
+    word-wrap: break-word !important;
+}
+
+.modal-body{
+    word-wrap: break-word !important;
 }
 
 /* tooltip */
