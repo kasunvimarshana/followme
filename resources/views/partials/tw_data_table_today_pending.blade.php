@@ -12,6 +12,9 @@ $(function(){
     //$.fn.dataTableExt.errMode = 'ignore';
     $.fn.dataTableExt.sErrMode = "console";
     var dataTableTWList = $('#twDataTable').DataTable({
+        'language' : {
+            'lengthMenu' : 'Show _MENU_ Entries'
+        },
         'columns' : [/*{
             'title' : '',
             'className' : 'details-control',
@@ -86,7 +89,7 @@ $(function(){
         'searching' : true,
         'ordering' : false,
         'info' : true,
-        'autoWidth' : true,
+        'autoWidth' : false,
         'processing' : false,
         'serverSide' : true,
         'jQueryUI' : false,
@@ -117,6 +120,9 @@ $(function(){
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
+            'targets' : [0, 1],
+            'width' : '30%'
+        },{
             'targets' : [1, 2],
             'responsivePriorty' : 1
         },{
@@ -192,7 +198,9 @@ $(function(){
                 button_5.bind("click", function(){
                     button_5.attr("disabled", true);
                     bootbox.confirm({
-                        message: "please confirm",
+                        size: "small",
+                        title: "Confirm",
+                        message: "Job Done",
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -241,7 +249,7 @@ $(function(){
                                 button_5.attr("disabled", false);
                             }
                         }
-                    });
+                    }).find('.modal-header').addClass('bg-success');
                     
                 })
                 button_5.append(button_5_body);

@@ -240,6 +240,14 @@
             'container': 'body'
         }).datepicker("setDate", moment('{!! $tW->due_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate());
         
+        $('#start_date').datepicker().on('show', function(e){
+            $(this).datepicker("setEndDate", $('#due_date').val());
+        });
+        
+        $('#due_date').datepicker().on('show', function(e){
+            $(this).datepicker("setStartDate", $('#start_date').val());
+        });
+        
         $('#twForm').submit(function(event) {
             /*event.preventDefault();
             var form = $(this);

@@ -12,6 +12,9 @@ $(function(){
     //$.fn.dataTableExt.errMode = 'ignore';
     $.fn.dataTableExt.sErrMode = "console";
     var dataTableTWInfoList = $('#twUserDataTable').DataTable({
+        'language' : {
+            'lengthMenu' : 'Show _MENU_ Entries'
+        },
         'columns' : [/*{
             'title' : '',
             'className' : 'details-control',
@@ -82,6 +85,9 @@ $(function(){
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
+            'targets' : [0, 1],
+            'width' : '30%'
+        },{
             'targets' : [1, 2],
             'responsivePriorty' : 1
         },{
@@ -114,7 +120,9 @@ $(function(){
                 button_2.bind("click", function(){
                     button_2.attr("disabled", true);
                     bootbox.confirm({
-                        message: "are you sure",
+                        size: "small",
+                        title: "Confirm",
+                        message: "Are You Sure That You Want to Delete <strong>" + rowData.own_user + "</strong>",
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -163,7 +171,7 @@ $(function(){
                                 button_2.attr("disabled", false);
                             }
                         }
-                    });
+                    }).find('.modal-header').addClass('bg-danger');
                     
                 })
                 button_2.append(button_2_body);

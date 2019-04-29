@@ -171,7 +171,8 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- table -->
-                                <table id="twUserDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <!-- class="table table-striped table-bordered dt-responsive nowrap" -->
+                                <table id="twUserDataTable" class="table table-bordered" style="width:100%" width="100%" cellspacing="0" border="1" align="left"></table>
                                 <!-- /.table -->
                             </div>
                             <!-- /.col -->
@@ -199,7 +200,8 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- table -->
-                                <table id="twInfoDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <!-- class="table table-striped table-bordered dt-responsive nowrap" -->
+                                <table id="twInfoDataTable" class="table table-bordered" style="width:100%" width="100%" cellspacing="0" border="1" align="left"></table>
                                 <!-- /.table -->
                             </div>
                             <!-- /.col -->

@@ -25,8 +25,8 @@
 }
 
 /* datatable */
-table.dataTable tbody td{
-    word-break: break-word;
+/*table.dataTable tbody td{
+    word-break: break-word !important;
     vertical-align: top;
 }
 
@@ -36,8 +36,9 @@ table td {
     white-space: nowrap;
     text-overflow: ellipsis;
     word-break: break-all;
+    word-wrap: break-word;
     overflow: hidden;
-}
+}*/
 
 .bg-green{
     background-color: rgba(0, 255, 0, 1) !important;

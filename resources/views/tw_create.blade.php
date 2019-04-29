@@ -186,7 +186,8 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- table -->
-                                <table id="twDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <!-- class="table table-striped table-bordered dt-responsive nowrap" -->
+                                <table id="twDataTable" class="table table-bordered" style="width:100%" width="100%" cellspacing="0" border="1" align="left"></table>
                                 <!-- /.table -->
                             </div>
                             <!-- /.col -->
@@ -277,6 +278,14 @@
             'orientation': 'auto',
             'container': 'body'
         }).datepicker("setDate", $('#start_date').val());
+        
+        $('#start_date').datepicker().on('show', function(e){
+            $(this).datepicker("setEndDate", $('#due_date').val());
+        });
+        
+        $('#due_date').datepicker().on('show', function(e){
+            $(this).datepicker("setStartDate", $('#start_date').val());
+        });
         
         /*$('#due_date').datepicker({
             'autoclose': true,

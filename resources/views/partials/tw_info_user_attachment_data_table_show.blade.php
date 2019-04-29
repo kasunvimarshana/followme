@@ -12,6 +12,9 @@ $(function(){
     //$.fn.dataTableExt.errMode = 'ignore';
     $.fn.dataTableExt.sErrMode = "console";
     var dataTableUserAttachmentList = $('#userAttachmentDataTable').DataTable({
+        'language' : {
+            'lengthMenu' : 'Show _MENU_ Entries'
+        },
         'columns' : [/*{
             'title' : '',
             'className' : 'details-control',
@@ -77,6 +80,9 @@ $(function(){
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
+            'targets' : [0, 1],
+            'width' : '30%'
+        },{
             'targets' : [0],
             'responsivePriorty' : 1
         },{

@@ -176,7 +176,8 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- table -->
-                                <table id="twDataTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"></table>
+                                <!-- class="table table-striped table-bordered dt-responsive nowrap" -->
+                                <table id="twDataTable" class="table table-bordered" style="width:100%" width="100%" cellspacing="0" border="1" align="left"></table>
                                 <!-- /.table -->
                             </div>
                             <!-- /.col -->
