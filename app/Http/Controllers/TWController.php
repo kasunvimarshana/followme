@@ -765,7 +765,7 @@ class TWController extends Controller
                         $tempUserAttachmentCloneLinkUrl = $tempUserAttachmentClone->link_url;
                         $newUserAttachmentLinkUrl = str_replace($tWCloneResourceDir, $newTWResourceDir, $tempUserAttachmentCloneLinkUrl);
                         Storage::copy($tempUserAttachmentCloneLinkUrl, $newUserAttachmentLinkUrl);
-                        $newUserAttachment = $tempTWInfoClone->userAttachments()->create(array(
+                        $newUserAttachment = $newTWInfo->userAttachments()->create(array(
                             'is_visible' => $is_visible,
                             'attached_by' => $current_user,
                             'file_original_name' => $file_original_name,
@@ -807,7 +807,8 @@ class TWController extends Controller
             'timer' => 3000
         );
         
-        return Response::json( $data );
+        //return Response::json( $data );
+        return redirect()->route('tw.showOwneTW');
     }
     
 }

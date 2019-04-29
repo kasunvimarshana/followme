@@ -30,6 +30,15 @@ table.dataTable tbody td{
     vertical-align: top;
 }
 
+table td {
+    transition: all .5s;
+    max-width: 120px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+}
+
 .bg-green{
     background-color: rgba(0, 255, 0, 1) !important;
     color: rgba(0, 0, 0, 1) !important;

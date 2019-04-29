@@ -241,7 +241,7 @@
         }).datepicker("setDate", moment('{!! $tW->due_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate());
         
         $('#twForm').submit(function(event) {
-            event.preventDefault();
+            /*event.preventDefault();
             var form = $(this);
             var form_id = $(this).attr('id');
             var _token = '{{ Session::token() }}';
@@ -296,7 +296,7 @@
                     //console.log( "complete" );
                     submit.attr("disabled", false);
                     //submit.removeAttr("disabled");
-                });
+                });*/
         });
     });
     </script>
