@@ -259,7 +259,8 @@
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
-            'todayHighlight': true
+            'todayHighlight': true,
+            'enableOnReadonly': false
         }).datepicker("setDate", moment('{!! $tW->start_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate());
         
         $('#due_date').datepicker({
@@ -267,7 +268,8 @@
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
-            'todayHighlight': true
+            'todayHighlight': true,
+            'enableOnReadonly': false
         }).datepicker("setDate", moment('{!! $tW->due_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate());
         
         //$('#meeting_category_id').select2();

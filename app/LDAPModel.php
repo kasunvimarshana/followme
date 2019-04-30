@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LDAPModel extends Model
 {
     
-    //protected $ldaphost = "brandixlk.org"; //ldap://brandixlk.org
+    //protected $ldaphost = "brandixlk.org"; //ldap://brandixlk.org //10.150.152.12
     protected $ldaphost = "10.150.152.12"; //ldap://brandixlk.org
     protected $ldapport = 389;
     protected $ldapconn = null;

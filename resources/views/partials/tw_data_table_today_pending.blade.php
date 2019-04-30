@@ -202,6 +202,8 @@ $(function(){
                         title: "Confirm",
                         message: "Job Done ?",
                         onEscape: true,
+                        show: true,
+                        scrollable: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -252,10 +254,16 @@ $(function(){
                         }
                     })
                         .find('.modal-header').addClass('bg-success')
-                        //.find('.bootbox-cancel:first').focus()
-                        .find('.bootbox-cancel').attr('autofocus', true);
+                        /*.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true)
+                        .on('shown.bs.modal', function(e){
+                            $(this).find(".bootbox-cancel:first").focus();
+                        })*/
+                        .init(function(e){
+                            $(this).find(".bootbox-cancel").focus();
+                        });
                     
-                })
+                });
                 button_5.append(button_5_body);
                 buttonGroup_5.append(button_5);
                 

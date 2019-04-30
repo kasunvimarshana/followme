@@ -250,6 +250,8 @@ $(function(){
                         title: "Confirm",
                         message: "Are You Sure That You Want to Delete <br/><strong>" + rowData.title + "</strong> ?",
                         onEscape: true,
+                        show: true,
+                        scrollable: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -300,10 +302,16 @@ $(function(){
                         }
                     })
                         .find('.modal-header').addClass('bg-danger')
-                        //.find('.bootbox-cancel:first').focus()
-                        .find('.bootbox-cancel').attr('autofocus', true);
+                        /*.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true)
+                        .on('shown.bs.modal', function(e){
+                            $(this).find(".bootbox-cancel:first").focus();
+                        })*/
+                        .init(function(e){
+                            $(this).find(".bootbox-cancel").focus();
+                        });
                     
-                })
+                });
                 button_2.append(button_2_body);
                 buttonGroup_2.append(button_2);
                 
@@ -372,6 +380,8 @@ $(function(){
                         title: "Confirm",
                         message: "Job Done ?",
                         onEscape: true,
+                        show: true,
+                        scrollable: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -422,10 +432,16 @@ $(function(){
                         }
                     })
                         .find('.modal-header').addClass('bg-success')
-                        //.find('.bootbox-cancel:first').focus()
-                        .find('.bootbox-cancel').attr('autofocus', true);
+                        /*.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true)
+                        .on('shown.bs.modal', function(e){
+                            $(this).find(".bootbox-cancel:first").focus();
+                        })*/
+                        .init(function(e){
+                            $(this).find(".bootbox-cancel").focus();
+                        });
                     
-                })
+                });
                 button_5.append(button_5_body);
                 buttonGroup_5.append(button_5);
                 
@@ -450,6 +466,8 @@ $(function(){
                         title: "Confirm",
                         message: "Job In Progress ?",
                         onEscape: true,
+                        show: true,
+                        scrollable: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -500,10 +518,16 @@ $(function(){
                         }
                     })
                         .find('.modal-header').addClass('bg-success')
-                        //.find('.bootbox-cancel:first').focus()
-                        .find('.bootbox-cancel').attr('autofocus', true);
+                        /*.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true)
+                        .on('shown.bs.modal', function(e){
+                            $(this).find(".bootbox-cancel:first").focus();
+                        })*/
+                        .init(function(e){
+                            $(this).find(".bootbox-cancel").focus();
+                        });
                     
-                })
+                });
                 button_6.append(button_6_body);
                 buttonGroup_6.append(button_6);
                 buttonToolbar.append(buttonGroup_3);

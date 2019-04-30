@@ -35,5 +35,6 @@
     $('#event_period').datepicker({
           inputs: $('.actual_range').toArray()
     });
+    $('#event_period').prop('disabled',true);
     </script>
 </div>

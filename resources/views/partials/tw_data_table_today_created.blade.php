@@ -182,6 +182,8 @@ $(function(){
                         title: "Confirm",
                         message: "Are You Sure That You Want to Delete <br/><strong>" + rowData.title + "</strong> ?",
                         onEscape: true,
+                        show: true,
+                        scrollable: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
@@ -232,10 +234,16 @@ $(function(){
                         }
                     })
                         .find('.modal-header').addClass('bg-danger')
-                        //.find('.bootbox-cancel:first').focus()
-                        .find('.bootbox-cancel').attr('autofocus', true);
+                        /*.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true)
+                        .on('shown.bs.modal', function(e){
+                            $(this).find(".bootbox-cancel:first").focus();
+                        })*/
+                        .init(function(e){
+                            $(this).find(".bootbox-cancel").focus();
+                        });
                     
-                })
+                });
                 button_2.append(button_2_body);
                 buttonGroup_2.append(button_2);
                 
