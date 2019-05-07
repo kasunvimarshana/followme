@@ -14,7 +14,7 @@
 
 /* treeview menu-open li */
 .sidebar-menu li{
-    padding-left: 1em !important;
+    padding-left: 0em !important;
 }
 .treeview.active.menu-open{
     padding-left: 0 !important;

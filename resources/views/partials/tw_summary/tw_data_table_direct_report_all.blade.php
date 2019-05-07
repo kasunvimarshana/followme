@@ -28,7 +28,7 @@ $(function(){
                 return data.epf_no;
             }
         },*/{
-            'title' : 'Title',
+            'title' : '3W',
             'orderable' : false,
             'data' : 'title',
             'render' : function(data, type, row){
@@ -122,7 +122,7 @@ $(function(){
                 var tableObjData = {};
                 var tableObjDataTemp = tableObj.data();
                 tableObj.removeData();
-                data.created_user = "{!! $auth_user->mail !!}";
+                data.own_user = "{!! $directReportUser->mail !!}";
                 if( tableObjDataTemp.hasOwnProperty('status_id') ){
                     tableObjData.progress = tableObjDataTemp.status_id;
                     tableObjData.due_date_from = tableObjDataTemp.start_date;
@@ -131,8 +131,8 @@ $(function(){
                     tableObjData.start_date = tableObjDataTemp.start_date;
                     tableObjData.due_date = tableObjDataTemp.due_date;
                 }
-                if( tableObjDataTemp.hasOwnProperty('own_user') ){
-                    tableObjData.own_user = tableObjDataTemp.own_user;
+                if( tableObjDataTemp.hasOwnProperty('created_user') ){
+                    tableObjData.created_user = tableObjDataTemp.created_user;
                 }
                 if( tableObjDataTemp.hasOwnProperty('meeting_category_id') ){
                     tableObjData.meeting_category_id = tableObjDataTemp.meeting_category_id;
@@ -206,114 +206,6 @@ $(function(){
                 
                 var buttonToolbar = $('<div></div>');
                 buttonToolbar.addClass('btn-toolbar');//pull-left
-                //button group
-                var buttonGroup_1 = $('<div></div>');
-                buttonGroup_1.addClass('btn-group');
-                var button_1 = $('<button></button>');
-                button_1.addClass('btn btn-info btn-sm');
-                var button_1_body = $('<i></i>');
-                button_1_body.addClass('fa fa-edit');
-                button_1_body.attr('data-toggle', 'tooltip');
-                button_1_body.attr('data-placement', 'auto');
-                button_1_body.attr('data-container', 'body');
-                //button_1_body.attr('title', 'title');
-                button_1_body.attr('data-title', 'Edit');
-                //button_1_body.attr('data-content', 'content');
-                button_1_body.tooltip();
-                //button_1_body.text('text');
-                button_1.bind("click", function(){
-                    var url = "{!! route('tw.edit', ['#tW']) !!}";
-                    url = url.replace("#tW", rowData.id);
-                    $( location ).attr("href", url);
-                });
-                button_1.append(button_1_body);
-                buttonGroup_1.append(button_1);
-                
-                //button group
-                var buttonGroup_2 = $('<div></div>');
-                buttonGroup_2.addClass('btn-group');
-                var button_2 = $('<button></button>');
-                button_2.addClass('btn btn-danger btn-sm');
-                var button_2_body = $('<i></i>');
-                button_2_body.addClass('fa fa-trash-o');
-                button_2_body.attr('data-toggle', 'tooltip');
-                button_2_body.attr('data-placement', 'auto');
-                button_2_body.attr('data-container', 'body');
-                //button_2_body.attr('title', 'title');
-                button_2_body.attr('data-title', 'Delete');
-                //button_2_body.attr('data-content', 'content');
-                button_2_body.tooltip();
-                button_2.bind("click", function(){
-                    button_2.attr("disabled", true);
-                    bootbox.confirm({
-                        size: "small",
-                        title: "Confirm",
-                        message: "Are You Sure That You Want to Delete <br/><strong>" + rowData.title + "</strong> ?",
-                        onEscape: true,
-                        show: true,
-                        scrollable: true,
-                        buttons: {
-                            confirm: {
-                                label: 'Yes',
-                                className: 'btn-success'
-                            },
-                            cancel: {
-                                label: 'No',
-                                className: 'btn-danger btn-primary'
-                            }
-                        },
-                        callback: function (result) {
-                            //console.log('This was logged in the callback: ' + result);
-                            if( result === true ){
-                                var url = "{!! route('tw.destroy', ['#tW']) !!}";
-                                url = url.replace("#tW", rowData.id);
-                                //$( location ).attr("href", url);
-                                
-                                $.ajax({
-                                    type: "GET",
-                                    url: url,
-                                    data: null,
-                                    //success: success,
-                                    //dataType: dataType,
-                                    //context: document.body
-                                })
-                                .done(function( data ) {
-                                    swal({
-                                        'title': data.title,
-                                        'text': data.text,
-                                        'type': data.type,
-                                        'timer': data.timer,
-                                        'showConfirmButton': false
-                                    });
-                                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
-                                })
-                                .fail(function() {
-                                    //console.log( "error" );
-                                    alert('fail');
-                                })
-                                .always(function() {
-                                    //console.log( "finished" );
-                                    button_2.attr("disabled", false);
-                                });
-                                
-                            }else{
-                                button_2.attr("disabled", false);
-                            }
-                        }
-                    })
-                        .find('.modal-header').addClass('bg-danger')
-                        /*.find('.bootbox-cancel:first').focus()
-                        .find('.bootbox-cancel').attr('autofocus', true)
-                        .on('shown.bs.modal', function(e){
-                            $(this).find(".bootbox-cancel:first").focus();
-                        })*/
-                        .init(function(e){
-                            $(this).find(".bootbox-cancel").focus();
-                        });
-                    
-                });
-                button_2.append(button_2_body);
-                buttonGroup_2.append(button_2);
                 
                 //button group
                 var buttonGroup_3 = $('<div></div>');
@@ -419,7 +311,6 @@ $(function(){
                                 })
                                 .fail(function() {
                                     //console.log( "error" );
-                                    alert('fail');
                                 })
                                 .always(function() {
                                     //console.log( "finished" );
@@ -449,98 +340,34 @@ $(function(){
                 var buttonGroup_6 = $('<div></div>');
                 buttonGroup_6.addClass('btn-group');
                 var button_6 = $('<button></button>');
-                button_6.addClass('btn btn-info btn-sm');
+                button_6.addClass('btn btn-success btn-sm');
                 var button_6_body = $('<i></i>');
-                button_6_body.addClass('fa fa-refresh');
+                button_6_body.addClass('fa fa-child');
                 button_6_body.attr('data-toggle', 'tooltip');
                 button_6_body.attr('data-placement', 'auto');
                 button_6_body.attr('data-container', 'body');
                 //button_6_body.attr('title', 'title');
-                button_6_body.attr('data-title', 'Update Status');
+                button_6_body.attr('data-title', 'Clone');
                 //button_6_body.attr('data-content', 'content');
                 button_6_body.tooltip();
                 button_6.bind("click", function(){
-                    button_6.attr("disabled", true);
-                    bootbox.confirm({
-                        size: "small",
-                        title: "Confirm",
-                        message: "Job In Progress ?",
-                        onEscape: true,
-                        show: true,
-                        scrollable: true,
-                        buttons: {
-                            confirm: {
-                                label: 'Yes',
-                                className: 'btn-success'
-                            },
-                            cancel: {
-                                label: 'No',
-                                className: 'btn-danger btn-primary'
-                            }
-                        },
-                        callback: function (result) {
-                            //console.log('This was logged in the callback: ' + result);
-                            if( result === true ){
-                                var url = "{!! route('tw.changeDoneFalse', ['#tW']) !!}";
-                                url = url.replace("#tW", rowData.id);
-                                //$( location ).attr("href", url);
-                                
-                                $.ajax({
-                                    type: "GET",
-                                    url: url,
-                                    data: null,
-                                    //success: success,
-                                    //dataType: dataType,
-                                    //context: document.body
-                                })
-                                .done(function( data ) {
-                                    swal({
-                                        'title': data.title,
-                                        'text': data.text,
-                                        'type': data.type,
-                                        'timer': data.timer,
-                                        'showConfirmButton': false
-                                    });
-                                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
-                                })
-                                .fail(function() {
-                                    //console.log( "error" );
-                                    alert('fail');
-                                })
-                                .always(function() {
-                                    //console.log( "finished" );
-                                    button_6.attr("disabled", false);
-                                });
-                                
-                            }else{
-                                button_6.attr("disabled", false);
-                            }
-                        }
-                    })
-                        .find('.modal-header').addClass('bg-success')
-                        /*.find('.bootbox-cancel:first').focus()
-                        .find('.bootbox-cancel').attr('autofocus', true)
-                        .on('shown.bs.modal', function(e){
-                            $(this).find(".bootbox-cancel:first").focus();
-                        })*/
-                        .init(function(e){
-                            $(this).find(".bootbox-cancel").focus();
-                        });
-                    
+                    var url = "{!! route('tw.showClone', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
+                    $( location ).attr("href", url);
                 });
                 button_6.append(button_6_body);
                 buttonGroup_6.append(button_6);
+                
                 buttonToolbar.append(buttonGroup_3);
                 if( ((rowData.is_done == false) || (rowData.is_done == null)) ){//open
-                    buttonToolbar.append(buttonGroup_4);
+                    //buttonToolbar.append(buttonGroup_4);
                 }
-                if( rowData.is_done ){
-                    buttonToolbar.append(buttonGroup_6);
-                }else{
-                    buttonToolbar.append(buttonGroup_5);
-                    buttonToolbar.append(buttonGroup_1);
+                if( !rowData.is_done ){
+                    //buttonToolbar.append(buttonGroup_5);
                 }
-                buttonToolbar.append(buttonGroup_2);
+                if( ((rowData.is_done == false) || (rowData.is_done == null)) && ((rowData.is_cloned == false) || (rowData.is_cloned == null)) ){//completed
+                    //buttonToolbar.append(buttonGroup_6);
+                }
                 
                 var popoverButtonToolbar = $('<div></div>');
                 popoverButtonToolbar.addClass('btn-toolbar pull-left');

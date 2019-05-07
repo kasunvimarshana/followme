@@ -74,11 +74,16 @@ class User extends Authenticatable
         return $this;
     }
     
-    public function findUsers($filter = '(mail=*)'){
+    public function findUsers($filter = '(mail=*)', $ldaptree = null){
         $users = array();
         $ldapModel = new LDAPModel();
         $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto');
-        $results = $ldapModel->doSearch($filter, $attributes);
+        $results = null;
+        if( !empty($ldaptree) ){
+            $results = $ldapModel->doSearch($filter, $attributes, $ldaptree);
+        }else{
+            $results = $ldapModel->doSearch($filter, $attributes);
+        }
         $results = $ldapModel->formatEntries( $results );
         if( $results ){
             foreach($results as $result){
@@ -89,6 +94,29 @@ class User extends Authenticatable
             }
         }
         
+        return $users;
+    }
+    
+    public function getDirectReports(){
+        $users = array();
+        if( ($this->directreports) && (is_array($this->directreports)) ){
+            foreach( $this->directreports as $directreport ){
+                $reportUserArray = array();
+                $filterArray = array();
+                $filterArray = @explode(',', $directreport);
+                $filter = @array_shift($filterArray);
+                if($filter){
+                    $filter = "({$filter})";
+                    $ldaptree = $directreport;
+                    $reportUserArray = $this->findUsers($filter, $ldaptree);
+                    $reportUser = @array_shift( $reportUserArray );
+                    if( ($reportUser) && ($reportUser->mail) ){
+                        $reportUser->thumbnailphoto = null;
+                        array_push($users, $reportUser);
+                    }
+                }
+            }
+        }
         return $users;
     }
     

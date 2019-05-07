@@ -188,7 +188,7 @@ $(function(){
                     //parentTd.addClass('default');
                 }
                 if( ((rowData.is_done == false) || (rowData.is_done == null)) ){//open
-                    parentTd.addClass('bg-yellow');
+                    //parentTd.addClass('bg-yellow');
                     span_1_text = 'OPEN';
                 }
                 span_1.text(span_1_text);

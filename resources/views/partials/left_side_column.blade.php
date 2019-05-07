@@ -41,8 +41,10 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{!! set_active(['home/tws/create', 'home/tws/create/*']) !!}"><a href="{!! route('tw.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Create New</a></li>
-                    <li class="{!! set_active(['home/tws/show-created-tws', 'home/tws/show-created-tws/*']) !!}"><a href="{!! route('tw.showCreatedTW') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Others</a></li>
                     <li class="{!! set_active(['home/tws/show-owne-tws', 'home/tws/show-owne-tws/*']) !!}"><a href="{!! route('tw.showOwneTW') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Me</a></li>
+                    <li class="{!! set_active(['home/tws/show-created-tws', 'home/tws/show-created-tws/*']) !!}"><a href="{!! route('tw.showCreatedTW') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Others</a></li>
+                    <!-- li class="{!! set_active(['home/direct-reports/show-all', 'home/direct-reports/*']) !!}"><a href="{!! route('user.listDirectReports', [urlencode($auth_user->mail)]) !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Subordinate</a></li -->
+                    <li class="{!! set_active(['home/direct-reports/show-all', 'home/direct-reports/*']) !!}"><a href="{!! route('user.showDirectReports') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Subordinates</a></li>
                 </ul>
             </li>
             

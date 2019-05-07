@@ -14,6 +14,7 @@ class LDAPModel extends Model
     
     protected $bind_rdn = "scan@brandix.com";
     protected $bind_password = "Brdx@9000";
+    protected $ldap_control_paged_result_count = 10;
     
     function __construct() {
         //parent::__construct();
@@ -100,7 +101,7 @@ class LDAPModel extends Model
     public function doSearch($filter = '(cn=*)', $attributes = array(), $ldaptree = 'OU=Brandix Users,DC=brandixlk,DC=org'){
         $results = array();
         
-        @ldap_control_paged_result($this->ldapconn, 10);
+        @ldap_control_paged_result($this->ldapconn, $this->ldap_control_paged_result_count);
         //$searchResults = @ldap_search($this->ldapconn, $ldaptree, $filter, $attributes, false, 10);
         $searchResults = @ldap_search($this->ldapconn, $ldaptree, $filter, $attributes);
         //ldap_count_entries($this->ldapconn, $searchResults);
