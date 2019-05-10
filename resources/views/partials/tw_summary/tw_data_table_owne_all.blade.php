@@ -58,22 +58,14 @@ $(function(){
                 return date;
             }
         },{
-            'title' : 'Owners',
+            'title' : 'Assigned By',
             'orderable' : false,
-            'data' : 'tw_users',
+            'data' : 'created_user',
             'render' : function(data, type, row){
-                var data_str = '';
-                if(($.isArray(data))){
-                    $.each(data, function( key, value ){
-                        var formatted_data = value.own_user;
-                        formatted_data = formatted_data.substring(0, formatted_data.lastIndexOf('@'));
-                        data_str =  formatted_data + ' <br/> ' + data_str;
-                    });
-                }else{
-                    data_str = value.own_user;
-                }
+                var formatted_data = data;
+                formatted_data = formatted_data.substring(0, data.lastIndexOf('@'));
                 
-                return data_str;
+                return formatted_data;
             }
         },{
             'title' : 'Job Status',
@@ -398,7 +390,14 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
+    });
+    
+    $('#twDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableTWList.table().columns.adjust().draw();
     });
 });
 </script>

@@ -83,7 +83,10 @@ class TWController extends Controller
             
         } else {
             // do process
-            $current_user = Login::getUserData()->mail;
+            $loginUserObj = Login::getUserData();
+            $current_user = $loginUserObj->mail;
+            $company_name = $loginUserObj->company;
+            $department_name = $loginUserObj->department;
             $twResourceDir = TWMetaEnum::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
             
             $twData = array(	
@@ -93,6 +96,8 @@ class TWController extends Controller
                 'due_date'     => Input::get('due_date'),
                 'description'     => Input::get('description'),
                 'created_user'     => $current_user,
+                'company_name'     => $company_name,
+                'department_name'     => $department_name,
                 'is_visible' => true,
                 'status_id' => TWStatusEnum::OPEN,
                 'resource_dir' => $twResourceDir,
@@ -247,7 +252,8 @@ class TWController extends Controller
             
         } else {
             // do process
-            $current_user = Login::getUserData()->mail;
+            $loginUserObj = Login::getUserData();
+            $current_user = $loginUserObj->mail;
             
             $twData = array(	
                 'meeting_category_id'     => Input::get('meeting_category_id'),
@@ -591,7 +597,8 @@ class TWController extends Controller
     public function changeDoneTrue(Request $request, TW $tW){
         //
         $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
-        $current_user = Login::getUserData()->mail;
+        $loginUserObj = Login::getUserData();
+        $current_user = $loginUserObj->mail;
         $tWClone = clone $tW;
         // do process
         $twData = array(	
@@ -633,20 +640,31 @@ class TWController extends Controller
     public function changeDoneFalse(Request $request, TW $tW){
         //
         $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
-        $current_user = Login::getUserData()->mail;
+        $loginUserObj = Login::getUserData();
+        $current_user = $loginUserObj->mail;
         $tWClone = clone $tW;
         // do process
         $twData = array(	
             'is_done' => false,
             'done_user' => null,
             'status_id' => TWStatusEnum::OPEN,
-            'done_date' => null
+            'done_date' => null,
+            'due_date' => Input::get('due_date')
         );
         // Start transaction!
         DB::beginTransaction();
 
         try {
+            
             $updatedTW = $tWClone->update( $twData );
+            
+            $newTWInfo = TWInfo::create(array(
+                'is_visible' => true,
+                't_w_id' => $tWClone->id,
+                'description' => Input::get('description'),
+                'created_user' => $current_user
+            ));
+            
         }catch(\Exception $e){
             DB::rollback();
             
@@ -694,7 +712,8 @@ class TWController extends Controller
         $tWClone = clone $tW;
         $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
         // do process
-        $current_user = Login::getUserData()->mail;
+        $loginUserObj = Login::getUserData();
+        $current_user = $loginUserObj->mail;
         $twResourceDir = TWMetaEnum::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
 
         $twData = array(	

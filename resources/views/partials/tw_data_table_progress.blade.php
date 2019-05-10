@@ -180,9 +180,14 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
     });
     
-    $('#twProgressDataTable').parents('div.dataTables_wrapper').first().hide();
+    $('#twProgressDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableTWList.table().columns.adjust().draw();
+    });
 });
 </script>

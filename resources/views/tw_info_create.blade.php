@@ -50,7 +50,7 @@
                                         <label for="description" class="col-sm-2 control-label">Description</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5">{{ old('description') }}</textarea>
+                                            <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5" required>{{ old('description') }}</textarea>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>

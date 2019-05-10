@@ -27,13 +27,6 @@ $(function(){
                 return data.epf_no;
             }
         },*/{
-            'title' : '3W',
-            'orderable' : false,
-            'data' : 'tw',
-            'render' : function(data, type, row){
-                return data.title;
-            }
-        },{
             'title' : 'Description',
             'orderable' : false,
             'data' : 'description',
@@ -86,10 +79,10 @@ $(function(){
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
-            'targets' : [0, 1],
-            'width' : '30%'
+            'targets' : [0],
+            'width' : '75%'
         },{
-            'targets' : [1, 2],
+            'targets' : [1],
             'responsivePriorty' : 1
         },{
             'targets' : [-1],
@@ -267,7 +260,14 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
+    });
+    
+    $('#twInfoDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableTWInfoList.table().columns.adjust().draw();
     });
 });
 </script>

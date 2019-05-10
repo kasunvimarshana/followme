@@ -251,9 +251,9 @@
                     @endisset
                 ],
                 backgroundColor: [
-                    'rgba(0, 255, 0, 1)',
-                    'rgba(255, 0, 0, 1)',
-                    'rgba(255, 255, 0, 1)'
+                    'rgba(0,153,0,1)',
+                    'rgba(153,0,0,1)',
+                    'rgba(153,153,0,1)'
                 ],
                 label: [
                     {!! App\Enums\TWStatusEnum::COMPLETED !!},

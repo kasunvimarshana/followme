@@ -61,6 +61,7 @@ class LoginController extends Controller
     
     public function doLogout(){
         Login::doLogout();
+        //$exitCode = Artisan::call('cache:clear');
         return redirect()->route('login.showLogin');
     }
  

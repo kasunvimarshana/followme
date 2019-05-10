@@ -44,7 +44,39 @@
                     <li class="{!! set_active(['home/tws/show-owne-tws', 'home/tws/show-owne-tws/*']) !!}"><a href="{!! route('tw.showOwneTW') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Me</a></li>
                     <li class="{!! set_active(['home/tws/show-created-tws', 'home/tws/show-created-tws/*']) !!}"><a href="{!! route('tw.showCreatedTW') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Others</a></li>
                     <!-- li class="{!! set_active(['home/direct-reports/show-all', 'home/direct-reports/*']) !!}"><a href="{!! route('user.listDirectReports', [urlencode($auth_user->mail)]) !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Subordinate</a></li -->
-                    <li class="{!! set_active(['home/direct-reports/show-all', 'home/direct-reports/*']) !!}"><a href="{!! route('user.showDirectReports') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Assigned To Subordinates</a></li>
+                </ul>
+            </li>
+            <li class="treeview {!! set_active(['team/direct-reports', 'team/direct-reports/*']) !!}">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>My Team</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{!! set_active(['team/direct-reports/show-all', 'team/direct-reports/*']) !!}"><a href="{!! route('user.showDirectReports') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
+                </ul>
+            </li>
+            <li class="treeview {!! set_active(['team/direct-reports', 'team/direct-reports/*']) !!}">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>My Department</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{!! set_active(['team/direct-reports/show-all', 'team/direct-reports/*']) !!}"><a href="{!! route('user.showDirectReports') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
+                </ul>
+            </li>
+            <li class="treeview {!! set_active(['team/direct-reports', 'team/direct-reports/*']) !!}">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>My SBU</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{!! set_active(['team/direct-reports/show-all', 'team/direct-reports/*']) !!}"><a href="{!! route('user.showDirectReports') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
                 </ul>
             </li>
             

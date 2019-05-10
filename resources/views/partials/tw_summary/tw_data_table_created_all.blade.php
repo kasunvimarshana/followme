@@ -28,6 +28,24 @@ $(function(){
                 return data.epf_no;
             }
         },*/{
+            'title' : 'Task Owners',
+            'orderable' : false,
+            'data' : 'tw_users',
+            'render' : function(data, type, row){
+                var data_str = '';
+                if(($.isArray(data))){
+                    $.each(data, function( key, value ){
+                        var formatted_data = value.own_user;
+                        formatted_data = formatted_data.substring(0, formatted_data.lastIndexOf('@'));
+                        data_str =  formatted_data + ' <br/> ' + data_str;
+                    });
+                }else{
+                    data_str = data.own_user;
+                }
+                
+                return data_str;
+            }
+        },{
             'title' : 'Title',
             'orderable' : false,
             'data' : 'title',
@@ -56,24 +74,6 @@ $(function(){
             'render' : function(data, type, row){
                 var date = moment(data, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
                 return date;
-            }
-        },{
-            'title' : 'Owners',
-            'orderable' : false,
-            'data' : 'tw_users',
-            'render' : function(data, type, row){
-                var data_str = '';
-                if(($.isArray(data))){
-                    $.each(data, function( key, value ){
-                        var formatted_data = value.own_user;
-                        formatted_data = formatted_data.substring(0, formatted_data.lastIndexOf('@'));
-                        data_str =  formatted_data + ' <br/> ' + data_str;
-                    });
-                }else{
-                    data_str = value.own_user;
-                }
-                
-                return data_str;
             }
         },{
             'title' : 'Job Status',
@@ -150,7 +150,7 @@ $(function(){
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
-            'targets' : [0, 1],
+            'targets' : [1, 2],
             'width' : '30%'
         },{
             'targets' : [1, 2],
@@ -461,34 +461,63 @@ $(function(){
                 button_6_body.tooltip();
                 button_6.bind("click", function(){
                     button_6.attr("disabled", true);
-                    bootbox.confirm({
+                    var formTemplateClone = $('#formTemplate').contents().clone(true);
+                    //var formTemplateCloneChild = formTemplateClone.children().get();
+                    var formTemplateCloneChild = formTemplateClone.children().first();
+                    var formTemplateCloneChildId = 'formTemplateCloneChild' + rowData.id;
+                    formTemplateCloneChild.find('form').attr('id', formTemplateCloneChildId);
+                    
+                    var bootboxObj = bootbox.confirm({
                         size: "small",
                         title: "Confirm",
-                        message: "Job In Progress ?",
+                        message: formTemplateCloneChild.html(),
                         onEscape: true,
                         show: true,
                         scrollable: true,
                         buttons: {
                             confirm: {
                                 label: 'Yes',
-                                className: 'btn-success'
+                                className: 'btn-success',
+                                callback: function(){
+                                    //return false;
+                                }
                             },
                             cancel: {
                                 label: 'No',
-                                className: 'btn-danger btn-primary'
+                                className: 'btn-danger btn-primary',
+                                callback: function(){
+                                    return false;
+                                }
                             }
                         },
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
-                            if( result === true ){
+                            var formObj = $('#' + formTemplateCloneChildId);
+                            formObj.validator('validate');
+                            var due_date = formObj.find('#due_date');
+                            var description = formObj.find('#description');
+                            var _token = formObj.find("[name='_token']");
+                            var due_date_value = due_date.val();
+                            var description_value = description.val();
+                            var _token_value = _token.val();
+                            description_value = 'Re  Submitted Due To : ' + description_value;
+                            
+                            if( (result === true) && ((!$.type(description_value) === 'string') || (description_value.length <= 0) || (moment(description_value, 'YYYY-MM-DD HH:mm:ss').isValid())) ){
+                               return false;
+                            }
+                            if( (result === true) ){
                                 var url = "{!! route('tw.changeDoneFalse', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);
                                 //$( location ).attr("href", url);
+                                var formdata = {};
+                                formdata.description =  description_value;
+                                formdata.due_date = due_date_value;
+                                formdata._token = _token_value;
                                 
                                 $.ajax({
-                                    type: "GET",
+                                    type: "POST",
                                     url: url,
-                                    data: null,
+                                    data: formdata,
                                     //success: success,
                                     //dataType: dataType,
                                     //context: document.body
@@ -505,7 +534,6 @@ $(function(){
                                 })
                                 .fail(function() {
                                     //console.log( "error" );
-                                    alert('fail');
                                 })
                                 .always(function() {
                                     //console.log( "finished" );
@@ -525,8 +553,26 @@ $(function(){
                         })*/
                         .init(function(e){
                             $(this).find(".bootbox-cancel").focus();
+                            
+                            var formObj = $('#' + formTemplateCloneChildId);
+                            formObj.find('#due_date').datepicker({
+                                'autoclose': true,
+                                'format': "yyyy-mm-dd",
+                                'immediateUpdates': true,
+                                'todayBtn': true,
+                                'todayHighlight': true,
+                                // 'widgetParent': ???,
+                                'widgetPositioning': {
+                                    horizontal: "auto",
+                                    vertical: "auto"
+                                },
+                                'toggleActive': true,
+                                'orientation': 'auto',
+                                'container': 'body'
+                            })
+                                .datepicker("setDate", moment(rowData.due_date, 'YYYY-MM-DD HH:mm:ss').toDate())
+                                .datepicker("setStartDate", moment(rowData.due_date, 'YYYY-MM-DD HH:mm:ss').toDate());
                         });
-                    
                 });
                 button_6.append(button_6_body);
                 buttonGroup_6.append(button_6);
@@ -571,7 +617,62 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
+    });
+    
+    $('#twDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableTWList.table().columns.adjust().draw();
     });
 });
 </script>
+
+<template id="formTemplate">
+  
+    <!-- --- -->
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-sm-12">
+            <!-- form -->
+            <form action="#" method="POST" autocomplete="off" id="form" enctype="multipart/form-data" data-toggle="validator">
+                @csrf
+                <!-- form-group -->
+                <div class="form-group col-sm-12">
+                    <!-- label for="due_date" class="col-sm-2 control-label">Due Date</label -->
+                    <div class="col-sm-12">
+                        <!-- p class="form-control-static"></p -->
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}" required/>
+                        </div>
+                    </div>
+                    <!-- span id="form-control" class="help-block"></span -->
+                </div>
+                <!-- /.form-group -->
+
+                <!-- form-group -->
+                <div class="form-group col-sm-12">
+                    <!-- label for="description" class="col-sm-2 control-label">Description</label -->
+                    <div class="col-sm-12">
+                        <!-- p class="form-control-static"></p -->
+                        <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5" required>{{ old('description') }}</textarea>
+                    </div>
+                    <!-- span id="form-control" class="help-block"></span -->
+                </div>
+                <!-- /.form-group -->
+            </form>
+            <!-- /.form -->
+        </div>
+        <!-- /.col -->
+
+    </div>
+    <!-- /.row -->
+    <!-- --- -->
+    
+</template>

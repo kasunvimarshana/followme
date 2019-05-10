@@ -27,7 +27,7 @@ $(function(){
                 return data.epf_no;
             }
         },*/{
-            'title' : 'User',
+            'title' : 'Submitted By',
             'orderable' : false,
             'data' : 'created_user',
             'render' : function(data, type, row){
@@ -51,7 +51,7 @@ $(function(){
                 return '';
             }
         }],
-        'responsive' : false,
+        'responsive' : true,
         'scrollX' : true,
         'paging' : true,
         'lengthChange' : true,
@@ -268,7 +268,14 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
+    });
+    
+    $('#twInfoDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableTWInfoList.table().columns.adjust().draw();
     });
 });
 </script>

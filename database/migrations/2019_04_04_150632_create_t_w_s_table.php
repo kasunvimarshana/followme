@@ -20,6 +20,8 @@ class CreateTWSTable extends Migration
             $table->boolean('is_visible')->default(1)->nullable();
             //$table->unsignedBigInteger('created_user')->index()->nullable();
             $table->string('created_user')->index()->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('department_name')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('meeting_category_id')->index()->nullable();

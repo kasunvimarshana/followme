@@ -237,7 +237,14 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
+    });
+    
+    $('#userAttachmentDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableUserAttachmentList.table().columns.adjust().draw();
     });
 });
 </script>

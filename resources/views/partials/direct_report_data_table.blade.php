@@ -28,12 +28,12 @@ $(function(){
                 return data.epf_no;
             }
         },*/{
-            'title' : 'Subordinate',
+            'title' : 'Associate',
             'orderable' : false,
-            'data' : 'mail',
+            'data' : 'cn',
             'render' : function(data, type, row){
                 var formatted_data = data;
-                formatted_data = formatted_data.substring(0, formatted_data.lastIndexOf('@'));
+                //formatted_data = formatted_data.substring(0, formatted_data.lastIndexOf('@'));
                 return formatted_data;
             }
         },{
@@ -120,6 +120,36 @@ $(function(){
             'targets' : [0],
             'responsivePriorty' : 0
         },{
+            'targets' : [1],
+            'responsivePriority' : 2,
+            'visible' : true,
+            'data' : null,
+            'createdCell' : function(td, cellData, rowData, row, col){
+                var parentTd = $(td);
+                //parentTd.empty();
+                parentTd.addClass('bg-green');
+            }
+        },{
+            'targets' : [2],
+            'responsivePriority' : 2,
+            'visible' : true,
+            'data' : null,
+            'createdCell' : function(td, cellData, rowData, row, col){
+                var parentTd = $(td);
+                //parentTd.empty();
+                parentTd.addClass('bg-red');
+            }
+        },{
+            'targets' : [3],
+            'responsivePriority' : 2,
+            'visible' : true,
+            'data' : null,
+            'createdCell' : function(td, cellData, rowData, row, col){
+                var parentTd = $(td);
+                //parentTd.empty();
+                parentTd.addClass('bg-yellow');
+            }
+        },{
             'targets' : [-1],
             'responsivePriority' : 2,
             'visible' : true,
@@ -185,8 +215,14 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
     });
     
+    $('#directReportDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableTWList.table().columns.adjust().draw();
+    });
 });
 </script>

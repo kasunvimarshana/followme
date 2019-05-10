@@ -243,7 +243,14 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
+    });
+    
+    $('#twUserDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableTWInfoList.table().columns.adjust().draw();
     });
 });
 </script>

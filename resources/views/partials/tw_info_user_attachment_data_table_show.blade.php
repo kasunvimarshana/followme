@@ -42,7 +42,7 @@ $(function(){
                 return '';
             }
         }],
-        'responsive' : false,
+        'responsive' : true,
         'scrollX' : true,
         'paging' : true,
         'lengthChange' : true,
@@ -151,7 +151,14 @@ $(function(){
                 popoverButtonToolbar.appendTo(parentTd);
             }
         }],
-        'drawCallback' : function(settings){}
+        'drawCallback' : function(settings){
+            var api = this.api();
+            var table = api.table();
+        }
+    });
+    
+    $('#userAttachmentDataTable').closest('.collapse').on('show.bs.collapse', function(){
+        dataTableUserAttachmentList.table().columns.adjust().draw();
     });
 });
 </script>
