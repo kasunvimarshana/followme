@@ -57,7 +57,7 @@
                     <li class="{!! set_active(['team/direct-reports/show-all', 'team/direct-reports/*']) !!}"><a href="{!! route('user.showDirectReports') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
                 </ul>
             </li>
-            <li class="treeview {!! set_active(['team/direct-reports', 'team/direct-reports/*']) !!}">
+            <li class="treeview {!! set_active(['team/departments', 'team/departments/*']) !!}">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>My Department</span>
                     <span class="pull-right-container">
@@ -65,10 +65,10 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{!! set_active(['team/direct-reports/show-all', 'team/direct-reports/*']) !!}"><a href="{!! route('user.showDirectReports') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
+                    <li class="{!! set_active(['team/departments/show', 'team/departments/*']) !!}"><a href="{!! route('department.show') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
                 </ul>
             </li>
-            <li class="treeview {!! set_active(['team/direct-reports', 'team/direct-reports/*']) !!}">
+            <li class="treeview {!! set_active(['team/companies', 'team/companies/*']) !!}">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>My SBU</span>
                     <span class="pull-right-container">
@@ -76,7 +76,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{!! set_active(['team/direct-reports/show-all', 'team/direct-reports/*']) !!}"><a href="{!! route('user.showDirectReports') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
+                    <li class="{!! set_active(['team/companies/departments', 'team/companies/departments*']) !!}"><a href="{!! route('company.showDepartments') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
                 </ul>
             </li>
             

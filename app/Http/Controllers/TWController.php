@@ -500,7 +500,7 @@ class TWController extends Controller
                 $query = $query->where(function($query){
                     $query->where('is_done','=',true);
                     $query->whereNotNull('done_date');
-                    $query->whereRaw('due_date <= done_date');
+                    $query->where(DB::raw('DATE(due_date)'),'>=',DB::raw('DATE(done_date)'));
                 });
             }else if( $progress == TWStatusEnum::FAIL ){
                 /*$query = $query->where(function($query){
@@ -544,6 +544,20 @@ class TWController extends Controller
                 });
             }else if( $progress == TWStatusEnum::CLOSE ){
                 $query = $query->where('is_done','=',true);
+            }else if( $progress == TWStatusEnum::FAIL_WITH_COMPLETED ){
+                $query = $query->where(function($query){
+                    $query->where('is_done','=',true);
+                    $query->whereNotNull('done_date');
+                    $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
+                });
+            }else if( $progress == TWStatusEnum::FAIL_WITH_UNCOMPLETED ){
+                $query = $query->where(function($query){
+                    $query->whereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                    $query->where(function($query){
+                        $query->where('is_done','=',false);
+                        $query->orWhereNull('is_done');
+                    });
+                });
             }
         }
         

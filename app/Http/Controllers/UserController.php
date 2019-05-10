@@ -200,8 +200,84 @@ class UserController extends Controller
     }
     
     public function showDirectReports(Request $request){
+        $loginUser = Login::getUserData();
+        $due_date_from = Carbon::now()->subMonths(5)->format('Y-m-d');
+        $due_date_to = Carbon::now()->format('Y-m-d');
+        $directReportsArray = $loginUser->getDirectReports();
+        
+        foreach($directReportsArray as $key=>&$value){
+
+            $twPassCount = TW::where('is_visible','=',true)
+                ->where(function($query){
+                    $query->where('is_done','=',true);
+                    $query->whereNotNull('done_date');
+                    $query->where(DB::raw('DATE(due_date)'),'>=',DB::raw('DATE(done_date)'));
+                })
+                ->whereDate('due_date','>=',$due_date_from)
+                ->whereDate('due_date','<=',$due_date_to)
+                ->whereHas('twUsers', function($query) use ($value){
+                    $query->where('own_user','=',$value->mail);
+                })
+                ->count();
+
+            $twFailWithCompletedCount = TW::where('is_visible','=',true)
+                ->where(function($query){
+                    $query->where(function($query){
+                        $query->where('is_done','=',true);
+                        $query->whereNotNull('done_date');
+                        $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
+                    });
+                })
+                ->whereDate('due_date', '>=', $due_date_from)
+                //->whereDate('due_date', '<=', $due_date_to)
+                ->whereHas('twUsers', function($query) use ($value){
+                    $query->where('own_user','=',$value->mail);
+                })
+                ->count();
+            
+            $twFailWithUncompletedCount = TW::where('is_visible','=',true)
+                ->where(function($query){
+                    $query->whereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                    $query->where(function($query){
+                        $query->where('is_done','=',false);
+                        $query->orWhereNull('is_done');
+                    });
+                })
+                ->whereDate('due_date', '>=', $due_date_from)
+                //->whereDate('due_date', '<=', $due_date_to)
+                ->whereHas('twUsers', function($query) use ($value){
+                    $query->where('own_user','=',$value->mail);
+                })
+                ->count();
+
+            $twInprogressCount = TW::where('is_visible','=',true)
+                ->where(function($query){
+                    $query->where('is_done','=',false);
+                    $query->orWhereNull('is_done');
+                })
+                ->where(function($query){
+                    //$query->whereRaw('due_date >= done_date');
+                    $query->orWhereDate('due_date','>=',Carbon::now()->format('Y-m-d'));
+                })
+                ->whereDate('due_date','>=', $due_date_from)
+                //->whereDate('due_date','<=', $due_date_to)
+                ->whereHas('twUsers', function($query) use ($value){
+                    $query->where('own_user','=',$value->mail);
+                })
+                ->count();
+
+            $value->twPassCount = $twPassCount;
+            $value->twFailWithCompletedCount = $twFailWithCompletedCount;
+            $value->twFailWithUncompletedCount = $twFailWithUncompletedCount;
+            $value->twInprogressCount = $twInprogressCount;
+
+        }
+        
+        // get data
+        $directReportsArray = (array) $directReportsArray;
+        
         if(view()->exists('subordinate_show')){
-            return View::make('subordinate_show');
+            return View::make('subordinate_show', ['directReportsArray' => $directReportsArray]);
         }
     }
     

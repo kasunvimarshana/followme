@@ -58,6 +58,9 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::match(['get', 'post'], 'tws/{tW}/change-done-false', array('uses' => 'TWController@changeDoneFalse'))->name('tw.changeDoneFalse');
     Route::get('home/tws/show-all', array('uses' => 'HomeController@index'))->name('tw.showAll');
     Route::get('meeting-categories/list', array('uses' => 'MeetingCategoryController@listMeetingCategories'))->name('meetingCategory.list');
+    
+    Route::get('team/companies/departments/show', array('uses' => 'CompanyController@showDepartments'))->name('company.showDepartments');
+    Route::get('team/departments/show', array('uses' => 'DepartmentController@showDepartments'))->name('department.show');
 });
 
 

@@ -29,7 +29,11 @@
             <div id="collapseTwoParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> My Team Status</a>
+                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span>
+                            @isset($departmentObj)
+                                {{ $departmentObj->company_name }}
+                            @endisset
+                        </a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
@@ -41,7 +45,7 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- table -->
-                                @foreach ($directReportsArray as $directReportKey => $directReport)
+                                @isset ($departmentObj)
                                     <div class="col-sm-6">
                                         <!-- box -->
                                         <div class="box box-primary">
@@ -49,7 +53,7 @@
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">
                                                     <!-- urlencode() -->
-                                                    <a href="{!! route('directReport.showDirectReportTW', [urlencode($directReport->mail)]) !!}">{{ $directReport->displayname }}</a>
+                                                    <a href="#">{{ $departmentObj->department_name }}</a>
                                                 </h3>
 
                                                 <div class="box-tools pull-right">
@@ -62,7 +66,7 @@
                                             <!-- box-body -->
                                             <div class="box-body">
                                                 <div class="chart">
-                                                    <canvas id="chart{!! $directReportKey !!}" style="height:250px"></canvas>
+                                                    <canvas id="chart{!! 1 !!}" style="height:250px"></canvas>
                                                 </div>
                                             </div>
                                             <!-- /.box-body -->
@@ -79,27 +83,27 @@
                                                 label               : 'Inprogress',
                                                 backgroundColor: 'rgba(255,190,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $directReport->twInprogressCount !!}]
+                                                data                : [{!! $departmentObj->twInprogressCount !!}]
                                             },
                                             {
                                                 label               : 'Done',
                                                 backgroundColor: 'rgba(34,139,34,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $directReport->twPassCount !!}]
+                                                data                : [{!! $departmentObj->twPassCount !!}]
                                             },{
                                                 label               : 'Fail (Done After Due Date)',
                                                 backgroundColor: 'rgba(139,34,34,0.7)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $directReport->twFailWithCompletedCount !!}]
+                                                data                : [{!! $departmentObj->twFailWithCompletedCount !!}]
                                             },{
                                                 label               : 'Fail (Not Done)',
                                                 backgroundColor: 'rgba(128,0,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $directReport->twFailWithUncompletedCount !!}]
+                                                data                : [{!! $departmentObj->twFailWithUncompletedCount !!}]
                                             }
                                           ]
                                         };
-                                        var canvasCtx = $('#chart{!! $directReportKey !!}').get(0).getContext('2d');
+                                        var canvasCtx = $('#chart{!! 1 !!}').get(0).getContext('2d');
                                         var chartConfig = {
                                             type: 'horizontalBar',
                                             data: chartData,
@@ -168,7 +172,7 @@
                                         var chartObj = new Chart(canvasCtx, chartConfig);
                                     }); 
                                     </script>
-                                @endforeach
+                                @endisset
                                 <!-- /.table -->
                             </div>
                             <!-- /.col -->
