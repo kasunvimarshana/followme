@@ -34,7 +34,7 @@ class CompanyController extends Controller
         $companyObj->company_name = $loginUser->company;
         $departmentsArray = array();
         
-        $departmentsArray = DB::table('t_w_s')
+        $departmentsArray = DB::table('t_w_users')
             ->select('company_name')
             ->addSelect('department_name')
             ->where('is_visible', true)
@@ -52,9 +52,14 @@ class CompanyController extends Controller
             })
             ->whereDate('due_date','>=',$due_date_from)
             ->whereDate('due_date','<=',$due_date_to)
-            ->where(function($query) use ($value){
+            /*->where(function($query) use ($value){
                 $query->where('company_name','=',$value->company_name);
                 $query->where('department_name','=',$value->department_name);
+            })*/
+            ->whereHas('twUsers', function($query) use ($value){
+                $query->where('company_name','=',$value->company_name);
+                $query->where('department_name','=',$value->department_name);
+                $query->distinct('t_w_id');
             })
             ->count();
 
@@ -68,9 +73,14 @@ class CompanyController extends Controller
                 })
                 ->whereDate('due_date', '>=', $due_date_from)
                 //->whereDate('due_date', '<=', $due_date_to)
-                ->where(function($query) use ($value){
+                /*->where(function($query) use ($value){
                     $query->where('company_name','=',$value->company_name);
                     $query->where('department_name','=',$value->department_name);
+                })*/
+                ->whereHas('twUsers', function($query) use ($value){
+                    $query->where('company_name','=',$value->company_name);
+                    $query->where('department_name','=',$value->department_name);
+                    $query->distinct('t_w_id');
                 })
                 ->count();
             
@@ -84,9 +94,14 @@ class CompanyController extends Controller
                 })
                 ->whereDate('due_date', '>=', $due_date_from)
                 //->whereDate('due_date', '<=', $due_date_to)
-                ->where(function($query) use ($value){
+                /*->where(function($query) use ($value){
                     $query->where('company_name','=',$value->company_name);
                     $query->where('department_name','=',$value->department_name);
+                })*/
+                ->whereHas('twUsers', function($query) use ($value){
+                    $query->where('company_name','=',$value->company_name);
+                    $query->where('department_name','=',$value->department_name);
+                    $query->distinct('t_w_id');
                 })
                 ->count();
 
@@ -101,9 +116,14 @@ class CompanyController extends Controller
                 })
                 ->whereDate('due_date','>=', $due_date_from)
                 //->whereDate('due_date','<=', $due_date_to)
-                ->where(function($query) use ($value){
+                /*->where(function($query) use ($value){
                     $query->where('company_name','=',$value->company_name);
                     $query->where('department_name','=',$value->department_name);
+                })*/
+                ->whereHas('twUsers', function($query) use ($value){
+                    $query->where('company_name','=',$value->company_name);
+                    $query->where('department_name','=',$value->department_name);
+                    $query->distinct('t_w_id');
                 })
                 ->count();
 

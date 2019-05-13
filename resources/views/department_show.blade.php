@@ -91,7 +91,7 @@
                                                 borderColor: 'rgba(0,0,0,0.5)',
                                                 data                : [{!! $departmentObj->twPassCount !!}]
                                             },{
-                                                label               : 'Fail (Done After Due Date)',
+                                                label               : 'Fail (Time Line Not Achived)',
                                                 backgroundColor: 'rgba(139,34,34,0.7)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
                                                 data                : [{!! $departmentObj->twFailWithCompletedCount !!}]
@@ -127,7 +127,7 @@
                                                     }*/
                                                 },
                                                 title: {
-                                                    display: true,
+                                                    display: false,
                                                     text: 'Chart'
                                                 },
                                                 animation: {
