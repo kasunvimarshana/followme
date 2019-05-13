@@ -131,10 +131,15 @@ class DepartmentController extends Controller
             $twAllCount = 1;
         }
         
-        $departmentObj->twPassCount = (($twPassCount / $twAllCount) * 100);
-        $departmentObj->twFailWithCompletedCount = (($twFailWithCompletedCount / $twAllCount) * 100);
-        $departmentObj->twFailWithUncompletedCount = (($twFailWithUncompletedCount / $twAllCount) * 100);
-        $departmentObj->twInprogressCount = (($twInprogressCount / $twAllCount) * 100);
+        $departmentObj->twAllCount = $twAllCount;
+        $departmentObj->twPassCount = $twPassCount;
+        $departmentObj->twFailWithCompletedCount = $twFailWithCompletedCount;
+        $departmentObj->twFailWithUncompletedCount = $twFailWithUncompletedCount;
+        $departmentObj->twInprogressCount = $twInprogressCount;
+        $departmentObj->twPassCountPercentage = (($twPassCount / $twAllCount) * 100);
+        $departmentObj->twFailWithCompletedCountPercentage = (($twFailWithCompletedCount / $twAllCount) * 100);
+        $departmentObj->twFailWithUncompletedCountPercentage = (($twFailWithUncompletedCount / $twAllCount) * 100);
+        $departmentObj->twInprogressCountPercentage = (($twInprogressCount / $twAllCount) * 100);
         
         if(view()->exists('department_show')){
             return View::make('department_show', ['departmentObj' => $departmentObj]);

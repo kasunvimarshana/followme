@@ -290,10 +290,15 @@ class UserController extends Controller
                 $twAllCount = 1;
             }
             
-            $value->twPassCount = (($twPassCount / $twAllCount) * 100);
-            $value->twFailWithCompletedCount = (($twFailWithCompletedCount / $twAllCount) * 100);
-            $value->twFailWithUncompletedCount = (($twFailWithUncompletedCount / $twAllCount) * 100);
-            $value->twInprogressCount = (($twInprogressCount / $twAllCount) * 100);
+            $value->twAllCount = $twAllCount;
+            $value->twPassCount = $twPassCount;
+            $value->twFailWithCompletedCount = $twFailWithCompletedCount;
+            $value->twFailWithUncompletedCount = $twFailWithUncompletedCount;
+            $value->twInprogressCount = $twInprogressCount;
+            $value->twPassCountPercentage = (($twPassCount / $twAllCount) * 100);
+            $value->twFailWithCompletedCountPercentage = (($twFailWithCompletedCount / $twAllCount) * 100);
+            $value->twFailWithUncompletedCountPercentage = (($twFailWithUncompletedCount / $twAllCount) * 100);
+            $value->twInprogressCountPercentage = (($twInprogressCount / $twAllCount) * 100);
 
         }
         

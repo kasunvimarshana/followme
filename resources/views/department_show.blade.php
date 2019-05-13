@@ -83,23 +83,27 @@
                                                 label               : 'Inprogress',
                                                 backgroundColor: 'rgba(255,190,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $departmentObj->twInprogressCount !!}]
+                                                data                : [{!! $departmentObj->twInprogressCountPercentage !!}],
+                                                dataCount      : [{!! $departmentObj->twInprogressCount !!}]
                                             },
                                             {
                                                 label               : 'Done',
                                                 backgroundColor: 'rgba(34,139,34,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $departmentObj->twPassCount !!}]
+                                                data                : [{!! $departmentObj->twPassCountPercentage !!}],
+                                                dataCount      : [{!! $departmentObj->twPassCount !!}]
                                             },{
                                                 label               : 'Fail (Time Line Not Achived)',
                                                 backgroundColor: 'rgba(139,34,34,0.7)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $departmentObj->twFailWithCompletedCount !!}]
+                                                data                : [{!! $departmentObj->twFailWithCompletedCountPercentage !!}],
+                                                dataCount      : [{!! $departmentObj->twFailWithCompletedCount !!}]
                                             },{
                                                 label               : 'Fail (Not Done)',
                                                 backgroundColor: 'rgba(128,0,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $departmentObj->twFailWithUncompletedCount !!}]
+                                                data                : [{!! $departmentObj->twFailWithUncompletedCountPercentage !!}],
+                                                dataCount      : [{!! $departmentObj->twFailWithUncompletedCount !!}]
                                             }
                                           ]
                                         };
@@ -119,12 +123,19 @@
                                                     position: 'bottom',
                                                 },
                                                 tooltips: {
-                                                    mode: 'nearest'
-                                                    /*callbacks: {
-                                                       label: function(tooltipItem) {
-                                                            return tooltipItem.yLabel;
+                                                    mode: 'nearest',
+                                                    callbacks: {
+                                                       label: function(tooltipItem, data) {
+                                                            var itemData = data.datasets[tooltipItem.datasetIndex].data.unshift();
+                                                            var itemDataCount = data.datasets[tooltipItem.datasetIndex].dataCount.unshift();
+                                                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                                                            if (label) {
+                                                                label += ': ';
+                                                            }
+                                                            label += Math.round(itemDataCount * 100) / 100;
+                                                            return label;
                                                        }
-                                                    }*/
+                                                    }
                                                 },
                                                 title: {
                                                     display: false,
