@@ -26,6 +26,14 @@ class HomeController extends Controller
         $due_date_from = Carbon::now()->subMonths(5)->format('Y-m-d');
         $due_date_to = Carbon::now()->format('Y-m-d');
         
+        $twAllCount = TW::where('is_visible','=',true)
+            ->whereDate('due_date','>=',$due_date_from)
+            ->whereDate('due_date','<=',$due_date_to)
+            ->whereHas('twUsers', function($query) use ($loginUser){
+                $query->where('own_user','=',$loginUser->mail);
+            })
+            ->count();
+        
         $twTodayCount = TW::where('is_visible','=',true)
             ->where(function($query){
                 $query->where('is_done','=',false);
@@ -87,6 +95,10 @@ class HomeController extends Controller
                 $query->where('own_user','=',$loginUser->mail);
             })
             ->count();
+        
+        if( $twAllCount == 0 ){
+            $twAllCount = 1;
+        }
         
         if(view()->exists('home')){
             return View::make('home', array(

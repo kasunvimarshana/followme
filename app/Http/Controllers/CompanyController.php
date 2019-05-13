@@ -44,6 +44,16 @@ class CompanyController extends Controller
         
         foreach($departmentsArray as $key=>&$value){
             
+            $twAllCount = TW::where('is_visible','=',true)
+            ->whereDate('due_date','>=',$due_date_from)
+            ->whereDate('due_date','<=',$due_date_to)
+            ->whereHas('twUsers', function($query) use ($value){
+                $query->where('company_name','=',$value->company_name);
+                $query->where('department_name','=',$value->department_name);
+                $query->distinct('t_w_id');
+            })
+            ->count();
+            
             $twPassCount = TW::where('is_visible','=',true)
             ->where(function($query){
                 $query->where('is_done','=',true);
@@ -127,10 +137,14 @@ class CompanyController extends Controller
                 })
                 ->count();
 
-            $value->twPassCount = $twPassCount;
-            $value->twFailWithCompletedCount = $twFailWithCompletedCount;
-            $value->twFailWithUncompletedCount = $twFailWithUncompletedCount;
-            $value->twInprogressCount = $twInprogressCount;
+            if( $twAllCount == 0 ){
+                $twAllCount = 1;
+            }
+            
+            $value->twPassCount = (($twPassCount / $twAllCount) * 100);
+            $value->twFailWithCompletedCount = (($twFailWithCompletedCount / $twAllCount) * 100);
+            $value->twFailWithUncompletedCount = (($twFailWithUncompletedCount / $twAllCount) * 100);
+            $value->twInprogressCount = (($twInprogressCount / $twAllCount) * 100);
 
         }
         

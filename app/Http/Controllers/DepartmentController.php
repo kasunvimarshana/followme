@@ -34,6 +34,16 @@ class DepartmentController extends Controller
         $departmentObj->company_name = $loginUser->company;
         $departmentObj->department_name = $loginUser->department;
         
+        $twAllCount = TW::where('is_visible','=',true)
+            ->whereDate('due_date','>=',$due_date_from)
+            ->whereDate('due_date','<=',$due_date_to)
+            ->whereHas('twUsers', function($query) use ($loginUser){
+                $query->where('company_name','=',$loginUser->company);
+                $query->where('department_name','=',$loginUser->department);
+                $query->distinct('t_w_id');
+            })
+            ->count();
+        
         $twPassCount = TW::where('is_visible','=',true)
             ->where(function($query){
                 $query->where('is_done','=',true);
@@ -117,10 +127,14 @@ class DepartmentController extends Controller
             })
             ->count();
         
-        $departmentObj->twPassCount = $twPassCount;
-        $departmentObj->twFailWithCompletedCount = $twFailWithCompletedCount;
-        $departmentObj->twFailWithUncompletedCount = $twFailWithUncompletedCount;
-        $departmentObj->twInprogressCount = $twInprogressCount;
+        if( $twAllCount == 0 ){
+            $twAllCount = 1;
+        }
+        
+        $departmentObj->twPassCount = (($twPassCount / $twAllCount) * 100);
+        $departmentObj->twFailWithCompletedCount = (($twFailWithCompletedCount / $twAllCount) * 100);
+        $departmentObj->twFailWithUncompletedCount = (($twFailWithUncompletedCount / $twAllCount) * 100);
+        $departmentObj->twInprogressCount = (($twInprogressCount / $twAllCount) * 100);
         
         if(view()->exists('department_show')){
             return View::make('department_show', ['departmentObj' => $departmentObj]);

@@ -129,6 +129,14 @@ class UserController extends Controller
         $due_date_to = Carbon::now()->format('Y-m-d');
         foreach($directReportsArray as $key=>&$value){
 
+            $twAllCount = TW::where('is_visible','=',true)
+            ->whereDate('due_date','>=',$due_date_from)
+            ->whereDate('due_date','<=',$due_date_to)
+            ->whereHas('twUsers', function($query) use ($value){
+                $query->where('own_user','=',$value->mail);
+            })
+            ->count();
+            
             $twCompletedCount = TW::where('is_visible','=',true)
                 ->where('is_done','=',true)
                 ->whereDate('due_date','>=',$due_date_from)
@@ -175,6 +183,10 @@ class UserController extends Controller
                 })
                 ->count();
 
+            if( $twAllCount == 0 ){
+                $twAllCount = 1;
+            }
+            
             $value->twCompletedCount = $twCompletedCount;
             $value->twFailCount = $twFailCount;
             $value->twInprogressCount = $twInprogressCount;
@@ -206,6 +218,14 @@ class UserController extends Controller
         $directReportsArray = $loginUser->getDirectReports();
         
         foreach($directReportsArray as $key=>&$value){
+            
+            $twAllCount = TW::where('is_visible','=',true)
+                ->whereDate('due_date','>=',$due_date_from)
+                ->whereDate('due_date','<=',$due_date_to)
+                ->whereHas('twUsers', function($query) use ($value){
+                    $query->where('own_user','=',$value->mail);
+                })
+                ->count();
 
             $twPassCount = TW::where('is_visible','=',true)
                 ->where(function($query){
@@ -266,10 +286,14 @@ class UserController extends Controller
                 })
                 ->count();
 
-            $value->twPassCount = $twPassCount;
-            $value->twFailWithCompletedCount = $twFailWithCompletedCount;
-            $value->twFailWithUncompletedCount = $twFailWithUncompletedCount;
-            $value->twInprogressCount = $twInprogressCount;
+            if( $twAllCount == 0 ){
+                $twAllCount = 1;
+            }
+            
+            $value->twPassCount = (($twPassCount / $twAllCount) * 100);
+            $value->twFailWithCompletedCount = (($twFailWithCompletedCount / $twAllCount) * 100);
+            $value->twFailWithUncompletedCount = (($twFailWithUncompletedCount / $twAllCount) * 100);
+            $value->twInprogressCount = (($twInprogressCount / $twAllCount) * 100);
 
         }
         

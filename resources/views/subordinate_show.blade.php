@@ -138,7 +138,7 @@
                                                         },
                                                         ticks: {
                                                             suggestedMin: 0,
-                                                            suggestedMax: 10,
+                                                            suggestedMax: 100,
                                                             beginAtZero: true,
                                                             minStepSize: 1
                                                         }
@@ -147,7 +147,7 @@
                                                         display: true,
                                                         ticks: {
                                                             suggestedMin: 0,
-                                                            suggestedMax: 10,
+                                                            suggestedMax: 100,
                                                             beginAtZero: true,
                                                             minStepSize: 1
                                                             /*callback: function(value, index, values) {
