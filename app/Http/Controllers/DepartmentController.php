@@ -27,16 +27,19 @@ class DepartmentController extends Controller
     //
     public function showDepartments(Request $request){
         $loginUser = Login::getUserData();
-        $due_date_from = Carbon::now()->subMonths(5)->format('Y-m-d');
-        $due_date_to = Carbon::now()->format('Y-m-d');
+        $date_today = Carbon::now()->format('Y-m-d');
+        $date_from = Carbon::now()->subMonths(5)->format('Y-m-d');
+        $date_to = Carbon::now()->format('Y-m-d');
+        $start_date_from = $date_from;
+        $start_date_to = $date_to;
         
         $departmentObj = new StdClass();
         $departmentObj->company_name = $loginUser->company;
         $departmentObj->department_name = $loginUser->department;
         
         $twAllCount = TW::where('is_visible','=',true)
-            ->whereDate('due_date','>=',$due_date_from)
-            ->whereDate('due_date','<=',$due_date_to)
+            ->whereDate('start_date','>=',$start_date_from)
+            ->whereDate('start_date','<=',$start_date_to)
             ->whereHas('twUsers', function($query) use ($loginUser){
                 $query->where('company_name','=',$loginUser->company);
                 $query->where('department_name','=',$loginUser->department);
@@ -50,8 +53,8 @@ class DepartmentController extends Controller
                 $query->whereNotNull('done_date');
                 $query->where(DB::raw('DATE(due_date)'),'>=',DB::raw('DATE(done_date)'));
             })
-            ->whereDate('due_date','>=',$due_date_from)
-            ->whereDate('due_date','<=',$due_date_to)
+            ->whereDate('start_date','>=',$start_date_from)
+            ->whereDate('start_date','<=',$start_date_to)
             /*->where(function($query) use ($loginUser){
                 $query->where('company_name','=',$loginUser->company);
                 $query->where('department_name','=',$loginUser->department);
@@ -71,8 +74,8 @@ class DepartmentController extends Controller
                     $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
                 });
             })
-            ->whereDate('due_date', '>=', $due_date_from)
-            //->whereDate('due_date', '<=', $due_date_to)
+            ->whereDate('start_date', '>=', $start_date_from)
+            ->whereDate('start_date', '<=', $start_date_to)
             /*->where(function($query) use ($loginUser){
                 $query->where('company_name','=',$loginUser->company);
                 $query->where('department_name','=',$loginUser->department);
@@ -85,15 +88,15 @@ class DepartmentController extends Controller
             ->count();
 
         $twFailWithUncompletedCount = TW::where('is_visible','=',true)
-            ->where(function($query){
-                $query->whereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+            ->where(function($query) use ($date_today){
+                $query->whereDate('due_date','<',$date_today);
                 $query->where(function($query){
                     $query->where('is_done','=',false);
                     $query->orWhereNull('is_done');
                 });
             })
-            ->whereDate('due_date', '>=', $due_date_from)
-            //->whereDate('due_date', '<=', $due_date_to)
+            ->whereDate('start_date', '>=', $start_date_from)
+            ->whereDate('start_date', '<=', $start_date_to)
             /*->where(function($query) use ($loginUser){
                 $query->where('company_name','=',$loginUser->company);
                 $query->where('department_name','=',$loginUser->department);
@@ -110,12 +113,12 @@ class DepartmentController extends Controller
                 $query->where('is_done','=',false);
                 $query->orWhereNull('is_done');
             })
-            ->where(function($query){
+            ->where(function($query) use ($date_today){
                 //$query->whereRaw('due_date >= done_date');
-                $query->orWhereDate('due_date','>=',Carbon::now()->format('Y-m-d'));
+                $query->orWhereDate('due_date','>=',$date_today);
             })
-            ->whereDate('due_date','>=', $due_date_from)
-            //->whereDate('due_date','<=', $due_date_to)
+            ->whereDate('start_date','>=', $start_date_from)
+            ->whereDate('start_date','<=', $start_date_to)
             /*->where(function($query) use ($loginUser){
                 $query->where('company_name','=',$loginUser->company);
                 $query->where('department_name','=',$loginUser->department);

@@ -383,6 +383,7 @@ class TWController extends Controller
         $query = null;
         $queryResult = null;
         //$recordsTotal = Model::where('active','=','1')->count();
+        $date_today = Carbon::now()->format('Y-m-d');
         
         $draw = $request->get('draw');
         
@@ -513,13 +514,13 @@ class TWController extends Controller
                     $query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
                     $query->orWhereNull('done_date'); 
                 });*/
-                $query = $query->where(function($query){
+                $query = $query->where(function($query) use ($date_today){
                     $query->where(function($query){
                         $query->whereNotNull('done_date');
                         $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
                     });
-                    $query->orWhere(function($query){
-                        $query->whereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                    $query->orWhere(function($query) use ($date_today){
+                        $query->whereDate('due_date','<',$date_today);
                         $query->where(function($query){
                             $query->where('is_done','=',false);
                             $query->orWhereNull('is_done');
@@ -527,14 +528,14 @@ class TWController extends Controller
                     });
                 });
             }else if( $progress == TWStatusEnum::INPROGRESS ){
-                $query = $query->where(function($query){
+                $query = $query->where(function($query) use ($date_today){
                     $query->where(function($query){
                         $query->where('is_done','=',false);
                         $query->orWhereNull('is_done');
                     });
-                    $query->where(function($query){
+                    $query->where(function($query) use ($date_today){
                         //$query->whereRaw('due_date >= done_date');
-                        $query->orWhereDate('due_date','>=',Carbon::now()->format('Y-m-d'));
+                        $query->orWhereDate('due_date','>=',$date_today);
                     });
                 }); 
             }else if( $progress == TWStatusEnum::OPEN ){
@@ -551,8 +552,8 @@ class TWController extends Controller
                     $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
                 });
             }else if( $progress == TWStatusEnum::FAIL_WITH_UNCOMPLETED ){
-                $query = $query->where(function($query){
-                    $query->whereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                $query = $query->where(function($query) use ($date_today){
+                    $query->whereDate('due_date','<',$date_today);
                     $query->where(function($query){
                         $query->where('is_done','=',false);
                         $query->orWhereNull('is_done');
