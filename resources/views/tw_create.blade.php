@@ -261,7 +261,8 @@
             'toggleActive': true,
             'orientation': 'auto',
             'container': 'body'
-        }).datepicker("setDate", new Date());
+        }).datepicker("setDate", new Date())
+        .trigger("changeDate");
         
         $('#due_date').datepicker({
             'autoclose': true,
@@ -277,7 +278,8 @@
             'toggleActive': true,
             'orientation': 'auto',
             'container': 'body'
-        }).datepicker("setDate", $('#start_date').val());
+        }).datepicker("setDate", $('#start_date').val())
+        .trigger("changeDate");
         
         $('#start_date').datepicker().on('show', function(e){
             $(this).datepicker("setEndDate", $('#due_date').val());
@@ -353,8 +355,8 @@
                     $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
                     title.val(null);
                     description.val(null);
-                    start_date.datepicker("setDate", new Date());
-                    due_date.datepicker("setDate", new Date());
+                    due_date.datepicker("setDate", new Date()).trigger("changeDate");
+                    start_date.datepicker("setDate", new Date()).trigger("changeDate");
                     var_user_attachment.fileinput('clear');
                     own_user.val(null).trigger('change');
                     meeting_category_id.val(null).trigger('change');

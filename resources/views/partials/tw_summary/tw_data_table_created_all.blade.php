@@ -570,8 +570,8 @@ $(function(){
                                 'orientation': 'auto',
                                 'container': 'body'
                             })
-                                .datepicker("setDate", moment(rowData.due_date, 'YYYY-MM-DD HH:mm:ss').toDate())
-                                .datepicker("setStartDate", moment(rowData.due_date, 'YYYY-MM-DD HH:mm:ss').toDate());
+                                .datepicker("setStartDate", moment(rowData.due_date, 'YYYY-MM-DD HH:mm:ss').toDate())
+                                .datepicker("setDate", moment(rowData.due_date, 'YYYY-MM-DD HH:mm:ss').toDate()).trigger("changeDate");
                         });
                 });
                 button_6.append(button_6_body);

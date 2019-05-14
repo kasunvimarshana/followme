@@ -380,6 +380,10 @@ class TWInfoController extends Controller
             $query = $query->limit($length)->offset($start);
         }
         
+        // order
+        $query->orderBy('id', 'desc');
+        $query->orderBy('updated_at', 'desc');
+        
         // get data
         $queryResult = $query->get();
         

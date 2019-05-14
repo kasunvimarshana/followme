@@ -282,7 +282,8 @@
             'toggleActive': true,
             'orientation': 'auto',
             'container': 'body'
-        }).datepicker("setDate", moment('{!! $tW->start_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate());
+        }).datepicker("setDate", moment('{!! $tW->start_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate())
+        .trigger("changeDate");
         
         $('#due_date').datepicker({
             'autoclose': true,
@@ -298,7 +299,8 @@
             'toggleActive': true,
             'orientation': 'auto',
             'container': 'body'
-        }).datepicker("setDate", moment('{!! $tW->due_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate());
+        }).datepicker("setDate", moment('{!! $tW->due_date !!}', 'YYYY-MM-DD HH:mm:ss').toDate())
+        .trigger("changeDate");
         
         $('#start_date').datepicker().on('show', function(e){
             $(this).datepicker("setEndDate", $('#due_date').val());
@@ -351,8 +353,8 @@
                     $('#twUserDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on 
                     //title.val(null);
                     //description.val(null);
-                    //start_date.datepicker("setDate", new Date());
-                    //due_date.datepicker("setDate", new Date());
+                    //due_date.datepicker("setDate", new Date()).trigger("changeDate");
+                    //start_date.datepicker("setDate", new Date()).trigger("changeDate");
                     //own_user.val(null).trigger('change');
                     //meeting_category_id.val(null).trigger('change');
                     // scroll top

@@ -126,8 +126,12 @@
                                                     mode: 'nearest',
                                                     callbacks: {
                                                        label: function(tooltipItem, data) {
-                                                            var itemData = data.datasets[tooltipItem.datasetIndex].data.unshift();
-                                                            var itemDataCount = data.datasets[tooltipItem.datasetIndex].dataCount.unshift();
+                                                            var itemDataArray = $.makeArray( data.datasets[tooltipItem.datasetIndex].data );
+                                                            var itemDataCountArray = $.makeArray( data.datasets[tooltipItem.datasetIndex].dataCount );
+                                                           
+                                                            var itemData = itemDataArray.shift();
+                                                            var itemDataCount = itemDataCountArray.shift();
+                                                            
                                                             var label = data.datasets[tooltipItem.datasetIndex].label || '';
                                                             if (label) {
                                                                 label += ': ';
