@@ -93,17 +93,11 @@
                                                 data                : [{!! $department->twPassCountPercentage !!}],
                                                 dataCount      : [{!! $department->twPassCount !!}]
                                             },{
-                                                label               : 'Fail (Time Line Not Achived)',
-                                                backgroundColor: 'rgba(139,34,34,0.7)',
-                                                borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $department->twFailWithCompletedCountPercentage !!}],
-                                                dataCount      : [{!! $department->twFailWithCompletedCount !!}]
-                                            },{
-                                                label               : 'Fail (Not Done)',
+                                                label               : 'Fail',
                                                 backgroundColor: 'rgba(128,0,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $department->twFailWithUncompletedCountPercentage !!}],
-                                                dataCount      : [{!! $department->twFailWithUncompletedCount !!}]
+                                                data                : [{!! ($department->twFailWithUncompletedCountPercentage + $department->twFailWithCompletedCountPercentage) !!}],
+                                                dataCount      : [{!! ($department->twFailWithUncompletedCount + $department->twFailWithCompletedCount) !!}]
                                             }
                                           ]
                                         };

@@ -89,17 +89,11 @@
                                                 data                : [{!! $directReport->twPassCountPercentage !!}],
                                                 dataCount      : [{!! $directReport->twPassCount !!}]
                                             },{
-                                                label               : 'Fail (Time Line Not Achived)',
-                                                backgroundColor: 'rgba(139,34,34,0.7)',
-                                                borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $directReport->twFailWithCompletedCountPercentage !!}],
-                                                dataCount      : [{!! $directReport->twFailWithCompletedCount !!}]
-                                            },{
-                                                label               : 'Fail (Not Done)',
+                                                label               : 'Fail',
                                                 backgroundColor: 'rgba(128,0,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $directReport->twFailWithUncompletedCountPercentage !!}],
-                                                dataCount      : [{!! $directReport->twFailWithUncompletedCount !!}]
+                                                data                : [{!! ($directReport->twFailWithUncompletedCountPercentage + $directReport->twFailWithCompletedCountPercentage) !!}],
+                                                dataCount      : [{!! ($directReport->twFailWithUncompletedCount + $directReport->twFailWithCompletedCount) !!}]
                                             }
                                           ]
                                         };
