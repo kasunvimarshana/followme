@@ -500,11 +500,19 @@ $(function(){
                             var due_date_value = due_date.val();
                             var description_value = description.val();
                             var _token_value = _token.val();
+                            
+                            if( (result === true) ){
+                                if( (!$.type(description_value) === 'string') ){
+                                   return false;
+                                }else if( (!moment(due_date_value, 'YYYY-MM-DD HH:mm:ss').isValid()) ){
+                                   return false;
+                                }else if( (description_value.length <= 0) ){
+                                    return false;     
+                                }
+                            }
+                            
                             description_value = 'Re  Submitted Due To : ' + description_value;
                             
-                            if( (result === true) && ((!$.type(description_value) === 'string') || (description_value.length <= 0) || (moment(description_value, 'YYYY-MM-DD HH:mm:ss').isValid())) ){
-                               return false;
-                            }
                             if( (result === true) ){
                                 var url = "{!! route('tw.changeDoneFalse', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);

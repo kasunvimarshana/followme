@@ -18,7 +18,7 @@ class CreateTWUsersTable extends Migration
             $table->timestamps();
             
             $table->boolean('is_visible')->default(1)->nullable();
-            $table->unsignedBigInteger('t_w_id')->index()->nullable();
+            $table->unsignedBigInteger('t_w_id')->index();//->nullable()
             //$table->unsignedBigInteger('own_user')->index()->nullable();
             $table->string('own_user')->index()->nullable();
             $table->string('company_name');//->nullable()

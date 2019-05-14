@@ -18,10 +18,10 @@ class CreateTWInfosTable extends Migration
             $table->timestamps();
             
             $table->boolean('is_visible')->default(1)->nullable();
-            $table->unsignedBigInteger('t_w_id')->index()->nullable();
+            $table->unsignedBigInteger('t_w_id')->index();//->nullable()
             $table->text('description')->nullable();
             //$table->unsignedBigInteger('created_user')->index()->nullable();
-            $table->string('created_user')->index()->nullable();
+            $table->string('created_user')->index();//->nullable()
             
             $table->foreign('t_w_id')->references('id')->on('t_w_s')->onUpdate('cascade')->onDelete('cascade');
         });

@@ -19,15 +19,15 @@ class CreateTWSTable extends Migration
             
             $table->boolean('is_visible')->default(1)->nullable();
             //$table->unsignedBigInteger('created_user')->index()->nullable();
-            $table->string('created_user')->index()->nullable();
+            $table->string('created_user')->index();//->nullable()
             $table->string('company_name');//->nullable()
             $table->string('department_name');//->nullable()
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('meeting_category_id')->index()->nullable();
             $table->unsignedBigInteger('status_id')->default(null)->nullable();
-            $table->dateTime('start_date')->nullable()->useCurrent();
-            $table->dateTime('due_date')->nullable()->useCurrent();
+            $table->dateTime('start_date')->useCurrent();//->nullable()
+            $table->dateTime('due_date')->useCurrent();//->nullable()
             $table->integer('piority')->default(0)->nullable();
             $table->boolean('is_done')->default(0)->nullable();
             //$table->unsignedBigInteger('done_user')->index()->nullable();
