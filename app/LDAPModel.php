@@ -12,8 +12,10 @@ class LDAPModel extends Model
     protected $ldapport = 389;
     protected $ldapconn = null;
     
-    protected $bind_rdn = "scan@brandix.com";
-    protected $bind_password = "Brdx@9000";
+    //protected $bind_rdn = "scan@brandix.com";
+    //protected $bind_password = "Brdx@9000";
+    protected $bind_rdn = "kasunv@brandix.com";
+    protected $bind_password = "Brdx@90000";
     protected $ldap_control_paged_result_count = 10;
     
     function __construct() {
