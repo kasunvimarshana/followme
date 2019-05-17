@@ -103,10 +103,12 @@ class Login extends Model
         $ldapModel = new LDAPModel();
         $user = new User();
         if($ldapModel->isBind($username, $password)){
-            self::setLoginTrue();
             $user->mail = $username;
             $user->getUser();
-            self::setUserData($user);
+            if(($user->company) && ($user->department)){
+                self::setUserData($user);
+                self::setLoginTrue();
+            }
         }
     }
     

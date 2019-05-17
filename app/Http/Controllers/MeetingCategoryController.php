@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\View;
 use DB;
 use \Response;
 
+use App\Login;
+use App\User;
+
 class MeetingCategoryController extends Controller
 {
     /**
@@ -33,6 +36,9 @@ class MeetingCategoryController extends Controller
     public function create()
     {
         //
+        if(view()->exists('meeting_category_create')){
+            return View::make('meeting_category_create');
+        }
     }
 
     /**
@@ -44,6 +50,47 @@ class MeetingCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        // do process
+        $current_user = Login::getUserData()->mail;
+
+        $meetingCategoryData = array(	
+            'is_visible' => true,
+            'name' => Input::get('name')
+        );
+
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            // Validate, then create if valid
+            $newMeetingCategory = MeetingCategory::create( $meetingCategoryData );
+
+        }catch(\Exception $e){
+
+            DB::rollback();
+
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+
+        }
+
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data ); 
     }
 
     /**
@@ -66,6 +113,9 @@ class MeetingCategoryController extends Controller
     public function edit(MeetingCategory $meetingCategory)
     {
         //
+        if(view()->exists('meeting_category_edit')){
+            return View::make('meeting_category_edit', ['meetingCategory' => $meetingCategory]);
+        }
     }
 
     /**
@@ -78,6 +128,53 @@ class MeetingCategoryController extends Controller
     public function update(Request $request, MeetingCategory $meetingCategory)
     {
         //
+        $meetingCategoryClone = clone $meetingCategory;
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        // do process
+        $current_user = Login::getUserData()->mail;
+
+        $meetingCategoryData = array(
+            'name' => Input::get('name')
+        );
+
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            // Validate, then create if valid
+            $meetingCategoryClone->update( $meetingCategoryData );
+
+        }catch(\Exception $e){
+
+            DB::rollback();
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return redirect()->back()->withInput();
+
+        }
+
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        notify()->flash(
+            $data['title'], 
+            $data['type'], [
+            'timer' => $data['timer'],
+            'text' => $data['text'],
+        ]);
+        
+        return redirect()->route('meetingCategory.create');
     }
 
     /**

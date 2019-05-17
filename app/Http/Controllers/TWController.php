@@ -480,6 +480,24 @@ class TWController extends Controller
             });
         }
         
+        // own company
+        if( ($request->get('own_company')) && (!empty($request->get('own_company'))) ){
+            $own_company =  $request->get('own_company');
+            $query = $query->whereHas('twUsers', function($query) use ($own_company){
+                $query->where('company_name','=',$own_company);
+                $query->distinct('t_w_id');
+            });
+        }
+        
+        // own department
+        if( ($request->get('own_department')) && (!empty($request->get('own_department'))) ){
+            $own_department =  $request->get('own_department');
+            $query = $query->whereHas('twUsers', function($query) use ($own_department){
+                $query->where('department_name','=',$own_department);
+                $query->distinct('t_w_id');
+            });
+        }
+        
         // is_visible
         if( ($request->get('is_visible') != null) ){
             $is_visible =  $request->get('is_visible');
@@ -733,6 +751,8 @@ class TWController extends Controller
         // do process
         $loginUserObj = Login::getUserData();
         $current_user = $loginUserObj->mail;
+        $company_name = $loginUserObj->company;
+        $department_name = $loginUserObj->department;
         $twResourceDir = TWMetaEnum::RESOURCE_DIR .'/'. uniqid( time() ) . '_';
 
         $twData = array(	
@@ -742,6 +762,8 @@ class TWController extends Controller
             'due_date'     => Input::get('due_date'),
             'description'     => Input::get('description'),
             'created_user'     => $current_user,
+            'company_name'     => $company_name,
+            'department_name'     => $department_name,
             'is_visible' => true,
             'status_id' => TWStatusEnum::OPEN,
             'resource_dir' => $twResourceDir,
@@ -816,7 +838,6 @@ class TWController extends Controller
         }catch(\Exception $e){
 
             DB::rollback();
-
             //delete directory
             if(Storage::exists($twResourceDir)) {
                 Storage::deleteDirectory($twResourceDir);
@@ -829,7 +850,7 @@ class TWController extends Controller
                 'timer' => 3000
             );
 
-            return Response::json( $data ); 
+            return redirect()->back()->withInput();
 
         }
 
@@ -844,6 +865,13 @@ class TWController extends Controller
             'type' => 'success',
             'timer' => 3000
         );
+        
+        notify()->flash(
+            $data['title'], 
+            $data['type'], [
+            'timer' => $data['timer'],
+            'text' => $data['text'],
+        ]);
         
         //return Response::json( $data );
         return redirect()->route('tw.showOwneTW');

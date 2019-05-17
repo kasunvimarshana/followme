@@ -79,6 +79,19 @@
                     <li class="{!! set_active(['team/companies/departments', 'team/companies/departments*']) !!}"><a href="{!! route('company.showDepartments') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
                 </ul>
             </li>
+            @superadmin
+            <li class="treeview {!! set_active(['meeting-categories', 'meeting-categories/*']) !!}">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Meeting Category</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{!! set_active(['meeting-categories/create', 'meeting-categories/create/*']) !!}"><a href="{!! route('meetingCategory.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Create New</a></li>
+                </ul>
+            </li>
+            @endsuperadmin
             
         </ul>
         <!-- /.sidebar-menu -->

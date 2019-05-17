@@ -148,4 +148,21 @@ class DepartmentController extends Controller
             return View::make('department_show', ['departmentObj' => $departmentObj]);
         }
     }
+    
+    public function showDepartmentTW(Request $request, $company, $department){
+        $loginUser = Login::getUserData();
+        $date_today = Carbon::now()->format('Y-m-d');
+        $date_from = Carbon::now()->subMonths(5)->format('Y-m-d');
+        $date_to = Carbon::now()->format('Y-m-d');
+        $start_date_from = $date_from;
+        $start_date_to = $date_to;
+        
+        $companyObj = urldecode($company);
+        $departmentObj = urldecode($department);
+        $progressVal = urldecode($request->get('progress'));
+        
+        if(view()->exists('department_tw_show')){
+            return View::make('department_tw_show', ['companyObj' => $companyObj, 'departmentObj' => $departmentObj, 'progressVal' => $progressVal]);
+        }
+    }
 }

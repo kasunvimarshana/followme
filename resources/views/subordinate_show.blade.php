@@ -42,7 +42,7 @@
                             <div class="col-sm-12">
                                 <!-- table -->
                                 @foreach ($directReportsArray as $directReportKey => $directReport)
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
                                         <!-- box -->
                                         <div class="box box-primary">
                                             <!-- box-header -->
@@ -80,20 +80,23 @@
                                                 backgroundColor: 'rgba(255,190,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
                                                 data                : [{!! $directReport->twInprogressCountPercentage !!}],
-                                                dataCount      : [{!! $directReport->twInprogressCount !!}]
+                                                dataCount      : [{!! $directReport->twInprogressCount !!}],
+                                                dataStatus     : {!! App\Enums\TWStatusEnum::INPROGRESS !!}
                                             },
                                             {
                                                 label               : 'Done',
                                                 backgroundColor: 'rgba(34,139,34,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $directReport->twPassCountPercentage !!}],
-                                                dataCount      : [{!! $directReport->twPassCount !!}]
+                                                data                : [{!! $directReport->twPassCountPercentage + $directReport->twFailWithCompletedCountPercentage !!}],
+                                                dataCount      : [{!! $directReport->twPassCount + $directReport->twFailWithCompletedCount !!}],
+                                                dataStatus     : {!! App\Enums\TWStatusEnum::COMPLETED !!}
                                             },{
                                                 label               : 'Fail',
                                                 backgroundColor: 'rgba(128,0,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! ($directReport->twFailWithUncompletedCountPercentage + $directReport->twFailWithCompletedCountPercentage) !!}],
-                                                dataCount      : [{!! ($directReport->twFailWithUncompletedCount + $directReport->twFailWithCompletedCount) !!}]
+                                                data                : [{!! ($directReport->twFailWithUncompletedCountPercentage) !!}],
+                                                dataCount      : [{!! ($directReport->twFailWithUncompletedCount) !!}],
+                                                dataStatus     : {!! App\Enums\TWStatusEnum::FAIL !!}
                                             }
                                           ]
                                         };

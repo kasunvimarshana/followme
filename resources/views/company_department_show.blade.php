@@ -46,14 +46,14 @@
                             <div class="col-sm-12">
                                 <!-- table -->
                                 @foreach ($companyObj->departments as $departmentKey => $department)
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
                                         <!-- box -->
                                         <div class="box box-primary">
                                             <!-- box-header -->
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">
                                                     <!-- urlencode() -->
-                                                    <a href="#">{{ $department->department_name }}</a>
+                                                    <a href="{!! route('department.showDepartmentTW', [urlencode($companyObj->company_name), urlencode($department->department_name)]) !!}">{{ $department->department_name }}</a>
                                                 </h3>
 
                                                 <div class="box-tools pull-right">
@@ -84,20 +84,23 @@
                                                 backgroundColor: 'rgba(255,190,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
                                                 data                : [{!! $department->twInprogressCountPercentage !!}],
-                                                dataCount      : [{!! $department->twInprogressCount !!}]
+                                                dataCount      : [{!! $department->twInprogressCount !!}],
+                                                dataStatus     : {!! App\Enums\TWStatusEnum::INPROGRESS !!}
                                             },
                                             {
                                                 label               : 'Done',
                                                 backgroundColor: 'rgba(34,139,34,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! $department->twPassCountPercentage !!}],
-                                                dataCount      : [{!! $department->twPassCount !!}]
+                                                data                : [{!! $department->twPassCountPercentage + $department->twFailWithCompletedCountPercentage !!}],
+                                                dataCount      : [{!! $department->twPassCount + $department->twFailWithCompletedCount !!}],
+                                                dataStatus     : {!! App\Enums\TWStatusEnum::COMPLETED !!}
                                             },{
                                                 label               : 'Fail',
                                                 backgroundColor: 'rgba(128,0,0,1)',
                                                 borderColor: 'rgba(0,0,0,0.5)',
-                                                data                : [{!! ($department->twFailWithUncompletedCountPercentage + $department->twFailWithCompletedCountPercentage) !!}],
-                                                dataCount      : [{!! ($department->twFailWithUncompletedCount + $department->twFailWithCompletedCount) !!}]
+                                                data                : [{!! ($department->twFailWithUncompletedCountPercentage) !!}],
+                                                dataCount      : [{!! ($department->twFailWithUncompletedCount) !!}],
+                                                dataStatus     : {!! App\Enums\TWStatusEnum::FAIL !!}
                                             }
                                           ]
                                         };
@@ -175,7 +178,25 @@
                                                         }
                                                     }]
                                                 },
-                                                'onClick': function (event, item) {}
+                                                'onClick': function (event, item) {
+                                                    var activeElement = this.getElementAtEvent(event);
+                                                    activeElement = activeElement.shift();
+                                                    //var activeElementDataSet = this.getDatasetAtEvent(event);
+                                                    var activeElementDataSet = {};
+                                                    var activeElementDataStatus = null;
+                                                    
+                                                    if (activeElement) {
+                                                        activeElementDataSet = this.data.datasets[activeElement._datasetIndex];
+                                                        activeElementDataStatus = activeElementDataSet.dataStatus;
+                                                        
+                                                        var url = "{!! route('department.showDepartmentTW', [urlencode($companyObj->company_name), urlencode($department->department_name), 'progress' => '#progress']) !!}";
+                                                        @php
+                                                            $progressKey = urlencode('#progress');
+                                                        @endphp
+                                                        url = url.replace("{!! $progressKey !!}", activeElementDataStatus);
+                                                        $( location ).attr("href", url);
+                                                    }
+                                                }
                                             }
                                         }
                                         var chartObj = new Chart(canvasCtx, chartConfig);
