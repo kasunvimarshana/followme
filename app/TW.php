@@ -72,4 +72,9 @@ class TW extends Model
         $user->thumbnailphoto = null;
         return $user;
     }
+    
+    //many to many
+    public function eventRecurringPatterns(){
+        return $this->morphMany('App\EventRecurringPattern', 'recurrable');
+    }
 }

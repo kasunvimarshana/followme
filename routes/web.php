@@ -64,11 +64,11 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
 });
 
 Route::group(['middleware' => 'superAdminMiddleware'], function(){
-    Route::get('team/{company}/{department}/tws/show', array('uses' => 'DepartmentController@showDepartmentTW'))->name('department.showDepartmentTW');
+    Route::get('backstage/team/{company}/{department}/tws/show', array('uses' => 'DepartmentController@showDepartmentTW'))->name('department.showDepartmentTW');
     
-    Route::get('meeting-categories/create', array('uses' => 'MeetingCategoryController@create'))->name('meetingCategory.create');
+    Route::get('backstage/meeting-categories/create', array('uses' => 'MeetingCategoryController@create'))->name('meetingCategory.create');
     Route::post('meeting-categories/create', array('uses' => 'MeetingCategoryController@store'))->name('meetingCategory.store');
-    Route::get('meeting-categories/{meetingCategory}/edit', array('uses' => 'MeetingCategoryController@edit'))->name('meetingCategory.edit');
+    Route::get('backstage/meeting-categories/{meetingCategory}/edit', array('uses' => 'MeetingCategoryController@edit'))->name('meetingCategory.edit');
     Route::post('meeting-categories/{meetingCategory}/edit', array('uses' => 'MeetingCategoryController@update'))->name('meetingCategory.update');
 });
 

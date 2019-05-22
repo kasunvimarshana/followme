@@ -80,15 +80,25 @@
                 </ul>
             </li>
             @superadmin
-            <li class="treeview {!! set_active(['meeting-categories', 'meeting-categories/*']) !!}">
+            <li class="treeview {!! set_active(['backstage', 'backstage/*']) !!}">
                 <a href="#">
-                    <i class="fa fa-edit"></i> <span>Meeting Category</span>
+                    <i class="fa fa-edit"></i> <span>Backstage</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{!! set_active(['meeting-categories/create', 'meeting-categories/create/*']) !!}"><a href="{!! route('meetingCategory.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Create New</a></li>
+                    <li class="treeview {!! set_active(['backstage/meeting-categories', 'backstage/meeting-categories/*']) !!}">
+                        <a href="#">
+                            <i class="fa fa-circle-o"></i> <span>Meeting Category</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="{!! set_active(['backstage/meeting-categories/create', 'backstage/meeting-categories/create/*']) !!}"><a href="{!! route('meetingCategory.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Create New</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             @endsuperadmin
