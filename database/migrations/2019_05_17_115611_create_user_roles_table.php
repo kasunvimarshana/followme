@@ -18,7 +18,7 @@ class CreateUserRolesTable extends Migration
             $table->timestamps();
             
             $table->boolean('is_visible')->default(1)->nullable();
-            $table->string('user_pk')->index();
+            $table->string('user_pk')->index()->unique();
             $table->string('role_pk')->index();
             //$table->softDeletes();
         });

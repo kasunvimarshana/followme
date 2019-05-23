@@ -20,6 +20,11 @@ class RecurringTypeSeeder extends Seeder
         ]);
         
         RecurringType::create([
+            'name' => 'general',
+            'is_visible' => 0
+        ]);
+        
+        RecurringType::create([
             'name' => 'tw-owner',
             'is_visible' => 0
         ]);

@@ -70,6 +70,11 @@ Route::group(['middleware' => 'superAdminMiddleware'], function(){
     Route::post('meeting-categories/create', array('uses' => 'MeetingCategoryController@store'))->name('meetingCategory.store');
     Route::get('backstage/meeting-categories/{meetingCategory}/edit', array('uses' => 'MeetingCategoryController@edit'))->name('meetingCategory.edit');
     Route::post('meeting-categories/{meetingCategory}/edit', array('uses' => 'MeetingCategoryController@update'))->name('meetingCategory.update');
+    
+    Route::get('backstage/user-roles/create', array('uses' => 'UserRoleController@create'))->name('userRole.create');
+    Route::post('user-roles/create', array('uses' => 'UserRoleController@store'))->name('userRole.store');
+    Route::match(['get', 'post'], 'user-roles/list', array('uses' => 'UserRoleController@listUserRoles'))->name('userRole.list');
+    Route::get('user-roles/{userRole}/destroy', array('uses' => 'UserRoleController@destroy'))->name('userRole.destroy');
 });
 
 

@@ -17,7 +17,7 @@ class RecurringType extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible','name');
+    protected $fillable = array('is_visible','is_active','name');
 
     /**
     * The attributes that should be hidden for arrays.

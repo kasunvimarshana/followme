@@ -100,7 +100,7 @@
                         </ul>
                     </li>
                     
-                    <li class="treeview {!! set_active(['backstage/users', 'backstage/users/*']) !!}">
+                    <li class="treeview {!! set_active(['backstage/user-roles', 'backstage/user-roles/*']) !!}">
                         <a href="#">
                             <i class="fa fa-circle-o"></i> <span>Admin User</span>
                             <span class="pull-right-container">
@@ -108,13 +108,13 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="{!! set_active(['backstage/users/create', 'backstage/users/create/*']) !!}"><a href="{!! route('meetingCategory.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Control</a></li>
+                            <li class="{!! set_active(['backstage/user-roles/create', 'backstage/user-roles/create/*']) !!}"><a href="{!! route('userRole.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Control</a></li>
                         </ul>
                     </li>
                     
                     <li class="treeview {!! set_active(['backstage/users', 'backstage/users/*']) !!}">
                         <a href="#">
-                            <i class="fa fa-circle-o"></i> <span>Escalation Time</span>
+                            <i class="fa fa-circle-o"></i> <span>Notification Schedule</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>

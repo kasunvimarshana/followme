@@ -18,6 +18,7 @@ class CreateRecurringTypesTable extends Migration
             $table->timestamps();
             
             $table->boolean('is_visible')->default(1)->nullable();
+            $table->boolean('is_active')->default(1)->nullable();
             $table->string('name')->index();//->nullable()
         });
     }
