@@ -1,6 +1,6 @@
 /*! @preserve
  * bootbox.js
- * version: 5.0.0
+ * version: 5.1.1
  * author: Nick Payne <nick@kurai.co.uk>
  * license: MIT
  * http://bootboxjs.com/
@@ -146,7 +146,9 @@
     // center modal vertically in page
     centerVertical: false,
     // Append "multiple" property to the select when using the "prompt" helper
-    multiple: false
+    multiple: false,
+    // Automatically scroll modal content when height exceeds viewport height
+    scrollable: false
   };
 
 
@@ -311,11 +313,36 @@
         console.warn('"size" requires Bootstrap 3.1.0 or higher. You appear to be using ' + options.fullBootstrapVersion + '. Please upgrade to use this option.');
       }
 
-      if (options.size === 'large') {
-        innerDialog.addClass('modal-lg');
-      } else if (options.size === 'small') {
-        innerDialog.addClass('modal-sm');
+      switch(options.size)
+      {
+        case 'small':
+        case 'sm':
+          innerDialog.addClass('modal-sm');
+          break;
+
+        case 'large':
+        case 'lg':
+          innerDialog.addClass('modal-lg');
+          break;
+
+        case 'xl':
+        case 'extra-large':
+          // Requires Bootstrap 4.2.0 or higher
+          if (options.fullBootstrapVersion.substring(0, 3) < '4.2') {
+            console.warn('Using size "xl"/"extra-large" requires Bootstrap 4.2.0 or higher. You appear to be using ' + options.fullBootstrapVersion + '. Please upgrade to use this option.');
+          }
+          innerDialog.addClass('modal-xl');
+          break;
       }
+    }
+
+    if(options.scrollable){
+      // Requires Bootstrap 4.3.0 or higher
+      if (options.fullBootstrapVersion.substring(0, 3) < '4.3') {
+        console.warn('Using "scrollable" requires Bootstrap 4.3.0 or higher. You appear to be using ' + options.fullBootstrapVersion + '. Please upgrade to use this option.');
+      }
+
+      innerDialog.addClass('modal-dialog-scrollable');
     }
 
     if (options.title) {
@@ -614,6 +641,12 @@
 
         if (options.required) {
           input.prop({ 'required': true });
+        }
+        
+        if (options.rows && !isNaN(parseInt(options.rows))) {
+          if(options.inputType === 'textarea'){
+            input.attr({ 'rows': options.rows });
+          }
         }
 
         break;

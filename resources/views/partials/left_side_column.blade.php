@@ -112,7 +112,7 @@
                         </ul>
                     </li>
                     
-                    <li class="treeview {!! set_active(['backstage/users', 'backstage/users/*']) !!}">
+                    <li class="treeview {!! set_active(['backstage/notification-schedules', 'backstage/notification-schedules/*']) !!}">
                         <a href="#">
                             <i class="fa fa-circle-o"></i> <span>Notification Schedule</span>
                             <span class="pull-right-container">
@@ -120,7 +120,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="{!! set_active(['backstage/users/create', 'backstage/users/create/*']) !!}"><a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Control</a></li>
+                            <li class="{!! set_active(['backstage/notification-schedules/create', 'backstage/notification-schedules/create/*']) !!}"><a href="{!! '#' !!}"> <i class="fa fa-arrow-circle-o-right"></i> Control</a></li>
                         </ul>
                     </li>
                 </ul>
