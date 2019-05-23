@@ -120,7 +120,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="{!! set_active(['backstage/users/create', 'backstage/users/create/*']) !!}"><a href="{!! route('meetingCategory.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Control</a></li>
+                            <li class="{!! set_active(['backstage/users/create', 'backstage/users/create/*']) !!}"><a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Control</a></li>
                         </ul>
                     </li>
                 </ul>
