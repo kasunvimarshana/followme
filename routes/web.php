@@ -74,8 +74,10 @@ Route::group(['middleware' => 'superAdminMiddleware'], function(){
     Route::post('user-roles/create', array('uses' => 'UserRoleController@store'))->name('userRole.store');
     Route::match(['get', 'post'], 'user-roles/list', array('uses' => 'UserRoleController@listUserRoles'))->name('userRole.list');
     Route::get('user-roles/{userRole}/destroy', array('uses' => 'UserRoleController@destroy'))->name('userRole.destroy');
-    
     Route::get('backstage/notification-schedules/create', array('uses' => 'NotificationScheduleController@create'))->name('notificationSchedule.create');
+    
+    Route::post('backstage/notification-schedules/store-schedule-tw-owner', array('uses' => 'NotificationScheduleController@storeScheduleTWOwner'))->name('notificationSchedule.storeScheduleTWOwner');
+    Route::post('backstage/notification-schedules/store-schedule-hod', array('uses' => 'NotificationScheduleController@storeScheduleHOD'))->name('notificationSchedule.storeScheduleHOD');
 });
 
 
