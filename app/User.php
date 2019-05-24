@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto'
+        'name', 'email', 'password', 'cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager'
     ];
     /*protected $fillable = [
         'name', 'email', 'password'
@@ -61,7 +61,7 @@ class User extends Authenticatable
         $ldapModel = new LDAPModel();
         $filteringAttributeValue = $this->$filteringAttribute;
         $filter = "({$filteringAttribute}={$filteringAttributeValue})";
-        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto');
+        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager');
         $result = $ldapModel->doSearch($filter, $attributes);
         $result = $ldapModel->formatEntries( $result );
         
@@ -77,7 +77,7 @@ class User extends Authenticatable
     public function findUsers($filter = '(mail=*)', $ldaptree = null){
         $users = array();
         $ldapModel = new LDAPModel();
-        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto');
+        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager');
         $results = null;
         if( !empty($ldaptree) ){
             $results = $ldapModel->doSearch($filter, $attributes, $ldaptree);
@@ -118,6 +118,27 @@ class User extends Authenticatable
             }
         }
         return $users;
+    }
+    
+    public function getManager(){
+        $user = null;
+        if( ($this->manager) ){
+            $managerArray = array();
+            $filterArray = array();
+            $filterArray = @explode(',', $this->manager);
+            $filter = @array_shift($filterArray);
+            if($filter){
+                $filter = "({$filter})";
+                $ldaptree = $this->manager;
+                $managerArray = $this->findUsers($filter, $ldaptree);
+                $manager = @array_shift( $managerArray );
+                if( ($manager) && ($manager->mail) ){
+                    $manager->thumbnailphoto = null;
+                    $user = $manager;
+                }
+            }
+        }
+        return $user;
     }
     
 }

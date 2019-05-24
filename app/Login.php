@@ -64,6 +64,7 @@ class Login extends Model
         self::setData("mobile", $user->mobile);
         self::setData("directreports", $user->directreports);
         self::setData("thumbnailphoto", $user->thumbnailphoto);
+        self::setData("manager", $user->manager);
     }
     
     public static function unsetUserData(){
@@ -79,6 +80,7 @@ class Login extends Model
         self::setData("mobile", null);
         self::setData("directreports", null);
         self::setData("thumbnailphoto", null);
+        self::setData("manager", null);
     }
     
     public static function getUserData(){
@@ -95,6 +97,7 @@ class Login extends Model
         $user->mobile = self::getData("mobile");
         $user->directreports = self::getData("directreports");
         $user->thumbnailphoto = self::getData("thumbnailphoto");
+        $user->manager = self::getData("manager");
         //$user->getUser();
         return $user;
     }
