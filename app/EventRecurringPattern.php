@@ -17,7 +17,7 @@ class EventRecurringPattern extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible','recurrable_type','recurrable_id','is_recurring','recurring_type_id','minute','hour','day_of_month','month','day_of_week','year','has_max_number_of_occures','max_number_of_occures','has_seperation_count','seperation_count','last_event_at','next_event_at','number_of_occures');
+    protected $fillable = array('is_visible','recurrable_type','recurrable_id','is_recurring','recurring_type_id','minute','hour','day','day_of_month','month','day_of_week','year','has_max_number_of_occures','max_number_of_occures','has_seperation_count','seperation_count','last_event_at','next_event_at','number_of_occures');
 
     /**
     * The attributes that should be hidden for arrays.

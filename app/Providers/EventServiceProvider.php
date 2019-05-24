@@ -7,6 +7,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+use App\Events\TWCreateEvent;
+use App\Listeners\TWCreateEventListener;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -18,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        TWCreateEvent::class => [
+            TWCreateEventListener::class
+        ]
     ];
 
     /**

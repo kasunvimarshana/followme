@@ -64,14 +64,14 @@
                                     
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="hour" class="col-sm-2 control-label" title="Hour">H (1 - 24)</label>
+                                        <label for="day" class="col-sm-2 control-label" title="Day">Day</label>
                                         <div class="col-sm-10">
                                             @php
-                                                $hourInputRange = range(0,24,1);
-                                                $hourInputRange = implode(" ,", $hourInputRange);
+                                                $dayInputRange = range(0,7,1);
+                                                $dayInputRange = implode(" ,", $dayInputRange);
                                             @endphp
                                             <!-- p class="form-control-static"></p -->
-                                            <input class="form-control" id="hour" name="hour" value="{!! $recurringPatternOwner->hour !!}" data-provide="slider" data-slider-ticks="[{!! $hourInputRange !!}]" data-slider-ticks-labels='[{!! $hourInputRange !!}]' data-slider-min="0" data-slider-max="24" data-slider-step="1" data-slider-value="{!! $recurringPatternOwner->hour !!}" data-slider-tooltip="hide" style="width: 100%;"/>
+                                            <input class="form-control" id="day" name="day" value="{!! $recurringPatternOwner->day !!}" data-provide="slider" data-slider-ticks="[{!! $dayInputRange !!}]" data-slider-ticks-labels='[{!! $dayInputRange !!}]' data-slider-min="0" data-slider-max="7" data-slider-step="1" data-slider-value="{!! $recurringPatternOwner->day !!}" data-slider-tooltip="hide" style="width: 100%;"/>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
@@ -173,14 +173,14 @@
                                     
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="hour" class="col-sm-2 control-label" title="Hour">H (1 - 24)</label>
+                                        <label for="day" class="col-sm-2 control-label" title="Day">Day</label>
                                         <div class="col-sm-10">
                                             @php
-                                                $hourInputRange = range(0,24,1);
-                                                $hourInputRange = implode(" ,", $hourInputRange);
+                                                $dayInputRange = range(0,7,1);
+                                                $dayInputRange = implode(" ,", $dayInputRange);
                                             @endphp
                                             <!-- p class="form-control-static"></p -->
-                                            <input class="form-control" id="hour" name="hour" value="{!! $recurringPatternHOD->hour !!}" data-provide="slider" data-slider-ticks="[{!! $hourInputRange !!}]" data-slider-ticks-labels='[{!! $hourInputRange !!}]' data-slider-min="0" data-slider-max="24" data-slider-step="1" data-slider-value="{!! $recurringPatternHOD->hour !!}" data-slider-tooltip="hide" style="width: 100%;"/>
+                                            <input class="form-control" id="day" name="day" value="{!! $recurringPatternHOD->day !!}" data-provide="slider" data-slider-ticks="[{!! $dayInputRange !!}]" data-slider-ticks-labels='[{!! $dayInputRange !!}]' data-slider-min="0" data-slider-max="7" data-slider-step="1" data-slider-value="{!! $recurringPatternHOD->day !!}" data-slider-tooltip="hide" style="width: 100%;"/>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>

@@ -24,6 +24,8 @@ use App\UserAttachment;
 use Storage;
 use Carbon\Carbon;
 
+use App\Events\TWCreateEvent;
+
 class TWController extends Controller
 {
     /**
@@ -156,6 +158,8 @@ class TWController extends Controller
                         ));
                     }
                 }
+                
+                event(new TWCreateEvent($newTW));
             }catch(\Exception $e){
                 
                 DB::rollback();

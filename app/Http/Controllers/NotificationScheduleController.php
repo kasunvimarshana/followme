@@ -60,7 +60,7 @@ class NotificationScheduleController extends Controller
         
         $recurringPatternData = array(
             'is_recurring' => $is_recurring,
-            'hour' => $request->get('hour'),
+            'day' => $request->get('day'),
             'day_of_week' => $request->get('day_of_week'),
             'month' => $request->get('month')
         );
@@ -121,7 +121,7 @@ class NotificationScheduleController extends Controller
         
         $recurringPatternData = array(
             'is_recurring' => $is_recurring,
-            'hour' => $request->get('hour'),
+            'day' => $request->get('day'),
             'day_of_week' => $request->get('day_of_week'),
             'month' => $request->get('month')
         );

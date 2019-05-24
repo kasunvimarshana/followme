@@ -17,7 +17,7 @@ class RecurringPattern extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible','is_recurring','recurring_type_id','minute','hour','day_of_month','month','day_of_week','year','has_max_number_of_occures','max_number_of_occures','has_seperation_count','seperation_count');
+    protected $fillable = array('is_visible','is_recurring','recurring_type_id','minute','hour','day','day_of_month','month','day_of_week','year','has_max_number_of_occures','max_number_of_occures','has_seperation_count','seperation_count');
 
     /**
     * The attributes that should be hidden for arrays.
