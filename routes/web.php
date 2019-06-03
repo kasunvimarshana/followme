@@ -15,6 +15,15 @@
     return view('welcome');
 });*/
 
+Route::get('mail', function(){
+    $data = array('name'=>"kasun vimarshana");
+    Mail::send(['text'=>'home'], $data, function($message) {
+        $message->to('kasunV@Brandix.com', 'Tutorials Point')
+            ->subject('Laravel Basic Testing Mail');
+        $message->from('kasunV@Brandix.com','Virat Gandhi');
+    });
+});
+
 Route::get('/', array('uses' => 'LoginController@showLogin'))->name('home');
 // route to show the login form
 Route::get('login', array('uses' => 'LoginController@showLogin'))->name('login.showLogin');

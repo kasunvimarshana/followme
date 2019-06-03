@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\TW;
 use App\RecurringType;
 use App\RecurringPattern;
+use Mail;
 
 class TWCreateEventListener
 {
@@ -74,6 +75,9 @@ class TWCreateEventListener
                 'has_seperation_count' => $recurringPatternHOD->has_seperation_count,
                 'seperation_count' => $recurringPatternHOD->seperation_count
             ));
-        }catch(\Exception $e){}
+            
+        }catch(\Exception $e){
+            
+        }
     }
 }

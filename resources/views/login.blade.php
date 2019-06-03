@@ -25,14 +25,25 @@
 <body class="hold-transition login-page">
     <div id="particles-js"></div>
 <div class="login-box">
-  <div class="login-logo">
+    <!-- --- -->
+  <!-- div class="login-logo" -->
     <!-- a href="{{ url('/') }}"><b>Follow </b>Me</a -->
-    <a class="logo-link" href="{{ url('/') }}">
-        <img class="img img-responsive logo-img" src="{!! asset('img/logo_1.png') !!}"/>
+    <!-- a class="logo-link" href="{{ url('/') }}" -->
+        <!-- img class="img img-responsive logo-img" src="{!! asset('img/logo_1.png') !!}"/ -->
         <!-- p style="color: white;"> Event Tracker </p -->
-        <p class="logo-text"> Event Tracker </p>
-    </a>
-  </div>
+        <!-- p class="logo-text"> Event Tracker </p -->
+    <!-- /a -->
+  <!-- /div -->
+    <!-- --- -->
+    <!-- --- -->
+    <div class="login-logo">
+        <!-- a href="{{ url('/') }}"><b>Follow </b>Me</a -->
+        <a class="logo-link" href="{{ url('/') }}">
+            <p style="color: rgba(0, 0, 255, 1);"> Follo<span style="color: rgba(255, 0, 0, 1);">w</span>Me </p>
+            <p class="logo-text"> Event Tracker </p>
+        </a>
+    </div>
+    <!-- --- -->
   <!-- /.login-logo -->
   <div class="login-box-body">
     <!-- p class="login-box-msg">Sign in to start your session</p -->
