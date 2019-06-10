@@ -16,6 +16,9 @@ use App\UserAttachment;
 use Storage;
 use Carbon\Carbon;
 
+use Mail;
+use App\Jobs\SendTWDevDateReachMailJob;
+
 class SendTWEmails extends Command
 {
     /**
@@ -150,6 +153,9 @@ class SendTWEmails extends Command
                                     'last_event_at' => $next_event_at_as_obj->format('Y-m-d'),
                                     'next_event_at' => $next_event_at_as_obj->format('Y-m-d')
                                 );
+                                
+                                $emailJob = (new SendTWDevDateReachMailJob($valueTWObject))->delay(Carbon::now()->addSeconds(10));
+                                dispatch($emailJob);
                                 
                                 $valueEventRecurringPattern->update( $eventRecurringPatternData );
                                 $valueEventRecurringPattern->increment('number_of_occures', 1);

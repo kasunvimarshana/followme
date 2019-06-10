@@ -10,6 +10,8 @@ use App\TW;
 use App\RecurringType;
 use App\RecurringPattern;
 use Mail;
+use Carbon\Carbon;
+use App\Jobs\SendTWCreateMailJob;
 
 class TWCreateEventListener
 {
@@ -75,6 +77,9 @@ class TWCreateEventListener
                 'has_seperation_count' => $recurringPatternHOD->has_seperation_count,
                 'seperation_count' => $recurringPatternHOD->seperation_count
             ));
+            
+            $emailJob = (new SendTWCreateMailJob($tWClone))->delay(Carbon::now()->addSeconds(10));
+            dispatch($emailJob);
             
         }catch(\Exception $e){
             
