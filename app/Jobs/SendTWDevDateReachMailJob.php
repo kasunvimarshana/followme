@@ -40,7 +40,11 @@ class SendTWDevDateReachMailJob implements ShouldQueue
         
         $twUsers = $tW->twUsers;
         foreach($twUsers as $key=>$value){
-            Mail::to($value->own_user)->send($email);
+            //Mail::to($value->own_user)->send($email);
+            $toUsers = $value->own_user;
+            $mailObj = Mail::to($value->own_user);
+            $mailObj->send($email);
+            //dd(Mail::failures());
         }
     }
 }

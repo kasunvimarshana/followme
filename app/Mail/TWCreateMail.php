@@ -32,7 +32,7 @@ class TWCreateMail extends Mailable
     {
         //return $this->view('view.name');
         $tW = $this->tW;
-        return $this->view('welcome')->with([
+        return $this->view('mail.tw_create_mail')->with([
             'tW' => $tW
         ]);
     }
