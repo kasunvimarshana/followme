@@ -27,7 +27,29 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('twemail:send')->everyFiveMinutes();
+        /*if (!strstr(shell_exec('ps xf'), 'php artisan queue:work')){
+            $schedule->command('queue:work')
+                     ->everyMinute()
+                     ->withoutOverlapping();
+        }*/
+        //$schedule->exec("php artisan queue:work");
+        //$schedule->exec("php artisan queue:work")->appendOutputTo('/my/logs/laravel_output.log');
+        //$schedule->command('queue:work --daemon --once')->withoutOverlapping();
+        $schedule->command('twemail:send')
+            ->evenInMaintenanceMode()
+            ->onOneServer()
+            //->runInBackground()
+            //->withoutOverlapping()
+            //->everyFiveMinutes()
+            ->environments(['staging', 'production']);
+        
+        $schedule->command('queue:work')
+            ->evenInMaintenanceMode()
+            ->onOneServer()
+            //->runInBackground()
+            //->withoutOverlapping()
+            //->everyFiveMinutes()
+            ->environments(['staging', 'production']);
     }
 
     /**
