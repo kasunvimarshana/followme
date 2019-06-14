@@ -39,7 +39,7 @@
     <div class="login-logo">
         <!-- a href="{{ url('/') }}"><b>Follow </b>Me</a -->
         <a class="logo-link" href="{{ url('/') }}">
-            <p style="color: rgba(0, 0, 255, 1);"> Follo<span style="color: rgba(255, 0, 0, 1);">w</span>Me </p>
+            <p style="color: rgba(72, 61, 139, 1);"> Follo<span style="color: rgba(139, 61, 72, 1);">w</span>Me </p>
             <p class="logo-text"> Event Tracker </p>
         </a>
     </div>

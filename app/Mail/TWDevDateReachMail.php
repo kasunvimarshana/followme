@@ -32,8 +32,16 @@ class TWDevDateReachMail extends Mailable
     {
         //return $this->view('view.name');
         $tW = $this->tW;
-        return $this->view('mail.tw_dev_date_reach_mail')->with([
+        $message = $this;
+        
+        $message = $message->subject("3W");
+        $message = $message->view('mail.tw_dev_date_reach_mail')->with([
             'tW' => $tW
         ]);
+        /*$message = $message->markdown('mail.tw_dev_date_reach_mail')->with([
+            'tW' => $tW
+        ]);*/
+        
+        return $message;
     }
 }

@@ -68,8 +68,8 @@ return [
     */
 
     //'timezone' => 'UTC',
-    'timezone' => 'Asia/Colombo',
-
+    //'timezone' => 'Asia/Colombo',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
