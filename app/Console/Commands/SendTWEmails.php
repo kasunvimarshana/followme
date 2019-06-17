@@ -154,8 +154,19 @@ class SendTWEmails extends Command
                                     'next_event_at' => $next_event_at_as_obj->format('Y-m-d')
                                 );
                                 
+                                /*
                                 $emailJob = (new SendTWDevDateReachMailJob($valueTWObject))->delay(Carbon::now()->addSeconds(10));
                                 dispatch($emailJob);
+                                */
+                                
+                                $twUsers = $tWClone->twUsers;
+                                foreach($twUsers as $key=>$value){
+                                    //Mail::to($value->own_user)->send($email);
+                                    $toUser = $value;
+                                    //$toUser = $value->own_user;
+                                    $emailJob = (new SendTWDevDateReachMailJob($valueTWObject, $toUser))->delay(Carbon::now()->addSeconds(10));
+                                    dispatch($emailJob);
+                                }
                                 
                                 $valueEventRecurringPattern->update( $eventRecurringPatternData );
                                 $valueEventRecurringPattern->increment('number_of_occures', 1);

@@ -1,27 +1,33 @@
-<h1>You have a dev date reach <b>3W</b></h1>
+<!-- h1>You have a dev date reach <b>3W</b></h1 -->
 
 @isset($tW)
+
+    @isset($tWUser)
+        <h3>Dear {{ $tWUser->cn }},</h3>
+    @endisset
     
-    <table style="border: 1px solid black; width:100%;">
-        <tr style="border: 1px solid black;">
-            <td style="border: 1px solid black;"> 3W </td>
-            <td style="border: 1px solid black;"> {{ $tW->title }} </td>
+    <p>You have a Dev Date reach 3W, Please pay your attention</p>
+    <!-- style="border: 1px solid black;" -->
+    <table style="width: 100%;">
+        <tr style="">
+            <td style="width: 15%;text-align: right !important;"> Assigned 3W : </td>
+            <td style=""> {{ $tW->title }} </td>
         </tr>
-        <tr style="border: 1px solid black;">
-            <td style="border: 1px solid black;"> Start Date </td>
-            <td style="border: 1px solid black;"> {{ $tW->start_date }} </td>
+        <tr style="">
+            <td style="width: 15%;text-align: right !important;"> Start Date : </td>
+            <td style=""> {{ $tW->start_date }} </td>
         </tr>
-        <tr style="border: 1px solid black;">
-            <td style="border: 1px solid black;"> Due Date </td>
-            <td style="border: 1px solid black;"> {{ $tW->due_date }} </td>
+        <tr style="">
+            <td style="width: 15%;text-align: right !important;"> Due Date : </td>
+            <td style=""> {{ $tW->due_date }} </td>
         </tr>
-        <tr style="border: 1px solid black;">
-            <td style="border: 1px solid black;"> Description </td>
-            <td style="border: 1px solid black;"> {{ $tW->description }} </td>
+        <tr style="">
+            <td style="width: 15%;text-align: right !important;"> Description : </td>
+            <td style=""> {{ $tW->description }} </td>
         </tr>
-        <tr style="border: 1px solid black;">
-            <td style="border: 1px solid black;"> Raised By </td>
-            <td style="border: 1px solid black;"> {{ $tW->created_user }} </td>
+        <tr style="">
+            <td style="width: 15%;text-align: right !important;"> 3W Raised By : </td>
+            <td style=""> {{ $tW->created_user }} </td>
         </tr>
     </table>
 

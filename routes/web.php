@@ -15,13 +15,25 @@
     return view('welcome');
 });*/
 
-Route::get('mail', function(){
+/*Route::get('mail', function(){
     $data = array('name'=>"kasun vimarshana");
     Mail::send(['text'=>'home'], $data, function($message) {
         $message->to('kasunV@Brandix.com', 'Tutorials Point')
             ->subject('Laravel Basic Testing Mail');
         $message->from('kasunV@Brandix.com','Virat Gandhi');
     });
+});*/
+
+Route::get('mail', function(){
+    
+    //$toTWUsersArray = array("email" => "kasunv@brandix.com", "name" => "kasun");
+    $toTWUsersArray = array("kasunv@brandix.com");
+    
+    Mail::to($toTWUsersArray)
+        //->subject("3W")
+        //->cc($toTWUsersArray)
+        //->bcc($toTWUsersArray)
+        ->queue(new App\Mail\TWCreateMail(App\TW::first(), App\Login::getUserData()));
 });
 
 Route::get('/', array('uses' => 'LoginController@showLogin'))->name('home');

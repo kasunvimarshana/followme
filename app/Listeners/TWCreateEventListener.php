@@ -78,8 +78,19 @@ class TWCreateEventListener
                 'seperation_count' => $recurringPatternHOD->seperation_count
             ));
             
+            /*
             $emailJob = (new SendTWCreateMailJob($tWClone))->delay(Carbon::now()->addSeconds(10));
             dispatch($emailJob);
+            */
+            
+            $twUsers = $tWClone->twUsers;
+            foreach($twUsers as $key=>$value){
+                //Mail::to($value->own_user)->send($email);
+                $toUser = $value;
+                //$toUser = $value->own_user;
+                $emailJob = (new SendTWCreateMailJob($tWClone, $toUser))->delay(Carbon::now()->addSeconds(10));
+                dispatch($emailJob);
+            }
             
         }catch(\Exception $e){
             
