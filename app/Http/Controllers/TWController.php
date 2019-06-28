@@ -290,6 +290,8 @@ class TWController extends Controller
                         'department_name' => $tempTWUser->department
                     ));
                 }
+                
+                event(new TWUpdateEvent($tWClone));
             }catch(\Exception $e){
                 
                 DB::rollback();
@@ -706,6 +708,7 @@ class TWController extends Controller
                 'created_user' => $current_user
             ));
             
+            event(new TWResubmitEvent($updatedTW));
         }catch(\Exception $e){
             DB::rollback();
             

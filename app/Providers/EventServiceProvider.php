@@ -23,6 +23,15 @@ class EventServiceProvider extends ServiceProvider
         ],
         TWCreateEvent::class => [
             TWCreateEventListener::class
+        ],
+        TWInfoCreateEvent::class => [
+            TWInfoCreateEventListener::class
+        ],
+        TWResubmitEvent::class => [
+            TWResubmitEventListener::class
+        ],
+        TWUpdateEvent::class => [
+            TWUpdateEventListener::class
         ]
     ];
 

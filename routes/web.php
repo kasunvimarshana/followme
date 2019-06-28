@@ -24,6 +24,7 @@
     });
 });*/
 
+/*
 Route::get('mail', function(){
     
     //$toTWUsersArray = array("email" => "kasunv@brandix.com", "name" => "kasun");
@@ -35,6 +36,7 @@ Route::get('mail', function(){
         //->bcc($toTWUsersArray)
         ->queue(new App\Mail\TWCreateMail(App\TW::first(), App\Login::getUserData()));
 });
+*/
 
 Route::get('/', array('uses' => 'LoginController@showLogin'))->name('home');
 // route to show the login form

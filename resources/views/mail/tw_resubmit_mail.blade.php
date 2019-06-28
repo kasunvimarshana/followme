@@ -1,4 +1,4 @@
-<!-- h1>You have a new <b>3W</b></h1 -->
+<!-- h1><b>Title</b></h1 -->
 
 @isset($tW)
     
@@ -6,7 +6,7 @@
         <p>Dear {{ $tWUser->cn }},</p>
     @endisset
 
-    <h3>New 3W assigned to you, Please pay your attention</h3>
+    <h3>You have a resubmitted 3W, Please pay your attention</h3>
     <!-- style="border: 1px solid black;" -->
     <table style="width: 100%;">
         <tr style="">

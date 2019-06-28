@@ -99,6 +99,8 @@ class TWInfoController extends Controller
                     ));
                 }
             }
+            
+            event(new TWInfoCreateEvent($newTWInfo));
         }catch(\Exception $e){
 
             DB::rollback();
