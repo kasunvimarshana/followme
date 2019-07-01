@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\Schema;
 
+use Illuminate\Support\Facades\Queue;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,5 +33,9 @@ class AppServiceProvider extends ServiceProvider
         Illuminate\Database\QueryException  : SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long;
         */
         Schema::defaultStringLength(191);
+        
+        /*Queue::failing(function ($connection, $job, $data) {
+            Log::error('Job failed!');
+        });*/
     }
 }

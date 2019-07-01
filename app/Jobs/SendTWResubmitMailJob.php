@@ -27,7 +27,7 @@ class SendTWResubmitMailJob implements ShouldQueue
     {
         //
         $this->tW = $tW;
-        $this->$tWUser = $tWUser;
+        $this->tWUser = $tWUser;
     }
 
     /**

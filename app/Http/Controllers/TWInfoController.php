@@ -23,6 +23,8 @@ use App\UserAttachment;
 use Storage;
 use Chumper\Zipper\Zipper;
 
+use App\Events\TWInfoCreateEvent;
+
 class TWInfoController extends Controller
 {
     /**

@@ -38,7 +38,7 @@ class TWInfoCreateEventListener
             
             $tW = $tWInfoClone->tw;
             $twUsers = $tW->twUsers;
-            $createdUser = $tWInfoClone->createdUser;
+            $createdUser = $tWInfoClone->createdUser();
             
             foreach($twUsers as $key=>$value){
                 //Mail::to($value->own_user)->send($email);

@@ -38,6 +38,10 @@ Route::get('mail', function(){
 });
 */
 
+/*Route::get('event_test', function(){
+    event(new App\Events\TWInfoCreateEvent(App\TWInfo::first()));
+});*/
+
 Route::get('/', array('uses' => 'LoginController@showLogin'))->name('home');
 // route to show the login form
 Route::get('login', array('uses' => 'LoginController@showLogin'))->name('login.showLogin');

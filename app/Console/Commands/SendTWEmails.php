@@ -159,7 +159,7 @@ class SendTWEmails extends Command
                                 dispatch($emailJob);
                                 */
                                 
-                                $twUsers = $tWClone->twUsers;
+                                $twUsers = $valueTWObject->twUsers;
                                 foreach($twUsers as $key=>$value){
                                     //Mail::to($value->own_user)->send($email);
                                     $toUser = $value;

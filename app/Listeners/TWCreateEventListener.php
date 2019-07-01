@@ -84,6 +84,7 @@ class TWCreateEventListener
             */
             
             $twUsers = $tWClone->twUsers;
+            
             foreach($twUsers as $key=>$value){
                 //Mail::to($value->own_user)->send($email);
                 $toUser = $value;

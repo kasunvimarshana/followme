@@ -8,7 +8,14 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 use App\Events\TWCreateEvent;
+use App\Events\TWInfoCreateEvent;
+use App\Events\TWResubmitEvent;
+use App\Events\TWUpdateEvent;
+
 use App\Listeners\TWCreateEventListener;
+use App\Listeners\TWInfoCreateEventListener;
+use App\Listeners\TWResubmitEventListener;
+use App\Listeners\TWUpdateEventListener;
 
 class EventServiceProvider extends ServiceProvider
 {

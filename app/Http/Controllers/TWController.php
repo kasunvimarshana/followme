@@ -25,6 +25,8 @@ use Storage;
 use Carbon\Carbon;
 
 use App\Events\TWCreateEvent;
+use App\Events\TWResubmitEvent;
+use App\Events\TWUpdateEvent;
 
 class TWController extends Controller
 {
@@ -708,7 +710,7 @@ class TWController extends Controller
                 'created_user' => $current_user
             ));
             
-            event(new TWResubmitEvent($updatedTW));
+            event(new TWResubmitEvent($tWClone));
         }catch(\Exception $e){
             DB::rollback();
             

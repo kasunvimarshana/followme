@@ -17,7 +17,6 @@ class TWInfoCreateEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
     
     public $tWInfo;
-
     /**
      * Create a new event instance.
      *
