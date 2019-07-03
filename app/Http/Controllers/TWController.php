@@ -27,6 +27,7 @@ use Carbon\Carbon;
 use App\Events\TWCreateEvent;
 use App\Events\TWResubmitEvent;
 use App\Events\TWUpdateEvent;
+use App\Events\TWCloseEvent;
 
 class TWController extends Controller
 {
@@ -657,6 +658,8 @@ class TWController extends Controller
 
         try {
             $updatedTW = $tWClone->update( $twData );
+            
+            event(new TWCloseEvent($tWClone));
         }catch(\Exception $e){
             DB::rollback();
             
@@ -844,6 +847,8 @@ class TWController extends Controller
                     }
                 }
             }
+            
+            event(new TWCreateEvent($newTW));
         }catch(\Exception $e){
 
             DB::rollback();

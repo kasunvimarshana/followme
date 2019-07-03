@@ -11,11 +11,13 @@ use App\Events\TWCreateEvent;
 use App\Events\TWInfoCreateEvent;
 use App\Events\TWResubmitEvent;
 use App\Events\TWUpdateEvent;
+use App\Events\TWCloseEvent;
 
 use App\Listeners\TWCreateEventListener;
 use App\Listeners\TWInfoCreateEventListener;
 use App\Listeners\TWResubmitEventListener;
 use App\Listeners\TWUpdateEventListener;
+use App\Listeners\TWCloseEventListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -39,6 +41,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         TWUpdateEvent::class => [
             TWUpdateEventListener::class
+        ],
+        TWCloseEvent::class => [
+            TWCloseEventListener::class
         ]
     ];
 

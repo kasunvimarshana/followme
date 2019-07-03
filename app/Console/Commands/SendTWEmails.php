@@ -164,8 +164,12 @@ class SendTWEmails extends Command
                                     //Mail::to($value->own_user)->send($email);
                                     $toUser = $value;
                                     //$toUser = $value->own_user;
-                                    $emailJob = (new SendTWDevDateReachMailJob($valueTWObject, $toUser))->delay(Carbon::now()->addSeconds(10));
-                                    dispatch($emailJob);
+                                    try{
+                                        $emailJob = (new SendTWDevDateReachMailJob($valueTWObject, $toUser))->delay(Carbon::now()->addSeconds(10));
+                                        dispatch($emailJob);
+                                    }catch(\Exception $e){
+                                        //dd($e);
+                                    }
                                 }
                                 
                                 $valueEventRecurringPattern->update( $eventRecurringPatternData );

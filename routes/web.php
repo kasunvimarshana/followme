@@ -42,6 +42,11 @@ Route::get('mail', function(){
     event(new App\Events\TWInfoCreateEvent(App\TWInfo::first()));
 });*/
 
+/*Route::get('event_test', function(){
+    $tW = new App\TW();
+    event(new App\Events\TWCloseEvent($tW->where('created_user', 'KasunV@brandix.com')->first()));
+});*/
+
 Route::get('/', array('uses' => 'LoginController@showLogin'))->name('home');
 // route to show the login form
 Route::get('login', array('uses' => 'LoginController@showLogin'))->name('login.showLogin');

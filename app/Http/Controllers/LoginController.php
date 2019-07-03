@@ -45,9 +45,12 @@ class LoginController extends Controller
             ->withErrors($validator)
             ->withInput(Input::except('password'));
         }else{
-            $email = Input::get('email');
-            $email = $email . '@brandix.com';
-            $password = Input::get('password');
+            $suffix = '@brandix.com';
+            $email = urldecode(Input::get('email'));
+            if( (!@stripos($email, $suffix)) ){
+                $email = $email . $suffix;
+            }
+            $password = urldecode(Input::get('password'));
             // attempt to do the login
             Login::doLogin($email, $password);
             if( Login::isLogin() ){
