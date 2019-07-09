@@ -345,6 +345,7 @@ class TWController extends Controller
             
             //delete directory
             if(Storage::exists($tW->resource_dir)) {
+                chmod(Storage::path($tW->resource_dir), 755);
                 Storage::deleteDirectory($tW->resource_dir);
             }
             
@@ -361,7 +362,7 @@ class TWController extends Controller
                 'type' => 'warning',
                 'timer' => 3000
             );
-
+            
             return Response::json( $data );
         }
 

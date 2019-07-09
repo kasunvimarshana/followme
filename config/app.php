@@ -239,5 +239,12 @@ return [
         //alias for chumper\zipper
         'Zipper' => Chumper\Zipper\Zipper::class
     ],
-
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Data
+    |--------------------------------------------------------------------------
+    */
+    'mail_user_name' => env('MAIL_USERNAME', null),
+    'mail_password' => env('MAIL_PASSWORD', null)
 ];

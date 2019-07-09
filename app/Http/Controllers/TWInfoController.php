@@ -256,6 +256,7 @@ class TWInfoController extends Controller
             if( $userAttachments ){
                 foreach($userAttachments as $userAttachment){
                     if(Storage::exists( $userAttachment->link_url )) {
+                        chmod(Storage::path($userAttachment->link_url), 755);
                         Storage::delete( $userAttachment->link_url );
                     }
                     $userAttachment->delete();
