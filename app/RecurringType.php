@@ -38,4 +38,9 @@ class RecurringType extends Model
         return $this->hasMany('App\RecurringPattern', 'recurring_type_id', 'id');
     }
     
+    //one to many
+    public function eventRecurringPatterns(){
+        return $this->hasMany('App\EventRecurringPattern', 'recurring_type_id', 'id');
+    }
+    
 }

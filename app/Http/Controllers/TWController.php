@@ -349,6 +349,7 @@ class TWController extends Controller
                 Storage::deleteDirectory($tW->resource_dir);
             }
             
+            $tW->eventRecurringPatterns()->delete();
             $tW->twInfos()->delete();
             $tW->twUsers()->delete();
             $tW->delete();
@@ -506,6 +507,18 @@ class TWController extends Controller
                 $query->where('department_name','=',$own_department);
                 $query->distinct('t_w_id');
             });
+        }
+        
+        // created company
+        if( ($request->get('created_company')) && (!empty($request->get('created_company'))) ){
+            $created_company = $request->get('created_company');
+            $query = $query->where('company_name', '=', $created_company);
+        }
+        
+        // created department
+        if( ($request->get('created_department')) && (!empty($request->get('created_department'))) ){
+            $created_department = $request->get('created_department');
+            $query = $query->where('department_name', '=', $created_department);
         }
         
         // is_visible

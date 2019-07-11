@@ -42,7 +42,7 @@
                                     @csrf
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="is_active" class="col-sm-2 control-label">Tag With Owner</label>
+                                        <label for="is_active" class="col-sm-2 control-label">Feature</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
                                             <input class="form-control" id="is_active" name="is_active" type="checkbox" data-toggle="toggle" {!! ($recurringTypeOwner->is_active)? 'checked' : null; !!}/>
@@ -151,7 +151,7 @@
                                     @csrf
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="is_active" class="col-sm-2 control-label">Tag With HOD</label>
+                                        <label for="is_active" class="col-sm-2 control-label">Feature</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
                                             <input class="form-control" id="is_active" name="is_active" type="checkbox" data-toggle="toggle" {!! ($recurringTypeHOD->is_active)? 'checked' : null; !!}/>

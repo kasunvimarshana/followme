@@ -6,6 +6,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\TW;
+use App\RecurringType;
+use App\RecurringPattern;
 use App\Events\TWCloseEvent;
 use Mail;
 use Carbon\Carbon;
@@ -35,6 +37,7 @@ class TWCloseEventListener
         $tWClone = clone $event->tW;
         
         try{
+            $tWClone->eventRecurringPatterns()->delete();
             
             $emailJob = (new SendTWCloseMailJob($tWClone))->delay(Carbon::now()->addSeconds(10));
             dispatch($emailJob);

@@ -9,6 +9,7 @@ use DB;
 use App\Login;
 use App\Enums\TWStatusEnum;
 use App\Enums\TWMetaEnum;
+use App\Enums\RecurringTypeEnum;
 use App\TWUser;
 use App\User;
 use App\TWInfo;
@@ -18,6 +19,7 @@ use Carbon\Carbon;
 
 use Mail;
 use App\Jobs\SendTWDevDateReachMailJob;
+use App\Jobs\SendTWOwnerHODTWDevDateReachMailJob;
 
 class SendTWEmails extends Command
 {
@@ -84,7 +86,8 @@ class SendTWEmails extends Command
                         //get last event date
                         $last_event_at = $valueEventRecurringPattern->last_event_at;
                         if( (empty($last_event_at)) ){
-                            $last_event_at = $valueEventRecurringPattern->created_at;
+                            //$last_event_at = $valueEventRecurringPattern->created_at;
+                            $last_event_at = $valueTWObject->due_date;
                         }
                         
                         //get other data
@@ -159,17 +162,28 @@ class SendTWEmails extends Command
                                 dispatch($emailJob);
                                 */
                                 
-                                $twUsers = $valueTWObject->twUsers;
-                                foreach($twUsers as $key=>$value){
-                                    //Mail::to($value->own_user)->send($email);
-                                    $toUser = $value;
-                                    //$toUser = $value->own_user;
-                                    try{
-                                        $emailJob = (new SendTWDevDateReachMailJob($valueTWObject, $toUser))->delay(Carbon::now()->addSeconds(10));
-                                        dispatch($emailJob);
-                                    }catch(\Exception $e){
-                                        //dd($e);
+                                if($recurring_type_id == RecurringTypeEnum::TW_OWNER){
+                                    
+                                    $twUsers = $valueTWObject->twUsers;
+                                    foreach($twUsers as $key=>$value){
+                                        //Mail::to($value->own_user)->send($email);
+                                        $toUser = $value;
+                                        //$toUser = $value->own_user;
+                                        try{
+                                            $emailJob = (new SendTWDevDateReachMailJob($valueTWObject, $toUser))->delay(Carbon::now()->addSeconds(10));
+                                            dispatch($emailJob);
+                                        }catch(\Exception $e){
+                                            //dd($e);
+                                        }
                                     }
+                                    
+                                }else if($recurring_type_id == RecurringTypeEnum::TW_OWNER_HOD){
+                                        try{
+                                            $emailJob = (new SendTWOwnerHODTWDevDateReachMailJob($valueTWObject))->delay(Carbon::now()->addSeconds(10));
+                                            dispatch($emailJob);
+                                        }catch(\Exception $e){
+                                            //dd($e);
+                                        }
                                 }
                                 
                                 $valueEventRecurringPattern->update( $eventRecurringPatternData );

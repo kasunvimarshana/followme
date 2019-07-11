@@ -9,11 +9,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 use Mail;
-use App\Mail\TWCloseMail;
+use App\Mail\TWOwnerHODTWDevDateReachMail;
 use App\User;
 use App\TW;
 
-class SendTWCloseMailJob implements ShouldQueue
+class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -43,13 +43,17 @@ class SendTWCloseMailJob implements ShouldQueue
             
         foreach($twUsers as $key=>$value){
             $toUser = $value;
-            /*
+            
             $tWUserObj = new User();
             $tWUserObj->mail = $toUser->own_user;
             $tWUserObj->getUser();
+            $managerObj = $tWUserObj->getManager();
+            
+            //array_push($ccUserArray, $toUser->own_user);
             array_push($ccUserArray, $tWUserObj->mail);
-            */
-            array_push($ccUserArray, $toUser->own_user);
+            if( ($managerObj) ){
+                array_push($ccUserArray, $managerObj->mail);
+            }
         }
         
         //send mail
@@ -63,7 +67,7 @@ class SendTWCloseMailJob implements ShouldQueue
                 //->subject("3W")
                 ->cc($ccUserArray)
                 //->bcc($toTWUsersArray)
-                ->send(new TWCloseMail($tW));
+                ->send(new TWOwnerHODTWDevDateReachMail($tW));
         }
     }
 }

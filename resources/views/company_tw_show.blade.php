@@ -46,12 +46,37 @@
                                 <!-- form -->
                                 <form action="#" method="POST" class="col-sm-8" autocomplete="off" id="twForm" enctype="multipart/form-data">
                                     @csrf
+                                    
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="created_user" class="col-sm-2 control-label">Assigned by</label>
+                                        <label for="created_department_name" class="col-sm-2 control-label">Created Department</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="created_user" name="created_user" value="{{ old('created_user') }}" data-placeholder="Assigned by" style="width: 100%;">
+                                            <select class="form-control select2" id="created_department_name" name="created_department_name" value="{{ old('created_department_name') }}" data-placeholder="Department" style="width: 100%;">
+                                            </select>
+                                        </div>
+                                        <!-- span id="form-control" class="help-block"></span -->
+                                    </div>
+                                    <!-- /.form-group -->
+                                    
+                                    <!-- form-group -->
+                                    <div class="form-group col-sm-12">
+                                        <label for="own_department_name" class="col-sm-2 control-label">Own Department</label>
+                                        <div class="col-sm-10">
+                                            <!-- p class="form-control-static"></p -->
+                                            <select class="form-control select2" id="own_department_name" name="own_department_name" value="{{ old('own_department_name') }}" data-placeholder="Department" style="width: 100%;">
+                                            </select>
+                                        </div>
+                                        <!-- span id="form-control" class="help-block"></span -->
+                                    </div>
+                                    <!-- /.form-group -->
+                                    
+                                    <!-- form-group -->
+                                    <div class="form-group col-sm-12">
+                                        <label for="own_user" class="col-sm-2 control-label">Owner</label>
+                                        <div class="col-sm-10">
+                                            <!-- p class="form-control-static"></p -->
+                                            <select class="form-control select2" id="own_user" name="own_user" value="{{ old('own_user') }}" data-placeholder="Owner" style="width: 100%;">
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -89,14 +114,14 @@
                                         
                                         <!-- form-group -->
                                         <div class="form-group col-sm-12 col-md-5 col-lg-5">
-                                            <label for="start_date" class="col-sm-2 control-label">Start Date</label>
+                                            <label for="start_date_from" class="col-sm-2 control-label">Start Date (From)</label>
                                             <div class="col-sm-10">
                                                 <!-- p class="form-control-static"></p -->
                                                 <div class="input-group date">
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}"/>
+                                                    <input type="text" class="form-control pull-right" id="start_date_from" name="start_date_from" placeholder="Start Date (From)" value="{{ old('start_date_from') }}"/>
                                                 </div>
                                             </div>
                                             <!-- span id="form-control" class="help-block"></span -->
@@ -105,14 +130,54 @@
                                         
                                         <!-- form-group -->
                                         <div class="form-group col-sm-12 col-md-5 col-lg-5">
-                                            <label for="due_date" class="col-sm-2 control-label">Due Date</label>
+                                            <label for="start_date_to" class="col-sm-2 control-label">Start Date (To)</label>
                                             <div class="col-sm-10">
                                                 <!-- p class="form-control-static"></p -->
                                                 <div class="input-group date">
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}"/>
+                                                    <input type="text" class="form-control pull-right" id="start_date_to" name="start_date_to" placeholder="Start Date (To)" value="{{ old('start_date_to') }}"/>
+                                                </div>
+                                            </div>
+                                            <!-- span id="form-control" class="help-block"></span -->
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                    <!-- /.form-group -->
+                                    
+                                    <!-- form-group -->
+                                    <div class="form-group col-sm-12">
+                                        <!-- skip div -->
+                                        <div class="col-sm-2"></div>
+                                        <!-- /.skip div -->
+                                        
+                                        <!-- form-group -->
+                                        <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                            <label for="due_date_from" class="col-sm-2 control-label">Due Date (From)</label>
+                                            <div class="col-sm-10">
+                                                <!-- p class="form-control-static"></p -->
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="due_date_from" name="due_date_from" placeholder="Due Date (From)" value="{{ old('due_date_from') }}"/>
+                                                </div>
+                                            </div>
+                                            <!-- span id="form-control" class="help-block"></span -->
+                                        </div>
+                                        <!-- /.form-group -->
+                                        
+                                        <!-- form-group -->
+                                        <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                            <label for="due_date_to" class="col-sm-2 control-label">Due Date (To)</label>
+                                            <div class="col-sm-10">
+                                                <!-- p class="form-control-static"></p -->
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="due_date_to" name="due_date_to" placeholder="Due Date (To)" value="{{ old('due_date_to') }}"/>
                                                 </div>
                                             </div>
                                             <!-- span id="form-control" class="help-block"></span -->
@@ -130,6 +195,9 @@
                                                 <option value=""> All </option>
                                                 <option value="{!! App\Enums\TWStatusEnum::OPEN !!}"> Open </option>
                                                 <option value="{!! App\Enums\TWStatusEnum::CLOSE !!}"> Closed </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::INPROGRESS !!}"> Inprogress </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::FAIL !!}"> Fail </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::COMPLETED !!}"> Done </option>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -164,7 +232,8 @@
             <div id="collapseTwoParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Assigned To Me</a>
+                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Filter Data 
+                        </a>
                     </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse in">
@@ -216,14 +285,16 @@
     <script src="{{ asset('node_modules/admin-lte/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
     <script src="{{ asset('node_modules/admin-lte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 
+    @includeIf('partials.tw_created_department_select', array())
+    @includeIf('partials.tw_own_department_select', array())
     @includeIf('partials.meeting_category_select', array())
-    @includeIf('partials.tw_summary.tw_created_user_select', array())
-    @includeIf('partials.tw_summary.tw_data_table_owne_all', array())
+    @includeIf('partials.tw_summary.tw_own_user_select', array())
+    @includeIf('partials.tw_summary.tw_data_table_company_all', array())
     <script>
     $(function() {
         "use strict";
         
-        $('#start_date').datepicker({
+        $('#start_date_from').datepicker({
             'autoclose': true,
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
@@ -232,14 +303,32 @@
             'clearBtn': true
         });//.datepicker("setDate", new Date());
         
-        $('#due_date').datepicker({
+        $('#start_date_to').datepicker({
             'autoclose': true,
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
             'todayHighlight': true,
             'clearBtn': true
-        });//.datepicker("setDate", $('#start_date').val());
+        });//.datepicker("setDate", $('#date').val());
+        
+        $('#due_date_from').datepicker({
+            'autoclose': true,
+            'format': "yyyy-mm-dd",
+            'immediateUpdates': true,
+            'todayBtn': true,
+            'todayHighlight': true,
+            'clearBtn': true
+        });//.datepicker("setDate", new Date());
+        
+        $('#due_date_to').datepicker({
+            'autoclose': true,
+            'format': "yyyy-mm-dd",
+            'immediateUpdates': true,
+            'todayBtn': true,
+            'todayHighlight': true,
+            'clearBtn': true
+        });//.datepicker("setDate", $('#date').val());
         
         $('#status_id').select2();
         
@@ -252,7 +341,9 @@
             //$("form").get(0).reset();
             //$('form > input[type=reset]').trigger('click');
             var tableObj = $('#twDataTable');
-            $('#created_user').val(null).trigger('change');
+            $('#created_department_name').val(null).trigger('change');
+            $('#own_department_name').val(null).trigger('change');
+            $('#own_user').val(null).trigger('change');
             $('#meeting_category_id').val(null).trigger('change');
             $('#status_id').val(null).trigger('change');
             //$('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not 
@@ -265,24 +356,38 @@
             event.preventDefault();
             
             var tableObj = $('#twDataTable');
-            var created_user = $('#created_user');
+            var created_department_name = $('#created_department_name');
+            var own_department_name = $('#own_department_name');
+            var own_user = $('#own_user');
             var meeting_category_id = $('#meeting_category_id');
             var title = $('#title');
-            var start_date = $('#start_date');
-            var due_date = $('#due_date');
+            var start_date_from = $('#start_date_from');
+            var start_date_to = $('#start_date_to');
+            var due_date_from = $('#due_date_from');
+            var due_date_to = $('#due_date_to');
             var status_id = $('#status_id');
             
-            var created_user_val = created_user.val();
+            var created_department_name_val = created_department_name.val();
+            var own_department_name_val = own_department_name.val();
+            var own_user_val = own_user.val();
             var meeting_category_id_val = meeting_category_id.val();
             var title_val = title.val();
-            var start_date_val = start_date.val();
-            var due_date_val = due_date.val();
+            var start_date_from_val = start_date_from.val();
+            var start_date_to_val = start_date_to.val();
+            var due_date_from_val = due_date_from.val();
+            var due_date_to_val = due_date_to.val();
             var status_id_val = status_id.val();
             
             tableObj.removeData();
             
-            if( created_user_val ){
-               tableObj.data('created_user', created_user_val);
+            if( created_department_name_val ){
+               tableObj.data('created_department_name', created_department_name_val);
+            }
+            if( own_department_name_val ){
+               tableObj.data('own_department_name', own_department_name_val);
+            }
+            if( own_user_val ){
+               tableObj.data('own_user', own_user_val);
             }
             if( meeting_category_id_val ){
                tableObj.data('meeting_category_id', meeting_category_id_val);
@@ -290,11 +395,17 @@
             if( title_val ){
                tableObj.data('title', title_val);
             }
-            if( start_date_val ){
-               tableObj.data('start_date', start_date_val);
+            if( start_date_from_val ){
+               tableObj.data('start_date_from', start_date_from_val);
             }
-            if( due_date_val ){
-               tableObj.data('due_date', due_date_val);
+            if( start_date_to_val ){
+               tableObj.data('start_date_to', start_date_to_val);
+            }
+            if( due_date_from_val ){
+               tableObj.data('due_date_from', due_date_from_val);
+            }
+            if( due_date_to_val ){
+               tableObj.data('due_date_to', due_date_to_val);
             }
             if( status_id_val ){
                tableObj.data('status_id', status_id_val);

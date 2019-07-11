@@ -123,17 +123,16 @@ $(function(){
                 var tableObjDataTemp = tableObj.data();
                 //tableObj.removeData();
                 data.own_company = "{!! $companyObj !!}";
-                data.own_department = "{!! $departmentObj !!}";
                 if( tableObjDataTemp.hasOwnProperty('status_id') ){
                     tableObjData.progress = tableObjDataTemp.status_id;
-                    tableObjData.due_date_from = tableObjDataTemp.start_date;
-                    tableObjData.due_date_to = tableObjDataTemp.due_date;
+                    tableObjData.due_date_from = tableObjDataTemp.due_date_from;
+                    tableObjData.due_date_to = tableObjDataTemp.due_date_to;
                 }
-                if( tableObjDataTemp.hasOwnProperty('start_date') ){
-                    tableObjData.start_date = tableObjDataTemp.start_date;
+                if( tableObjDataTemp.hasOwnProperty('created_department_name') ){
+                    tableObjData.created_department = tableObjDataTemp.created_department_name;
                 }
-                if( tableObjDataTemp.hasOwnProperty('due_date') ){
-                    tableObjData.due_date = tableObjDataTemp.due_date;
+                if( tableObjDataTemp.hasOwnProperty('own_department_name') ){
+                    tableObjData.own_department = tableObjDataTemp.own_department_name;
                 }
                 if( tableObjDataTemp.hasOwnProperty('own_user') ){
                     tableObjData.own_user = tableObjDataTemp.own_user;
@@ -143,6 +142,18 @@ $(function(){
                 }
                 if( tableObjDataTemp.hasOwnProperty('title') ){
                     tableObjData.search = tableObjDataTemp.title;
+                }
+                if( tableObjDataTemp.hasOwnProperty('start_date_from') ){
+                    tableObjData.start_date_from = tableObjDataTemp.start_date_from;
+                }
+                if( tableObjDataTemp.hasOwnProperty('start_date_to') ){
+                    tableObjData.start_date_to = tableObjDataTemp.start_date_to;
+                }
+                if( tableObjDataTemp.hasOwnProperty('due_date_from') ){
+                    tableObjData.due_date_from = tableObjDataTemp.due_date_from;
+                }
+                if( tableObjDataTemp.hasOwnProperty('due_date_to') ){
+                    tableObjData.due_date_to = tableObjDataTemp.due_date_to;
                 }
                 data = $.extend(data, tableObjData);
             },

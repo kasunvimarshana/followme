@@ -17,6 +17,7 @@ use App\LDAPModel;
 use LdapQuery\Builder; 
 use Illuminate\Http\JsonResponse;
 use App\TW;
+use App\TWUser;
 use App\Login;
 use Carbon\Carbon;
 use DB;
@@ -165,4 +166,273 @@ class DepartmentController extends Controller
             return View::make('department_tw_show', ['companyObj' => $companyObj, 'departmentObj' => $departmentObj, 'progressVal' => $progressVal]);
         }
     }
+    
+    //other
+    public function listDepartments(Request $request){
+        // Solution to get around integer overflow errors
+        // $model->latest()->limit(PHP_INT_MAX)->offset(1)->get();
+        // function will process the ajax request
+        $draw = null;
+        $start = 0;
+        $length = 0;
+        $search = null;
+        
+        $recordsTotal = 0;
+        $recordsFiltered = 0;
+        $query = null;
+        $queryResult = null;
+        //$recordsTotal = Model::where('active','=','1')->count();
+        
+        $draw = $request->get('draw');
+        
+        $tw = new TW();
+        
+        //$query = $tw->where('is_visible', '=', true);
+        $query = $tw->select('department_name');
+        $query = $query->groupBy('department_name');
+        $recordsTotal = $query->count();
+        $recordsFiltered = $recordsTotal;
+            
+        // get search query value
+        if( ($request->get('search')) && (!empty($request->get('search'))) ){
+            $search = $request->get('search');
+            if( $search && (@key_exists('value', $search)) ){
+                $search = $search['value'];
+            }
+            if($search && (!empty($search))){
+                //$search = (string) $search;
+                $query = $query->where('department_name', 'like', '%' . $search . '%');
+            }
+        }
+        
+        // company_name
+        if( ($request->get('department_name')) && (!empty($request->get('department_name'))) ){
+            $department_name =  $request->get('department_name');
+            $query = $query->whereDate('department_name', '=', $department_name);
+        }
+        
+        // get filtered record count
+        $recordsFiltered = $query->count();
+        
+        // get limit value
+        if( $request->get('length') ){
+            $length = intval( $request->get('length') );
+            $query = $query->limit($length);
+        }
+        // set default value for length (PHP_INT_MAX)
+        if( $length <= 0 ){
+            $length = PHP_INT_MAX;
+            //$length = 0;
+        }
+        
+        // get offset value
+        if( $request->get('start') ){
+            $start = intval( $request->get('start') );
+        }else if( $request->get('page') ){
+            $start = intval( $request->get('page') );
+            //$start = abs( ( ( $start - 1 ) * $length ) );
+            $start = ( ( $start - 1 ) * $length );
+        }
+        
+        // filter with offset value
+        if( $start > 0 ){
+            //$query = $query->limit($length)->skip($start);
+            $query = $query->limit($length)->offset($start);
+        }
+        
+        // get data
+        $queryResult = $query->get();
+        
+        $recordsTotal = $recordsFiltered;
+        $data = array(
+            'draw' => $draw,
+            'start' => $start,
+            'length' => $length,
+            'search' => $search,
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $queryResult,
+        );
+        
+        return Response::json( $data );   
+    }
+    
+    public function listTWCreatedDepartments(Request $request){
+        // Solution to get around integer overflow errors
+        // $model->latest()->limit(PHP_INT_MAX)->offset(1)->get();
+        // function will process the ajax request
+        $draw = null;
+        $start = 0;
+        $length = 0;
+        $search = null;
+        
+        $recordsTotal = 0;
+        $recordsFiltered = 0;
+        $query = null;
+        $queryResult = null;
+        //$recordsTotal = Model::where('active','=','1')->count();
+        
+        $draw = $request->get('draw');
+        
+        $tw = new TW();
+        
+        //$query = $tw->where('is_visible', '=', true);
+        $query = $tw->select('department_name');
+        $query = $query->groupBy('department_name');
+        $recordsTotal = $query->count();
+        $recordsFiltered = $recordsTotal;
+            
+        // get search query value
+        if( ($request->get('search')) && (!empty($request->get('search'))) ){
+            $search = $request->get('search');
+            if( $search && (@key_exists('value', $search)) ){
+                $search = $search['value'];
+            }
+            if($search && (!empty($search))){
+                //$search = (string) $search;
+                $query = $query->where('department_name', 'like', '%' . $search . '%');
+            }
+        }
+        
+        // company_name
+        if( ($request->get('department_name')) && (!empty($request->get('department_name'))) ){
+            $department_name =  $request->get('department_name');
+            $query = $query->whereDate('department_name', '=', $department_name);
+        }
+        
+        // get filtered record count
+        $recordsFiltered = $query->count();
+        
+        // get limit value
+        if( $request->get('length') ){
+            $length = intval( $request->get('length') );
+            $query = $query->limit($length);
+        }
+        // set default value for length (PHP_INT_MAX)
+        if( $length <= 0 ){
+            $length = PHP_INT_MAX;
+            //$length = 0;
+        }
+        
+        // get offset value
+        if( $request->get('start') ){
+            $start = intval( $request->get('start') );
+        }else if( $request->get('page') ){
+            $start = intval( $request->get('page') );
+            //$start = abs( ( ( $start - 1 ) * $length ) );
+            $start = ( ( $start - 1 ) * $length );
+        }
+        
+        // filter with offset value
+        if( $start > 0 ){
+            //$query = $query->limit($length)->skip($start);
+            $query = $query->limit($length)->offset($start);
+        }
+        
+        // get data
+        $queryResult = $query->get();
+        
+        $recordsTotal = $recordsFiltered;
+        $data = array(
+            'draw' => $draw,
+            'start' => $start,
+            'length' => $length,
+            'search' => $search,
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $queryResult,
+        );
+        
+        return Response::json( $data );   
+    }
+    
+    public function listTWOwnDepartments(Request $request){
+        // Solution to get around integer overflow errors
+        // $model->latest()->limit(PHP_INT_MAX)->offset(1)->get();
+        // function will process the ajax request
+        $draw = null;
+        $start = 0;
+        $length = 0;
+        $search = null;
+        
+        $recordsTotal = 0;
+        $recordsFiltered = 0;
+        $query = null;
+        $queryResult = null;
+        //$recordsTotal = Model::where('active','=','1')->count();
+        
+        $draw = $request->get('draw');
+        
+        $tWUser = new TWUser();
+        
+        //$query = $tw->where('is_visible', '=', true);
+        $query = $tWUser->select('department_name');
+        $query = $query->groupBy('department_name');
+        $recordsTotal = $query->count();
+        $recordsFiltered = $recordsTotal;
+            
+        // get search query value
+        if( ($request->get('search')) && (!empty($request->get('search'))) ){
+            $search = $request->get('search');
+            if( $search && (@key_exists('value', $search)) ){
+                $search = $search['value'];
+            }
+            if($search && (!empty($search))){
+                //$search = (string) $search;
+                $query = $query->where('department_name', 'like', '%' . $search . '%');
+            }
+        }
+        
+        // company_name
+        if( ($request->get('department_name')) && (!empty($request->get('department_name'))) ){
+            $department_name =  $request->get('department_name');
+            $query = $query->whereDate('department_name', '=', $department_name);
+        }
+        
+        // get filtered record count
+        $recordsFiltered = $query->count();
+        
+        // get limit value
+        if( $request->get('length') ){
+            $length = intval( $request->get('length') );
+            $query = $query->limit($length);
+        }
+        // set default value for length (PHP_INT_MAX)
+        if( $length <= 0 ){
+            $length = PHP_INT_MAX;
+            //$length = 0;
+        }
+        
+        // get offset value
+        if( $request->get('start') ){
+            $start = intval( $request->get('start') );
+        }else if( $request->get('page') ){
+            $start = intval( $request->get('page') );
+            //$start = abs( ( ( $start - 1 ) * $length ) );
+            $start = ( ( $start - 1 ) * $length );
+        }
+        
+        // filter with offset value
+        if( $start > 0 ){
+            //$query = $query->limit($length)->skip($start);
+            $query = $query->limit($length)->offset($start);
+        }
+        
+        // get data
+        $queryResult = $query->get();
+        
+        $recordsTotal = $recordsFiltered;
+        $data = array(
+            'draw' => $draw,
+            'start' => $start,
+            'length' => $length,
+            'search' => $search,
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $queryResult,
+        );
+        
+        return Response::json( $data );   
+    }
+    
 }

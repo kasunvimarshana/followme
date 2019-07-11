@@ -72,9 +72,11 @@ class NotificationScheduleController extends Controller
             // Validate, then create if valid
             $recurringType = RecurringType::where('name','tw-owner')->first();
             $recurringPattern = $recurringType->recurringPatterns()->first();
+            $eventRecurringPatterns = $recurringType->eventRecurringPatterns();
             
             $recurringType->update( $recurringTypeData );
             $recurringPattern->update( $recurringPatternData );
+            $eventRecurringPatterns->update( $recurringPatternData );
 
         }catch(\Exception $e){
 
@@ -133,9 +135,11 @@ class NotificationScheduleController extends Controller
             // Validate, then create if valid
             $recurringType = RecurringType::where('name','tw-owner-hod')->first();
             $recurringPattern = $recurringType->recurringPatterns()->first();
+            $eventRecurringPatterns = $recurringType->eventRecurringPatterns();
             
             $recurringType->update( $recurringTypeData );
             $recurringPattern->update( $recurringPatternData );
+            $eventRecurringPatterns->update( $recurringPatternData );
 
         }catch(\Exception $e){
 

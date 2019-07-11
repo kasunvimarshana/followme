@@ -76,7 +76,10 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{!! set_active(['team/companies/departments', 'team/companies/departments*']) !!}"><a href="{!! route('company.showDepartments') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
+                    <li class="{!! set_active(['team/companies/departments', 'team/companies/departments/*']) !!}"><a href="{!! route('company.showDepartments') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Status</a></li>
+                    @isset($auth_user)
+                        <li class="{!! set_active(['team/companies/show', 'team/companies/show/*']) !!}"><a href="{!! route('company.showCompanyTW', urlencode($auth_user->company)) !!}"> <i class="fa fa-arrow-circle-o-right"></i> View All</a></li>
+                    @endisset
                 </ul>
             </li>
             @superadmin

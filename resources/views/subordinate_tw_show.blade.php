@@ -247,13 +247,22 @@
         
         $('#status_id').select2();
         
+        @if((isset($progressVal)) && (!empty($progressVal)))
+            var status_id = $('#status_id');
+            $('#status_id').val({!! $progressVal !!}).trigger('change');
+        @endif
+        
         $('#reset').on('click', function(event){
             //$("form").get(0).reset();
             //$('form > input[type=reset]').trigger('click');
+            var tableObj = $('#twDataTable');
             $('#created_user').val(null).trigger('change');
             $('#meeting_category_id').val(null).trigger('change');
             $('#status_id').val(null).trigger('change');
-            $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not 
+            //$('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not 
+            
+            tableObj.removeData();
+            $('#twForm').trigger('submit');
         });
         
         $('#twForm').submit(function(event) {
@@ -273,6 +282,8 @@
             var start_date_val = start_date.val();
             var due_date_val = due_date.val();
             var status_id_val = status_id.val();
+            
+            tableObj.removeData();
             
             if( created_user_val ){
                tableObj.data('created_user', created_user_val);
@@ -297,6 +308,8 @@
             // scroll top
             $('html, body').animate({scrollTop:0}, 'slow');
         });
+        
+        $('#twForm').trigger('submit');
     });
     </script>
 @endsection
