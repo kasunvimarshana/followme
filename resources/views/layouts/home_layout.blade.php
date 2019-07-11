@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>{{ config('app.name', 'Title') }}</title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <meta content="width=device-width, height=device-height, initial-scale=0.9, maximum-scale=1.0, minimum-scale=0.1 user-scalable=no" name="viewport" id="viewport-meta"/>
     @section('section_stylesheet')
         @includeIf('partials.main_stylesheet', array())
     @show

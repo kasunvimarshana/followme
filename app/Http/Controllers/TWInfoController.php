@@ -86,10 +86,14 @@ class TWInfoController extends Controller
             $newTWInfo = TWInfo::create( $twInfoData );
 
             if( $request->hasFile('var_user_attachment') ){
+                chmod(Storage::path($twResourceDir), 0755);
+                
                 foreach($userAttachmentData as $key => $value){
                     $file_original_name = $value->getClientOriginalName();
                     $file_type = $value->getClientOriginalExtension();
                     $filename = $value->store( $twResourceDir );
+                    //chmod(Storage::path($filename), 0755);
+                    
                     $newUserAttachment = $newTWInfo->userAttachments()->create(array(
                         'is_visible' => true,
                         'attached_by' => $current_user,
@@ -193,10 +197,14 @@ class TWInfoController extends Controller
             $tWInfoClone->update( $twInfoData );
 
             if( $request->hasFile('var_user_attachment') ){
+                chmod(Storage::path($twResourceDir), 0755);
+                
                 foreach($userAttachmentData as $key => $value){
                     $file_original_name = $value->getClientOriginalName();
                     $file_type = $value->getClientOriginalExtension();
                     $filename = $value->store( $twResourceDir );
+                    //chmod(Storage::path($filename), 0755);
+                    
                     $newUserAttachment = $tWInfoClone->userAttachments()->create(array(
                         'is_visible' => true,
                         'attached_by' => $current_user,
@@ -256,7 +264,7 @@ class TWInfoController extends Controller
             if( $userAttachments ){
                 foreach($userAttachments as $userAttachment){
                     if(Storage::exists( $userAttachment->link_url )) {
-                        chmod(Storage::path($userAttachment->link_url), 755);
+                        chmod(Storage::path($userAttachment->link_url), 0775);
                         Storage::delete( $userAttachment->link_url );
                     }
                     $userAttachment->delete();

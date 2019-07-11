@@ -133,6 +133,8 @@
                                                 <option value="{!! App\Enums\TWStatusEnum::INPROGRESS !!}"> Inprogress </option>
                                                 <option value="{!! App\Enums\TWStatusEnum::FAIL !!}"> Fail </option>
                                                 <option value="{!! App\Enums\TWStatusEnum::COMPLETED !!}"> Done </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::FAIL_WITH_COMPLETED !!}"> Fail (Close) </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::FAIL_WITH_UNCOMPLETED !!}"> Fail (Open) </option>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->

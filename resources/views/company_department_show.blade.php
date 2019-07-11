@@ -55,7 +55,45 @@
                                                     <!-- urlencode() -->
                                                     <a href="{!! route('department.showDepartmentTW', [urlencode($companyObj->company_name), urlencode($department->department_name)]) !!}">{{ $department->department_name }}</a>
                                                 </h3>
-
+                                                
+                                                <ul class="nav nav-pills nav-stacked">
+                                                    <li>
+                                                        @php
+                                                            $completeWithTimelinePercentage = 0;
+                                                            try{
+                                                                $tempSum = $department->twPassCountPercentage + $department->twFailWithCompletedCountPercentage;
+                                                                $completeWithTimelinePercentage = (($department->twPassCountPercentage / $tempSum) * 100);
+                                                            }catch(Exception $e){
+                                                                $completeWithTimelinePercentage = 0;
+                                                            }
+                                                        @endphp
+                                                        <a href="#">Timeline Achived : 
+                                                            <span class="pull-right">
+                                                                <i class="fa"></i> 
+                                                                <span class="label label-default">{!! number_format($completeWithTimelinePercentage, 0) !!} <small>%</small></span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                    <li>
+                                                        @php
+                                                            $completeWithoutTimelinePercentage = 0;
+                                                            try{
+                                                                $tempSum = $department->twPassCountPercentage + $department->twFailWithCompletedCountPercentage;
+                                                                $completeWithTimelinePercentage = (($department->twFailWithCompletedCountPercentage / $tempSum) * 100);
+                                                            }catch(Exception $e){
+                                                                $completeWithTimelinePercentage = 0;
+                                                            }
+                                                        @endphp
+                                                        <a href="#">Timeline Not Achived : 
+                                                            <span class="pull-right">
+                                                                <i class="fa"></i> 
+                                                                <span class="label label-default">{!! number_format($completeWithoutTimelinePercentage, 0) !!} <small>%</small></span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                
                                                 <div class="box-tools pull-right">
                                                     <!-- button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                                     </button -->
@@ -100,7 +138,7 @@
                                                 borderColor: 'rgba(0,0,0,0.5)',
                                                 data                : [{!! ($department->twFailWithUncompletedCountPercentage) !!}],
                                                 dataCount      : [{!! ($department->twFailWithUncompletedCount) !!}],
-                                                dataStatus     : {!! App\Enums\TWStatusEnum::FAIL !!}
+                                                dataStatus     : {!! App\Enums\TWStatusEnum::FAIL_WITH_UNCOMPLETED !!}
                                             }
                                           ]
                                         };

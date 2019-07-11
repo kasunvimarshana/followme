@@ -146,10 +146,14 @@ class TWController extends Controller
                 }
                 
                 if( $request->hasFile('var_user_attachment') ){
+                    chmod(Storage::path($twResourceDir), 0755);
+                    
                     foreach($userAttachmentData as $key => $value){
                         $file_original_name = $value->getClientOriginalName();
                         $file_type = $value->getClientOriginalExtension();
                         $filename = $value->store( $twResourceDir );
+                        //chmod(Storage::path($filename), 0755);
+                        
                         $newUserAttachment = $newTWInfo->userAttachments()->create(array(
                             'is_visible' => true,
                             'attached_by' => $current_user,
@@ -345,7 +349,7 @@ class TWController extends Controller
             
             //delete directory
             if(Storage::exists($tW->resource_dir)) {
-                chmod(Storage::path($tW->resource_dir), 755);
+                chmod(Storage::path($tW->resource_dir), 0775);
                 Storage::deleteDirectory($tW->resource_dir);
             }
             
@@ -851,6 +855,8 @@ class TWController extends Controller
                         $tempUserAttachmentCloneLinkUrl = $tempUserAttachmentClone->link_url;
                         $newUserAttachmentLinkUrl = str_replace($tWCloneResourceDir, $newTWResourceDir, $tempUserAttachmentCloneLinkUrl);
                         Storage::copy($tempUserAttachmentCloneLinkUrl, $newUserAttachmentLinkUrl);
+                        //chmod(Storage::path($newUserAttachmentLinkUrl), 0755);
+                        
                         $newUserAttachment = $newTWInfo->userAttachments()->create(array(
                             'is_visible' => $is_visible,
                             'attached_by' => $current_user,

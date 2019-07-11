@@ -48,7 +48,7 @@
                                     @csrf
                                     
                                     <!-- form-group -->
-                                    <div class="form-group col-sm-12">
+                                    <div class="form-group col-sm-12" style="display : none !important;">
                                         <label for="created_department_name" class="col-sm-2 control-label">Created Department</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
@@ -61,7 +61,7 @@
                                     
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
-                                        <label for="own_department_name" class="col-sm-2 control-label">Own Department</label>
+                                        <label for="own_department_name" class="col-sm-2 control-label">Department</label>
                                         <div class="col-sm-10">
                                             <!-- p class="form-control-static"></p -->
                                             <select class="form-control select2" id="own_department_name" name="own_department_name" value="{{ old('own_department_name') }}" data-placeholder="Department" style="width: 100%;">
@@ -198,6 +198,8 @@
                                                 <option value="{!! App\Enums\TWStatusEnum::INPROGRESS !!}"> Inprogress </option>
                                                 <option value="{!! App\Enums\TWStatusEnum::FAIL !!}"> Fail </option>
                                                 <option value="{!! App\Enums\TWStatusEnum::COMPLETED !!}"> Done </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::FAIL_WITH_COMPLETED !!}"> Fail (Close) </option>
+                                                <option value="{!! App\Enums\TWStatusEnum::FAIL_WITH_UNCOMPLETED !!}"> Fail (Open) </option>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->

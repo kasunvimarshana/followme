@@ -13,6 +13,6 @@ final class TWStatusEnum extends Enum
     const PASS = 7;
     const FAIL = 5;
     const INPROGRESS = 6;
-    const FAIL_WITH_COMPLETED = 7;
-    const FAIL_WITH_UNCOMPLETED = 8;
+    const FAIL_WITH_COMPLETED = 8;
+    const FAIL_WITH_UNCOMPLETED = 9;
 }

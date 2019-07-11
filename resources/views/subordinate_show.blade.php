@@ -51,6 +51,44 @@
                                                     <!-- urlencode() -->
                                                     <a href="{!! route('directReport.showDirectReportTW', [urlencode($directReport->mail)]) !!}">{{ $directReport->displayname }}</a>
                                                 </h3>
+                                                
+                                                <ul class="nav nav-pills nav-stacked">
+                                                    <li>
+                                                        @php
+                                                            $completeWithTimelinePercentage = 0;
+                                                            try{
+                                                                $tempSum = $directReport->twPassCountPercentage + $directReport->twFailWithCompletedCountPercentage;
+                                                                $completeWithTimelinePercentage = (($directReport->twPassCountPercentage / $tempSum) * 100);
+                                                            }catch(Exception $e){
+                                                                $completeWithTimelinePercentage = 0;
+                                                            }
+                                                        @endphp
+                                                        <a href="#">Timeline Achived : 
+                                                            <span class="pull-right">
+                                                                <i class="fa"></i> 
+                                                                <span class="label label-default">{!! number_format($completeWithTimelinePercentage, 0) !!} <small>%</small></span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                    <li>
+                                                        @php
+                                                            $completeWithoutTimelinePercentage = 0;
+                                                            try{
+                                                                $tempSum = $directReport->twPassCountPercentage + $directReport->twFailWithCompletedCountPercentage;
+                                                                $completeWithoutTimelinePercentage = (($directReport->twFailWithCompletedCountPercentage / $tempSum) * 100);
+                                                            }catch(Exception $e){
+                                                                $completeWithoutTimelinePercentage = 0;
+                                                            }
+                                                        @endphp
+                                                        <a href="#">Timeline Not Achived : 
+                                                            <span class="pull-right">
+                                                                <i class="fa"></i> 
+                                                                <span class="label label-default">{!! number_format($completeWithoutTimelinePercentage, 0) !!} <small>%</small></span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
 
                                                 <div class="box-tools pull-right">
                                                     <!-- button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -96,7 +134,7 @@
                                                 borderColor: 'rgba(0,0,0,0.5)',
                                                 data                : [{!! ($directReport->twFailWithUncompletedCountPercentage) !!}],
                                                 dataCount      : [{!! ($directReport->twFailWithUncompletedCount) !!}],
-                                                dataStatus     : {!! App\Enums\TWStatusEnum::FAIL !!}
+                                                dataStatus     : {!! App\Enums\TWStatusEnum::FAIL_WITH_UNCOMPLETED !!}
                                             }
                                           ]
                                         };

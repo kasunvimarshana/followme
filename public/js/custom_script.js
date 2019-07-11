@@ -1,3 +1,12 @@
+// cahange viewport
+$(function(){
+    "use strict";
+    //var viewport = $('meta[name="viewport"]');
+    //viewport.attr("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.1 user-scalable=no"); 
+    //document.body.style.zoom = "80%";
+    //document.activeElement.parentElement.style.zoom = 0.9;
+});
+
 // hide popovers and tooltips
 function hideTooltipAndPopover(){
     "use strict";
