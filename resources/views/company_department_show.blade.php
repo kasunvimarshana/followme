@@ -80,9 +80,9 @@
                                                             $completeWithoutTimelinePercentage = 0;
                                                             try{
                                                                 $tempSum = $department->twPassCountPercentage + $department->twFailWithCompletedCountPercentage;
-                                                                $completeWithTimelinePercentage = (($department->twFailWithCompletedCountPercentage / $tempSum) * 100);
+                                                                $completeWithoutTimelinePercentage = (($department->twFailWithCompletedCountPercentage / $tempSum) * 100);
                                                             }catch(Exception $e){
-                                                                $completeWithTimelinePercentage = 0;
+                                                                $completeWithoutTimelinePercentage = 0;
                                                             }
                                                         @endphp
                                                         <a href="#">Timeline Not Achived : 

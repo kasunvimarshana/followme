@@ -42,7 +42,7 @@ class SendTWDevDateReachMailJob implements ShouldQueue
         $tWUser = $this->tWUser;
         $tWUserObj = new User();
         $tWUserObj->mail = $tWUser->own_user;
-        $tWUserObj->getUser();
+        $tWUserObj = $tWUserObj->getUser();
         
         //send mail
         if( isset($tWUserObj) ){

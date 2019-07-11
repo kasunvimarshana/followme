@@ -46,7 +46,7 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
             
             $tWUserObj = new User();
             $tWUserObj->mail = $toUser->own_user;
-            $tWUserObj->getUser();
+            $tWUserObj = $tWUserObj->getUser();
             $managerObj = $tWUserObj->getManager();
             
             //array_push($ccUserArray, $toUser->own_user);
