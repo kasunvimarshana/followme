@@ -99,7 +99,7 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('departments/list/create', array('uses' => 'DepartmentController@listTWCreatedDepartments'))->name('department.listCreate');
     Route::get('departments/list/own', array('uses' => 'DepartmentController@listTWOwnDepartments'))->name('department.listOwn');
     
-    Route::get('team/companies/{company}/{department}/tws/show', array('uses' => 'DepartmentController@showDepartmentTW'))->name('department.showDepartmentTW');
+    Route::get('team/companies/show/{company}/{department}/tws/show', array('uses' => 'DepartmentController@showDepartmentTW'))->name('department.showDepartmentTW');
     Route::get('team/companies/show/{company}/tws/show', array('uses' => 'CompanyController@showCompanyTW'))->name('company.showCompanyTW');
 });
 
