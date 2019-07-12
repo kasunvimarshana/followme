@@ -98,13 +98,12 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::get('departments/list', array('uses' => 'DepartmentController@listDepartments'))->name('department.list');
     Route::get('departments/list/create', array('uses' => 'DepartmentController@listTWCreatedDepartments'))->name('department.listCreate');
     Route::get('departments/list/own', array('uses' => 'DepartmentController@listTWOwnDepartments'))->name('department.listOwn');
+    
+    Route::get('backstage/team/{company}/{department}/tws/show', array('uses' => 'DepartmentController@showDepartmentTW'))->name('department.showDepartmentTW');
+    Route::get('team/companies/show/{company}/tws/show', array('uses' => 'CompanyController@showCompanyTW'))->name('company.showCompanyTW');
 });
 
 Route::group(['middleware' => 'superAdminMiddleware'], function(){
-    Route::get('team/companies/show/{company}/tws/show', array('uses' => 'CompanyController@showCompanyTW'))->name('company.showCompanyTW');
-    
-    Route::get('backstage/team/{company}/{department}/tws/show', array('uses' => 'DepartmentController@showDepartmentTW'))->name('department.showDepartmentTW');
-    
     Route::get('backstage/meeting-categories/create', array('uses' => 'MeetingCategoryController@create'))->name('meetingCategory.create');
     Route::post('meeting-categories/create', array('uses' => 'MeetingCategoryController@store'))->name('meetingCategory.store');
     Route::get('backstage/meeting-categories/{meetingCategory}/edit', array('uses' => 'MeetingCategoryController@edit'))->name('meetingCategory.edit');
