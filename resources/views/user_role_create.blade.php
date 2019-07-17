@@ -144,6 +144,7 @@
             var form_id = $(this).attr('id');
             var _token = '{{ Session::token() }}';
 
+            var tableObj = $('#userRoleDataTable');
             var user_pk = form.find('#user_pk');
             var submit = form.find('#submit');
             submit.attr("disabled", true);
@@ -171,7 +172,8 @@
                         'timer': data.timer,
                         'showConfirmButton': false
                     });
-                    $('#userRoleDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    tableObj.DataTable().ajax.reload( null, true ); // user paging is not reset on reload
                     user_pk.val(null).trigger('change');
                     // scroll top
                     $('html, body').animate({scrollTop:0}, 'slow');

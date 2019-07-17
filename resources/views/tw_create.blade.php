@@ -303,6 +303,7 @@
             var form_id = $(this).attr('id');
             var _token = '{{ Session::token() }}';
 
+            var tableObj = $('#twDataTable');
             var own_user = form.find('#own_user');
             var meeting_category_id = form.find('#meeting_category_id');
             var title = form.find('#title');
@@ -352,7 +353,8 @@
                         'timer': data.timer,
                         'showConfirmButton': false
                     });
-                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    tableObj.DataTable().ajax.reload( null, true ); // user paging is not reset on reload
                     title.val(null);
                     description.val(null);
                     due_date.datepicker("setDate", new Date()).trigger("changeDate");

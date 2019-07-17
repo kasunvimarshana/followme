@@ -128,6 +128,7 @@ $(function(){
                 var parentTd = $(td);
                 //parentTd.empty();
                 parentTd.addClass('bg-green');
+                parentTd.addClass('text-style-1');
             }
         },{
             'targets' : [2],
@@ -138,6 +139,7 @@ $(function(){
                 var parentTd = $(td);
                 //parentTd.empty();
                 parentTd.addClass('bg-red');
+                parentTd.addClass('text-style-1');
             }
         },{
             'targets' : [3],
@@ -148,6 +150,7 @@ $(function(){
                 var parentTd = $(td);
                 //parentTd.empty();
                 parentTd.addClass('bg-yellow');
+                parentTd.addClass('text-style-1');
             }
         },{
             'targets' : [-1],

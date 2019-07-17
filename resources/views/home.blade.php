@@ -319,7 +319,8 @@
                         tableObj.data('status_id', null);
                         tableObj.parents('div.dataTables_wrapper').first().hide();
                     }
-                    tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    tableObj.DataTable().ajax.reload( null, true ); // user paging is not reset on reload
                 }catch( e ){}
             }
         }

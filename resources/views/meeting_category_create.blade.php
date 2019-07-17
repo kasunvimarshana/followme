@@ -133,6 +133,8 @@
         
         $('#form1').submit(function(event) {
             event.preventDefault();
+            
+            var tableObj = $('#meetingCategoryDataTable');
             var form = $(this);
             var form_id = $(this).attr('id');
             var _token = '{{ Session::token() }}';
@@ -164,7 +166,8 @@
                         'timer': data.timer,
                         'showConfirmButton': false
                     });
-                    $('#meetingCategoryDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    tableObj.DataTable().ajax.reload( null, true ); // user paging is not reset on reload
                     name.val(null);
                     // scroll top
                     $('html, body').animate({scrollTop:0}, 'slow');

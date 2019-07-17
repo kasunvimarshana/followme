@@ -186,6 +186,7 @@ $(function(){
                     //parentTd.addClass('bg-yellow');
                     span_1_text = 'OPEN';
                 }
+                parentTd.addClass('text-style-1');
                 span_1.text(span_1_text);
                 span_1.appendTo(parentTd);
             }

@@ -91,7 +91,11 @@ class TWInfoController extends Controller
                 foreach($userAttachmentData as $key => $value){
                     $file_original_name = $value->getClientOriginalName();
                     $file_type = $value->getClientOriginalExtension();
-                    $filename = $value->store( $twResourceDir );
+                    //$filename = $value->store( $twResourceDir );
+                    $filename = $value->storeAs( 
+                        $twResourceDir,
+                        uniqid( time() ) . '_' . $file_original_name
+                    );
                     //chmod(Storage::path($filename), 0755);
                     
                     $newUserAttachment = $newTWInfo->userAttachments()->create(array(
@@ -202,7 +206,11 @@ class TWInfoController extends Controller
                 foreach($userAttachmentData as $key => $value){
                     $file_original_name = $value->getClientOriginalName();
                     $file_type = $value->getClientOriginalExtension();
-                    $filename = $value->store( $twResourceDir );
+                    //$filename = $value->store( $twResourceDir );
+                    $filename = $value->storeAs( 
+                        $twResourceDir,
+                        uniqid( time() ) . '_' . $file_original_name
+                    );
                     //chmod(Storage::path($filename), 0755);
                     
                     $newUserAttachment = $tWInfoClone->userAttachments()->create(array(

@@ -166,6 +166,7 @@
             var form_id = $(this).attr('id');
             var _token = '{{ Session::token() }}';
 
+            var tableObj = $('#twInfoDataTable');
             var description = form.find('#description');
             var var_user_attachment = form.find('#var_user_attachment');
             var submit = form.find('#submit');
@@ -196,7 +197,8 @@
                         'timer': data.timer,
                         'showConfirmButton': false
                     });
-                    $('#twInfoDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                    tableObj.DataTable().ajax.reload( null, true ); // user paging is not reset on reload
                     description.val(null);
                     var_user_attachment.fileinput('clear');
                     // scroll top

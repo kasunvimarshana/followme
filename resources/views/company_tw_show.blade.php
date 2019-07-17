@@ -414,7 +414,8 @@
                tableObj.data('status_id', status_id_val);
             }
             
-            tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+            //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+            tableObj.DataTable().ajax.reload( null, true ); // user paging is not reset on reload
             // scroll top
             $('html, body').animate({scrollTop:0}, 'slow');
         });
