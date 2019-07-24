@@ -5,6 +5,15 @@
     <h3>There is a Dev Date reach 3W, Please pay your attention</h3>
     <!-- style="border: 1px solid black;" -->
     <table style="width: 100%;">
+        @php
+            $meetingCategory = $tW->meetingCategory;
+        @endphp
+        @isset($meetingCategory)
+            <tr style="">
+                <td style="width: 15%;text-align: right !important;"> Category : </td>
+                <td style=""> {{ $meetingCategory->name }} </td>
+            </tr>
+        @endisset
         <tr style="">
             <td style="width: 15%;text-align: right !important;"> Assigned 3W : </td>
             <td style=""> {{ $tW->title }} </td>

@@ -115,6 +115,7 @@ $(function(){
                 button_1.bind("click", function(){
                     var url = "{!! route('userAttachment.getFile', ['#userAttachment']) !!}";
                     url = url.replace("#userAttachment", rowData.id);
+                    //$( location ).attr("target", "_blank");
                     $( location ).attr("href", url);
                 });
                 button_1.append(button_1_body);

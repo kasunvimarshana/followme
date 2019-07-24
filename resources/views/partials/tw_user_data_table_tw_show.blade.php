@@ -206,7 +206,9 @@ $(function(){
                 button_3.bind("click", function(){
                     var url = "{!! route('twUser.show', ['#tWUser']) !!}";
                     url = url.replace("#tWUser", rowData.id);
-                    $( location ).attr("href", url);
+                    //$( location ).attr("href", url);
+                    var windowObject = window.open(url, '_blank', null, true);
+                    windowObject.focus();
                 });
                 button_3.append(button_3_body);
                 buttonGroup_3.append(button_3);

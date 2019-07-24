@@ -182,7 +182,7 @@
                                     </a>
                                     <!-- info-box-content -->
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Owne 3W</span>
+                                        <span class="info-box-text">Own 3W</span>
                                         <span class="info-box-number">
                                             @isset($meetingTWCount)
                                                 {{ number_format($meetingTWCount) }}

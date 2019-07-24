@@ -109,7 +109,9 @@ $(function(){
                 button_1.bind("click", function(){
                     var url = "{!! route('meetingCategory.edit', ['#meetingCategory']) !!}";
                     url = url.replace("#meetingCategory", rowData.id);
-                    $( location ).attr("href", url);
+                    //$( location ).attr("href", url);
+                    var windowObject = window.open(url, '_blank', null, true);
+                    windowObject.focus();
                 });
                 button_1.append(button_1_body);
                 buttonGroup_1.append(button_1);

@@ -63,9 +63,9 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
             $twCreatedUser = $tW->created_user;
             $ccUserArray = array_unique($ccUserArray);
             
-            Mail::to($twCreatedUser)
+            Mail::to($ccUserArray)
                 //->subject("3W")
-                ->cc($ccUserArray)
+                //->cc($ccUserArray)
                 //->bcc($toTWUsersArray)
                 ->send(new TWOwnerHODTWDevDateReachMail($tW));
         }

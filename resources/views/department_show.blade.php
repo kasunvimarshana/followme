@@ -232,7 +232,9 @@
                                                             $progressKey = urlencode('#progress');
                                                         @endphp
                                                         url = url.replace("{!! $progressKey !!}", activeElementDataStatus);
-                                                        $( location ).attr("href", url);
+                                                        //$( location ).attr("href", url);
+                                                        var windowObject = window.open(url, '_blank', null, true);
+                                                        windowObject.focus();
                                                     }
                                                 }
                                             }

@@ -153,8 +153,9 @@ $(function(){
                 button_3_body.tooltip();
                 button_3.bind("click", function(){
                     var url = "{!! route('tw.show', ['#tW']) !!}";
-                    url = url.replace("#tW", rowData.id);
-                    $( location ).attr("href", url);
+                    //$( location ).attr("href", url);
+                    var windowObject = window.open(url, '_blank', null, true);
+                    windowObject.focus();
                 });
                 button_3.append(button_3_body);
                 buttonGroup_3.append(button_3);
@@ -176,7 +177,9 @@ $(function(){
                 button_4.bind("click", function(){
                     var url = "{!! route('twInfo.create', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
-                    $( location ).attr("href", url);
+                    //$( location ).attr("href", url);
+                    var windowObject = window.open(url, '_blank', null, true);
+                    windowObject.focus();
                 });
                 button_4.append(button_4_body);
                 buttonGroup_4.append(button_4);

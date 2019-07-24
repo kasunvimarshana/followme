@@ -182,7 +182,9 @@ $(function(){
                 button_1.bind("click", function(){
                     var url = "{!! route('directReport.showDirectReportTW', ['#user']) !!}";
                     url = url.replace("#user", encodeURIComponent(rowData.mail));
-                    $( location ).attr("href", url);
+                    //$( location ).attr("href", url);
+                    var windowObject = window.open(url, '_blank', null, true);
+                    windowObject.focus();
                 });
                 button_1.append(button_1_body);
                 buttonGroup_1.append(button_1);
