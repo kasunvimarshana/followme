@@ -44,9 +44,14 @@ class SendTWResubmitMailJob implements ShouldQueue
         $tWUserObj->mail = $tWUser->own_user;
         $tWUserObj = $tWUserObj->getUser();
         
+        //$toUserArray = array();
+        
         //send mail
         if( isset($tWUserObj) ){
-            Mail::to($tWUserObj->mail)
+            
+            $toUserArray = array($tWUserObj->mail, $tW->created_user);
+            
+            Mail::to( $toUserArray )
                 //->subject("3W")
                 //->cc($toTWUsersArray)
                 //->bcc($toTWUsersArray)
