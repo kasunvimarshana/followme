@@ -44,16 +44,18 @@ class SendTWCreateMailJob implements ShouldQueue
         $tWUserObj->mail = $tWUser->own_user;
         $tWUserObj = $tWUserObj->getUser();
         
-        //$toUserArray = array();
+        $toUserArray = array();
+        $ccUserArray = array();
         
         //send mail
         if( isset($tWUserObj) ){
             
-            $toUserArray = array($tWUserObj->mail, $tW->created_user);
+            $toUserArray = array($tWUserObj->mail);
+            $ccUserArray = array($tW->created_user);
             
             Mail::to( $toUserArray )
                 //->subject("3W")
-                //->cc($toTWUsersArray)
+                ->cc($ccUserArray)
                 //->bcc($toTWUsersArray)
                 ->send(new TWCreateMail($tW, $tWUserObj));
         }
