@@ -52,7 +52,7 @@
       <!-- {{ csrf_field() }} || {{ Session::token() }} -->
       @csrf
       <div class="form-group has-feedback">
-        <input type="text" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required autocomplete="off"/>
+        <input type="text" name="email" class="form-control" placeholder="User ID" value="{{ old('email') }}" required autocomplete="off"/>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
