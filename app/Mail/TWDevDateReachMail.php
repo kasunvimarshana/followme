@@ -12,17 +12,17 @@ class TWDevDateReachMail extends Mailable
     use Queueable, SerializesModels;
 
     protected $tW;
-    protected $tWUser;
+    protected $userObjectArray;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($tW, $tWUser)
+    public function __construct($tW, $userObjectArray)
     {
         //
         $this->tW = $tW;
-        $this->tWUser = $tWUser;
+        $this->userObjectArray = $userObjectArray;
     }
 
     /**
@@ -34,13 +34,13 @@ class TWDevDateReachMail extends Mailable
     {
         //return $this->view('view.name');
         $tW = $this->tW;
-        $tWUser = $this->tWUser;
+        $userObjectArray = $this->userObjectArray;
         $message = $this;
         
         $message = $message->subject("3W");
         $message = $message->view('mail.tw_dev_date_reach_mail')->with([
             'tW' => $tW,
-            'tWUser' => $tWUser
+            'userObjectArray' => $userObjectArray
         ]);
         /*$message = $message->markdown('mail.tw_dev_date_reach_mail')->with([
             'tW' => $tW

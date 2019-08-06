@@ -2,15 +2,9 @@
 
 @isset($tW)
 
-    @if( (isset($userObjectArray)) )
-        
-        @if ( (count($userObjectArray, 0) > 1) )
-            <p>Dear All,</p>
-        @else
-            <p>Dear {{ array_shift( $userObjectArray )->cn }},</p>
-        @endif
-
-    @endif
+    @isset($tWUser)
+        <p>Dear {{ $tWUser->cn }},</p>
+    @endisset
     
     <h3>You have a Due Date reach 3W, Please pay your attention</h3>
     <!-- style="border: 1px solid black;" -->

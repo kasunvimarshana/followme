@@ -83,6 +83,7 @@ class TWCreateEventListener
             dispatch($emailJob);
             */
             
+            /*
             $twUsers = $tWClone->twUsers;
             
             foreach($twUsers as $key=>$value){
@@ -92,6 +93,9 @@ class TWCreateEventListener
                 $emailJob = (new SendTWCreateMailJob($tWClone, $toUser))->delay(Carbon::now()->addSeconds(10));
                 dispatch($emailJob);
             }
+            */
+            $emailJob = (new SendTWCreateMailJob($tWClone))->delay(Carbon::now()->addSeconds(10));
+            dispatch($emailJob);
             
         }catch(\Exception $e){
             

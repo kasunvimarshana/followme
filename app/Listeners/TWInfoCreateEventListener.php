@@ -36,7 +36,9 @@ class TWInfoCreateEventListener
         
         try{
             
+            /*
             $tW = $tWInfoClone->tw;
+            
             $twUsers = $tW->twUsers;
             $createdUser = $tWInfoClone->createdUser();
             
@@ -47,6 +49,9 @@ class TWInfoCreateEventListener
                 $emailJob = (new SendTWInfoCreateMailJob($tWInfoClone, $tW, $toUser))->delay(Carbon::now()->addSeconds(10));
                 dispatch($emailJob);
             }
+            */
+            $emailJob = (new SendTWInfoCreateMailJob($tWInfoClone))->delay(Carbon::now()->addSeconds(10));
+            dispatch($emailJob);
             
         }catch(\Exception $e){
             

@@ -39,6 +39,9 @@ class SendTWCloseMailJob implements ShouldQueue
         //
         $tW = $this->tW;
         $twUsers = $tW->twUsers;
+        
+        $userObjectArray_1 = array();
+        $toUserArray = array();
         $ccUserArray = array();
             
         foreach($twUsers as $key=>$value){
@@ -46,24 +49,27 @@ class SendTWCloseMailJob implements ShouldQueue
             /*
             $tWUserObj = new User();
             $tWUserObj->mail = $toUser->own_user;
-            $tWUserObj->getUser();
-            array_push($ccUserArray, $tWUserObj->mail);
+            $tWUserObj = $tWUserObj->getUser();
+            $managerObj = $tWUserObj->getManager();
+            
+            //array_push($userObjectArray_1, $tWUserObj);
             */
             array_push($ccUserArray, $toUser->own_user);
         }
         
         //send mail
         if( isset($tW) ){
+            array_push($toUserArray, $tW->created_user);
             
-            //$twCreatedUser = $tW->createdUser()->mail;
-            $twCreatedUser = $tW->created_user;
+            $toUserArray = array_unique($toUserArray);
             $ccUserArray = array_unique($ccUserArray);
             
-            Mail::to($twCreatedUser)
+            Mail::to($toUserArray)
                 //->subject("3W")
                 ->cc($ccUserArray)
-                //->bcc($toTWUsersArray)
+                //->bcc($ccUserArray)
                 ->send(new TWCloseMail($tW));
         }
     }
+    
 }

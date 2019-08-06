@@ -7,22 +7,24 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TWResubmitMail extends Mailable
+class TWInfoCreateMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $tWInfo;
     protected $tW;
-    protected $userObjectArray;
+    protected $tWUser;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($tW, $userObjectArray)
+    public function __construct($tWInfo, $tW, $tWUser)
     {
         //
+        $this->tWInfo = $tWInfo;
         $this->tW = $tW;
-        $this->userObjectArray = $userObjectArray;
+        $this->tWUser = $tWUser;
     }
 
     /**
@@ -33,14 +35,16 @@ class TWResubmitMail extends Mailable
     public function build()
     {
         //return $this->view('view.name');
+        $tWInfo = $this->tWInfo;
         $tW = $this->tW;
-        $userObjectArray = $this->userObjectArray;
+        $tWUser = $this->tWUser;
         $message = $this;
         
-        $message = $message->subject("3W Resubmit");
-        $message = $message->view('mail.tw_resubmit_mail')->with([
+        $message = $message->subject("3W Info");
+        $message = $message->view('mail.tw_info_create_mail')->with([
+            'tWInfo' => $tWInfo,
             'tW' => $tW,
-            'userObjectArray' => $userObjectArray
+            'tWUser' => $tWUser
         ]);
         
         return $message;

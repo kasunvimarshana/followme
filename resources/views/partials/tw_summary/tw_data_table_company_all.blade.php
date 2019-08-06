@@ -155,6 +155,10 @@ $(function(){
                 if( tableObjDataTemp.hasOwnProperty('due_date_to') ){
                     tableObjData.due_date_to = tableObjDataTemp.due_date_to;
                 }
+                if( tableObjDataTemp.hasOwnProperty('is_reviewable') ){
+                    tableObjData.is_reviewable = tableObjDataTemp.is_reviewable;
+                }
+                
                 data = $.extend(data, tableObjData);
             },
             'error' : function(e){
@@ -380,6 +384,178 @@ $(function(){
                 button_6.append(button_6_body);
                 buttonGroup_6.append(button_6);
                 
+                //button group
+                var buttonGroup_7 = $('<div></div>');
+                buttonGroup_7.addClass('btn-group');
+                var button_7 = $('<button></button>');
+                button_7.addClass('btn btn-info btn-sm');
+                var button_7_body = $('<i></i>');
+                button_7_body.addClass('glyphicon glyphicon-copy');
+                button_7_body.attr('data-toggle', 'tooltip');
+                button_7_body.attr('data-placement', 'auto');
+                button_7_body.attr('data-container', 'body');
+                //button_7_body.attr('title', 'title');
+                button_7_body.attr('data-title', 'Reviewable (True)');
+                //button_7_body.attr('data-content', 'content');
+                button_7_body.tooltip();
+                button_7.bind("click", function(){
+                    button_7.attr("disabled", true);
+                    bootbox.confirm({
+                        size: "small",
+                        title: "Confirm",
+                        message: "Set as reviewed",
+                        onEscape: true,
+                        show: true,
+                        scrollable: true,
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger btn-primary'
+                            }
+                        },
+                        callback: function (result) {
+                            //console.log('This was logged in the callback: ' + result);
+                            if( result === true ){
+                                var url = "{!! route('tw.changeReviewableTrue', ['#tW']) !!}";
+                                url = url.replace("#tW", rowData.id);
+                                //$( location ).attr("href", url);
+                                
+                                $.ajax({
+                                    type: "GET",
+                                    url: url,
+                                    data: null,
+                                    //success: success,
+                                    //dataType: dataType,
+                                    //context: document.body
+                                })
+                                .done(function( data ) {
+                                    swal({
+                                        'title': data.title,
+                                        'text': data.text,
+                                        'type': data.type,
+                                        'timer': data.timer,
+                                        'showConfirmButton': false
+                                    });
+                                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                                })
+                                .fail(function() {
+                                    //console.log( "error" );
+                                    alert('fail');
+                                })
+                                .always(function() {
+                                    //console.log( "finished" );
+                                    button_7.attr("disabled", false);
+                                });
+                                
+                            }else{
+                                button_7.attr("disabled", false);
+                            }
+                        }
+                    })
+                        .find('.modal-header').addClass('bg-success')
+                        /*.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true)
+                        .on('shown.bs.modal', function(e){
+                            $(this).find(".bootbox-cancel:first").focus();
+                        })*/
+                        .init(function(e){
+                            $(this).find(".bootbox-cancel").focus();
+                        });
+                    
+                });
+                button_7.append(button_7_body);
+                buttonGroup_7.append(button_7);
+                
+                //button group
+                var buttonGroup_8 = $('<div></div>');
+                buttonGroup_8.addClass('btn-group');
+                var button_8 = $('<button></button>');
+                button_8.addClass('btn btn-info btn-sm');
+                var button_8_body = $('<i></i>');
+                button_8_body.addClass('glyphicon glyphicon-paste');
+                button_8_body.attr('data-toggle', 'tooltip');
+                button_8_body.attr('data-placement', 'auto');
+                button_8_body.attr('data-container', 'body');
+                //button_8_body.attr('title', 'title');
+                button_8_body.attr('data-title', 'Reviewable (False)');
+                //button_8_body.attr('data-content', 'content');
+                button_8_body.tooltip();
+                button_8.bind("click", function(){
+                    button_8.attr("disabled", true);
+                    bootbox.confirm({
+                        size: "small",
+                        title: "Confirm",
+                        message: "Set as not reviewed",
+                        onEscape: true,
+                        show: true,
+                        scrollable: true,
+                        buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger btn-primary'
+                            }
+                        },
+                        callback: function (result) {
+                            //console.log('This was logged in the callback: ' + result);
+                            if( result === true ){
+                                var url = "{!! route('tw.changeReviewableFalse', ['#tW']) !!}";
+                                url = url.replace("#tW", rowData.id);
+                                //$( location ).attr("href", url);
+                                
+                                $.ajax({
+                                    type: "GET",
+                                    url: url,
+                                    data: null,
+                                    //success: success,
+                                    //dataType: dataType,
+                                    //context: document.body
+                                })
+                                .done(function( data ) {
+                                    swal({
+                                        'title': data.title,
+                                        'text': data.text,
+                                        'type': data.type,
+                                        'timer': data.timer,
+                                        'showConfirmButton': false
+                                    });
+                                    $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                                })
+                                .fail(function() {
+                                    //console.log( "error" );
+                                    alert('fail');
+                                })
+                                .always(function() {
+                                    //console.log( "finished" );
+                                    button_8.attr("disabled", false);
+                                });
+                                
+                            }else{
+                                button_8.attr("disabled", false);
+                            }
+                        }
+                    })
+                        .find('.modal-header').addClass('bg-success')
+                        /*.find('.bootbox-cancel:first').focus()
+                        .find('.bootbox-cancel').attr('autofocus', true)
+                        .on('shown.bs.modal', function(e){
+                            $(this).find(".bootbox-cancel:first").focus();
+                        })*/
+                        .init(function(e){
+                            $(this).find(".bootbox-cancel").focus();
+                        });
+                    
+                });
+                button_8.append(button_8_body);
+                buttonGroup_8.append(button_8);
+                
                 buttonToolbar.append(buttonGroup_3);
                 if( ((rowData.is_done == false) || (rowData.is_done == null)) ){//open
                     //buttonToolbar.append(buttonGroup_4);
@@ -389,6 +565,12 @@ $(function(){
                 }
                 if( ((rowData.is_done == false) || (rowData.is_done == null)) && ((rowData.is_cloned == false) || (rowData.is_cloned == null)) ){//completed
                     //buttonToolbar.append(buttonGroup_6);
+                }
+                
+                if( ((rowData.is_reviewable == false) || (rowData.is_reviewable == null)) ){
+                    buttonToolbar.append(buttonGroup_7);
+                }else{
+                    buttonToolbar.append(buttonGroup_8);
                 }
                 
                 var popoverButtonToolbar = $('<div></div>');

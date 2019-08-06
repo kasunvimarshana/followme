@@ -36,6 +36,7 @@ class TWUpdateEventListener
         
         try{
             
+            /*
             $twUsers = $tWClone->twUsers;
             
             foreach($twUsers as $key=>$value){
@@ -45,6 +46,10 @@ class TWUpdateEventListener
                 $emailJob = (new SendTWUpdateMailJob($tWClone, $toUser))->delay(Carbon::now()->addSeconds(10));
                 dispatch($emailJob);
             }
+            */
+            
+            $emailJob = (new SendTWUpdateMailJob($tWClone))->delay(Carbon::now()->addSeconds(10));
+            dispatch($emailJob);
             
         }catch(\Exception $e){
             

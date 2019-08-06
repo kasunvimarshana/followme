@@ -1,18 +1,8 @@
-<!-- h1>You have a dev date reach <b>3W</b></h1 -->
+<!-- h1>You have a new <b>3W</b></h1 -->
 
 @isset($tW)
 
-    @if( (isset($userObjectArray)) )
-        
-        @if ( (count($userObjectArray, 0) > 1) )
-            <p>Dear All,</p>
-        @else
-            <p>Dear {{ array_shift( $userObjectArray )->cn }},</p>
-        @endif
-
-    @endif
-    
-    <h3>You have a Due Date reach 3W, Please pay your attention</h3>
+    <h3>The 3W was closed, Please pay your attention</h3>
     <!-- style="border: 1px solid black;" -->
     <table style="width: 100%;">
         @php

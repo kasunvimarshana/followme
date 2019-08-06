@@ -17,17 +17,15 @@ class SendTWDevDateReachMailJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $tW;
-    protected $tWUser;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($tW, $tWUser)
+    public function __construct($tW)
     {
         //
         $this->tW = $tW;
-        $this->tWUser = $tWUser;
     }
 
     /**
@@ -39,18 +37,37 @@ class SendTWDevDateReachMailJob implements ShouldQueue
     {
         //
         $tW = $this->tW;
-        $tWUser = $this->tWUser;
-        $tWUserObj = new User();
-        $tWUserObj->mail = $tWUser->own_user;
-        $tWUserObj = $tWUserObj->getUser();
+        $twUsers = $tW->twUsers;
+        
+        $userObjectArray_1 = array();
+        $toUserArray = array();
+        $ccUserArray = array();
+            
+        foreach($twUsers as $key=>$value){
+            $toUser = $value;
+            
+            $tWUserObj = new User();
+            $tWUserObj->mail = $toUser->own_user;
+            $tWUserObj = $tWUserObj->getUser();
+            //$managerObj = $tWUserObj->getManager();
+            
+            array_push($userObjectArray_1, $tWUserObj);
+            array_push($toUserArray, $toUser->own_user);
+        }
         
         //send mail
-        if( isset($tWUserObj) ){
-            Mail::to($tWUserObj->mail)
+        if( isset($tW) ){
+            array_push($ccUserArray, $tW->created_user);
+            
+            $toUserArray = array_unique($toUserArray);
+            $ccUserArray = array_unique($ccUserArray);
+            
+            Mail::to($toUserArray)
                 //->subject("3W")
-                //->cc($toTWUsersArray)
-                //->bcc($toTWUsersArray)
-                ->send(new TWDevDateReachMail($tW, $tWUserObj));
+                //->cc($ccUserArray)
+                //->bcc($ccUserArray)
+                ->send(new TWDevDateReachMail($tW, $userObjectArray_1));
         }
     }
+    
 }

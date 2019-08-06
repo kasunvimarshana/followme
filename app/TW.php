@@ -19,7 +19,7 @@ class TW extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible', 'created_user', 'company_name', 'department_name', 'title', 'description', 'meeting_category_id', 'status_id', 'start_date', 'due_date', 'piority', 'is_done', 'done_user', 'done_date', 'resource_dir', 'is_cloned');
+    protected $fillable = array('is_visible', 'created_user', 'company_name', 'department_name', 'title', 'description', 'meeting_category_id', 'status_id', 'start_date', 'due_date', 'piority', 'is_done', 'done_user', 'done_date', 'resource_dir', 'is_cloned', 'is_cloned_child', 'cloned_parent_id', 'is_archived', 'is_reviewable');
 
     /**
     * The attributes that should be hidden for arrays.
@@ -77,4 +77,15 @@ class TW extends Model
     public function eventRecurringPatterns(){
         return $this->morphMany('App\EventRecurringPattern', 'recurrable');
     }
+    
+    //one to many
+    public function twChildren(){
+        return $this->hasMany('App\TW', 'cloned_parent_id', 'id');
+    }
+    
+    //one to many (inverse)
+    public function twParent(){
+        return $this->belongsTo('App\TW', 'cloned_parent_id', 'id');
+    }
+    
 }

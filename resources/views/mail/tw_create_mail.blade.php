@@ -1,10 +1,16 @@
 <!-- h1>You have a new <b>3W</b></h1 -->
 
 @isset($tW)
-    
-    @isset($tWUser)
-        <p>Dear {{ $tWUser->cn }},</p>
-    @endisset
+
+    @if( (isset($userObjectArray)) )
+        
+        @if ( (count($userObjectArray, 0) > 1) )
+            <p>Dear All,</p>
+        @else
+            <p>Dear {{ array_shift( $userObjectArray )->cn }},</p>
+        @endif
+
+    @endif
 
     <h3>New 3W assigned to you, Please pay your attention</h3>
     <!-- style="border: 1px solid black;" -->

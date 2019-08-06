@@ -13,18 +13,18 @@ class TWInfoCreateMail extends Mailable
 
     protected $tWInfo;
     protected $tW;
-    protected $tWUser;
+    protected $userObjectArray;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($tWInfo, $tW, $tWUser)
+    public function __construct($tWInfo, $tW, $userObjectArray)
     {
         //
         $this->tWInfo = $tWInfo;
         $this->tW = $tW;
-        $this->tWUser = $tWUser;
+        $this->userObjectArray = $userObjectArray;
     }
 
     /**
@@ -37,14 +37,14 @@ class TWInfoCreateMail extends Mailable
         //return $this->view('view.name');
         $tWInfo = $this->tWInfo;
         $tW = $this->tW;
-        $tWUser = $this->tWUser;
+        $userObjectArray = $this->userObjectArray;
         $message = $this;
         
         $message = $message->subject("3W Info");
         $message = $message->view('mail.tw_info_create_mail')->with([
             'tWInfo' => $tWInfo,
             'tW' => $tW,
-            'tWUser' => $tWUser
+            'userObjectArray' => $userObjectArray
         ]);
         
         return $message;

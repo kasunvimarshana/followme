@@ -17,15 +17,17 @@ class SendTWCreateMailJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $tW;
+    protected $tWUser;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($tW)
+    public function __construct($tW, $tWUser)
     {
         //
         $this->tW = $tW;
+        $this->tWUser = $tWUser;
     }
 
     /**
@@ -37,37 +39,25 @@ class SendTWCreateMailJob implements ShouldQueue
     {
         //
         $tW = $this->tW;
-        $twUsers = $tW->twUsers;
+        $tWUser = $this->tWUser;
+        $tWUserObj = new User();
+        $tWUserObj->mail = $tWUser->own_user;
+        $tWUserObj = $tWUserObj->getUser();
         
-        $userObjectArray_1 = array();
         $toUserArray = array();
         $ccUserArray = array();
-            
-        foreach($twUsers as $key=>$value){
-            $toUser = $value;
-            
-            $tWUserObj = new User();
-            $tWUserObj->mail = $toUser->own_user;
-            $tWUserObj = $tWUserObj->getUser();
-            //$managerObj = $tWUserObj->getManager();
-            
-            array_push($userObjectArray_1, $tWUserObj);
-            array_push($toUserArray, $toUser->own_user);
-        }
         
         //send mail
-        if( isset($tW) ){
-            array_push($ccUserArray, $tW->created_user);
+        if( isset($tWUserObj) ){
             
-            $toUserArray = array_unique($toUserArray);
-            $ccUserArray = array_unique($ccUserArray);
+            $toUserArray = array($tWUserObj->mail);
+            $ccUserArray = array($tW->created_user);
             
-            Mail::to($toUserArray)
+            Mail::to( $toUserArray )
                 //->subject("3W")
                 ->cc($ccUserArray)
-                //->bcc($ccUserArray)
-                ->send(new TWCreateMail($tW, $userObjectArray_1));
+                //->bcc($toTWUsersArray)
+                ->send(new TWCreateMail($tW, $tWUserObj));
         }
     }
-    
 }

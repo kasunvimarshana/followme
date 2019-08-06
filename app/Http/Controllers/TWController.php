@@ -106,7 +106,10 @@ class TWController extends Controller
                 'is_visible' => true,
                 'status_id' => TWStatusEnum::OPEN,
                 'resource_dir' => $twResourceDir,
-                'is_cloned' => false
+                'is_cloned' => false,
+                'is_cloned_child' => false,
+                'is_archived' => false,
+                'is_reviewable' => true
             );
             
             $twUserData = (array) Input::get('own_user');
@@ -495,7 +498,7 @@ class TWController extends Controller
         if( ($request->get('own_user')) && (!empty($request->get('own_user'))) ){
             $own_user =  $request->get('own_user');
             $query = $query->whereHas('twUsers', function($query) use ($own_user){
-                $query->where('own_user', '=', $own_user);
+                $query = $query->where('own_user', '=', $own_user);
             });
         }
         
@@ -503,8 +506,8 @@ class TWController extends Controller
         if( ($request->get('own_company')) && (!empty($request->get('own_company'))) ){
             $own_company =  $request->get('own_company');
             $query = $query->whereHas('twUsers', function($query) use ($own_company){
-                $query->where('company_name','=',$own_company);
-                $query->distinct('t_w_id');
+                $query = $query->where('company_name','=',$own_company);
+                $query = $query->distinct('t_w_id');
             });
         }
         
@@ -512,8 +515,8 @@ class TWController extends Controller
         if( ($request->get('own_department')) && (!empty($request->get('own_department'))) ){
             $own_department =  $request->get('own_department');
             $query = $query->whereHas('twUsers', function($query) use ($own_department){
-                $query->where('department_name','=',$own_department);
-                $query->distinct('t_w_id');
+                $query = $query->where('department_name','=',$own_department);
+                $query = $query->distinct('t_w_id');
             });
         }
         
@@ -548,9 +551,9 @@ class TWController extends Controller
                 $query = $query->where('is_done','=',true);
             }else if( $progress == TWStatusEnum::PASS ){
                 $query = $query->where(function($query){
-                    $query->where('is_done','=',true);
-                    $query->whereNotNull('done_date');
-                    $query->where(DB::raw('DATE(due_date)'),'>=',DB::raw('DATE(done_date)'));
+                    $query = $query->where('is_done','=',true);
+                    $query = $query->whereNotNull('done_date');
+                    $query = $query->where(DB::raw('DATE(due_date)'),'>=',DB::raw('DATE(done_date)'));
                 });
             }else if( $progress == TWStatusEnum::FAIL ){
                 /*$query = $query->where(function($query){
@@ -564,50 +567,94 @@ class TWController extends Controller
                     $query->orWhereNull('done_date'); 
                 });*/
                 $query = $query->where(function($query) use ($date_today){
-                    $query->where(function($query){
-                        $query->whereNotNull('done_date');
-                        $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
+                    $query = $query->where(function($query){
+                        $query = $query->whereNotNull('done_date');
+                        $query = $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
                     });
-                    $query->orWhere(function($query) use ($date_today){
-                        $query->whereDate('due_date','<',$date_today);
-                        $query->where(function($query){
-                            $query->where('is_done','=',false);
-                            $query->orWhereNull('is_done');
+                    $query = $query->orWhere(function($query) use ($date_today){
+                        $query = $query->whereDate('due_date','<',$date_today);
+                        $query = $query->where(function($query){
+                            $query = $query->where('is_done','=',false);
+                            $query = $query->orWhereNull('is_done');
                         });
                     });
                 });
             }else if( $progress == TWStatusEnum::INPROGRESS ){
                 $query = $query->where(function($query) use ($date_today){
-                    $query->where(function($query){
-                        $query->where('is_done','=',false);
-                        $query->orWhereNull('is_done');
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_done','=',false);
+                        $query = $query->orWhereNull('is_done');
                     });
-                    $query->where(function($query) use ($date_today){
+                    $query = $query->where(function($query) use ($date_today){
                         //$query->whereRaw('due_date >= done_date');
-                        $query->orWhereDate('due_date','>=',$date_today);
+                        $query = $query->orWhereDate('due_date','>=',$date_today);
                     });
                 }); 
             }else if( $progress == TWStatusEnum::OPEN ){
                 $query = $query->where(function($query){
-                    $query->where('is_done','=',false);
-                    $query->orWhereNull('is_done');
+                    $query = $query->where('is_done','=',false);
+                    $query = $query->orWhereNull('is_done');
                 });
             }else if( $progress == TWStatusEnum::CLOSE ){
                 $query = $query->where('is_done','=',true);
             }else if( $progress == TWStatusEnum::FAIL_WITH_COMPLETED ){
                 $query = $query->where(function($query){
-                    $query->where('is_done','=',true);
-                    $query->whereNotNull('done_date');
-                    $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
+                    $query = $query->where('is_done','=',true);
+                    $query = $query->whereNotNull('done_date');
+                    $query = $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
                 });
             }else if( $progress == TWStatusEnum::FAIL_WITH_UNCOMPLETED ){
                 $query = $query->where(function($query) use ($date_today){
-                    $query->whereDate('due_date','<',$date_today);
-                    $query->where(function($query){
-                        $query->where('is_done','=',false);
-                        $query->orWhereNull('is_done');
+                    $query = $query->whereDate('due_date','<',$date_today);
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_done','=',false);
+                        $query = $query->orWhereNull('is_done');
                     });
                 });
+            }
+        }
+        
+        // is_archived ( is_bool($variable) )
+        if( ($request->has('is_archived')) && (is_bool($request->input('is_archived'))) ){
+            if( ($request->input('is_archived')) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_archived','=',true);
+                    });
+                });
+                
+            }else{
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_archived','=',false);
+                        $query = $query->orWhereNull('is_archived');
+                    });
+                }); 
+                
+            }
+        }
+        
+        // is_reviewable ( is_bool($variable) )
+        if( ($request->has('is_reviewable')) && (is_bool($request->input('is_reviewable'))) ){
+            if( ($request->input('is_archived')) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_reviewable','=',true);
+                    });
+                });
+                
+            }else{
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_reviewable','=',false);
+                        $query = $query->orWhereNull('is_reviewable');
+                    });
+                }); 
+                
             }
         }
         
@@ -801,7 +848,11 @@ class TWController extends Controller
             'is_visible' => true,
             'status_id' => TWStatusEnum::OPEN,
             'resource_dir' => $twResourceDir,
-            'is_cloned' => false
+            'is_cloned' => false,
+            'is_cloned_child' => true,
+            'cloned_parent_id' => $tWClone->id,
+            'is_archived' => false,
+            'is_reviewable' => false
         );
 
         $twUserData = (array) Input::get('own_user');
@@ -914,5 +965,170 @@ class TWController extends Controller
         //return Response::json( $data );
         return redirect()->route('tw.showOwneTW');
     }
+    
+    public function changeArchivedTrue(Request $request, TW $tW){
+        //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        $loginUserObj = Login::getUserData();
+        $current_user = $loginUserObj->mail;
+        $tWClone = clone $tW;
+        // do process
+        $twData = array(	
+            'is_archived' => true
+        );
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            $updatedTW = $tWClone->update( $twData );
+            
+        }catch(\Exception $e){
+            DB::rollback();
+            
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+        }
+        
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data ); 
+    }
+    
+    public function changeArchivedFalse(Request $request, TW $tW){
+        //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        $loginUserObj = Login::getUserData();
+        $current_user = $loginUserObj->mail;
+        $tWClone = clone $tW;
+        // do process
+        $twData = array(	
+            'is_archived' => false
+        );
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            $updatedTW = $tWClone->update( $twData );
+            
+        }catch(\Exception $e){
+            DB::rollback();
+            
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+        }
+        
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data ); 
+    }
+    
+    public function changeReviewableTrue(Request $request, TW $tW){
+        //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        $loginUserObj = Login::getUserData();
+        $current_user = $loginUserObj->mail;
+        $tWClone = clone $tW;
+        // do process
+        $twData = array(	
+            'is_reviewable' => true
+        );
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            $updatedTW = $tWClone->update( $twData );
+            
+        }catch(\Exception $e){
+            DB::rollback();
+            
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+        }
+        
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data ); 
+    }
+    
+    public function changeReviewableFalse(Request $request, TW $tW){
+        //
+        $data = array('title' => '', 'text' => '', 'type' => '', 'timer' => 3000);
+        $loginUserObj = Login::getUserData();
+        $current_user = $loginUserObj->mail;
+        $tWClone = clone $tW;
+        // do process
+        $twData = array(	
+            'is_reviewable' => false
+        );
+        // Start transaction!
+        DB::beginTransaction();
+
+        try {
+            $updatedTW = $tWClone->update( $twData );
+            
+        }catch(\Exception $e){
+            DB::rollback();
+            
+            $data = array(
+                'title' => 'error',
+                'text' => 'error',
+                'type' => 'warning',
+                'timer' => 3000
+            );
+
+            return Response::json( $data ); 
+        }
+        
+        DB::commit();
+        
+        $data = array(
+            'title' => 'success',
+            'text' => 'success',
+            'type' => 'success',
+            'timer' => 3000
+        );
+        
+        return Response::json( $data ); 
+    }
+    
     
 }

@@ -206,6 +206,21 @@
                                         <!-- span id="form-control" class="help-block"></span -->
                                     </div>
                                     <!-- /.form-group -->
+                                    
+                                    <!-- form-group -->
+                                    <div class="form-group col-sm-12">
+                                        <label for="is_reviewable" class="col-sm-2 control-label">Review Status</label>
+                                        <div class="col-sm-10">
+                                            <!-- p class="form-control-static"></p -->
+                                            <select class="form-control select2" id="is_reviewable" name="is_reviewable" value="{{ old('is_reviewable') }}" style="width: 100%;">
+                                                <option value=""> All </option>
+                                                <option value="1"> Reviewed </option>
+                                                <option value="0"> Not Reviewed </option>
+                                            </select>
+                                        </div>
+                                        <!-- span id="form-control" class="help-block"></span -->
+                                    </div>
+                                    <!-- /.form-group -->
 
                                     <!-- form-group -->
                                     <div class="form-group col-sm-12">
@@ -335,6 +350,8 @@
         
         $('#status_id').select2();
         
+        $('#is_reviewable').select2();
+        
         @if((isset($progressVal)) && (!empty($progressVal)))
             var status_id = $('#status_id');
             $('#status_id').val({!! $progressVal !!}).trigger('change');
@@ -349,6 +366,7 @@
             $('#own_user').val(null).trigger('change');
             $('#meeting_category_id').val(null).trigger('change');
             $('#status_id').val(null).trigger('change');
+            $('#is_reviewable').val(null).trigger('change');
             //$('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not 
             
             tableObj.removeData();
@@ -369,6 +387,7 @@
             var due_date_from = $('#due_date_from');
             var due_date_to = $('#due_date_to');
             var status_id = $('#status_id');
+            var is_reviewable = $('#is_reviewable');
             
             var created_department_name_val = created_department_name.val();
             var own_department_name_val = own_department_name.val();
@@ -380,6 +399,7 @@
             var due_date_from_val = due_date_from.val();
             var due_date_to_val = due_date_to.val();
             var status_id_val = status_id.val();
+            var is_reviewable_val = is_reviewable.val();
             
             tableObj.removeData();
             
@@ -412,6 +432,9 @@
             }
             if( status_id_val ){
                tableObj.data('status_id', status_id_val);
+            }
+            if( (typeof is_reviewable_val === "boolean") ){
+               tableObj.data('is_reviewable', is_reviewable_val);
             }
             
             //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload

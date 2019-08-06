@@ -39,9 +39,6 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
         //
         $tW = $this->tW;
         $twUsers = $tW->twUsers;
-        
-        $userObjectArray_1 = array();
-        $toUserArray = array();
         $ccUserArray = array();
             
         foreach($twUsers as $key=>$value){
@@ -52,11 +49,10 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
             $tWUserObj = $tWUserObj->getUser();
             $managerObj = $tWUserObj->getManager();
             
-            //array_push($toUserArray, $toUser->own_user);
-            //array_push($userObjectArray_1, $tWUserObj);
-            array_push($toUserArray, $tWUserObj->mail);
+            //array_push($ccUserArray, $toUser->own_user);
+            array_push($ccUserArray, $tWUserObj->mail);
             if( ($managerObj) ){
-                array_push($toUserArray, $managerObj->mail);
+                array_push($ccUserArray, $managerObj->mail);
             }
         }
         
@@ -65,12 +61,12 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
             
             //$twCreatedUser = $tW->createdUser()->mail;
             $twCreatedUser = $tW->created_user;
-            $toUserArray = array_unique($toUserArray);
+            $ccUserArray = array_unique($ccUserArray);
             
-            Mail::to($toUserArray)
+            Mail::to($ccUserArray)
                 //->subject("3W")
                 //->cc($ccUserArray)
-                //->bcc($ccUserArray)
+                //->bcc($toTWUsersArray)
                 ->send(new TWOwnerHODTWDevDateReachMail($tW));
         }
     }

@@ -78,6 +78,7 @@ class TWResubmitEventListener
                 'seperation_count' => $recurringPatternHOD->seperation_count
             ));
             
+            /*
             $twUsers = $tWClone->twUsers;
             
             foreach($twUsers as $key=>$value){
@@ -87,6 +88,10 @@ class TWResubmitEventListener
                 $emailJob = (new SendTWResubmitMailJob($tWClone, $toUser))->delay(Carbon::now()->addSeconds(10));
                 dispatch($emailJob);
             }
+            */
+            
+            $emailJob = (new SendTWResubmitMailJob($tWClone))->delay(Carbon::now()->addSeconds(10));
+            dispatch($emailJob);
             
         }catch(\Exception $e){
             

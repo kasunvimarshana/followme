@@ -2,9 +2,15 @@
 
 @isset($tW)
     
-    @isset($tWUser)
-        <p>Dear {{ $tWUser->cn }},</p>
-    @endisset
+    @if( (isset($userObjectArray)) )
+        
+        @if ( (count($userObjectArray, 0) > 1) )
+            <p>Dear All,</p>
+        @else
+            <p>Dear {{ array_shift( $userObjectArray )->cn }},</p>
+        @endif
+
+    @endif
 
     <h3>You have a resubmitted 3W, Please pay your attention</h3>
     <!-- style="border: 1px solid black;" -->

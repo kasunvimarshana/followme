@@ -164,6 +164,7 @@ class SendTWEmails extends Command
                                 
                                 if($recurring_type_id == RecurringTypeEnum::TW_OWNER){
                                     
+                                    /*
                                     $twUsers = $valueTWObject->twUsers;
                                     foreach($twUsers as $key=>$value){
                                         //Mail::to($value->own_user)->send($email);
@@ -175,6 +176,13 @@ class SendTWEmails extends Command
                                         }catch(\Exception $e){
                                             //dd($e);
                                         }
+                                    }
+                                    */
+                                    try{
+                                        $emailJob = (new SendTWDevDateReachMailJob($valueTWObject))->delay(Carbon::now()->addSeconds(10));
+                                        dispatch($emailJob);
+                                    }catch(\Exception $e){
+                                        //dd($e);
                                     }
                                     
                                 }else if($recurring_type_id == RecurringTypeEnum::TW_OWNER_HOD){

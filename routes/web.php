@@ -101,6 +101,9 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     
     Route::get('team/companies/show/{company}/{department}/tws/show', array('uses' => 'DepartmentController@showDepartmentTW'))->name('department.showDepartmentTW');
     Route::get('team/companies/show/{company}/tws/show', array('uses' => 'CompanyController@showCompanyTW'))->name('company.showCompanyTW');
+    
+    Route::match(['get', 'post'], 'tws/{tW}/change-reviewable-true', array('uses' => 'TWController@changeReviewableTrue'))->name('tw.changeReviewableTrue');
+    Route::match(['get', 'post'], 'tws/{tW}/change-reviewable-false', array('uses' => 'TWController@changeReviewableFalse'))->name('tw.changeReviewableFalse');
 });
 
 Route::group(['middleware' => 'superAdminMiddleware'], function(){

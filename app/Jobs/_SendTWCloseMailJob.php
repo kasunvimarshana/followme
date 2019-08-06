@@ -9,11 +9,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 use Mail;
-use App\Mail\TWOwnerHODTWDevDateReachMail;
+use App\Mail\TWCloseMail;
 use App\User;
 use App\TW;
 
-class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
+class SendTWCloseMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -39,25 +39,17 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
         //
         $tW = $this->tW;
         $twUsers = $tW->twUsers;
-        
-        $userObjectArray_1 = array();
-        $toUserArray = array();
         $ccUserArray = array();
             
         foreach($twUsers as $key=>$value){
             $toUser = $value;
-            
+            /*
             $tWUserObj = new User();
             $tWUserObj->mail = $toUser->own_user;
-            $tWUserObj = $tWUserObj->getUser();
-            $managerObj = $tWUserObj->getManager();
-            
-            //array_push($toUserArray, $toUser->own_user);
-            //array_push($userObjectArray_1, $tWUserObj);
-            array_push($toUserArray, $tWUserObj->mail);
-            if( ($managerObj) ){
-                array_push($toUserArray, $managerObj->mail);
-            }
+            $tWUserObj->getUser();
+            array_push($ccUserArray, $tWUserObj->mail);
+            */
+            array_push($ccUserArray, $toUser->own_user);
         }
         
         //send mail
@@ -65,13 +57,13 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
             
             //$twCreatedUser = $tW->createdUser()->mail;
             $twCreatedUser = $tW->created_user;
-            $toUserArray = array_unique($toUserArray);
+            $ccUserArray = array_unique($ccUserArray);
             
-            Mail::to($toUserArray)
+            Mail::to($twCreatedUser)
                 //->subject("3W")
-                //->cc($ccUserArray)
-                //->bcc($ccUserArray)
-                ->send(new TWOwnerHODTWDevDateReachMail($tW));
+                ->cc($ccUserArray)
+                //->bcc($toTWUsersArray)
+                ->send(new TWCloseMail($tW));
         }
     }
 }
