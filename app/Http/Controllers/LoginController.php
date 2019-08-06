@@ -50,7 +50,8 @@ class LoginController extends Controller
             if( (!@stripos($email, $suffix)) ){
                 $email = $email . $suffix;
             }
-            $password = urldecode(Input::get('password'));
+            //$password = urldecode(Input::get('password'));
+            $password = Input::get('password');
             // attempt to do the login
             Login::doLogin($email, $password);
             if( Login::isLogin() ){
