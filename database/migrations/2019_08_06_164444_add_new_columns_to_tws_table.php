@@ -13,7 +13,7 @@ class AddNewColumnsToTwsTable extends Migration
      */
     public function up()
     {
-        Schema::table('tws', function (Blueprint $table) {
+        Schema::table('t_w_s', function (Blueprint $table) {
             //
             $table->boolean('is_cloned_child')->default(0)->nullable();
             $table->unsignedBigInteger('cloned_parent_id')->index()->nullable();
@@ -29,7 +29,7 @@ class AddNewColumnsToTwsTable extends Migration
      */
     public function down()
     {
-        Schema::table('tws', function (Blueprint $table) {
+        Schema::table('t_w_s', function (Blueprint $table) {
             //
             //$table->dropColumn('col');
             $table->dropColumn(['is_cloned_child', 'cloned_parent_id', 'is_archived', 'is_reviewable']);
