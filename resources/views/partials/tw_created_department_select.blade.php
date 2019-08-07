@@ -32,7 +32,7 @@ $(function(){
                     }),
                     pagination: {
                         //more: (params.page * data.length) < Number(data.recordsTotal)
-                        more: params.pagination.more
+                        more: data.pagination.more
                     }
                 };
             },
