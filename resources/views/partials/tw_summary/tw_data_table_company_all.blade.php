@@ -569,9 +569,9 @@ $(function(){
                 }
                 
                 if( ((rowData.is_reviewable == false) || (rowData.is_reviewable == null)) ){
-                    buttonToolbar.append(buttonGroup_7);
-                }else{
                     buttonToolbar.append(buttonGroup_8);
+                }else{
+                    buttonToolbar.append(buttonGroup_7);
                 }
                 
                 var popoverButtonToolbar = $('<div></div>');
