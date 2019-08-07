@@ -21,7 +21,7 @@ $(function(){
                 return query;
             },
             processResults: function (data, params) {
-                params.page = params.page || 1;
+                //params.page = params.page || 1;
                 return {
                     results: $.map(data.data, function (obj) {
                         return { 
@@ -31,7 +31,8 @@ $(function(){
                         };
                     }),
                     pagination: {
-                        more: (params.page * data.length) < Number(data.recordsTotal)
+                        //more: (params.page * data.length) < Number(data.recordsTotal)
+                        more: params.pagination.more
                     }
                 };
             },
