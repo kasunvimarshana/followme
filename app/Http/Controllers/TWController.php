@@ -889,7 +889,7 @@ class TWController extends Controller
             'is_cloned_child' => true,
             'cloned_parent_id' => $tWClone->id,
             'is_archived' => false,
-            'is_reviewable' => false
+            'is_reviewable' => true
         );
 
         $twUserData = (array) Input::get('own_user');

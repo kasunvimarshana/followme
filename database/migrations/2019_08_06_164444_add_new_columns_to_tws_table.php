@@ -18,7 +18,7 @@ class AddNewColumnsToTwsTable extends Migration
             $table->boolean('is_cloned_child')->default(0)->nullable();
             $table->unsignedBigInteger('cloned_parent_id')->index()->nullable();
             $table->boolean('is_archived')->default(0)->nullable();
-            $table->boolean('is_reviewable')->default(0)->nullable();
+            $table->boolean('is_reviewable')->default(1)->nullable();
         });
     }
 

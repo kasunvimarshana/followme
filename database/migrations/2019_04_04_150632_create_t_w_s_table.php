@@ -39,7 +39,7 @@ class CreateTWSTable extends Migration
             $table->boolean('is_cloned_child')->default(0)->nullable();
             $table->unsignedBigInteger('cloned_parent_id')->index()->nullable();
             $table->boolean('is_archived')->default(0)->nullable();
-            $table->boolean('is_reviewable')->default(0)->nullable();
+            $table->boolean('is_reviewable')->default(1)->nullable();
             $table->boolean('is_remindable')->default(0)->nullable();
             $table->dateTime('last_remind_date')->default(null)->nullable();
             $table->dateTime('next_remind_date')->default(null)->nullable();

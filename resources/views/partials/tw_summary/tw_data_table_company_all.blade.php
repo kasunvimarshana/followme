@@ -396,7 +396,7 @@ $(function(){
                 button_7_body.attr('data-placement', 'auto');
                 button_7_body.attr('data-container', 'body');
                 //button_7_body.attr('title', 'title');
-                button_7_body.attr('data-title', 'Reviewable (True)');
+                button_7_body.attr('data-title', 'Reviewable (False)');
                 //button_7_body.attr('data-content', 'content');
                 button_7_body.tooltip();
                 button_7.bind("click", function(){
@@ -421,7 +421,7 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result === true ){
-                                var url = "{!! route('tw.changeReviewableTrue', ['#tW']) !!}";
+                                var url = "{!! route('tw.changeReviewableFalse', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);
                                 //$( location ).attr("href", url);
                                 
@@ -482,7 +482,7 @@ $(function(){
                 button_8_body.attr('data-placement', 'auto');
                 button_8_body.attr('data-container', 'body');
                 //button_8_body.attr('title', 'title');
-                button_8_body.attr('data-title', 'Reviewable (False)');
+                button_8_body.attr('data-title', 'Reviewable (True)');
                 //button_8_body.attr('data-content', 'content');
                 button_8_body.tooltip();
                 button_8.bind("click", function(){
@@ -507,7 +507,7 @@ $(function(){
                         callback: function (result) {
                             //console.log('This was logged in the callback: ' + result);
                             if( result === true ){
-                                var url = "{!! route('tw.changeReviewableFalse', ['#tW']) !!}";
+                                var url = "{!! route('tw.changeReviewableTrue', ['#tW']) !!}";
                                 url = url.replace("#tW", rowData.id);
                                 //$( location ).attr("href", url);
                                 

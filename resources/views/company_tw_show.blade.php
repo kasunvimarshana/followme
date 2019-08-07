@@ -442,7 +442,7 @@
             var is_reviewable_val_false = new String("false").trim().toLowerCase();
             var is_reviewable_val_temp = new String(is_reviewable_val).trim().toLowerCase();
             if( ( is_reviewable_val_temp.localeCompare(is_reviewable_val_true) == 0 ) || ( is_reviewable_val_temp.localeCompare(is_reviewable_val_false) == 0 ) ){
-               tableObj.data('is_reviewable', is_reviewable_val);
+               tableObj.data('is_reviewable', is_reviewable_val_temp);
             }
             
             //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
