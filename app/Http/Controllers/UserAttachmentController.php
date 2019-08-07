@@ -211,27 +211,33 @@ class UserAttachmentController extends Controller
         // get limit value
         if( $request->get('length') ){
             $length = intval( $request->get('length') );
+            $length = abs( $length );
             $query = $query->limit($length);
         }
         // set default value for length (PHP_INT_MAX)
         if( $length <= 0 ){
             $length = PHP_INT_MAX;
+            $length = abs( $length );
             //$length = 0;
         }
         
         // get offset value
         if( $request->get('start') ){
             $start = intval( $request->get('start') );
+            $start = abs( $start );
         }else if( $request->get('page') ){
             $start = intval( $request->get('page') );
             //$start = abs( ( ( $start - 1 ) * $length ) );
             $start = ( ( $start - 1 ) * $length );
+            $start = abs( $start );
         }
         
         // filter with offset value
         if( $start > 0 ){
             //$query = $query->limit($length)->skip($start);
             $query = $query->limit($length)->offset($start);
+        }else if( $length > 0 ){
+            $query = $query->limit($length);
         }
         
         // order
@@ -249,11 +255,15 @@ class UserAttachmentController extends Controller
         $data = array(
             'draw' => $draw,
             'start' => $start,
+            'page' => $start,
             'length' => $length,
             'search' => $search,
             'recordsTotal' => $recordsTotal,
             'recordsFiltered' => $recordsFiltered,
-            'data' => $queryResult
+            'data' => $queryResult,
+            'pagination' => array(
+                'more' => ( ($start * $length) < $recordsFiltered ) ? true : false
+            )
         );
         
         return Response::json( $data );   

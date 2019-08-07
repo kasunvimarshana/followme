@@ -94,11 +94,15 @@ class UserController extends Controller
         $data = array(
             'draw' => $draw,
             'start' => $start,
+            'page' => $start,
             'length' => $length,
             'search' => $search,
             'recordsTotal' => $recordsTotal,
             'recordsFiltered' => $recordsFiltered,
-            'data' => $queryResult
+            'data' => $queryResult,
+            'pagination' => array(
+                'more' => ( ($start * $length) < $recordsFiltered ) ? true : false
+            )
         );
         
         return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
@@ -204,11 +208,15 @@ class UserController extends Controller
         $data = array(
             'draw' => $draw,
             'start' => $start,
+            'page' => $start,
             'length' => $length,
             'search' => $search,
             'recordsTotal' => $recordsTotal,
             'recordsFiltered' => $recordsFiltered,
-            'data' => $queryResult
+            'data' => $queryResult,
+            'pagination' => array(
+                'more' => ( ($start * $length) < $recordsFiltered ) ? true : false
+            )
         );
         
         return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
