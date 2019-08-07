@@ -214,8 +214,8 @@
                                             <!-- p class="form-control-static"></p -->
                                             <select class="form-control select2" id="is_reviewable" name="is_reviewable" value="{{ old('is_reviewable') }}" style="width: 100%;">
                                                 <option value=""> All </option>
-                                                <option value="1"> Reviewed </option>
-                                                <option value="0"> Not Reviewed </option>
+                                                <option value="false"> Reviewed </option>
+                                                <option value="true"> Not Reviewed </option>
                                             </select>
                                         </div>
                                         <!-- span id="form-control" class="help-block"></span -->
@@ -433,7 +433,15 @@
             if( status_id_val ){
                tableObj.data('status_id', status_id_val);
             }
+            /*
             if( (typeof is_reviewable_val === "boolean") ){
+               tableObj.data('is_reviewable', is_reviewable_val);
+            }
+            */
+            var is_reviewable_val_true = new String("true").trim().toLowerCase();
+            var is_reviewable_val_false = new String("false").trim().toLowerCase();
+            var is_reviewable_val_temp = new String(is_reviewable_val).trim().toLowerCase();
+            if( ( is_reviewable_val_temp.localeCompare(is_reviewable_val_true) == 0 ) || ( is_reviewable_val_temp.localeCompare(is_reviewable_val_false) == 0 ) ){
                tableObj.data('is_reviewable', is_reviewable_val);
             }
             

@@ -615,8 +615,13 @@ class TWController extends Controller
         }
         
         // is_archived ( is_bool($variable) )
-        if( ($request->has('is_archived')) && (is_bool($request->input('is_archived'))) ){
-            if( ($request->input('is_archived')) ){
+        if( ($request->has('is_archived')) ){
+            
+            $is_archived_val_true = "true";
+            $is_archived_val_false = "false";
+            $is_archived_val_temp = $request->input('is_archived');
+            
+            if( (strcasecmp($is_archived_val_temp, $is_archived_val_true) == 0) ){
                 
                 $query = $query->where(function($query){
                     $query = $query->where(function($query){
@@ -624,7 +629,7 @@ class TWController extends Controller
                     });
                 });
                 
-            }else{
+            }else if( (strcasecmp($is_archived_val_temp, $is_archived_val_false) == 0) ){
                 
                 $query = $query->where(function($query){
                     $query = $query->where(function($query){
@@ -637,8 +642,13 @@ class TWController extends Controller
         }
         
         // is_reviewable ( is_bool($variable) )
-        if( ($request->has('is_reviewable')) && (is_bool($request->input('is_reviewable'))) ){
-            if( ($request->input('is_archived')) ){
+        if( ($request->has('is_reviewable')) ){
+            
+            $is_reviewable_val_true = "true";
+            $is_reviewable_val_false = "false";
+            $is_reviewable_val_temp = $request->input('is_reviewable');
+            
+            if( (strcasecmp($is_reviewable_val_temp, $is_reviewable_val_true) == 0) ){
                 
                 $query = $query->where(function($query){
                     $query = $query->where(function($query){
@@ -646,12 +656,39 @@ class TWController extends Controller
                     });
                 });
                 
-            }else{
+            }else if( (strcasecmp($is_reviewable_val_temp, $is_reviewable_val_false) == 0) ){
                 
                 $query = $query->where(function($query){
                     $query = $query->where(function($query){
                         $query = $query->where('is_reviewable','=',false);
                         $query = $query->orWhereNull('is_reviewable');
+                    });
+                }); 
+                
+            }
+        }
+        
+        // is_cloned_child ( is_bool($variable) )
+        if( ($request->has('is_cloned_child')) ){
+            
+            $is_cloned_child_val_true = "true";
+            $is_cloned_child_val_false = "false";
+            $is_cloned_child_val_temp = $request->input('is_cloned_child');
+            
+            if( (strcasecmp($is_cloned_child_val_temp, $is_cloned_child_val_true) == 0) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_cloned_child','=',true);
+                    });
+                });
+                
+            }else if( (strcasecmp($is_cloned_child_val_temp, $is_cloned_child_val_false) == 0) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_cloned_child','=',false);
+                        $query = $query->orWhereNull('is_cloned_child');
                     });
                 }); 
                 

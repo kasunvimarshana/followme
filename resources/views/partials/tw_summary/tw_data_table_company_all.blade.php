@@ -158,6 +158,7 @@ $(function(){
                 if( tableObjDataTemp.hasOwnProperty('is_reviewable') ){
                     tableObjData.is_reviewable = tableObjDataTemp.is_reviewable;
                 }
+                tableObjData.is_cloned_child = "false";
                 
                 data = $.extend(data, tableObjData);
             },
