@@ -8,6 +8,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
+use Exception;
+
 use Mail;
 use App\Mail\TWCloseMail;
 use App\User;
@@ -16,6 +18,49 @@ use App\TW;
 class SendTWCloseMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    
+    /**
+     * The queue connection that should handle the job.
+     *
+     * @var string
+     */
+    //public $connection = 'sqs';
+    /**
+     * The number of seconds the job can run before timing out.
+     *
+     * @var int
+     */
+    //public $timeout = 120;
+    /**
+    * The number of seconds to wait before retrying the job.
+    *
+    * @var int
+    */
+    //public $retryAfter = 3;
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 60;
+    /**
+    * Delete the job if its models no longer exist.
+    *
+    * @var bool
+    */
+    public $deleteWhenMissingModels = true;
+    
+    /**
+    * Determine the time at which the job should timeout.
+    *
+    * @return \DateTime
+    */
+    /*
+    public function retryUntil()
+    {
+        return now()->addSeconds(5);
+    }
+    */
 
     protected $tW;
     /**
@@ -71,5 +116,18 @@ class SendTWCloseMailJob implements ShouldQueue
                 ->send(new TWCloseMail($tW));
         }
     }
+    
+    /**
+     * The job failed to process.
+     *
+     * @param  Exception  $exception
+     * @return void
+     */
+    /*
+    public function failed(Exception $exception)
+    {
+        // Send user notification of failure, etc...
+    }
+    */
     
 }

@@ -15,6 +15,49 @@ use App\User;
 class SendTWCreateMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    
+    /**
+     * The queue connection that should handle the job.
+     *
+     * @var string
+     */
+    //public $connection = 'sqs';
+    /**
+     * The number of seconds the job can run before timing out.
+     *
+     * @var int
+     */
+    //public $timeout = 120;
+    /**
+    * The number of seconds to wait before retrying the job.
+    *
+    * @var int
+    */
+    //public $retryAfter = 3;
+    /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 60;
+    /**
+    * Delete the job if its models no longer exist.
+    *
+    * @var bool
+    */
+    public $deleteWhenMissingModels = true;
+    
+    /**
+    * Determine the time at which the job should timeout.
+    *
+    * @return \DateTime
+    */
+    /*
+    public function retryUntil()
+    {
+        return now()->addSeconds(5);
+    }
+    */
 
     protected $tW;
     /**
@@ -69,5 +112,18 @@ class SendTWCreateMailJob implements ShouldQueue
                 ->send(new TWCreateMail($tW, $userObjectArray_1));
         }
     }
+    
+    /**
+     * The job failed to process.
+     *
+     * @param  Exception  $exception
+     * @return void
+     */
+    /*
+    public function failed(Exception $exception)
+    {
+        // Send user notification of failure, etc...
+    }
+    */
     
 }
