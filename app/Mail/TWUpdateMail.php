@@ -36,8 +36,9 @@ class TWUpdateMail extends Mailable
         $tW = $this->tW;
         $userObjectArray = $this->userObjectArray;
         $message = $this;
+        $messageSubject = "updated 3W [" . $tW->title . "]";
         
-        $message = $message->subject("3W Update");
+        $message = $message->subject( $messageSubject );
         $message = $message->view('mail.tw_update_mail')->with([
             'tW' => $tW,
             'userObjectArray' => $userObjectArray

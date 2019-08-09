@@ -27,7 +27,7 @@ $(function(){
                     results: $.map(data.data, function (obj) {
                         return { 
                             id  : obj.mail, 
-                            text: obj.mail + ' | ' + obj.displayname || obj.employeenumber, 
+                            text: obj.mail + ' | ' + ( obj.displayname || obj.employeenumber ) + ' | ' + obj.physicaldeliveryofficename, 
                             data: obj 
                         };
                     }),

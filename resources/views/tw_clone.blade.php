@@ -48,112 +48,157 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- form -->
-                                <form action="{!! route('tw.doClone', ['tW' => $tW->id]) !!}" method="POST" class="col-sm-8" autocomplete="off" id="twForm" enctype="multipart/form-data">
+                                <form action="{!! route('tw.doClone', ['tW' => $tW->id]) !!}" method="POST" class="col-sm-9" autocomplete="off" id="twForm" enctype="multipart/form-data">
                                     @csrf
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="own_user" class="col-sm-2 control-label">Owner</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple" required>
-                                            </select>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
                                     
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="meeting_category_id" class="col-sm-2 control-label">Category</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ $tW->meeting_category_id }}" data-placeholder="Category" style="width: 100%;" required>
-                                                @if($tW)
-                                                    @php
-                                                        $oldMeetingCategory = $tW->meetingCategory;
-                                                    @endphp
-                                                    @isset($oldMeetingCategory)
-                                                        <option value="{{ $oldMeetingCategory->id }}" selected> {{ $oldMeetingCategory->name }} </option>
-                                                    @endisset
-                                                @endif
-                                            </select>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="title" class="col-sm-2 control-label">3W</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="3W" value="{{ $tW->title }}" required/>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-                                    
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <!-- skip div -->
-                                        <div class="col-sm-2"></div>
-                                        <!-- /.skip div -->
-                                        
-                                        <!-- form-group -->
-                                        <div class="form-group col-sm-12 col-md-5 col-lg-5">
-                                            <label for="start_date" class="col-sm-2 control-label">Start Date</label>
-                                            <div class="col-sm-10">
-                                                <!-- p class="form-control-static"></p -->
-                                                <div class="input-group date">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <div class="panel-heading"><strong class="lead text-danger">What</strong></div>
+                                            <div class="panel-body">
+                                                <!-- -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="meeting_category_id" class="ol-sm-2 control-label text-muted small">Category</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ $tW->meeting_category_id }}" data-placeholder="Category" style="width: 100%;" required>
+                                                            @if($tW)
+                                                                @php
+                                                                    $oldMeetingCategory = $tW->meetingCategory;
+                                                                @endphp
+                                                                @isset($oldMeetingCategory)
+                                                                    <option value="{{ $oldMeetingCategory->id }}" selected> {{ $oldMeetingCategory->name }} </option>
+                                                                @endisset
+                                                            @endif
+                                                        </select>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}" required/>
+                                                    <!-- span id="form-control" class="help-block"></span -->
                                                 </div>
-                                            </div>
-                                            <!-- span id="form-control" class="help-block"></span -->
-                                        </div>
-                                        <!-- /.form-group -->
-                                        
-                                        <!-- form-group -->
-                                        <div class="form-group col-sm-12 col-md-5 col-lg-5">
-                                            <label for="due_date" class="col-sm-2 control-label">Due Date</label>
-                                            <div class="col-sm-10">
-                                                <!-- p class="form-control-static"></p -->
-                                                <div class="input-group date">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
-                                                    <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}" required/>
-                                                </div>
-                                            </div>
-                                            <!-- span id="form-control" class="help-block"></span -->
-                                        </div>
-                                        <!-- /.form-group -->
-                                    </div>
-                                    <!-- /.form-group -->
-                                    
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="description" class="col-sm-2 control-label">Description</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5" required>{{ $tW->description }}</textarea>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
+                                                <!-- /.form-group -->
 
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <!-- btn-toolbar -->
-                                        <div class="col col-sm-12">
-                                            <!-- div class="btn-group btn-group-lg pull-right" -->
-                                                <button type="submit" class="btn btn-primary pull-right" id="submit">Submit</button>
-                                            <!-- /div -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="title" class="ol-sm-2 control-label text-muted small">Subject</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <input type="text" class="form-control" id="title" name="title" placeholder="Subject" value="{{ $tW->title }}" required/>
+                                                    </div>
+                                                    <!-- span id="form-control" class="help-block"></span -->
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- /.form-group -->
+                                    <!-- -->
+                                    
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <div class="panel-heading"><strong class="lead text-danger">Who</strong></div>
+                                            <div class="panel-body">
+                                                <!-- -->
+                                               <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="own_user" class="col-sm-2 control-label text-muted small">Owner</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <select class="form-control select2" id="own_user" name="own_user[]" value="{{ old('own_user[]') }}" data-placeholder="Owner" style="width: 100%;" multiple="multiple" required>
+                                                        </select>
+                                                    </div>
+                                                    <!-- span id="form-control" class="help-block"></span -->
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
+                                    
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <div class="panel-heading"><strong class="lead text-danger">When</strong></div>
+                                            <div class="panel-body">
+                                                <!-- -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <!-- skip div -->
+                                                    <div class="col-sm-2"></div>
+                                                    <!-- /.skip div -->
+
+                                                    <!-- form-group -->
+                                                    <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                                        <label for="start_date" class="col-sm-2 control-label text-muted small">Start Date</label>
+                                                        <div class="col-sm-10">
+                                                            <!-- p class="form-control-static"></p -->
+                                                            <div class="input-group date">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}" required/>
+                                                            </div>
+                                                        </div>
+                                                        <!-- span id="form-control" class="help-block"></span -->
+                                                    </div>
+                                                    <!-- /.form-group -->
+
+                                                    <!-- form-group -->
+                                                    <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                                        <label for="due_date" class="col-sm-2 control-label text-muted small">Due Date</label>
+                                                        <div class="col-sm-10">
+                                                            <!-- p class="form-control-static"></p -->
+                                                            <div class="input-group date">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}" required/>
+                                                            </div>
+                                                        </div>
+                                                        <!-- span id="form-control" class="help-block"></span -->
+                                                    </div>
+                                                    <!-- /.form-group -->
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
+                                    
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <!-- div class="panel-heading"><strong class="lead text-danger">Description</strong></div -->
+                                            <div class="panel-body">
+                                                <!-- -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="description" class="col-sm-2 control-label text-muted small">Description</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5" required>{{ $tW->description }}</textarea>
+                                                    </div>
+                                                    <!-- span id="form-control" class="help-block"></span -->
+                                                </div>
+                                                <!-- /.form-group -->
+
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <!-- btn-toolbar -->
+                                                    <div class="col col-sm-12">
+                                                        <!-- div class="btn-group btn-group-lg pull-right" -->
+                                                            <button type="submit" class="btn btn-primary pull-right" id="submit">Submit</button>
+                                                        <!-- /div -->
+                                                    </div>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
 
                                 </form>
                                 <!-- /.form -->

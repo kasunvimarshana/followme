@@ -94,10 +94,10 @@
             <div id="collapseTwoParent" class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> Added 3W Resources</a>
+                        <a data-toggle="collapse" data-parent="#collapseTwoParent" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> List</a>
                     </h4>
                 </div>
-                <div id="collapseTwo" class="panel-collapse collapse in">
+                <div id="collapseTwo" class="panel-collapse collapse out">
                     <div class="panel-body">
                         
                         <!-- --- -->

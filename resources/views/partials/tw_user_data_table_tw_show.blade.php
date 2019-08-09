@@ -81,7 +81,21 @@ $(function(){
                 //console.log(e);
             }
         },
-        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){},
+        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){
+            var parentTR = $( row );
+            //parentTR.empty();
+            //parentTd.addClass('default');
+            //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').toDate();
+            //var today = moment().format('YYYY-MM-DD');
+            //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+            //var done_date = moment(data.done_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+            
+            if( ((data.is_reviewable == false) || (data.is_reviewable == null)) ){
+                parentTR.addClass('bg-info border border-primary text-white');
+            }else{
+                parentTR.removeClass('bg-info border border-primary text-white');
+            }
+        },
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
@@ -121,8 +135,8 @@ $(function(){
                     button_2.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
-                        title: "Confirm",
-                        message: "Are You Sure That You Want to Delete <br/><strong>" + rowData.own_user + "</strong> ?",
+                        title: "Confirmation",
+                        message: "<strong>Do you want to delete 3W ?</strong><br/><small>" + rowData.title + "</small>",
                         onEscape: true,
                         show: true,
                         scrollable: true,

@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager'
+        'name', 'email', 'password', 'cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager', 'physicaldeliveryofficename'
     ];
     /*protected $fillable = [
         'name', 'email', 'password'
@@ -61,7 +61,7 @@ class User extends Authenticatable
         $ldapModel = new LDAPModel();
         $filteringAttributeValue = $this->$filteringAttribute;
         $filter = "({$filteringAttribute}={$filteringAttributeValue})";
-        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager');
+        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager', 'physicaldeliveryofficename');
         $result = $ldapModel->doSearch($filter, $attributes);
         $result = $ldapModel->formatEntries( $result );
         
@@ -77,7 +77,7 @@ class User extends Authenticatable
     public function findUsers($filter = '(mail=*)', $ldaptree = null){
         $users = array();
         $ldapModel = new LDAPModel();
-        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager');
+        $attributes = array('cn', 'sn', 'title', 'description', 'displayname', 'department', 'company', 'employeenumber', 'mailnickname', 'mail', 'mobile', 'userprincipalname', 'directreports', 'thumbnailphoto', 'manager', 'physicaldeliveryofficename');
         $results = null;
         if( !empty($ldaptree) ){
             $results = $ldapModel->doSearch($filter, $attributes, $ldaptree);

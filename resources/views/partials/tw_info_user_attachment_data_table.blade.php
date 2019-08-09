@@ -139,8 +139,8 @@ $(function(){
                     button_2.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
-                        title: "Confirm",
-                        message: "Are You Sure That You Want to Delete <br/><strong>" + rowData.file_original_name + "</strong> ?",
+                        title: "Confirmation",
+                        message: "<strong>Do you want to delete ?</strong><br/><small>" + rowData.file_original_name + "</small>",
                         onEscape: true,
                         show: true,
                         scrollable: true,

@@ -39,8 +39,9 @@ class TWInfoCreateMail extends Mailable
         $tW = $this->tW;
         $userObjectArray = $this->userObjectArray;
         $message = $this;
+        $messageSubject = "New 3W info [" . $tW->title . "]";
         
-        $message = $message->subject("3W Info");
+        $message = $message->subject( $messageSubject );
         $message = $message->view('mail.tw_info_create_mail')->with([
             'tWInfo' => $tWInfo,
             'tW' => $tW,

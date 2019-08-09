@@ -144,13 +144,42 @@ $(function(){
                 if( tableObjDataTemp.hasOwnProperty('title') ){
                     tableObjData.search = tableObjDataTemp.title;
                 }
+                if( tableObjDataTemp.hasOwnProperty('start_date_from') ){
+                    tableObjData.start_date_from = tableObjDataTemp.start_date_from;
+                }
+                if( tableObjDataTemp.hasOwnProperty('start_date_to') ){
+                    tableObjData.start_date_to = tableObjDataTemp.start_date_to;
+                }
+                if( tableObjDataTemp.hasOwnProperty('due_date_from') ){
+                    tableObjData.due_date_from = tableObjDataTemp.due_date_from;
+                }
+                if( tableObjDataTemp.hasOwnProperty('due_date_to') ){
+                    tableObjData.due_date_to = tableObjDataTemp.due_date_to;
+                }
+                if( tableObjDataTemp.hasOwnProperty('is_reviewable') ){
+                    tableObjData.is_reviewable = tableObjDataTemp.is_reviewable;
+                }
                 data = $.extend(data, tableObjData);
             },
             'error' : function(e){
                 //console.log(e);
             }
         },
-        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){},
+        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){
+            var parentTR = $( row );
+            //parentTR.empty();
+            //parentTd.addClass('default');
+            //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').toDate();
+            //var today = moment().format('YYYY-MM-DD');
+            //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+            //var done_date = moment(data.done_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+            
+            if( ((data.is_reviewable == false) || (data.is_reviewable == null)) ){
+                parentTR.addClass('bg-info border border-primary text-white');
+            }else{
+                parentTR.removeClass('bg-info border border-primary text-white');
+            }
+        },
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
@@ -278,8 +307,8 @@ $(function(){
                     button_5.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
-                        title: "Confirm",
-                        message: "Job Done ?",
+                        title: "Confirmation",
+                        message: "<strong>Job Done ?</strong><br/><small>" + rowData.title + "</small>",
                         onEscape: true,
                         show: true,
                         scrollable: true,

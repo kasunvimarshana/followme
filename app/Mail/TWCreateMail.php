@@ -36,8 +36,9 @@ class TWCreateMail extends Mailable
         $tW = $this->tW;
         $userObjectArray = $this->userObjectArray;
         $message = $this;
+        $messageSubject = "New 3W [" . $tW->title . "]";
         
-        $message = $message->subject("3W");
+        $message = $message->subject( $messageSubject );
         $message = $message->view('mail.tw_create_mail')->with([
             'tW' => $tW,
             'userObjectArray' => $userObjectArray

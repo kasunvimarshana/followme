@@ -36,8 +36,9 @@ class TWDevDateReachMail extends Mailable
         $tW = $this->tW;
         $userObjectArray = $this->userObjectArray;
         $message = $this;
+        $messageSubject = "Due date reached 3W [" . $tW->title . "]";
         
-        $message = $message->subject("3W");
+        $message = $message->subject( $messageSubject );
         $message = $message->view('mail.tw_dev_date_reach_mail')->with([
             'tW' => $tW,
             'userObjectArray' => $userObjectArray

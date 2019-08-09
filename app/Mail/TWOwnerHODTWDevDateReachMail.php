@@ -33,8 +33,9 @@ class TWOwnerHODTWDevDateReachMail extends Mailable
         //return $this->view('view.name');
         $tW = $this->tW;
         $message = $this;
+        $messageSubject = "Due date reached 3W - [" . $tW->title . "]";
         
-        $message = $message->subject("3W");
+        $message = $message->subject( $messageSubject );
         $message = $message->view('mail.tw_owner_hod_tw_dev_date_reach_mail')->with([
             'tW' => $tW
         ]);

@@ -33,8 +33,9 @@ class TWCloseMail extends Mailable
         //return $this->view('view.name');
         $tW = $this->tW;
         $message = $this;
+        $messageSubject = "3W closed [" . $tW->title . "]";
         
-        $message = $message->subject("3W Closed");
+        $message = $message->subject( $messageSubject );
         $message = $message->view('mail.tw_close_mail')->with([
             'tW' => $tW
         ]);

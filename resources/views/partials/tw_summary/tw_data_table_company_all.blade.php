@@ -166,7 +166,21 @@ $(function(){
                 //console.log(e);
             }
         },
-        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){},
+        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){
+            var parentTR = $( row );
+            //parentTR.empty();
+            //parentTd.addClass('default');
+            //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').toDate();
+            //var today = moment().format('YYYY-MM-DD');
+            //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+            //var done_date = moment(data.done_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+            
+            if( ((data.is_reviewable == false) || (data.is_reviewable == null)) ){
+                parentTR.addClass('bg-info border border-primary text-white');
+            }else{
+                parentTR.removeClass('bg-info border border-primary text-white');
+            }
+        },
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
@@ -294,8 +308,8 @@ $(function(){
                     button_5.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
-                        title: "Confirm",
-                        message: "Job Done ?",
+                        title: "Confirmation",
+                        message: "<strong>Job Done ?</strong><br/><small>" + rowData.title + "</small>",
                         onEscape: true,
                         show: true,
                         scrollable: true,
@@ -396,15 +410,15 @@ $(function(){
                 button_7_body.attr('data-placement', 'auto');
                 button_7_body.attr('data-container', 'body');
                 //button_7_body.attr('title', 'title');
-                button_7_body.attr('data-title', 'Reviewable (False)');
+                button_7_body.attr('data-title', 'Archive (On)');
                 //button_7_body.attr('data-content', 'content');
                 button_7_body.tooltip();
                 button_7.bind("click", function(){
                     button_7.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
-                        title: "Confirm",
-                        message: "Set as reviewed",
+                        title: "Confirmation",
+                        message: "<strong>Do you need to archive ?</strong><br/><small>" + rowData.title + "</small>",
                         onEscape: true,
                         show: true,
                         scrollable: true,
@@ -482,15 +496,15 @@ $(function(){
                 button_8_body.attr('data-placement', 'auto');
                 button_8_body.attr('data-container', 'body');
                 //button_8_body.attr('title', 'title');
-                button_8_body.attr('data-title', 'Reviewable (True)');
+                button_8_body.attr('data-title', 'Archive (Off)');
                 //button_8_body.attr('data-content', 'content');
                 button_8_body.tooltip();
                 button_8.bind("click", function(){
                     button_8.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
-                        title: "Confirm",
-                        message: "Set as not reviewed",
+                        title: "Confirmation",
+                        message: "<strong>Do you need to recall ?</strong><br/><small>" + rowData.title + "</small>",
                         onEscape: true,
                         show: true,
                         scrollable: true,
@@ -568,11 +582,15 @@ $(function(){
                     //buttonToolbar.append(buttonGroup_6);
                 }
                 
+                /* php */
+                @superadmin
                 if( ((rowData.is_reviewable == false) || (rowData.is_reviewable == null)) ){
                     buttonToolbar.append(buttonGroup_8);
                 }else{
                     buttonToolbar.append(buttonGroup_7);
                 }
+                @endsuperadmin
+                /* php */
                 
                 var popoverButtonToolbar = $('<div></div>');
                 popoverButtonToolbar.addClass('btn-toolbar pull-left');

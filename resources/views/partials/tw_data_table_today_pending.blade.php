@@ -116,7 +116,21 @@ $(function(){
                 //console.log(e);
             }
         },
-        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){},
+        'rowCallback' : function(row, data, displayNum, displayIndex, dataIndex){
+            var parentTR = $( row );
+            //parentTR.empty();
+            //parentTd.addClass('default');
+            //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').toDate();
+            //var today = moment().format('YYYY-MM-DD');
+            //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+            //var done_date = moment(data.done_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
+            
+            if( ((data.is_reviewable == false) || (data.is_reviewable == null)) ){
+                parentTR.addClass('bg-info border border-primary text-white');
+            }else{
+                parentTR.removeClass('bg-info border border-primary text-white');
+            }
+        },
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
         'columnDefs' : [{
@@ -202,8 +216,8 @@ $(function(){
                     button_5.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
-                        title: "Confirm",
-                        message: "Job Done ?",
+                        title: "Confirmation",
+                        message: "<strong>Job Done ?</strong><br/><small>" + rowData.title + "</small>",
                         onEscape: true,
                         show: true,
                         scrollable: true,

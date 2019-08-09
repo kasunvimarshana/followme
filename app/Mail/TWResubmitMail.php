@@ -36,8 +36,9 @@ class TWResubmitMail extends Mailable
         $tW = $this->tW;
         $userObjectArray = $this->userObjectArray;
         $message = $this;
+        $messageSubject = "Resubmitted 3W [" . $tW->title . "]";
         
-        $message = $message->subject("3W Resubmit");
+        $message = $message->subject( $messageSubject );
         $message = $message->view('mail.tw_resubmit_mail')->with([
             'tW' => $tW,
             'userObjectArray' => $userObjectArray

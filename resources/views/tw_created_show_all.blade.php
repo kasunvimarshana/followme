@@ -44,115 +44,200 @@
                             <!-- col -->
                             <div class="col-sm-12">
                                 <!-- form -->
-                                <form action="#" method="POST" class="col-sm-8" autocomplete="off" id="twForm" enctype="multipart/form-data">
+                                <form action="#" method="POST" class="col-sm-9" autocomplete="off" id="twForm" enctype="multipart/form-data">
                                     @csrf
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="own_user" class="col-sm-2 control-label">Owner</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="own_user" name="own_user" value="{{ old('own_user') }}" data-placeholder="Owner" style="width: 100%;">
-                                            </select>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
                                     
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="meeting_category_id" class="col-sm-2 control-label">Category</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;">
-                                            </select>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="title" class="col-sm-2 control-label">3W</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="3W" value="{{ old('title') }}"/>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
-                                    
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <!-- skip div -->
-                                        <div class="col-sm-2"></div>
-                                        <!-- /.skip div -->
-                                        
-                                        <!-- form-group -->
-                                        <div class="form-group col-sm-12 col-md-5 col-lg-5">
-                                            <label for="start_date" class="col-sm-2 control-label">Start Date</label>
-                                            <div class="col-sm-10">
-                                                <!-- p class="form-control-static"></p -->
-                                                <div class="input-group date">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <div class="panel-heading"><strong class="lead text-danger">What</strong></div>
+                                            <div class="panel-body">
+                                                <!-- -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="meeting_category_id" class="col-sm-2 control-label text-muted small">Category</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <select class="form-control select2" id="meeting_category_id" name="meeting_category_id" value="{{ old('meeting_category_id') }}" data-placeholder="Category" style="width: 100%;">
+                                                        </select>
                                                     </div>
-                                                    <input type="text" class="form-control pull-right" id="start_date" name="start_date" placeholder="Start Date" value="{{ old('start_date') }}"/>
+                                                    <!-- span id="form-control" class="help-block"></span -->
                                                 </div>
-                                            </div>
-                                            <!-- span id="form-control" class="help-block"></span -->
-                                        </div>
-                                        <!-- /.form-group -->
-                                        
-                                        <!-- form-group -->
-                                        <div class="form-group col-sm-12 col-md-5 col-lg-5">
-                                            <label for="due_date" class="col-sm-2 control-label">Due Date</label>
-                                            <div class="col-sm-10">
-                                                <!-- p class="form-control-static"></p -->
-                                                <div class="input-group date">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
-                                                    <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}"/>
-                                                </div>
-                                            </div>
-                                            <!-- span id="form-control" class="help-block"></span -->
-                                        </div>
-                                        <!-- /.form-group -->
-                                    </div>
-                                    <!-- /.form-group -->
-                                    
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <label for="status_id" class="col-sm-2 control-label">Job Status</label>
-                                        <div class="col-sm-10">
-                                            <!-- p class="form-control-static"></p -->
-                                            <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" style="width: 100%;">
-                                                <option value=""> All </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::OPEN !!}"> Open </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::CLOSE !!}"> Closed </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::INPROGRESS !!}"> Inprogress </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::PASS !!}"> Pass </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::FAIL !!}"> Fail </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::COMPLETED !!}"> Done </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::FAIL_WITH_COMPLETED !!}"> Fail (Close) </option>
-                                                <option value="{!! App\Enums\TWStatusEnum::FAIL_WITH_UNCOMPLETED !!}"> Fail (Open) </option>
-                                            </select>
-                                        </div>
-                                        <!-- span id="form-control" class="help-block"></span -->
-                                    </div>
-                                    <!-- /.form-group -->
+                                                <!-- /.form-group -->
 
-                                    <!-- form-group -->
-                                    <div class="form-group col-sm-12">
-                                        <!-- btn-toolbar -->
-                                        <div class="col col-sm-12">
-                                            <!-- div class="btn-group btn-group-lg pull-right" -->
-                                                <button type="submit" class="btn btn-primary pull-right" id="submit">Search</button>
-                                                <button type="reset" class="btn btn-info pull-right" id="reset">Reset</button>
-                                            <!-- /div -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="title" class="col-sm-2 control-label text-muted small">Subject</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <input type="text" class="form-control" id="title" name="title" placeholder="Subject" value="{{ old('title') }}"/>
+                                                    </div>
+                                                    <!-- span id="form-control" class="help-block"></span -->
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- /.form-group -->
+                                    <!-- -->
+                                    
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <div class="panel-heading"><strong class="lead text-danger">Who</strong></div>
+                                            <div class="panel-body">
+                                                <!-- -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="own_user" class="col-sm-2 control-label text-muted small">Owner</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <select class="form-control select2" id="own_user" name="own_user" value="{{ old('own_user') }}" data-placeholder="Owner" style="width: 100%;">
+                                                        </select>
+                                                    </div>
+                                                    <!-- span id="form-control" class="help-block"></span -->
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
+                                    
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <div class="panel-heading"><strong class="lead text-danger">When</strong></div>
+                                            <div class="panel-body">
+                                                <!-- -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12" style="display : none !important;">
+                                                    <!-- skip div -->
+                                                    <div class="col-sm-2"></div>
+                                                    <!-- /.skip div -->
+
+                                                    <!-- form-group -->
+                                                    <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                                        <label for="start_date_from" class="col-sm-2 control-label text-muted small">Start Date (From)</label>
+                                                        <div class="col-sm-10">
+                                                            <!-- p class="form-control-static"></p -->
+                                                            <div class="input-group date">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control pull-right" id="start_date_from" name="start_date_from" placeholder="Start Date (From)" value="{{ old('start_date_from') }}"/>
+                                                            </div>
+                                                        </div>
+                                                        <!-- span id="form-control" class="help-block"></span -->
+                                                    </div>
+                                                    <!-- /.form-group -->
+
+                                                    <!-- form-group -->
+                                                    <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                                        <label for="start_date_to" class="col-sm-2 control-label text-muted small">Start Date (To)</label>
+                                                        <div class="col-sm-10">
+                                                            <!-- p class="form-control-static"></p -->
+                                                            <div class="input-group date">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control pull-right" id="start_date_to" name="start_date_to" placeholder="Start Date (To)" value="{{ old('start_date_to') }}"/>
+                                                            </div>
+                                                        </div>
+                                                        <!-- span id="form-control" class="help-block"></span -->
+                                                    </div>
+                                                    <!-- /.form-group -->
+                                                </div>
+                                                <!-- /.form-group -->
+
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <!-- skip div -->
+                                                    <div class="col-sm-2"></div>
+                                                    <!-- /.skip div -->
+
+                                                    <!-- form-group -->
+                                                    <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                                        <label for="due_date_from" class="col-sm-2 control-label text-muted small">Due Date (From)</label>
+                                                        <div class="col-sm-10">
+                                                            <!-- p class="form-control-static"></p -->
+                                                            <div class="input-group date">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control pull-right" id="due_date_from" name="due_date_from" placeholder="Due Date (From)" value="{{ old('due_date_from') }}"/>
+                                                            </div>
+                                                        </div>
+                                                        <!-- span id="form-control" class="help-block"></span -->
+                                                    </div>
+                                                    <!-- /.form-group -->
+
+                                                    <!-- form-group -->
+                                                    <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                                        <label for="due_date_to" class="col-sm-2 control-label text-muted small">Due Date (To)</label>
+                                                        <div class="col-sm-10">
+                                                            <!-- p class="form-control-static"></p -->
+                                                            <div class="input-group date">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control pull-right" id="due_date_to" name="due_date_to" placeholder="Due Date (To)" value="{{ old('due_date_to') }}"/>
+                                                            </div>
+                                                        </div>
+                                                        <!-- span id="form-control" class="help-block"></span -->
+                                                    </div>
+                                                    <!-- /.form-group -->
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
+                                    
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <!-- div class="panel-heading"><strong class="lead text-danger">Description</strong></div -->
+                                            <div class="panel-body">
+                                                <!-- -->
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="status_id" class="col-sm-2 control-label text-muted small">Job Status</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <select class="form-control select2" id="status_id" name="status_id" value="{{ old('status_id') }}" style="width: 100%;">
+                                                            <option value=""> All </option>
+                                                            <option value="{!! App\Enums\TWStatusEnum::OPEN !!}"> Open </option>
+                                                            <option value="{!! App\Enums\TWStatusEnum::CLOSE !!}"> Closed </option>
+                                                            <option value="{!! App\Enums\TWStatusEnum::INPROGRESS !!}"> Inprogress </option>
+                                                            <option value="{!! App\Enums\TWStatusEnum::PASS !!}"> Pass </option>
+                                                            <option value="{!! App\Enums\TWStatusEnum::FAIL !!}"> Fail </option>
+                                                            <option value="{!! App\Enums\TWStatusEnum::COMPLETED !!}"> Done </option>
+                                                            <option value="{!! App\Enums\TWStatusEnum::FAIL_WITH_COMPLETED !!}"> Fail (Close) </option>
+                                                            <option value="{!! App\Enums\TWStatusEnum::FAIL_WITH_UNCOMPLETED !!}"> Fail (Open) </option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- span id="form-control" class="help-block"></span -->
+                                                </div>
+                                                <!-- /.form-group -->
+
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <!-- btn-toolbar -->
+                                                    <div class="col col-sm-12">
+                                                        <!-- div class="btn-group btn-group-lg pull-right" -->
+                                                            <button type="submit" class="btn btn-primary pull-right" id="submit">Search</button>
+                                                            <button type="reset" class="btn btn-info pull-right" id="reset">Reset</button>
+                                                        <!-- /div -->
+                                                    </div>
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
 
                                 </form>
                                 <!-- /.form -->
@@ -229,7 +314,7 @@
     $(function() {
         "use strict";
         
-        $('#start_date').datepicker({
+        $('#start_date_from').datepicker({
             'autoclose': true,
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
@@ -238,14 +323,32 @@
             'clearBtn': true
         });//.datepicker("setDate", new Date());
         
-        $('#due_date').datepicker({
+        $('#start_date_to').datepicker({
             'autoclose': true,
             'format': "yyyy-mm-dd",
             'immediateUpdates': true,
             'todayBtn': true,
             'todayHighlight': true,
             'clearBtn': true
-        });//.datepicker("setDate", $('#start_date').val());
+        });//.datepicker("setDate", $('#date').val());
+        
+        $('#due_date_from').datepicker({
+            'autoclose': true,
+            'format': "yyyy-mm-dd",
+            'immediateUpdates': true,
+            'todayBtn': true,
+            'todayHighlight': true,
+            'clearBtn': true
+        });//.datepicker("setDate", new Date());
+        
+        $('#due_date_to').datepicker({
+            'autoclose': true,
+            'format': "yyyy-mm-dd",
+            'immediateUpdates': true,
+            'todayBtn': true,
+            'todayHighlight': true,
+            'clearBtn': true
+        });//.datepicker("setDate", $('#date').val());
         
         $('#status_id').select2();
         
@@ -274,16 +377,22 @@
             var own_user = $('#own_user');
             var meeting_category_id = $('#meeting_category_id');
             var title = $('#title');
-            var start_date = $('#start_date');
-            var due_date = $('#due_date');
+            var start_date_from = $('#start_date_from');
+            var start_date_to = $('#start_date_to');
+            var due_date_from = $('#due_date_from');
+            var due_date_to = $('#due_date_to');
             var status_id = $('#status_id');
+            var is_reviewable = $('#is_reviewable');
             
             var own_user_val = own_user.val();
             var meeting_category_id_val = meeting_category_id.val();
             var title_val = title.val();
-            var start_date_val = start_date.val();
-            var due_date_val = due_date.val();
+            var start_date_from_val = start_date_from.val();
+            var start_date_to_val = start_date_to.val();
+            var due_date_from_val = due_date_from.val();
+            var due_date_to_val = due_date_to.val();
             var status_id_val = status_id.val();
+            var is_reviewable_val = is_reviewable.val();
             
             tableObj.removeData();
             
@@ -296,15 +405,34 @@
             if( title_val ){
                tableObj.data('title', title_val);
             }
-            if( start_date_val ){
-               tableObj.data('start_date', start_date_val);
+            if( start_date_from_val ){
+               tableObj.data('start_date_from', start_date_from_val);
             }
-            if( due_date_val ){
-               tableObj.data('due_date', due_date_val);
+            if( start_date_to_val ){
+               tableObj.data('start_date_to', start_date_to_val);
+            }
+            if( due_date_from_val ){
+               tableObj.data('due_date_from', due_date_from_val);
+            }
+            if( due_date_to_val ){
+               tableObj.data('due_date_to', due_date_to_val);
             }
             if( status_id_val ){
                tableObj.data('status_id', status_id_val);
             }
+            /*
+            if( (typeof is_reviewable_val === "boolean") ){
+               tableObj.data('is_reviewable', is_reviewable_val);
+            }
+            */
+            /*
+            var is_reviewable_val_true = new String("true").trim().toLowerCase();
+            var is_reviewable_val_false = new String("false").trim().toLowerCase();
+            var is_reviewable_val_temp = new String(is_reviewable_val).trim().toLowerCase();
+            if( ( is_reviewable_val_temp.localeCompare(is_reviewable_val_true) == 0 ) || ( is_reviewable_val_temp.localeCompare(is_reviewable_val_false) == 0 ) ){
+               tableObj.data('is_reviewable', is_reviewable_val_temp);
+            }
+            */
             
             //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
             tableObj.DataTable().ajax.reload( null, true ); // user paging is not reset on reload
