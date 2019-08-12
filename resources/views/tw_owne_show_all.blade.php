@@ -210,6 +210,21 @@
                                                     <!-- span id="form-control" class="help-block"></span -->
                                                 </div>
                                                 <!-- /.form-group -->
+                                                
+                                                <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="is_reviewable" class="col-sm-2 control-label text-muted small">Archived</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <select class="form-control select2" id="is_reviewable" name="is_reviewable" value="{{ old('is_reviewable') }}" style="width: 100%;">
+                                                            <option value="true"> No </option>
+                                                            <option value="false"> Yes </option>
+                                                            <option value=""> All </option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- span id="form-control" class="help-block"></span -->
+                                                </div>
+                                                <!-- /.form-group -->
 
                                                 <!-- form-group -->
                                                 <div class="form-group col-sm-12">
@@ -414,14 +429,12 @@
                tableObj.data('is_reviewable', is_reviewable_val);
             }
             */
-            /*
             var is_reviewable_val_true = new String("true").trim().toLowerCase();
             var is_reviewable_val_false = new String("false").trim().toLowerCase();
             var is_reviewable_val_temp = new String(is_reviewable_val).trim().toLowerCase();
             if( ( is_reviewable_val_temp.localeCompare(is_reviewable_val_true) == 0 ) || ( is_reviewable_val_temp.localeCompare(is_reviewable_val_false) == 0 ) ){
                tableObj.data('is_reviewable', is_reviewable_val_temp);
             }
-            */
             
             //tableObj.DataTable().ajax.reload( null, false ); // user paging is not reset on reload
             tableObj.DataTable().ajax.reload( null, true ); // user paging is not reset on reload

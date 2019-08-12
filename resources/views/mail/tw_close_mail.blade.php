@@ -2,7 +2,7 @@
 
 @isset($tW)
 
-    <h3>The 3W was closed, Please pay your attention</h3>
+    <p><strong>The 3W was closed, Please pay your attention</strong></p>
     <!-- style="border: 1px solid black;" -->
     <table style="width: 100%;">
         @php
