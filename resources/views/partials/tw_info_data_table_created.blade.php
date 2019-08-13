@@ -111,7 +111,7 @@ $(function(){
                 //button_1_body.attr('data-content', 'content');
                 button_1_body.tooltip();
                 //button_1_body.text('text');
-                button_1.bind("click", function(){
+                button_1.on("click", function(){
                     var url = "{!! route('twInfo.edit', ['#tWInfo']) !!}";
                     url = url.replace("#tWInfo", rowData.id);
                     //$( location ).attr("href", url);
@@ -135,7 +135,7 @@ $(function(){
                 button_2_body.attr('data-title', 'Delete');
                 //button_2_body.attr('data-content', 'content');
                 button_2_body.tooltip();
-                button_2.bind("click", function(){
+                button_2.on("click", function(){
                     button_2.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -221,7 +221,7 @@ $(function(){
                 button_3_body.attr('data-title', 'View');
                 //button_3_body.attr('data-content', 'content');
                 button_3_body.tooltip();
-                button_3.bind("click", function(){
+                button_3.on("click", function(){
                     var url = "{!! route('twInfo.show', ['#tWInfo']) !!}";
                     url = url.replace("#tWInfo", rowData.id);
                     //$( location ).attr("href", url);
@@ -247,6 +247,7 @@ $(function(){
                 popoverToggleButton.attr('data-toggle', 'popover');
                 popoverToggleButton.attr('data-placement', 'auto');
                 popoverToggleButton.attr('data-container', 'body');
+                //popoverToggleButton.attr('data-trigger', 'focus');
                 var popoverToggleButtonSpan = $('<span></span>');
                 popoverToggleButtonSpan.addClass('fa fa-gears');
                 
@@ -257,6 +258,15 @@ $(function(){
                         return buttonToolbar;
                     }
                 });
+                
+                /*
+                popoverToggleButton.on('show.bs.popover', function(){
+                    console.log("show");
+                });
+                popoverToggleButton.on('hidden.bs.popover', function(){
+                    console.log("hidden");
+                });
+                */
 
                 popoverToggleButton.append(popoverToggleButtonSpan);
                 popoverButtonGroup_1.append(popoverToggleButton);

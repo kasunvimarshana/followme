@@ -256,7 +256,7 @@ $(function(){
                 button_3_body.attr('data-title', 'View');
                 //button_3_body.attr('data-content', 'content');
                 button_3_body.tooltip();
-                button_3.bind("click", function(){
+                button_3.on("click", function(){
                     var url = "{!! route('tw.show', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
                     //$( location ).attr("href", url);
@@ -280,7 +280,7 @@ $(function(){
                 button_4_body.attr('data-title', 'Update Attachment');
                 //button_4_body.attr('data-content', 'content');
                 button_4_body.tooltip();
-                button_4.bind("click", function(){
+                button_4.on("click", function(){
                     var url = "{!! route('twInfo.create', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
                     //$( location ).attr("href", url);
@@ -304,7 +304,7 @@ $(function(){
                 button_5_body.attr('data-title', 'Update Status');
                 //button_5_body.attr('data-content', 'content');
                 button_5_body.tooltip();
-                button_5.bind("click", function(){
+                button_5.on("click", function(){
                     button_5.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -389,7 +389,7 @@ $(function(){
                 button_6_body.attr('data-title', 'Clone');
                 //button_6_body.attr('data-content', 'content');
                 button_6_body.tooltip();
-                button_6.bind("click", function(){
+                button_6.on("click", function(){
                     var url = "{!! route('tw.showClone', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
                     //$( location ).attr("href", url);
@@ -413,7 +413,7 @@ $(function(){
                 button_7_body.attr('data-title', 'Archive (On)');
                 //button_7_body.attr('data-content', 'content');
                 button_7_body.tooltip();
-                button_7.bind("click", function(){
+                button_7.on("click", function(){
                     button_7.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -499,7 +499,7 @@ $(function(){
                 button_8_body.attr('data-title', 'Archive (Off)');
                 //button_8_body.attr('data-content', 'content');
                 button_8_body.tooltip();
-                button_8.bind("click", function(){
+                button_8.on("click", function(){
                     button_8.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -604,6 +604,7 @@ $(function(){
                 popoverToggleButton.attr('data-toggle', 'popover');
                 popoverToggleButton.attr('data-placement', 'auto');
                 popoverToggleButton.attr('data-container', 'body');
+                //popoverToggleButton.attr('data-trigger', 'focus');
                 var popoverToggleButtonSpan = $('<span></span>');
                 popoverToggleButtonSpan.addClass('fa fa-gears');
                 
@@ -614,6 +615,15 @@ $(function(){
                         return buttonToolbar;
                     }
                 });
+                
+                /*
+                popoverToggleButton.on('show.bs.popover', function(){
+                    console.log("show");
+                });
+                popoverToggleButton.on('hidden.bs.popover', function(){
+                    console.log("hidden");
+                });
+                */
 
                 popoverToggleButton.append(popoverToggleButtonSpan);
                 popoverButtonGroup_1.append(popoverToggleButton);

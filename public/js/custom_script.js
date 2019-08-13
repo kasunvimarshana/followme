@@ -12,6 +12,13 @@ function hideTooltipAndPopover(){
     "use strict";
     $('.popover').popover('hide');
     $('.tooltip').tooltip('hide');
+    
+    //$('.tooltip').tooltip('toggle');
+    //$('.tooltip').tooltip('toggleEnabled');
+    //$('.tooltip').popover('dispose');
+    //$('.popover').popover('toggle');
+    //$('.popover').popover('toggleEnabled');
+    //$('.popover').popover('dispose');
     //$('.popover').remove();
     //$('.tooltip').remove();
 }
@@ -69,6 +76,10 @@ $(function(){
         $('#container_fluid').loading('start');
     }).bind("ajaxStop", function(event, request, settings){
         $('#container_fluid').loading('stop');
+        //initialize tooltip
+        $('[data-toggle="tooltip"]').tooltip(); 
+        //initialize popover
+        $('[data-toggle="popover"]').popover();
     });
 });
 

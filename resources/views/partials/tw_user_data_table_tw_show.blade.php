@@ -89,12 +89,13 @@ $(function(){
             //var today = moment().format('YYYY-MM-DD');
             //var due_date = moment(data.due_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
             //var done_date = moment(data.done_date, 'YYYY-MM-DD HH:mm:ss').format('YYYY-MM-DD');
-            
+            /*
             if( ((data.is_reviewable == false) || (data.is_reviewable == null)) ){
                 parentTR.addClass('bg-info border border-primary text-white');
             }else{
                 parentTR.removeClass('bg-info border border-primary text-white');
             }
+            */
         },
         'createRow' : function(row, data, dataIndex){},
         //'order' : [[1, 'asc']],
@@ -131,7 +132,7 @@ $(function(){
                 button_2_body.attr('data-title', 'Delete');
                 //button_2_body.attr('data-content', 'content');
                 button_2_body.tooltip();
-                button_2.bind("click", function(){
+                button_2.on("click", function(){
                     button_2.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -217,7 +218,7 @@ $(function(){
                 button_3_body.attr('data-title', 'View');
                 //button_3_body.attr('data-content', 'content');
                 button_3_body.tooltip();
-                button_3.bind("click", function(){
+                button_3.on("click", function(){
                     var url = "{!! route('twUser.show', ['#tWUser']) !!}";
                     url = url.replace("#tWUser", rowData.id);
                     //$( location ).attr("href", url);
@@ -242,6 +243,7 @@ $(function(){
                 popoverToggleButton.attr('data-toggle', 'popover');
                 popoverToggleButton.attr('data-placement', 'auto');
                 popoverToggleButton.attr('data-container', 'body');
+                //popoverToggleButton.attr('data-trigger', 'focus');
                 var popoverToggleButtonSpan = $('<span></span>');
                 popoverToggleButtonSpan.addClass('fa fa-gears');
                 
@@ -252,6 +254,15 @@ $(function(){
                         return buttonToolbar;
                     }
                 });
+                
+                /*
+                popoverToggleButton.on('show.bs.popover', function(){
+                    console.log("show");
+                });
+                popoverToggleButton.on('hidden.bs.popover', function(){
+                    console.log("hidden");
+                });
+                */
 
                 popoverToggleButton.append(popoverToggleButtonSpan);
                 popoverButtonGroup_1.append(popoverToggleButton);

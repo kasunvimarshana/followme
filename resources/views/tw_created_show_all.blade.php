@@ -367,6 +367,8 @@
         
         $('#status_id').select2();
         
+        $('#is_reviewable').select2();
+        
         @if((isset($progressVal)) && (!empty($progressVal)))
             var status_id = $('#status_id');
             $('#status_id').val({!! $progressVal !!}).trigger('change');
