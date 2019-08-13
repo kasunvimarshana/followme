@@ -12,7 +12,7 @@
 
     @endif
 
-    <p><strong>You have a new 3W information, Please pay your attention</strong></p>
+    <p><strong>You have a new 3W information, Please action</strong></p>
     <!-- style="border: 1px solid black;" -->
     <table style="width: 100%;">
         @php

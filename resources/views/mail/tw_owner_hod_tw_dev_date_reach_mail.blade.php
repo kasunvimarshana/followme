@@ -2,7 +2,7 @@
 
 @isset($tW)
     
-    <p><strong>There is a Due Date reach 3W, Please pay your attention</strong></p>
+    <p><strong>There is a Due Date reach 3W, Please action</strong></p>
     <!-- style="border: 1px solid black;" -->
     <table style="width: 100%;">
         @php
