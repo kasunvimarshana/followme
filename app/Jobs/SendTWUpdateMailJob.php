@@ -107,7 +107,7 @@ class SendTWUpdateMailJob implements ShouldQueue
             
             Mail::to($toUserArray)
                 //->subject("3W")
-                //->cc($ccUserArray)
+                ->cc($ccUserArray)
                 //->bcc($ccUserArray)
                 ->send(new TWUpdateMail($tW, $userObjectArray_1));
         }
