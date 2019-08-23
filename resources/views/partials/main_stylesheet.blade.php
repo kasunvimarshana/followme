@@ -1,7 +1,7 @@
 <!-- Bootstrap --> 
 <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/bootstrap/dist/css/bootstrap.min.css') }}"/>
 <!-- Font Awesome -->
-<link rel="stylesheet" href="{!! asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') !!}"/>
+<!-- link rel="stylesheet" href="{!! asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') !!}"/ -->
 <link rel="stylesheet" href="{{ asset('node_modules/admin-lte/bower_components/font-awesome/css/font-awesome.min.css') }}"/>
 <!-- glyphicon -->
 <!-- link rel="stylesheet" href="{!! asset('node_modules/glyphicons-only-bootstrap/css/bootstrap.min.css') !!}"/ -->

@@ -25,7 +25,7 @@
 <!-- Bootstrap Validation -->
 <script src="{{ asset('node_modules/bootstrap-validator/dist/validator.min.js') }}"></script>
 <!-- Font Awesome -->
-<script src="{{ asset('node_modules/@fortawesome/fontawesome-free/js/all.min.js') }}"></script>
+<!-- script src="{{ asset('node_modules/@fortawesome/fontawesome-free/js/all.min.js') }}"></script -->
 <!-- custom script -->
 <script src="{{ asset('js/custom_script.js') }}"></script>
 
