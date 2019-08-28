@@ -99,20 +99,22 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
             //array_push($userObjectArray_1, $tWUserObj);
             array_push($toUserArray, $tWUserObj->mail);
             if( ($managerObj) ){
-                array_push($toUserArray, $managerObj->mail);
+                array_push($ccUserArray, $managerObj->mail);
             }
         }
         
         //send mail
         if( isset($tW) ){
-            
+            //array_push($ccUserArray, $tW->created_user);
             //$twCreatedUser = $tW->createdUser()->mail;
             $twCreatedUser = $tW->created_user;
+            
             $toUserArray = array_unique($toUserArray);
+            $ccUserArray = array_unique($ccUserArray);
             
             Mail::to($toUserArray)
                 //->subject("3W")
-                //->cc($ccUserArray)
+                ->cc($ccUserArray)
                 //->bcc($ccUserArray)
                 ->send(new TWOwnerHODTWDevDateReachMail($tW));
         }

@@ -12,7 +12,7 @@
 
     @endif
     
-    <p><strong>You have a Due Date reach 3W, Please action</strong></p>
+    <p><strong>Reminder - 3W has reached to due date,</strong></p>
     <!-- style="border: 1px solid black;" -->
     <table style="width: 100%;">
         @php
