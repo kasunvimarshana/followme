@@ -23,6 +23,11 @@ class CreateTWUsersTable extends Migration
             $table->string('own_user')->index()->nullable();
             $table->string('company_name');//->nullable()
             $table->string('department_name');//->nullable()
+            $table->boolean('is_done')->default(0)->nullable();
+            $table->boolean('is_cloned')->default(0)->nullable();
+            $table->boolean('is_archived')->default(0)->nullable();
+            $table->boolean('is_reviewable')->default(0)->nullable();
+            $table->boolean('is_remindable')->default(0)->nullable();
             //$table->softDeletes();
             
             $table->foreign('t_w_id')->references('id')->on('t_w_s')->onUpdate('cascade')->onDelete('cascade');

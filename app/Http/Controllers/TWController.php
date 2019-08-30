@@ -144,7 +144,8 @@ class TWController extends Controller
                         'is_visible' => true,
                         'own_user' => $tempTWUser->mail,
                         'company_name' => $tempTWUser->company,
-                        'department_name' => $tempTWUser->department
+                        'department_name' => $tempTWUser->department,
+                        'is_cloned' => false
                     ));
                 }
                 
@@ -301,7 +302,8 @@ class TWController extends Controller
                         'is_visible' => true,
                         'own_user' => $tempTWUser->mail,
                         'company_name' => $tempTWUser->company,
-                        'department_name' => $tempTWUser->department
+                        'department_name' => $tempTWUser->department,
+                        'is_cloned' => false
                     ));
                 }
                 
@@ -910,7 +912,12 @@ class TWController extends Controller
         DB::beginTransaction();
 
         try {
-            $updatedTW = $tWClone->update( array('is_cloned' => true) );
+            //$updatedTW = $tWClone->update( array('is_cloned' => true) );
+            $currentTWUser = $tWClone->twUsers->where('own_user', '=', $current_user)->first();
+            if( $currentTWUser ){
+                $updatedCurrentTWUser = $currentTWUser->update( array('is_cloned' => true) );
+            }
+            
             //create directory
             if(!Storage::exists($twResourceDir)) {
                 Storage::makeDirectory($twResourceDir, 0775, true); //creates directory

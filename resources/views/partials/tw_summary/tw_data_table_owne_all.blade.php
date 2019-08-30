@@ -396,8 +396,30 @@ $(function(){
                 if( !rowData.is_done ){
                     buttonToolbar.append(buttonGroup_5);
                 }
+                /*
                 if( ((rowData.is_done == false) || (rowData.is_done == null)) && ((rowData.is_cloned == false) || (rowData.is_cloned == null)) ){//completed
                     buttonToolbar.append(buttonGroup_6);
+                }
+                */
+                if( ((rowData.is_done == false) || (rowData.is_done == null)) ){//completed
+                    //$.map(arr, function(elem, index) {});
+                    //$.each(arr, function(index, elem) {});
+                    var tw_users_array = rowData.tw_users;
+                    if( (tw_users_array) && ($.isArray(tw_users_array)) ){
+                        $.each(tw_users_array, function(index, element) {
+                            var current_own_user = "{!! $auth_user->mail !!}";
+                            var tw_user_own_user = element.own_user;
+                            current_own_user = current_own_user.toLowerCase();
+                            tw_user_own_user = tw_user_own_user.toLowerCase();
+                            var is_detect_own_user = current_own_user.localeCompare( tw_user_own_user );
+                            if( is_detect_own_user === 0 ){
+                               if( (element.is_cloned == false) || (element.is_cloned == null) ){
+                                  buttonToolbar.append(buttonGroup_6);
+                                }
+                               return false;
+                            }
+                        });
+                    }
                 }
                 
                 var popoverButtonToolbar = $('<div></div>');

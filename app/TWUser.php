@@ -19,7 +19,7 @@ class TWUser extends Model
     *
     * @var array
     */
-    protected $fillable = array('is_visible', 't_w_id', 'own_user', 'company_name', 'department_name');
+    protected $fillable = array('is_visible', 't_w_id', 'own_user', 'company_name', 'department_name', 'is_done', 'is_cloned', 'is_archived', 'is_reviewable', 'is_remindable');
 
     /**
     * The attributes that should be hidden for arrays.
