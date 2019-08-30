@@ -935,7 +935,8 @@ class TWController extends Controller
                     'is_visible' => true,
                     'own_user' => $tempTWUser->mail,
                     'company_name' => $tempTWUser->company,
-                    'department_name' => $tempTWUser->department
+                    'department_name' => $tempTWUser->department,
+                    'is_cloned' => false
                 ));
             }
             
