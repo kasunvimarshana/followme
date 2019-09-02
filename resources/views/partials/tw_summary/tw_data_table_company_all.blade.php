@@ -834,6 +834,24 @@ $(function(){
                     buttonToolbar.append(buttonGroup_1);
                 }
                 buttonToolbar.append(buttonGroup_2);
+                @else
+                var temp_auth_user = "{!! $auth_user->mail !!}";
+                var temp_created_user = rowData.created_user;
+                temp_auth_user = temp_auth_user.toLowerCase();
+                temp_created_user = temp_created_user.toLowerCase();
+                var is_detect_created_user = temp_auth_user.localeCompare( temp_created_user );
+                if( is_detect_created_user == 0 ){
+                    if( ((rowData.is_done == false) || (rowData.is_done == null)) ){//open
+                        buttonToolbar.append(buttonGroup_4);
+                    }
+                    if( rowData.is_done ){
+                        buttonToolbar.append(buttonGroup_6);
+                    }else{
+                        buttonToolbar.append(buttonGroup_5);
+                        buttonToolbar.append(buttonGroup_1);
+                    }
+                    buttonToolbar.append(buttonGroup_2);
+                }
                 @endsuperadmin
                 /* php */
                 
