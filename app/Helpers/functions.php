@@ -32,4 +32,10 @@ if(!function_exists('arrayToObject')){
     }
 }
 
+/*
+function remove_element($array,$value) {
+  return array_diff($array, (is_array($value) ? $value : array($value)));
+}
+*/
+
 ?>

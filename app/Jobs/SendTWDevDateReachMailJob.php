@@ -85,6 +85,7 @@ class SendTWDevDateReachMailJob implements ShouldQueue
         $userObjectArray_1 = array();
         $toUserArray = array();
         $ccUserArray = array();
+        $bccUserArray = array();
             
         foreach($twUsers as $key=>$value){
             $toUser = $value;

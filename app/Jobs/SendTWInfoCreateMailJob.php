@@ -88,6 +88,7 @@ class SendTWInfoCreateMailJob implements ShouldQueue
         $userObjectArray_1 = array();
         $toUserArray = array();
         $ccUserArray = array();
+        $bccUserArray = array();
             
         foreach($twUsers as $key=>$value){
             $toUser = $value;
@@ -108,10 +109,15 @@ class SendTWInfoCreateMailJob implements ShouldQueue
             $toUserArray = array_unique($toUserArray);
             $ccUserArray = array_unique($ccUserArray);
             
+            if (($key = array_search($tWInfo->created_user, $toUserArray)) !== false) {
+                array_push($bccUserArray, $toUserArray[$key]);
+                unset($toUserArray[$key]);
+            }
+            
             Mail::to($toUserArray)
                 //->subject("3W")
                 //->cc($ccUserArray)
-                //->bcc($ccUserArray)
+                ->bcc($bccUserArray)
                 ->send(new TWInfoCreateMail($tWInfo, $tW, $userObjectArray_1));
         }
     }

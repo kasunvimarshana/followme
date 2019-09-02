@@ -88,6 +88,7 @@ class SendTWCloseMailJob implements ShouldQueue
         $userObjectArray_1 = array();
         $toUserArray = array();
         $ccUserArray = array();
+        $bccUserArray = array();
             
         foreach($twUsers as $key=>$value){
             $toUser = $value;
@@ -109,10 +110,15 @@ class SendTWCloseMailJob implements ShouldQueue
             $toUserArray = array_unique($toUserArray);
             $ccUserArray = array_unique($ccUserArray);
             
+            if (($key = array_search($tW->done_user, $ccUserArray)) !== false) {
+                array_push($bccUserArray, $ccUserArray[$key]);
+                unset($ccUserArray[$key]);
+            }
+            
             Mail::to($toUserArray)
                 //->subject("3W")
                 ->cc($ccUserArray)
-                //->bcc($ccUserArray)
+                ->bcc($ccUserArray)
                 ->send(new TWCloseMail($tW));
         }
     }
