@@ -495,7 +495,7 @@ $(function(){
                 button_6_body.attr('data-placement', 'auto');
                 button_6_body.attr('data-container', 'body');
                 //button_6_body.attr('title', 'title');
-                button_6_body.attr('data-title', 'Update Status');
+                button_6_body.attr('data-title', 'Recall');
                 //button_6_body.attr('data-content', 'content');
                 button_6_body.tooltip();
                 button_6.on("click", function(){
