@@ -100,7 +100,11 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
             //array_push($userObjectArray_1, $tWUserObj);
             array_push($toUserArray, $tWUserObj->mail);
             if( ($managerObj) ){
-                array_push($ccUserArray, $managerObj->mail);
+                $tWUserObj_physicaldeliveryofficename = $tWUserObj->physicaldeliveryofficename;
+                $managerObj_physicaldeliveryofficename = $managerObj->physicaldeliveryofficename;
+                if( (strcasecmp($tWUserObj_physicaldeliveryofficename, $managerObj_physicaldeliveryofficename) == 0) ){
+                    array_push($ccUserArray, $managerObj->mail);
+                }
             }
         }
         
