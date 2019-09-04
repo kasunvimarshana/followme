@@ -20,7 +20,7 @@ class LDAPModel extends Model
     //protected $bind_password = "Brdx@90000";
     protected $bind_rdn;
     protected $bind_password;
-    protected $ldap_control_paged_result_count = 10;
+    protected $ldap_control_paged_result_count = 50;//10
     
     function __construct() {
         //parent::__construct();
