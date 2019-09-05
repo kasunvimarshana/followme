@@ -108,11 +108,11 @@ class SendTWInfoCreateMailJob implements ShouldQueue
             
             $toUserArray = array_unique($toUserArray);
             $ccUserArray = array_unique($ccUserArray);
-            
             if (($key = array_search($tWInfo->created_user, $toUserArray)) !== false) {
                 array_push($bccUserArray, $toUserArray[$key]);
                 unset($toUserArray[$key]);
             }
+            $bccUserArray = array_unique($bccUserArray);
             
             Mail::to($toUserArray)
                 //->subject("3W")
