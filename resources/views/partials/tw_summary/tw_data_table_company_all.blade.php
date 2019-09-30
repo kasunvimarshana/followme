@@ -257,7 +257,9 @@ $(function(){
                 //button_1_body.attr('data-content', 'content');
                 button_1_body.tooltip();
                 //button_1_body.text('text');
-                button_1.on("click", function(){
+                button_1.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     var url = "{!! route('tw.edit', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
                     //$( location ).attr("href", url);
@@ -281,7 +283,9 @@ $(function(){
                 button_2_body.attr('data-title', 'Delete');
                 //button_2_body.attr('data-content', 'content');
                 button_2_body.tooltip();
-                button_2.on("click", function(){
+                button_2.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     button_2.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -367,7 +371,9 @@ $(function(){
                 button_3_body.attr('data-title', 'View');
                 //button_3_body.attr('data-content', 'content');
                 button_3_body.tooltip();
-                button_3.on("click", function(){
+                button_3.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     var url = "{!! route('tw.show', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
                     //$( location ).attr("href", url);
@@ -391,7 +397,9 @@ $(function(){
                 button_4_body.attr('data-title', 'Update Attachment');
                 //button_4_body.attr('data-content', 'content');
                 button_4_body.tooltip();
-                button_4.on("click", function(){
+                button_4.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     var url = "{!! route('twInfo.create', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
                     //$( location ).attr("href", url);
@@ -415,7 +423,9 @@ $(function(){
                 button_5_body.attr('data-title', 'Update Status');
                 //button_5_body.attr('data-content', 'content');
                 button_5_body.tooltip();
-                button_5.on("click", function(){
+                button_5.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     button_5.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -501,7 +511,9 @@ $(function(){
                 button_6_body.attr('data-title', 'Recall');
                 //button_6_body.attr('data-content', 'content');
                 button_6_body.tooltip();
-                button_6.on("click", function(){
+                button_6.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     button_6.attr("disabled", true);
                     var formTemplateClone = $('#formTemplate').contents().clone(true);
                     //var formTemplateCloneChild = formTemplateClone.children().get();
@@ -641,7 +653,9 @@ $(function(){
                 button_7_body.attr('data-title', 'Archive (On)');
                 //button_7_body.attr('data-content', 'content');
                 button_7_body.tooltip();
-                button_7.on("click", function(){
+                button_7.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     button_7.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -727,7 +741,9 @@ $(function(){
                 button_8_body.attr('data-title', 'Archive (Off)');
                 //button_8_body.attr('data-content', 'content');
                 button_8_body.tooltip();
-                button_8.on("click", function(){
+                button_8.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     button_8.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -873,6 +889,9 @@ $(function(){
                 
                 popoverToggleButton.popover({
                     html: true, 
+                    selector: false,
+                    //selector: ('#'+popoverToggleButtonId),
+                    //trigger: 'manual',
                     content: function() {
                         //var content_string = buttonToolbar.html();
                         return buttonToolbar;

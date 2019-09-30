@@ -105,7 +105,9 @@ $(function(){
                 button_2_body.attr('data-title', 'Delete');
                 //button_2_body.attr('data-content', 'content');
                 button_2_body.tooltip();
-                button_2.on("click", function(){
+                button_2.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     button_2.attr("disabled", true);
                     bootbox.confirm({
                         size: "small",
@@ -197,6 +199,9 @@ $(function(){
                 
                 popoverToggleButton.popover({
                     html: true, 
+                    selector: false,
+                    //selector: ('#'+popoverToggleButtonId),
+                    //trigger: 'manual',
                     content: function() {
                         //var content_string = buttonToolbar.html();
                         return buttonToolbar;

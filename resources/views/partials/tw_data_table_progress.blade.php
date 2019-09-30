@@ -141,7 +141,9 @@ $(function(){
                 //button_1_body.attr('data-content', 'content');
                 button_1_body.tooltip();
                 //button_1_body.text('text');
-                button_1.on("click", function(){
+                button_1.off("click").on("click", function(event){
+                    event.preventDefault();
+                    //event.stopPropagation();
                     var url = "{!! route('tw.show', ['#tW']) !!}";
                     url = url.replace("#tW", rowData.id);
                     //$( location ).attr("href", url);
@@ -171,6 +173,9 @@ $(function(){
                 
                 popoverToggleButton.popover({
                     html: true, 
+                    selector: false,
+                    //selector: ('#'+popoverToggleButtonId),
+                    //trigger: 'manual',
                     content: function() {
                         //var content_string = buttonToolbar.html();
                         return buttonToolbar;
