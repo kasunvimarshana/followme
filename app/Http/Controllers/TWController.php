@@ -679,20 +679,26 @@ class TWController extends Controller
             
             if( (strcasecmp($is_cloned_child_val_temp, $is_cloned_child_val_true) == 0) ){
                 
-                $query = $query->where(function($query){
+                /*$query = $query->where(function($query){
                     $query = $query->where(function($query){
                         $query = $query->where('is_cloned_child','=',true);
                     });
+                });*/
+                $query = $query->whereHas('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
                 });
                 
             }else if( (strcasecmp($is_cloned_child_val_temp, $is_cloned_child_val_false) == 0) ){
                 
-                $query = $query->where(function($query){
+                /*$query = $query->where(function($query){
                     $query = $query->where(function($query){
                         $query = $query->where('is_cloned_child','=',false);
                         $query = $query->orWhereNull('is_cloned_child');
                     });
-                }); 
+                });*/ 
+                $query = $query->whereDoesntHave('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
+                });
                 
             }
         }
