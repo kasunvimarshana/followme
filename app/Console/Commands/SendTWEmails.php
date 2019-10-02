@@ -105,6 +105,10 @@ class SendTWEmails extends Command
                         $last_event_at_as_obj = Carbon::createFromFormat('Y-m-d H:i:s', $last_event_at);
                         $next_event_at_as_obj = Carbon::createFromFormat('Y-m-d H:i:s', $last_event_at);
                         
+                        $date_today_as_obj = $date_today_as_obj->startOfDay();
+						$last_event_at_as_obj = $last_event_at_as_obj->startOfDay();
+						$next_event_at_as_obj = $next_event_at_as_obj->startOfDay();
+                        
                         //if is active
                         if($is_active){
                             
@@ -147,8 +151,9 @@ class SendTWEmails extends Command
                             
                             //diff
                             //$dayDifferent = $date_today_as_obj->diffInMinutes($next_event_at_as_obj, false);
-                            $dayDifferent = $date_today_as_obj->diffInHours($next_event_at_as_obj, false);
+                            //$dayDifferent = $date_today_as_obj->diffInHours($next_event_at_as_obj, false);
                             //$dayDifferent = $date_today_as_obj->diffInDays($next_event_at_as_obj, false);
+                            $dayDifferent = $date_today_as_obj->diffInDays($next_event_at_as_obj, false);
                             
                             //check different
                             if( ($dayDifferent < 0) ){
