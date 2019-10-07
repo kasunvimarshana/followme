@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Queue;
 
 use App\TW;
-use App\App\Observers\TWObserver;
+use App\Observers\TWObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
