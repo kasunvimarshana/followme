@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Schema;
 
 use Illuminate\Support\Facades\Queue;
 
+use App\TW;
+use App\App\Observers\TWObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -37,5 +40,6 @@ class AppServiceProvider extends ServiceProvider
         /*Queue::failing(function ($connection, $job, $data) {
             Log::error('Job failed!');
         });*/
+        TW::observe(TWObserver::class);
     }
 }

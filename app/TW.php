@@ -35,6 +35,12 @@ class TW extends Model
     */
     //protected $casts = array();
     
+    /*public static function boot()
+    {
+        parent::boot();
+        TW::observe(new \App\Observers\TWObserver);
+    }*/
+    
     //one to many
     public function twUsers(){
         return $this->hasMany('App\TWUser', 't_w_id', 'id');
