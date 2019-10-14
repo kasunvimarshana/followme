@@ -152,6 +152,9 @@ $(function(){
                 if( tableObjDataTemp.hasOwnProperty('due_date_from') ){
                     tableObjData.due_date_from = tableObjDataTemp.due_date_from;
                 }
+                if( tableObjDataTemp.hasOwnProperty('description') ){
+                    tableObjData.description = tableObjDataTemp.description;
+                }
                 if( tableObjDataTemp.hasOwnProperty('due_date_to') ){
                     tableObjData.due_date_to = tableObjDataTemp.due_date_to;
                 }

@@ -202,6 +202,28 @@
                                             <div class="panel-body">
                                                 <!-- -->
                                                 <!-- form-group -->
+                                                <div class="form-group col-sm-12">
+                                                    <label for="description" class="col-sm-2 control-label text-muted small">Description</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- p class="form-control-static"></p -->
+                                                        <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5">{{ old('description') }}</textarea>
+                                                    </div>
+                                                    <!-- span id="form-control" class="help-block"></span -->
+                                                </div>
+                                                <!-- /.form-group -->
+                                                <!-- -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- -->
+                                    
+                                    <!-- -->
+                                    <div class="row form-group col-sm-12">
+                                        <div class="panel panel-default panel-warning">
+                                            <!-- div class="panel-heading"><strong class="lead text-danger">Description</strong></div -->
+                                            <div class="panel-body">
+                                                <!-- -->
+                                                <!-- form-group -->
                                                 <div class="form-group col-sm-12" style="display : none !important;">
                                                     <label for="created_department_name" class="col-sm-2 control-label text-muted small">Created Department</label>
                                                     <div class="col-sm-10">
@@ -432,6 +454,7 @@
             var start_date_to = $('#start_date_to');
             var due_date_from = $('#due_date_from');
             var due_date_to = $('#due_date_to');
+            var description = $('#description');
             var status_id = $('#status_id');
             var is_reviewable = $('#is_reviewable');
             
@@ -444,6 +467,7 @@
             var start_date_to_val = start_date_to.val();
             var due_date_from_val = due_date_from.val();
             var due_date_to_val = due_date_to.val();
+            var description_val = description.val();
             var status_id_val = status_id.val();
             var is_reviewable_val = is_reviewable.val();
             
@@ -475,6 +499,9 @@
             }
             if( due_date_to_val ){
                tableObj.data('due_date_to', due_date_to_val);
+            }
+            if( description ){
+               tableObj.data('description', description_val);
             }
             if( status_id_val ){
                tableObj.data('status_id', status_id_val);

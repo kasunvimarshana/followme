@@ -703,6 +703,12 @@ class TWController extends Controller
             }
         }
         
+        //description
+        if( (($request->has("description")) && ($request->filled("description"))) ){
+            $description = $request->input("description");
+            $query = $query->where('description', 'like', '%' . $description . '%');
+        }
+        
         // get filtered record count
         $recordsFiltered = $query->count();
         
