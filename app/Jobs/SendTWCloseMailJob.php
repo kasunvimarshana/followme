@@ -109,10 +109,12 @@ class SendTWCloseMailJob implements ShouldQueue
             
             $toUserArray = array_unique($toUserArray);
             $ccUserArray = array_unique($ccUserArray);
+            /*
             if (($key = array_search($tW->done_user, $ccUserArray)) !== false) {
                 array_push($bccUserArray, $ccUserArray[$key]);
                 unset($ccUserArray[$key]);
             }
+            */
             $bccUserArray = array_unique($bccUserArray);
             
             Mail::to($toUserArray)
