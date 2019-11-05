@@ -302,7 +302,24 @@ $(function(){
                     event.preventDefault();
                     //event.stopPropagation();
                     button_5.attr("disabled", true);
-                    bootbox.confirm({
+                    
+                    if( (rowData.tw_infos == void(0)) || ((rowData.tw_infos) && (rowData.tw_infos.length <= 1)) ){
+                        
+                        bootbox.alert({
+                            message: "Please Add Resource Before Close",
+                            size: 'small',
+                            //className: 'rubberBand animated',
+                            //backdrop: true,
+                            //locale: 'en',
+                            callback: function () {
+                                //console.log('This was logged in the callback!');
+                                button_5.attr("disabled", false);
+                            }
+                        });
+                        
+                    }else{
+                        
+                        bootbox.confirm({
                         size: "small",
                         title: "Confirmation",
                         message: "<strong>Job Done ?</strong><br/><small>" + rowData.title + "</small>",
@@ -366,7 +383,8 @@ $(function(){
                         .init(function(e){
                             $(this).find(".bootbox-cancel").focus();
                         });
-                    
+                        
+                    }
                 });
                 button_5.append(button_5_body);
                 buttonGroup_5.append(button_5);

@@ -430,7 +430,24 @@ $(function(){
                     event.preventDefault();
                     //event.stopPropagation();
                     button_5.attr("disabled", true);
-                    bootbox.confirm({
+                                                                  
+                    if( (rowData.tw_infos == void(0)) || ((rowData.tw_infos) && (rowData.tw_infos.length <= 1)) ){
+                        
+                        bootbox.alert({
+                            message: "Please Add Resource Before Close",
+                            size: 'small',
+                            //className: 'rubberBand animated',
+                            //backdrop: true,
+                            //locale: 'en',
+                            callback: function () {
+                                //console.log('This was logged in the callback!');
+                                button_5.attr("disabled", false);
+                            }
+                        });
+                        
+                    }else{
+                        
+                        bootbox.confirm({
                         size: "small",
                         title: "Confirmation",
                         message: "<strong>Job Done ?</strong><br/><small>" + rowData.title + "</small>",
@@ -495,7 +512,8 @@ $(function(){
                         .init(function(e){
                             $(this).find(".bootbox-cancel").focus();
                         });
-                    
+                        
+                    }
                 });
                 button_5.append(button_5_body);
                 buttonGroup_5.append(button_5);
@@ -927,3 +945,51 @@ $(function(){
     });
 });
 </script>
+
+<template id="formTemplate">
+  
+    <!-- --- -->
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-sm-12">
+            <!-- form -->
+            <form action="#" method="POST" autocomplete="off" id="form" enctype="multipart/form-data" data-toggle="validator">
+                @csrf
+                <!-- form-group -->
+                <div class="form-group col-sm-12">
+                    <!-- label for="due_date" class="col-sm-2 control-label">Due Date</label -->
+                    <div class="col-sm-12">
+                        <!-- p class="form-control-static"></p -->
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="due_date" name="due_date" placeholder="Due Date" value="{{ old('due_date') }}" required/>
+                        </div>
+                    </div>
+                    <!-- span id="form-control" class="help-block"></span -->
+                </div>
+                <!-- /.form-group -->
+
+                <!-- form-group -->
+                <div class="form-group col-sm-12">
+                    <!-- label for="description" class="col-sm-2 control-label">Description</label -->
+                    <div class="col-sm-12">
+                        <!-- p class="form-control-static"></p -->
+                        <textarea class="form-control rounded-0" id="description" name="description" placeholder="Description" rows="5" required>{{ old('description') }}</textarea>
+                    </div>
+                    <!-- span id="form-control" class="help-block"></span -->
+                </div>
+                <!-- /.form-group -->
+            </form>
+            <!-- /.form -->
+        </div>
+        <!-- /.col -->
+
+    </div>
+    <!-- /.row -->
+    <!-- --- -->
+    
+</template>
