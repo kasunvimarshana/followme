@@ -428,7 +428,7 @@ $(function(){
                     if( (rowData.tw_infos == void(0)) || ((rowData.tw_infos) && (rowData.tw_infos.length <= 1)) ){
                         
                         bootbox.alert({
-                            message: "Please Add Resource Before Close",
+                            message: "Please Mention Your Action Steps in Description Section, Prior to Close The 3W",
                             size: 'small',
                             //className: 'rubberBand animated',
                             //backdrop: true,
