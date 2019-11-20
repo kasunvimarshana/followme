@@ -458,5 +458,4 @@ class TWInfoController extends Controller
             }
         } 
     }
-    
 }

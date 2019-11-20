@@ -312,6 +312,120 @@ $(function(){
                     //event.stopPropagation();
                     button_5.attr("disabled", true);
                     
+                    var url = "{!! route('tw.getTWInfoCount', ['#tW']) !!}";
+                    url = url.replace("#tW", rowData.id);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        data: new Object(),
+                        //success: success,
+                        //dataType: dataType,
+                        //context: document.body
+                    })
+                    .done(function( data ) {
+                        //console.log(data);
+                        var count = 0;
+                        if( (data) && (data.count) ){
+                           count = Number(data.count);
+                        }
+                        if( (count != void(0)) && (count > 1) ){
+                            bootbox.confirm({
+                            size: "small",
+                            title: "Confirmation",
+                            message: "<strong>Job Done ?</strong><br/><small>" + rowData.title + "</small>",
+                            onEscape: true,
+                            show: true,
+                            scrollable: true,
+                            buttons: {
+                                confirm: {
+                                    label: 'Yes',
+                                    className: 'btn-success'
+                                },
+                                cancel: {
+                                    label: 'No',
+                                    className: 'btn-danger btn-primary'
+                                }
+                            },
+                            callback: function (result) {
+                                //console.log('This was logged in the callback: ' + result);
+                                if( result === true ){
+                                    var url = "{!! route('tw.changeDoneTrue', ['#tW']) !!}";
+                                    url = url.replace("#tW", rowData.id);
+                                    //$( location ).attr("href", url);
+
+                                    $.ajax({
+                                        type: "GET",
+                                        url: url,
+                                        data: null,
+                                        //success: success,
+                                        //dataType: dataType,
+                                        //context: document.body
+                                    })
+                                    .done(function( data ) {
+                                        swal({
+                                            'title': data.title,
+                                            'text': data.text,
+                                            'type': data.type,
+                                            'timer': data.timer,
+                                            'showConfirmButton': false
+                                        });
+                                        $('#twDataTable').DataTable().ajax.reload( null, false ); // user paging is not reset on reload
+                                    })
+                                    .fail(function() {
+                                        //console.log( "error" );
+                                        alert('fail');
+                                    })
+                                    .always(function() {
+                                        //console.log( "finished" );
+                                        button_5.attr("disabled", false);
+                                    });
+
+                                }else{
+                                    button_5.attr("disabled", false);
+                                }
+                            }
+                        })
+                            .find('.modal-header').addClass('bg-success')
+                            /*.find('.bootbox-cancel:first').focus()
+                            .find('.bootbox-cancel').attr('autofocus', true)
+                            .on('shown.bs.modal', function(e){
+                                $(this).find(".bootbox-cancel:first").focus();
+                            })*/
+                            .init(function(e){
+                                $(this).find(".bootbox-cancel").focus();
+                            });
+                        }else{
+                            bootbox.alert({
+                                message: "Please Mention Your Action Steps in Description Section, Prior to Close The 3W",
+                                size: 'small',
+                                //className: 'rubberBand animated',
+                                //backdrop: true,
+                                //locale: 'en',
+                                callback: function () {
+                                    //console.log('This was logged in the callback!');
+                                    button_5.attr("disabled", false);
+                                }
+                            });
+                        }
+                    })
+                    .fail(function() {
+                        //console.log( "error" );
+                        bootbox.alert({
+                            message: "Please Mention Your Action Steps in Description Section, Prior to Close The 3W",
+                            size: 'small',
+                            //className: 'rubberBand animated',
+                            //backdrop: true,
+                            //locale: 'en',
+                            callback: function () {
+                                //console.log('This was logged in the callback!');
+                                button_5.attr("disabled", false);
+                            }
+                        });
+                    })
+                    .always(function() {
+                        //console.log( "finished" );
+                    });
+                    /*
                     if( (rowData.tw_infos == void(0)) || ((rowData.tw_infos) && (rowData.tw_infos.length <= 1)) ){
                         
                         bootbox.alert({
@@ -372,6 +486,7 @@ $(function(){
                                 })
                                 .fail(function() {
                                     //console.log( "error" );
+                                    alert('fail');
                                 })
                                 .always(function() {
                                     //console.log( "finished" );
@@ -384,16 +499,17 @@ $(function(){
                         }
                     })
                         .find('.modal-header').addClass('bg-success')
-                        /*.find('.bootbox-cancel:first').focus()
-                        .find('.bootbox-cancel').attr('autofocus', true)
-                        .on('shown.bs.modal', function(e){
-                            $(this).find(".bootbox-cancel:first").focus();
-                        })*/
+                        //.find('.bootbox-cancel:first').focus()
+                        //.find('.bootbox-cancel').attr('autofocus', true)
+                        //.on('shown.bs.modal', function(e){
+                        //    $(this).find(".bootbox-cancel:first").focus();
+                        //})
                         .init(function(e){
                             $(this).find(".bootbox-cancel").focus();
                         });
                         
                     }
+                    */
                 });
                 button_5.append(button_5_body);
                 buttonGroup_5.append(button_5);

@@ -1196,5 +1196,24 @@ class TWController extends Controller
         return Response::json( $data ); 
     }
     
-    
+    public function getTWInfoCount(Request $request, TW $tW){
+        //
+        $data = array('count' => 0);
+        $loginUserObj = Login::getUserData();
+        $current_user = $loginUserObj->mail;
+        $tWClone = clone $tW;
+        // Start transaction!
+        //DB::beginTransaction();
+        try {
+            $count = 0;
+            $count = $tWClone->twInfos()->count();
+            $data = array('count' => $count);
+        }catch(\Exception $e){
+            //DB::rollback();
+            $data = array('count' => 0);
+            //return Response::json( $data ); 
+        }
+        //DB::commit();
+        return Response::json( $data );
+    }
 }
