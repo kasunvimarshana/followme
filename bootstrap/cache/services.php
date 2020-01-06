@@ -40,6 +40,7 @@
     36 => 'App\\Providers\\AuthUserProvider',
     37 => 'Codecourse\\Notify\\NotifyServiceProvider',
     38 => 'Chumper\\Zipper\\ZipperServiceProvider',
+    39 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
   array (
@@ -68,6 +69,7 @@
     22 => 'App\\Providers\\AuthUserProvider',
     23 => 'Codecourse\\Notify\\NotifyServiceProvider',
     24 => 'Chumper\\Zipper\\ZipperServiceProvider',
+    25 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
   array (

@@ -291,6 +291,7 @@
                                                     <div class="col col-sm-12">
                                                         <!-- div class="btn-group btn-group-lg pull-right" -->
                                                             <button type="submit" class="btn btn-primary pull-right" id="submit">Search</button>
+                                                            <button type="button" class="btn btn-success pull-right" id="download">Download</button>
                                                             <button type="reset" class="btn btn-info pull-right" id="reset">Reset</button>
                                                         <!-- /div -->
                                                     </div>
@@ -472,6 +473,8 @@
             var is_reviewable_val = is_reviewable.val();
             
             tableObj.removeData();
+            
+            tableObj.is_cloned_child = "false";
             
             if( created_department_name_val ){
                tableObj.data('created_department_name', created_department_name_val);

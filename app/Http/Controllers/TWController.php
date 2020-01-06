@@ -29,8 +29,17 @@ use App\Events\TWResubmitEvent;
 use App\Events\TWUpdateEvent;
 use App\Events\TWCloseEvent;
 
+use Excel;
+
 class TWController extends Controller
 {
+    /* *** */
+    public function is_true($val, $return_null = false){
+        $boolval = ( is_string($val) ? filter_var($val, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) : (bool) $val );
+        //$boolval = boolval( $boolval );
+        return ( $boolval === null && !$return_null ? false : $boolval );
+    }
+    /* *** */
     /**
      * Display a listing of the resource.
      *
@@ -537,12 +546,14 @@ class TWController extends Controller
         // is_visible
         if( ($request->get('is_visible') != null) ){
             $is_visible =  $request->get('is_visible');
+            $is_visible = $this->is_true( $is_visible );
             $query = $query->where('is_visible', '=', $is_visible);
         }
             
         // is_done
         if( ($request->get('is_done') != null) ){
             $is_done =  $request->get('is_done');
+            $is_done = $this->is_true( $is_done );
             $query = $query->where('is_done', '=', $is_done);
         }
         
@@ -618,7 +629,7 @@ class TWController extends Controller
         
         // is_archived ( is_bool($variable) )
         if( ($request->has('is_archived')) ){
-            
+            /*
             $is_archived_val_true = "true";
             $is_archived_val_false = "false";
             $is_archived_val_temp = $request->input('is_archived');
@@ -641,11 +652,32 @@ class TWController extends Controller
                 }); 
                 
             }
+            */
+            $is_archived = $request->input('is_archived');
+            $is_archived = $this->is_true( $is_archived );
+            if( ($is_archived) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_archived','=',true);
+                    });
+                });
+                
+            }else{
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_archived','=',false);
+                        $query = $query->orWhereNull('is_archived');
+                    });
+                }); 
+                
+            }
         }
         
         // is_reviewable ( is_bool($variable) )
         if( ($request->has('is_reviewable')) ){
-            
+            /*
             $is_reviewable_val_true = "true";
             $is_reviewable_val_false = "false";
             $is_reviewable_val_temp = $request->input('is_reviewable');
@@ -668,37 +700,76 @@ class TWController extends Controller
                 }); 
                 
             }
+            */
+            $is_reviewable = $request->input('is_reviewable');
+            $is_reviewable = $this->is_true( $is_reviewable );
+            if( ($is_reviewable) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_reviewable','=',true);
+                    });
+                });
+                
+            }else{
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_reviewable','=',false);
+                        $query = $query->orWhereNull('is_reviewable');
+                    });
+                }); 
+                
+            }
         }
         
         // is_cloned_child ( is_bool($variable) )
         if( ($request->has('is_cloned_child')) ){
-            
+            /*
             $is_cloned_child_val_true = "true";
             $is_cloned_child_val_false = "false";
             $is_cloned_child_val_temp = $request->input('is_cloned_child');
             
             if( (strcasecmp($is_cloned_child_val_temp, $is_cloned_child_val_true) == 0) ){
                 
-                /*$query = $query->where(function($query){
-                    $query = $query->where(function($query){
-                        $query = $query->where('is_cloned_child','=',true);
-                    });
-                });*/
                 $query = $query->whereHas('twUsers', function($query){
                     $query = $query->where('is_cloned','=',true);
                 });
                 
             }else if( (strcasecmp($is_cloned_child_val_temp, $is_cloned_child_val_false) == 0) ){
                 
-                /*$query = $query->where(function($query){
+                $query = $query->whereDoesntHave('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
+                });
+                
+            }
+            */
+            $is_cloned_child = $request->input('is_cloned_child');
+            $is_cloned_child = $this->is_true( $is_cloned_child );
+            if( ($is_cloned_child) ){
+                /*
+                $query = $query->whereHas('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
+                });
+                */
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_cloned_child','=',true);
+                    });
+                });
+                
+            }else{
+                /*
+                $query = $query->whereDoesntHave('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
+                });
+                */
+                $query = $query->where(function($query){
                     $query = $query->where(function($query){
                         $query = $query->where('is_cloned_child','=',false);
                         $query = $query->orWhereNull('is_cloned_child');
                     });
-                });*/ 
-                $query = $query->whereDoesntHave('twUsers', function($query){
-                    $query = $query->where('is_cloned','=',true);
-                });
+                }); 
                 
             }
         }
@@ -1215,5 +1286,440 @@ class TWController extends Controller
         }
         //DB::commit();
         return Response::json( $data );
+    }
+    
+    public function downloadTWs(Request $request){
+        // Solution to get around integer overflow errors
+        // $model->latest()->limit(PHP_INT_MAX)->offset(1)->get();
+        // function will process the ajax request
+        $draw = null;
+        $start = 0;
+        $length = 0;
+        $search = null;
+        
+        $recordsTotal = 0;
+        $recordsFiltered = 0;
+        $query = null;
+        $queryResult = null;
+        //$recordsTotal = Model::where('active','=','1')->count();
+        $date_today = Carbon::now()->format('Y-m-d');
+        
+        $draw = $request->get('draw');
+        
+        $tw = new TW();
+        
+        $query = $tw->with(['twUsers', 'twInfos', 'status'])->where('is_visible', '=', true);
+        
+        $recordsTotal = $query->count();
+        $recordsFiltered = $recordsTotal;
+            
+        // get search query value
+        if( ($request->get('search')) && (!empty($request->get('search'))) ){
+            $search = $request->get('search');
+            if( $search && (@key_exists('value', $search)) ){
+                $search = $search['value'];
+            }
+            if($search && (!empty($search))){
+                //$search = (string) $search;
+                $query = $query->where('title', 'like', '%' . $search . '%');
+            }
+        }
+        
+        // created_user
+        if( ($request->get('created_user')) && (!empty($request->get('created_user'))) ){
+            $created_user = $request->get('created_user');
+            $query = $query->where('created_user', '=', $created_user);
+        }
+        
+        // meeting_category_id
+        if( ($request->get('meeting_category_id')) && (!empty($request->get('meeting_category_id'))) ){
+            $meeting_category_id =  $request->get('meeting_category_id');
+            $query = $query->where('meeting_category_id', '=', $meeting_category_id);
+        }
+        
+        // status
+        if( ($request->get('status_id')) && (!empty($request->get('status_id'))) ){
+            $status_id =  $request->get('status_id');
+            $query = $query->where('status_id', '=', $status_id);
+        }
+        
+        // start date
+        if( ($request->get('start_date')) && (!empty($request->get('start_date'))) ){
+            $start_date =  $request->get('start_date');
+            $query = $query->whereDate('start_date', 'like', $start_date . '%');
+        }
+        
+        // start date from
+        if( ($request->get('start_date_from')) && (!empty($request->get('start_date_from'))) ){
+            $start_date_from =  $request->get('start_date_from');
+            $query = $query->whereDate('start_date', '>=', $start_date_from);
+        }
+        
+        // start date to
+        if( ($request->get('start_date_to')) && (!empty($request->get('start_date_to'))) ){
+            $start_date_to =  $request->get('start_date_to');
+            $query = $query->whereDate('start_date', '<=', $start_date_to);
+        }
+        
+        // due date
+        if( ($request->get('due_date')) && (!empty($request->get('due_date'))) ){
+            $due_date =  $request->get('due_date');
+            $query = $query->whereDate('due_date', 'like', $due_date . '%');
+        }
+        
+        // due date from
+        if( ($request->get('due_date_from')) && (!empty($request->get('due_date_from'))) ){
+            $due_date_from =  $request->get('due_date_from');
+            $query = $query->whereDate('due_date', '>=', $due_date_from);
+        }
+        
+        // due date to
+        if( ($request->get('due_date_to')) && (!empty($request->get('due_date_to'))) ){
+            $due_date_to =  $request->get('due_date_to');
+            $query = $query->whereDate('due_date', '<=', $due_date_to);
+        }
+        
+        // created date
+        if( ($request->get('created_at')) && (!empty($request->get('created_at'))) ){
+            $created_at =  $request->get('created_at');
+            $query = $query->whereDate('created_at', '=', $created_at);
+        }
+        
+        // updated date
+        if( ($request->get('updated_at')) && (!empty($request->get('updated_at'))) ){
+            $updated_at =  $request->get('updated_at');
+            $query = $query->whereDate('updated_at', '=', $updated_at);
+        }
+        
+        // own user
+        if( ($request->get('own_user')) && (!empty($request->get('own_user'))) ){
+            $own_user =  $request->get('own_user');
+            $query = $query->whereHas('twUsers', function($query) use ($own_user){
+                $query = $query->where('own_user', '=', $own_user);
+            });
+        }
+        
+        // own company
+        if( ($request->get('own_company')) && (!empty($request->get('own_company'))) ){
+            $own_company =  $request->get('own_company');
+            $query = $query->whereHas('twUsers', function($query) use ($own_company){
+                $query = $query->where('company_name','=',$own_company);
+                $query = $query->distinct('t_w_id');
+            });
+        }
+        
+        // own department
+        if( ($request->get('own_department')) && (!empty($request->get('own_department'))) ){
+            $own_department =  $request->get('own_department');
+            $query = $query->whereHas('twUsers', function($query) use ($own_department){
+                $query = $query->where('department_name','=',$own_department);
+                $query = $query->distinct('t_w_id');
+            });
+        }
+        
+        // created company
+        if( ($request->get('created_company')) && (!empty($request->get('created_company'))) ){
+            $created_company = $request->get('created_company');
+            $query = $query->where('company_name', '=', $created_company);
+        }
+        
+        // created department
+        if( ($request->get('created_department')) && (!empty($request->get('created_department'))) ){
+            $created_department = $request->get('created_department');
+            $query = $query->where('department_name', '=', $created_department);
+        }
+        
+        // is_visible
+        if( ($request->get('is_visible') != null) ){
+            $is_visible =  $request->get('is_visible');
+            $is_visible = $this->is_true( $is_visible );
+            $query = $query->where('is_visible', '=', $is_visible);
+        }
+            
+        // is_done
+        if( ($request->get('is_done') != null) ){
+            $is_done =  $request->get('is_done');
+            $is_done = $this->is_true( $is_done );
+            $query = $query->where('is_done', '=', $is_done);
+        }
+        
+        // progress
+        if( ($request->get('progress')) && (!empty($request->get('progress'))) ){
+            $progress =  $request->get('progress');
+            if( $progress == TWStatusEnum::COMPLETED ){
+                $query = $query->where('is_done','=',true);
+            }else if( $progress == TWStatusEnum::PASS ){
+                $query = $query->where(function($query){
+                    $query = $query->where('is_done','=',true);
+                    $query = $query->whereNotNull('done_date');
+                    $query = $query->where(DB::raw('DATE(due_date)'),'>=',DB::raw('DATE(done_date)'));
+                });
+            }else if( $progress == TWStatusEnum::FAIL ){
+                /*$query = $query->where(function($query){
+                    $query->where('is_done','=',false);
+                    $query->orWhereNull('is_done');
+                });
+                $query = $query->where(function($query){
+                    $query->whereRaw('due_date > done_date');
+                    $query->where(DB::raw("DATE(due_date) > DATE(done_date)"));
+                    $query->orWhereDate('due_date','<',Carbon::now()->format('Y-m-d'));
+                    $query->orWhereNull('done_date'); 
+                });*/
+                $query = $query->where(function($query) use ($date_today){
+                    $query = $query->where(function($query){
+                        $query = $query->whereNotNull('done_date');
+                        $query = $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
+                    });
+                    $query = $query->orWhere(function($query) use ($date_today){
+                        $query = $query->whereDate('due_date','<',$date_today);
+                        $query = $query->where(function($query){
+                            $query = $query->where('is_done','=',false);
+                            $query = $query->orWhereNull('is_done');
+                        });
+                    });
+                });
+            }else if( $progress == TWStatusEnum::INPROGRESS ){
+                $query = $query->where(function($query) use ($date_today){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_done','=',false);
+                        $query = $query->orWhereNull('is_done');
+                    });
+                    $query = $query->where(function($query) use ($date_today){
+                        //$query->whereRaw('due_date >= done_date');
+                        $query = $query->orWhereDate('due_date','>=',$date_today);
+                    });
+                }); 
+            }else if( $progress == TWStatusEnum::OPEN ){
+                $query = $query->where(function($query){
+                    $query = $query->where('is_done','=',false);
+                    $query = $query->orWhereNull('is_done');
+                });
+            }else if( $progress == TWStatusEnum::CLOSE ){
+                $query = $query->where('is_done','=',true);
+            }else if( $progress == TWStatusEnum::FAIL_WITH_COMPLETED ){
+                $query = $query->where(function($query){
+                    $query = $query->where('is_done','=',true);
+                    $query = $query->whereNotNull('done_date');
+                    $query = $query->where(DB::raw('DATE(due_date)'),'<',DB::raw('DATE(done_date)'));
+                });
+            }else if( $progress == TWStatusEnum::FAIL_WITH_UNCOMPLETED ){
+                $query = $query->where(function($query) use ($date_today){
+                    $query = $query->whereDate('due_date','<',$date_today);
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_done','=',false);
+                        $query = $query->orWhereNull('is_done');
+                    });
+                });
+            }
+        }
+        
+        // is_archived ( is_bool($variable) )
+        if( ($request->has('is_archived')) ){
+            /*
+            $is_archived_val_true = "true";
+            $is_archived_val_false = "false";
+            $is_archived_val_temp = $request->input('is_archived');
+            
+            if( (strcasecmp($is_archived_val_temp, $is_archived_val_true) == 0) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_archived','=',true);
+                    });
+                });
+                
+            }else if( (strcasecmp($is_archived_val_temp, $is_archived_val_false) == 0) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_archived','=',false);
+                        $query = $query->orWhereNull('is_archived');
+                    });
+                }); 
+                
+            }
+            */
+            $is_archived = $request->input('is_archived');
+            $is_archived = $this->is_true( $is_archived );
+            if( ($is_archived) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_archived','=',true);
+                    });
+                });
+                
+            }else{
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_archived','=',false);
+                        $query = $query->orWhereNull('is_archived');
+                    });
+                }); 
+                
+            }
+        }
+        
+        // is_reviewable ( is_bool($variable) )
+        if( ($request->has('is_reviewable')) ){
+            /*
+            $is_reviewable_val_true = "true";
+            $is_reviewable_val_false = "false";
+            $is_reviewable_val_temp = $request->input('is_reviewable');
+            
+            if( (strcasecmp($is_reviewable_val_temp, $is_reviewable_val_true) == 0) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_reviewable','=',true);
+                    });
+                });
+                
+            }else if( (strcasecmp($is_reviewable_val_temp, $is_reviewable_val_false) == 0) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_reviewable','=',false);
+                        $query = $query->orWhereNull('is_reviewable');
+                    });
+                }); 
+                
+            }
+            */
+            $is_reviewable = $request->input('is_reviewable');
+            $is_reviewable = $this->is_true( $is_reviewable );
+            if( ($is_reviewable) ){
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_reviewable','=',true);
+                    });
+                });
+                
+            }else{
+                
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_reviewable','=',false);
+                        $query = $query->orWhereNull('is_reviewable');
+                    });
+                }); 
+                
+            }
+        }
+        
+        // is_cloned_child ( is_bool($variable) )
+        if( ($request->has('is_cloned_child')) ){
+            /*
+            $is_cloned_child_val_true = "true";
+            $is_cloned_child_val_false = "false";
+            $is_cloned_child_val_temp = $request->input('is_cloned_child');
+            
+            if( (strcasecmp($is_cloned_child_val_temp, $is_cloned_child_val_true) == 0) ){
+                
+                $query = $query->whereHas('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
+                });
+                
+            }else if( (strcasecmp($is_cloned_child_val_temp, $is_cloned_child_val_false) == 0) ){
+                
+                $query = $query->whereDoesntHave('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
+                });
+                
+            }
+            */
+            $is_cloned_child = $request->input('is_cloned_child');
+            $is_cloned_child = $this->is_true( $is_cloned_child );
+            if( ($is_cloned_child) ){
+                /*
+                $query = $query->whereHas('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
+                });
+                */
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_cloned_child','=',true);
+                    });
+                });
+                
+            }else{
+                /*
+                $query = $query->whereDoesntHave('twUsers', function($query){
+                    $query = $query->where('is_cloned','=',true);
+                });
+                */
+                $query = $query->where(function($query){
+                    $query = $query->where(function($query){
+                        $query = $query->where('is_cloned_child','=',false);
+                        $query = $query->orWhereNull('is_cloned_child');
+                    });
+                }); 
+                
+            }
+        }
+        
+        //description
+        if( (($request->has("description")) && ($request->filled("description"))) ){
+            $description = $request->input("description");
+            $query = $query->where('description', 'like', '%' . $description . '%');
+        }
+        
+        // get filtered record count
+        /*
+        $recordsFiltered = $query->count();
+        */
+        
+        // get limit value
+        /*
+        if( $request->get('length') ){
+            $length = intval( $request->get('length') );
+            $length = abs( $length );
+            $query = $query->limit($length);
+        }
+        */
+        // set default value for length (PHP_INT_MAX)
+        /*
+        if( $length <= 0 ){
+            $length = PHP_INT_MAX;
+            $length = abs( $length );
+            //$length = 0;
+        }
+        */
+        // get offset value
+        /*
+        if( $request->get('start') ){
+            $start = intval( $request->get('start') );
+            $start = abs( $start );
+        }else if( $request->get('page') ){
+            $start = intval( $request->get('page') );
+            //$start = abs( ( ( $start - 1 ) * $length ) );
+            $start = ( ( $start - 1 ) * $length );
+            $start = abs( $start );
+        }
+        */
+        // filter with offset value
+        /*
+        if( $start > 0 ){
+            //$query = $query->limit($length)->skip($start);
+            $query = $query->limit($length)->offset($start);
+        }else if( $length > 0 ){
+            $query = $query->limit($length);
+        }
+        */
+        // order
+        $query->orderBy('id', 'desc');
+        $query->orderBy('updated_at', 'desc');
+        
+        // get data
+        $queryResult = $query->get();
+        
+        return Excel::create('laravelcode', function($excel) use ($queryResult) {
+            $excel->sheet('mySheet', function($sheet) use ($queryResult){
+                //$sheet->fromArray($queryResult);
+                $sheet->fromArray(array("x", "y", "z"));
+            });
+        })->download("xlsx");
     }
 }

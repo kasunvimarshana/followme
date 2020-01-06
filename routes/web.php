@@ -105,6 +105,8 @@ Route::group(['middleware' => 'memberMiddleWare'], function(){
     Route::match(['get', 'post'], 'tws/{tW}/change-reviewable-true', array('uses' => 'TWController@changeReviewableTrue'))->name('tw.changeReviewableTrue');
     Route::match(['get', 'post'], 'tws/{tW}/change-reviewable-false', array('uses' => 'TWController@changeReviewableFalse'))->name('tw.changeReviewableFalse');
     Route::match(['get', 'post'], 'tws/{tW}/tw-infos/count', array('uses' => 'TWController@getTWInfoCount'))->name('tw.getTWInfoCount');
+    
+    Route::get('tws/download', array('uses' => 'TWController@downloadTWs'))->name('tw.download');
 });
 
 Route::group(['middleware' => 'superAdminMiddleware'], function(){
