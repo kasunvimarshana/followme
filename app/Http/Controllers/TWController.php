@@ -29,7 +29,9 @@ use App\Events\TWResubmitEvent;
 use App\Events\TWUpdateEvent;
 use App\Events\TWCloseEvent;
 
+//use Maatwebsite\Excel\Facades\Excel;
 use Excel;
+use App\Exports\CommonExportWorkBook;
 
 class TWController extends Controller
 {
@@ -1715,11 +1717,7 @@ class TWController extends Controller
         // get data
         $queryResult = $query->get();
         
-        return Excel::create('laravelcode', function($excel) use ($queryResult) {
-            $excel->sheet('mySheet', function($sheet) use ($queryResult){
-                //$sheet->fromArray($queryResult);
-                $sheet->fromArray(array("x", "y", "z"));
-            });
-        })->download("xlsx");
+        $export = new CommonExportWorkBook($queryResult->toArray());
+        return Excel::download($export, 'download.xlsx');
     }
 }
