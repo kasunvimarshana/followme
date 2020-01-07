@@ -38,11 +38,17 @@ class CommonExportWorkBook implements FromArray, WithHeadings, WithStrictNullCom
      */
     public function headings(): array{
         return [
-            '#',
-            'Name',
-            'Email',
-            'Created at',
-            'Updated at'
+            'ID',
+            'MEETING CATEGORY',
+            'TITLE',
+            'DESCRIPTION',
+            'DATE - START',
+            'DATE - DUE',
+            'DATE - DONE',
+            'USER - CREATED',
+            'USER - DONE',
+            'USER - RESPONSIBLE',
+            'STATUS',
         ];
     }
     

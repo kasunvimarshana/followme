@@ -353,6 +353,11 @@
     
 </div>
 <!-- /.row -->
+
+<!-- row -->
+<div id="hidden_form_container_download_1" class="row" style="display: none;">
+</div>
+<!-- /.row -->
 @endsection
 
 @section('section_script')
@@ -527,7 +532,72 @@
             $('html, body').animate({scrollTop:0}, 'slow');
         });
         
-        $('#twForm').trigger('submit');
+        //$('#twForm').trigger('submit');
     });
+    </script>
+
+    <script>
+        var temp_twForm = null;
+        var download = null;
+        var hidden_form_container_download_1 = null;
+        
+        temp_twForm = $("#twForm");
+        download = temp_twForm.find("#download");
+        //hidden_form_container_download_1 = $("#hidden_form_container_download_1");
+        download.off("click").on("click", function(event){
+            event.preventDefault();
+            //event.stopPropagation();
+            //var formData = new FormData(document.querySelector('form'));
+            //document.getElementById("form").target = "_blank";
+            //var formData = new Object();
+            hidden_form_container_download_1 = $("#hidden_form_container_download_1");
+            hidden_form_container_download_1.empty();
+            var form_1 = $("<form>");
+            var url = "{!! route('tw.download', []) !!}";
+            
+            form_1.empty();
+            form_1.attr("id", "hidden_form_1");
+            form_1.attr("method", "get");
+            form_1.attr("action", url);
+            form_1.attr("target", "_blank");
+            form_1.off("submit");
+            
+            var form_2_clone = null;
+            var form_2_clone_serialize_array = null;
+            //form_2_clone = download.closest("#twForm").clone(true);
+            form_2_clone = download.closest("#twForm");
+            form_2_clone_serialize_array = form_2_clone.serializeArray();
+            
+            var field_1 = null;
+            field_1 = $("<input>");
+            field_1.attr("type", "hidden");
+            field_1.attr("name", "is_cloned_child");
+            field_1.attr("value", "false");
+            form_1.append(field_1);
+            
+            $.each(form_2_clone_serialize_array, function(k, v){
+                //$form.append('<input type="hidden" name="' + k + '" value="' + v + '">');
+                //console.log(k);
+                //console.log(v);
+                if( v ){
+                    field_1 = $("<input>");
+                    field_1.attr("type", "hidden");
+                    field_1.attr("name", v.name);
+                    //field_1.attr("value", v.value);
+                    field_1.attr("value", (form_2_clone.find("#" + v.name).val()));
+                    form_1.append(field_1);
+                }
+                
+                console.log( v );
+                console.log(v.name + " === " + field_1.attr("value"));
+            });
+            
+            hidden_form_container_download_1.append(form_1);
+            form_1.submit();
+            
+            delete form_2_clone;
+            delete form_2_clone_serialize_array;
+            hidden_form_container_download_1.empty();
+        });
     </script>
 @endsection

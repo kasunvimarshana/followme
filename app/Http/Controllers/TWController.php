@@ -1310,7 +1310,7 @@ class TWController extends Controller
         
         $tw = new TW();
         
-        $query = $tw->with(['twUsers', 'twInfos', 'status'])->where('is_visible', '=', true);
+        $query = $tw->with(['twUsers', 'twInfos', 'status', 'meetingCategory'])->where('is_visible', '=', true);
         
         $recordsTotal = $query->count();
         $recordsFiltered = $recordsTotal;
@@ -1717,7 +1717,45 @@ class TWController extends Controller
         // get data
         $queryResult = $query->get();
         
-        $export = new CommonExportWorkBook($queryResult->toArray());
+        /* *** */
+        $temp_result_array_1 = array();
+        $temp_result_array_2 = array();
+        foreach($queryResult as $key => $value){
+            //$temp_result_array_2 = array( 11 );
+            $temp_result_array_2 = array_fill(0, 10, null);
+            //$value->createdUser();
+            //$value->doneUser();
+            $temp_result_array_2[0] = $value->id;
+            if( ($value->meetingCategory) ){
+                $temp_meetingCategory = $value->meetingCategory;
+                $temp_result_array_2[1] = $temp_meetingCategory->name;
+            }
+            $temp_result_array_2[2] = $value->title;
+            $temp_result_array_2[3] = $value->description;
+            $temp_result_array_2[4] = $value->start_date;
+            $temp_result_array_2[5] = $value->due_date;
+            $temp_result_array_2[6] = $value->done_date;
+            $temp_result_array_2[7] = $value->created_user;
+            $temp_result_array_2[8] = $value->done_user;
+            if( ($value->twUsers) ){
+                $temp_twUsers = $value->twUsers;
+                $temp_twUser_Array = array();
+                foreach($temp_twUsers as $k => $v){
+                    array_push($temp_twUser_Array, $v->own_user);
+                }
+                $temp_result_array_2[9] = implode(", ", $temp_twUser_Array);
+                //$temp_result_array_2[9] = join(", ", $temp_twUser_Array);
+            }
+            if( ($value->status) ){
+                $temp_status = $value->status;
+                $temp_result_array_2[10] = $temp_status->name;
+            }
+            
+            array_push($temp_result_array_1, $temp_result_array_2);
+        }
+        /* *** */
+        
+        $export = new CommonExportWorkBook( $temp_result_array_1 );
         return Excel::download($export, 'download.xlsx');
     }
 }
