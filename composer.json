@@ -23,7 +23,7 @@
         "maatwebsite/excel": "^3.1",
         "microsoft/microsoft-graph": "^1.6",
         "nesbot/carbon": "^2.16",
-        "phpoffice/phpspreadsheet": "^1.9",
+        "phpoffice/phpspreadsheet": "^1.8",
         "spatie/flysystem-dropbox": "^1.0",
         "spatie/laravel-permission": "^2.36",
         "zanysoft/laravel-zip": "^1.0"
