@@ -12,6 +12,7 @@ use Mail;
 use App\Mail\TWOwnerHODTWDevDateReachMail;
 use App\User;
 use App\TW;
+use App\UserEscalateOff;
 
 class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
 {
@@ -94,16 +95,33 @@ class SendTWOwnerHODTWDevDateReachMailJob implements ShouldQueue
             $tWUserObj = new User();
             $tWUserObj->mail = $toUser->own_user;
             $tWUserObj = $tWUserObj->getUser();
-            $managerObj = $tWUserObj->getManager();
+            //$managerObj = $tWUserObj->getManager();
+            $UserEscalateOffObj = new UserEscalateOff();
+            $UserEscalateOffObj = $UserEscalateOffObj->where('user_pk', '=', $tWUserObj->mail);
+            $UserEscalateOffObj = $UserEscalateOffObj->first();
             
             //array_push($toUserArray, $toUser->own_user);
             //array_push($userObjectArray_1, $tWUserObj);
             array_push($toUserArray, $tWUserObj->mail);
-            if( ($managerObj) ){
-                $tWUserObj_physicaldeliveryofficename = $tWUserObj->physicaldeliveryofficename;
-                $managerObj_physicaldeliveryofficename = $managerObj->physicaldeliveryofficename;
-                if( (strcasecmp($tWUserObj_physicaldeliveryofficename, $managerObj_physicaldeliveryofficename) == 0) ){
-                    array_push($ccUserArray, $managerObj->mail);
+            
+            if( ($UserEscalateOffObj) ){
+                if( ($UserEscalateOffObj->email_escalate) ){
+                    array_push($ccUserArray, $UserEscalateOffObj->email_escalate);
+                }
+            }else{
+                $managerObj = $tWUserObj->getManager();
+                if( ($managerObj) ){
+                    //
+                    /*
+                    $tWUserObj_physicaldeliveryofficename = $tWUserObj->physicaldeliveryofficename;
+                    $managerObj_physicaldeliveryofficename = $managerObj->physicaldeliveryofficename;
+                    if( (strcasecmp($tWUserObj_physicaldeliveryofficename, $managerObj_physicaldeliveryofficename) == 0) ){
+                        array_push($ccUserArray, $managerObj->mail);
+                    }
+                    */
+                    if( ($managerObj->mail) ){
+                        array_push($ccUserArray, $managerObj->mail);
+                    }
                 }
             }
         }

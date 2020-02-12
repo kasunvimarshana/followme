@@ -122,6 +122,11 @@ Route::group(['middleware' => 'superAdminMiddleware'], function(){
     
     Route::post('backstage/notification-schedules/store-schedule-tw-owner', array('uses' => 'NotificationScheduleController@storeScheduleTWOwner'))->name('notificationSchedule.storeScheduleTWOwner');
     Route::post('backstage/notification-schedules/store-schedule-hod', array('uses' => 'NotificationScheduleController@storeScheduleHOD'))->name('notificationSchedule.storeScheduleHOD');
+    
+    Route::get('backstage/user-escalate-offs/create', array('uses' => 'UserEscalateOffController@create'))->name('userEscalateOff.create');
+    Route::post('user-escalate-offs/create', array('uses' => 'UserEscalateOffController@store'))->name('userEscalateOff.store');
+    Route::match(['get', 'post'], 'user-escalate-offs/list', array('uses' => 'UserEscalateOffController@listUserEscalateOff'))->name('userEscalateOff.list');
+    Route::get('user-escalate-offs/{userEscalateOff}/destroy', array('uses' => 'UserEscalateOffController@destroy'))->name('userEscalateOff.destroy');
 });
 
 

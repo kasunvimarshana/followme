@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserRolesTable extends Migration
+class CreateUserEscalateOffsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateUserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('user_escalate_offs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             
             $table->boolean('is_visible')->default(1)->nullable();
+            $table->boolean('is_escalate')->default(1)->nullable();
             $table->string('user_pk')->index()->nullable()->unique();
             //$table->string('email_user')->index()->nullable()->unique();
-            $table->string('role_pk')->index()->nullable();
+            $table->string('email_escalate')->index()->nullable();
             //$table->softDeletes();
         });
     }
@@ -32,6 +33,6 @@ class CreateUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('user_escalate_offs');
     }
 }

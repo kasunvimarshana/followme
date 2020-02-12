@@ -115,6 +115,18 @@
                         </ul>
                     </li>
                     
+                    <li class="treeview {!! set_active(['backstage/user-escalate-offs', 'backstage/user-escalate-offs/*']) !!}">
+                        <a href="#">
+                            <i class="fa fa-circle-o"></i> <span>Escalate Off User</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="{!! set_active(['backstage/user-escalate-offs/create', 'backstage/user-escalate-offs/create/*']) !!}"><a href="{!! route('userEscalateOff.create') !!}"> <i class="fa fa-arrow-circle-o-right"></i> Control</a></li>
+                        </ul>
+                    </li>
+                    
                     <li class="treeview {!! set_active(['backstage/notification-schedules', 'backstage/notification-schedules/*']) !!}">
                         <a href="#">
                             <i class="fa fa-circle-o"></i> <span>Notification Schedule</span>
